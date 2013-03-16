@@ -466,13 +466,13 @@
             this.journalsRadioButton.Name = "journalsRadioButton";
             this.journalsRadioButton.Size = new System.Drawing.Size(64, 17);
             this.journalsRadioButton.TabIndex = 5;
-            this.journalsRadioButton.TabStop = true;
             this.journalsRadioButton.Text = "Journals";
             this.journalsRadioButton.UseVisualStyleBackColor = true;
             // 
             // authorRadioButton
             // 
             this.authorRadioButton.AutoSize = true;
+            this.authorRadioButton.Checked = true;
             this.authorRadioButton.Location = new System.Drawing.Point(36, 55);
             this.authorRadioButton.Name = "authorRadioButton";
             this.authorRadioButton.Size = new System.Drawing.Size(61, 17);
