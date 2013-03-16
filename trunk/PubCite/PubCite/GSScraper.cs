@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using HtmlAgilityPack;
 
-namespace scraper
+namespace PubCite
 {
 
     class GSScraper
