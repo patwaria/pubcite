@@ -91,6 +91,7 @@ namespace PubCite
 
         private void authorsSuggestions_SelectedIndexChanged(object sender, EventArgs e)
         {
+            
         }
     }
 }
