@@ -95,7 +95,8 @@ namespace PubCite
         }
 
         private void authorsSuggestions_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        {   
+            System.Console.WriteLine(authorsSuggestions.FocusedItem.Index);
             
         }
     }
