@@ -38,6 +38,8 @@ namespace PubCite
         private void CloseButton_Click_1(object sender, EventArgs e)
         {
             maintabControl.TabPages.Remove(maintabControl.SelectedTab);
+            if (maintabControl.TabCount == 0)
+                CloseButton.Visible = false;
         }
 
         
@@ -50,6 +52,8 @@ namespace PubCite
             search Nsearch = new search();
             MyTab.Controls.Add(Nsearch);
             Nsearch.get_sugg().Visible = false;
+            if (CloseButton.Visible == false)
+                CloseButton.Visible = true;
         }
 
         private void favouritesToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -59,6 +63,8 @@ namespace PubCite
             maintabControl.TabPages.Add(MyTab);
             FavPanel NFav = new FavPanel();
             MyTab.Controls.Add(NFav);
+            if (CloseButton.Visible == false)
+                CloseButton.Visible = true;
         }
 
         private void toolStripbackButton_Click(object sender, EventArgs e)
