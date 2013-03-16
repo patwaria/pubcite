@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Author.cs" />
     <Compile Include="AuthorList.cs" />
+    <Compile Include="GSAuthorPageScraper.cs" />
     <Compile Include="AuthSuggestion.cs" />
     <Content Include="Authors.txt" />
     <Compile Include="ClassifyAuthors.cs" />
@@ -70,6 +71,7 @@
     </Compile>
     <Compile Include="CSXParser.cs" />
     <Compile Include="CSXClasses.cs" />
+    <Compile Include="GSScraper.cs" />
     <Compile Include="Journal.cs" />
     <Compile Include="JournalList.cs" />
     <Compile Include="Paper.cs" />
