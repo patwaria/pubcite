@@ -429,7 +429,7 @@
             this.authorsSuggestions.TabIndex = 0;
             this.authorsSuggestions.UseCompatibleStateImageBehavior = false;
             this.authorsSuggestions.View = System.Windows.Forms.View.Details;
-            this.authorsSuggestions.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.authorsSuggestions.SelectedIndexChanged += new System.EventHandler(this.authorsSuggestions_SelectedIndexChanged);
             // 
             // Authors
             // 
