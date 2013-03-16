@@ -52,6 +52,7 @@
     <Compile Include="Author.cs" />
     <Compile Include="AuthorList.cs" />
     <Compile Include="AuthSuggestion.cs" />
+    <Content Include="Authors.txt" />
     <Compile Include="ClassifyAuthors.cs" />
     <Compile Include="ClassifyJournals.cs" />
     <Compile Include="Fav.cs">
