@@ -29,7 +29,7 @@ namespace SG
         {
             return suggestionURL;
         }
-        bool isSet()
+        public bool isSet()
         {
             return suggest;
         }
