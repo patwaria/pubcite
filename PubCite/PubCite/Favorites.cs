@@ -22,11 +22,11 @@ namespace SG
         public void populateFavorites()
         {
 
-            if (Directory.Exists(@"\Favorites"))
+            if (Directory.Exists(@"Favorites"))
             {
-                if (File.Exists(@"\Favorites\Author"))
+                if (File.Exists(@"Favorites\Author"))
                 {// populate the list
-                    FileStream fs = new FileStream(@"\Favorites\Author", FileMode.Open,FileAccess.Read);
+                    FileStream fs = new FileStream(@"Favorites\Author", FileMode.Open,FileAccess.Read);
                     BinaryFormatter bf = new BinaryFormatter();
                     object inf =  bf.Deserialize(fs);
                     ListofAuthor = (AuthorList)inf;
@@ -34,10 +34,10 @@ namespace SG
 
                 }
 
-                if (File.Exists(@"\Favorites\Journal"))
+                if (File.Exists(@"Favorites\Journal"))
                 {
                     //Populate the list
-                    FileStream fs = new FileStream(@"\Favorites\Journal", FileMode.Open,FileAccess.Read);
+                    FileStream fs = new FileStream(@"Favorites\Journal", FileMode.Open,FileAccess.Read);
                     BinaryFormatter bf = new BinaryFormatter();
                     object inf = bf.Deserialize(fs);
                     ListofJournal = (JournalList)inf;
@@ -47,7 +47,7 @@ namespace SG
             }
             else
             {
-                Directory.CreateDirectory(@"C:\Favorites");
+                Directory.CreateDirectory(@"Favorites");
                 Console.WriteLine("Created directory");
             }
         }
@@ -72,15 +72,15 @@ namespace SG
             ListofAuthor.clear();
             ListofJournal.clear();
             //WRITE TO FILE
-            File.Delete(@"\Favorites\Author");
-            File.Delete(@"\Favorites\Journal");
+            File.Delete(@"Favorites\Author");
+            File.Delete(@"Favorites\Journal");
         }
 
         public void removeAuthor(int i)
         {    
             
             ListofAuthor.RemoveAt(i);
-            Stream stream = File.Open(@"\Favorites\Author", FileMode.Create);
+            Stream stream = File.Open(@"Favorites\Author", FileMode.Create);
             BinaryFormatter bFormatter = new BinaryFormatter();
             bFormatter.Serialize(stream, ListofAuthor);
             stream.Close();
@@ -89,7 +89,7 @@ namespace SG
         public void removeJournal(int i)
         {  
             ListofJournal.RemoveAt(i);
-            Stream stream = File.Open(@"\Favorites\Journal", FileMode.Create);
+            Stream stream = File.Open(@"Favorites\Journal", FileMode.Create);
             BinaryFormatter bFormatter = new BinaryFormatter();
             bFormatter.Serialize(stream, ListofJournal);
             stream.Close();
@@ -99,7 +99,7 @@ namespace SG
         {    // ADD id TO THE AUTHOR
             ListofAuthor.Add(a);
             // add to file
-            Stream stream = File.Open(@"\Favorites\Author", FileMode.Create);
+            Stream stream = File.Open(@"Favorites\Author", FileMode.Create);
             BinaryFormatter bFormatter = new BinaryFormatter();
             bFormatter.Serialize(stream, ListofAuthor);
             stream.Close();
@@ -110,7 +110,7 @@ namespace SG
 
             ListofJournal.Add(a);
             // add to file
-            Stream stream = File.Open(@"\Favorites\Journal", FileMode.Create);
+            Stream stream = File.Open(@"Favorites\Journal", FileMode.Create);
             BinaryFormatter bFormatter = new BinaryFormatter();
             bFormatter.Serialize(stream, ListofJournal);
             stream.Close();
