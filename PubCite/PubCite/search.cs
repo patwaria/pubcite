@@ -48,15 +48,20 @@ namespace PubCite
 
                 SG.AuthSuggestion authSug = Parser.getAuthSuggestions(searchField.Text);
 
-                if (authSug == null)
-                    System.Console.WriteLine("NULL");
+                if (authSug == null || !authSug.isSet())
+                {
+                    // TODO : show message to user and gofor exhaustive search results
+                    
+                    System.Console.WriteLine("Data Not Available!");
+                }
                 else
                 {
                     //System.Console.WriteLine(authSug.isSet());
                     List<string> authors = authSug.getSuggestions();
                     System.Console.WriteLine(authors[0]);
                     ListViewItem item;
-                    for(int i = 0; i < authors.Count; i++) {
+                    for (int i = 0; i < authors.Count; i++)
+                    {
                         item = new ListViewItem(authors[i]);
                         authorsSuggestions.Items.Add(item);
                     }
