@@ -1,0 +1,207 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Runtime.Serialization;
+
+namespace SG
+{
+    [Serializable()]
+    public class SearchEntity:ISerializable
+    {
+        private string name;             //name of the search entity - author or journal
+        protected List<Paper> papers;    //list of papers of the search entity
+        private int h_ind;               //h index of the search entity
+        private int i10_ind;             // i10 index of the search entity
+
+        //constructors
+        public  SearchEntity(string name, int h, int i)
+        {
+            this.name = name;
+            h_ind = h;
+            i10_ind = i;
+            papers = new List<Paper>();
+        }
+        public  SearchEntity(SerializationInfo info, StreamingContext ctxt){
+            name = (string)info.GetValue("Name", typeof(string));
+            papers = (List<Paper>)info.GetValue("PaperList", typeof(List<Paper>));
+            h_ind = (int)info.GetValue("HInd", typeof(int));
+            i10_ind = (int)info.GetValue("IInd", typeof(int));
+        }
+        public virtual void GetObjectData(SerializationInfo info, StreamingContext ctxt)
+        {
+            info.AddValue("Name", name);
+            info.AddValue("PaperList", papers);
+            info.AddValue("HInd", h_ind);
+            info.AddValue("IInd", i10_ind);
+        }
+
+        //property - "Name" of the search entity
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+        }
+
+        //function to add paper to the paper list
+        public void addPaper(Paper p)
+        {
+            papers.Add(p);
+        }
+
+        //method to get total number of citations of the search entity
+        public int getTotalNumberofCitations()
+        {
+            int n = 0;
+            foreach (Paper p in papers)
+            {
+                n += p.NumberOfCitations;
+            }
+            return n;
+        }
+
+        //method to get the number of papers of the search entity
+        public int getNumberOfPapers()
+        {
+            return papers.Count;
+        }
+
+        //method to get h index of the search entity
+        public int getHIndex()
+        {
+            if (h_ind == -1)
+            {
+                int h = (int)Math.Sqrt((double)getTotalNumberofCitations());
+                int x;
+                while (h >= 0)
+                {
+                    x = 0; ;
+                    foreach (Paper p in papers)
+                    {
+                        if (p.NumberOfCitations > h)
+                        {
+                            x++;
+                        }
+                    }
+                    if (x == h)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        h--;
+                    }
+                }
+
+                h_ind = h;
+            }
+            if (h_ind == -1)
+                return 0;
+            return h_ind;
+        }
+
+        //method to get i10 index of the search index
+        public int getI10Index()
+        {
+            if (i10_ind == -1)
+            {
+                int i = 0;
+                foreach (Paper p in papers)
+                {
+                    if (p.NumberOfCitations >= 10)
+                        i++;
+                }
+                i10_ind = i;
+            }
+            return i10_ind;
+        }
+
+        //method to get average number of citations per paper
+        public float getCitesPerPaper()
+        {
+            if (getNumberOfPapers() != 0)
+            {
+                return (float)getTotalNumberofCitations() / getNumberOfPapers();
+            }
+            else return 0;
+        }
+
+        //property to access list of papers
+        public List<Paper> getPapers()
+        {
+            return papers;
+        }
+
+        //functions to sort the paper list according to different parameters
+        //value of order is true for sort in ascending order false otherwise
+        public void sortPapersByCitations(bool order)
+        {
+            if (order)
+            {
+                papers.Sort((x, y) => x.NumberOfCitations.CompareTo(y.NumberOfCitations));
+            }
+            else
+            {
+                papers.Sort((y, x) => x.NumberOfCitations.CompareTo(y.NumberOfCitations));
+            }
+        }
+        public void sortPapersByYear(bool order)
+        {
+            if (order)
+            {
+                papers.Sort((x, y) => x.Year.CompareTo(y.Year));
+            }
+            else
+            {
+                papers.Sort((y, x) => x.Year.CompareTo(x.Year));
+            }
+        }
+        public void sortPapersByGSRank(bool order)
+        {
+            if (order)
+            {
+                papers.Sort((x, y) => x.GSRank.CompareTo(y.GSRank));
+            }
+            else
+            {
+                papers.Sort((y, x) => x.GSRank.CompareTo(x.GSRank));
+            }
+        }
+        public void sortPapersByTitle(bool order)
+        {
+            if (order)
+            {
+                papers.Sort((x, y) => x.Title.CompareTo(y.Title));
+            }
+            else
+            {
+                papers.Sort((y, x) => x.Title.CompareTo(x.Title));
+            }
+        }
+        public void sortPapersByPublication(bool order)
+        {
+            if (order)
+            {
+                papers.Sort((x, y) => x.Publication.CompareTo(y.Publication));
+            }
+            else
+            {
+                papers.Sort((y, x) => x.Publication.CompareTo(x.Publication));
+            }
+        }
+        public void sortPapersByPublisher(bool order)
+        {
+            if (order)
+            {
+                papers.Sort((x, y) => x.Publisher.CompareTo(y.Publisher));
+            }
+            else
+            {
+                papers.Sort((y, x) => x.Publisher.CompareTo(x.Publisher));
+            }
+        }
+    }
+}
