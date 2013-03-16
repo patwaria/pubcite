@@ -46,20 +46,22 @@ namespace PubCite
                 journalsResultsListView.Visible = false;
                 Suggestions.Visible = true;
 
-                SG.AuthSuggestion authSug = Parser.getAuthSuggestions(searchField.SelectedText.ToString());
+                SG.AuthSuggestion authSug = Parser.getAuthSuggestions(searchField.Text);
 
                 if (authSug == null)
                     System.Console.WriteLine("NULL");
                 else
                 {
-                    System.Console.WriteLine(authSug.isSet());
-                    /*List<string> authors = authSug.getSuggestions();
+                    //System.Console.WriteLine(authSug.isSet());
+                    List<string> authors = authSug.getSuggestions();
                     System.Console.WriteLine(authors[0]);
                     ListViewItem item;
                     for(int i = 0; i < authors.Count; i++) {
                         item = new ListViewItem(authors[i]);
                         authorsSuggestions.Items.Add(item);
-                    }*/
+                    }
+                    authorsSuggestions.FullRowSelect = true;
+                    authorsSuggestions.Click += new EventHandler(authorsSuggestions_Click);
                 }
                 
              }
@@ -72,19 +74,23 @@ namespace PubCite
             System.Console.WriteLine();
         }
 
+        private void authorsSuggestions_Click(object sender, EventArgs e)
+        {
+            
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             this.Parent.GetContainerControl();   
         }
 
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        private void siteComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void siteComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void authorsSuggestions_SelectedIndexChanged(object sender, EventArgs e)
         {
-
         }
     }
 }
