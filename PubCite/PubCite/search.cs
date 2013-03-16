@@ -30,17 +30,46 @@ namespace PubCite
 
         private void searchButton_Click(object sender, EventArgs e)
         {
+
+            CSXParser Parser = new CSXParser();
+            if (siteComboBox.SelectedItem.ToString().Equals("Citeseer"))
+                System.Console.WriteLine("Citeseer available");
+            else if (siteComboBox.SelectedItem.ToString().Equals("Google Scholar"))
+                System.Console.WriteLine("GS Not available");
+            else if (siteComboBox.SelectedItem.ToString().Equals("Microsoft Academic Search"))
+                System.Console.WriteLine("MAS Not available");
+
+
             if (authorRadioButton.Checked == true)
             {
                 authorResultsListView.Visible = true;
                 journalsResultsListView.Visible = false;
                 Suggestions.Visible = true;
+
+                SG.AuthSuggestion authSug = Parser.getAuthSuggestions(searchField.SelectedText.ToString());
+
+                if (authSug == null)
+                    System.Console.WriteLine("NULL");
+                else
+                {
+                    System.Console.WriteLine(authSug.isSet());
+                    /*List<string> authors = authSug.getSuggestions();
+                    System.Console.WriteLine(authors[0]);
+                    ListViewItem item;
+                    for(int i = 0; i < authors.Count; i++) {
+                        item = new ListViewItem(authors[i]);
+                        authorsSuggestions.Items.Add(item);
+                    }*/
+                }
+                
              }
             if (journalsRadioButton.Checked == true)
             {
                 authorResultsListView.Visible = false;
                 journalsResultsListView.Visible = true;
             }
+
+            System.Console.WriteLine();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -49,6 +78,11 @@ namespace PubCite
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void siteComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

@@ -349,15 +349,15 @@ namespace PubCite
             Console.WriteLine(i10Index);
         }
 
-        /*
-        public static void Main(string[] args)
+        
+        /*public static void Main(string[] args)
         {
             String authURL = "http://citeseer.ist.psu.edu/viewauth/summary?aid=7229&list=full";
             CSXAuth p = new CSXAuth(authURL);
-            Console.ReadLine();
+            //Console.ReadLine();
 
             CSXAuthSug q = new CSXAuthSug("James Anderson");
-            Console.ReadLine();
+            //Console.ReadLine();
         }*/
 
     }

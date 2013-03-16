@@ -6,17 +6,20 @@ using SG;
 
 namespace PubCite
 {
-    public class CSXParser : parser
+    public class CSXParser
     {
 
         public CSXParser() { }
 
         public AuthSuggestion getAuthSuggestions(string authName)
         {
+            System.Console.WriteLine("Called");
             CSXAuthSug s = new CSXAuthSug(authName);
 
+            System.Console.WriteLine(s.found + " " + s.sugList.Count);
             AuthSuggestion authSugObj = new AuthSuggestion(s.sugList,s.urlList,s.found);
-
+            //for (int i = 0; i < s.sugList.Count; i++)
+            //    System.Console.WriteLine(s.sugList[i] + "\n");
             return authSugObj;
         }
         public Author getAuthStatistics(string authUrl)
