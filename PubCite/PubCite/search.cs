@@ -30,7 +30,7 @@ namespace PubCite
 
         private void searchButton_Click(object sender, EventArgs e)
         {
-
+            authorsSuggestions.Items.Clear();
             CSXParser Parser = new CSXParser();
             if (siteComboBox.SelectedItem.ToString().Equals("Citeseer"))
                 System.Console.WriteLine("Citeseer available");
