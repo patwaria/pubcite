@@ -16,7 +16,7 @@ namespace PubCite
             System.Console.WriteLine("Called");
             CSXAuthSug s = new CSXAuthSug(authName);
 
-            System.Console.WriteLine(s.found + " " + s.sugList.Count);
+            //System.Console.WriteLine(s.found + " " + s.sugList.Count);
             AuthSuggestion authSugObj = new AuthSuggestion(s.sugList,s.urlList,s.found);
             //for (int i = 0; i < s.sugList.Count; i++)
             //    System.Console.WriteLine(s.sugList[i] + "\n");
