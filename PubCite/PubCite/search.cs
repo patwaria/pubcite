@@ -39,7 +39,7 @@ namespace PubCite
             {
                 authorResultsListView.Visible = true;
                 journalsResultsListView.Visible = false;
-                Suggestions.Visible = true;
+             
 
                 if (siteComboBox.SelectedItem.ToString().Equals("Citeseer"))
                 {
@@ -67,13 +67,34 @@ namespace PubCite
 
                 if (authSug == null || !authSug.isSet())
                 {
+                    authorResultsListView.Items.Clear();
                     // TODO : show message to user and gofor exhaustive search results
-                    
+                   
+                  
+                    if (a[0] == true) Results = Parser.getAuthors(searchField.Text);
+                    else if(a[1]==true) Results = Scraper.getAuthors(searchField.Text);
+                    Papers = Results.Papers;
+                    for (int i = 0; i < Papers.Count; i++)
+                    {
+
+
+                        /*populating */
+                        item = new ListViewItem(Papers[i].Title);
+                        item.SubItems.Add(Papers[i].Year.ToString());
+                        item.SubItems.Add(Papers[i].NumberOfCitations.ToString());
+                        authorResultsListView.Items.Add(item);
+                        Console.WriteLine(Papers[i].Title + Papers[i].Year + Papers[i].NumberOfCitations);
+
+
+                    }
+                   
+
                     System.Console.WriteLine("Data Not Available!");
                 }
                 else
                 {
                     //System.Console.WriteLine(authSug.isSet());
+                    Suggestions.Visible = true;
                    authors = authSug.getSuggestions();
                    auth_url = authSug.getSuggestionsURL();
 
@@ -105,7 +126,7 @@ namespace PubCite
              authstats = Parser.getAuthStatistics(auth_url[authorsSuggestions.FocusedItem.Index]);
             else if(a[1]==true)
                  authstats = Scraper.getAuthStatistics(auth_url[authorsSuggestions.FocusedItem.Index]);
-            List<SG.Paper> Papers = authstats.getPapers();
+            Papers = authstats.getPapers();
             Console.WriteLine(Papers.Count);
             for (int i = 0; i < Papers.Count; i++) {
 
@@ -148,6 +169,8 @@ namespace PubCite
         ListViewItem item;
         SG.AuthSuggestion authSug;
         SG.Author authstats;
+        SG.ClassifyAuthors Results;
+        List<SG.Paper> Papers;
         Boolean[] a = { false,false,false };
     }
     
