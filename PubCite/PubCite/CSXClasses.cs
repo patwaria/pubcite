@@ -220,7 +220,7 @@ namespace PubCite
 
             Console.WriteLine(rows.Count);
 
-            for (int i = 1; i < rows.Count; i++)
+            for (int i = 0; i < rows.Count; i++)
             {
                 Console.WriteLine("*** *** ***");
 
@@ -304,14 +304,15 @@ namespace PubCite
             affiliation = affl.InnerText;
             Console.WriteLine(affiliation);
 
-            HtmlNode npub = doc.DocumentNode.SelectSingleNode("//*[@id=\"authInfo\"]/tr[3]/td[2]");
+            /*HtmlNode npub = doc.DocumentNode.SelectSingleNode("//*[@id=\"authInfo\"]/tr[3]/td[2]");
             Console.Write("No. of publications: ");
             numPub = Convert.ToInt32(npub.InnerText);
-            Console.WriteLine(numPub);
+            Console.WriteLine(numPub);*/
+            //Parsed number disregarded because of occasional inconsistencies in the website, list length used instead
 
             HtmlNode hindex = doc.DocumentNode.SelectSingleNode("//*[@id=\"authInfo\"]/tr[4]/td[2]");
             Console.Write("H-index: ");
-            hIndex = Convert.ToInt32(npub.InnerText);
+            hIndex = Convert.ToInt32(hindex.InnerText);
             Console.WriteLine(hIndex);
 
             HtmlNodeCollection rows = doc.DocumentNode.SelectNodes("//*[@id=\"viewContent-inner\"]/table/tr");
@@ -344,6 +345,9 @@ namespace PubCite
                 tempPubliList.Add(tempPubliObj);
             }
             publiList = tempPubliList.ToArray();
+
+            numPub = publiList.Length;
+            Console.WriteLine(numPub);
 
             i10Index = i10;
             Console.WriteLine(i10Index);
