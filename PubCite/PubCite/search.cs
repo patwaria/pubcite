@@ -99,7 +99,8 @@ namespace PubCite
         }
 
         private void authorsSuggestions_Click(object sender, EventArgs e)
-        {   
+        {
+            authorResultsListView.Items.Clear();
             if(a[0]==true)
              authstats = Parser.getAuthStatistics(auth_url[authorsSuggestions.FocusedItem.Index]);
             else if(a[1]==true)
