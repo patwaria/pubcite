@@ -109,6 +109,8 @@ namespace PubCite
             Console.WriteLine(Papers.Count);
             for (int i = 0; i < Papers.Count; i++) {
 
+
+                /*populating */
                  item = new ListViewItem(Papers[i].Title);
                 item.SubItems.Add(Papers[i].Year.ToString());
                 item.SubItems.Add(Papers[i].NumberOfCitations.ToString());
