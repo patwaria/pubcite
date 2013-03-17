@@ -31,7 +31,7 @@ namespace PubCite
         private void searchButton_Click(object sender, EventArgs e)
         {
             authorsSuggestions.Items.Clear();
-            CSXParser Parser = new CSXParser();
+             Parser = new CSXParser();
             if (siteComboBox.SelectedItem.ToString().Equals("Citeseer"))
                 System.Console.WriteLine("Citeseer available");
             else if (siteComboBox.SelectedItem.ToString().Equals("Google Scholar"))
@@ -57,8 +57,10 @@ namespace PubCite
                 else
                 {
                     //System.Console.WriteLine(authSug.isSet());
-                    List<string> authors = authSug.getSuggestions();
-                    System.Console.WriteLine(authors[0]);
+                   authors = authSug.getSuggestions();
+                   auth_url = authSug.getSuggestionsURL();
+
+                   // System.Console.WriteLine(authors[0]);
                     ListViewItem item;
                     for (int i = 0; i < authors.Count; i++)
                     {
@@ -81,6 +83,9 @@ namespace PubCite
 
         private void authorsSuggestions_Click(object sender, EventArgs e)
         {
+            SG.Author authstas = Parser.getAuthStatistics(auth_url[authorsSuggestions.FocusedItem.Index]);
+            
+            
             
         }
 
@@ -94,10 +99,13 @@ namespace PubCite
 
         }
 
-        private void authorsSuggestions_SelectedIndexChanged(object sender, EventArgs e)
-        {   
-            System.Console.WriteLine(authorsSuggestions.FocusedItem.Index);
-            
-        }
+        
+
+        List<string> auth_url;
+        List<string> authors;
+        CSXParser Parser;
     }
+    
+    
+
 }
