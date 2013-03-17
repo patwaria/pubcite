@@ -132,12 +132,13 @@ namespace PubCite
 
 
                 /*populating */
-                authorNameLabel.Text = authstats.Name;
+                authorLabel.Text = authstats.Name;
                 citesperPaper.Text = authstats.getCitesPerPaper().ToString();
                 //citesperYear.Text = authstats.get
                 hindex.Text = authstats.getHIndex().ToString();
                 i10index.Text = authstats.getI10Index().ToString();
                 citationsNumberLabel.Text = authstats.getTotalNumberofCitations().ToString();
+
                 item = new ListViewItem(Papers[i].Title);
                 item.SubItems.Add(Papers[i].Year.ToString());
                 item.SubItems.Add(Papers[i].NumberOfCitations.ToString());
