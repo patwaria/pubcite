@@ -132,7 +132,7 @@ namespace PubCite
 
 
                 /*populating */
-                authorLabel.Text = authstats.Name;
+                authorNameLabel.Text = authstats.Name;
                 citesperPaper.Text = authstats.getCitesPerPaper().ToString();
                 //citesperYear.Text = authstats.get
                 hindex.Text = authstats.getHIndex().ToString();
