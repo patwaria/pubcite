@@ -83,7 +83,7 @@ namespace PubCite
 
         private void authorsSuggestions_Click(object sender, EventArgs e)
         {
-            SG.Author authstas = Parser.getAuthStatistics(auth_url[authorsSuggestions.FocusedItem.Index]);
+            SG.Author authstats = Parser.getAuthStatistics(auth_url[authorsSuggestions.FocusedItem.Index]);
             
             
             
