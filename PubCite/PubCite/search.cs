@@ -171,11 +171,30 @@ namespace PubCite
                 journalsResultsListView.Items.Add(item);
             
             }
-            
-            
+
+            journalsResultsListView.FullRowSelect = true;
+            journalsResultsListView.Click+= new EventHandler(journalsResultsListView_OnClick);
         
         }
+        private void journalsResultsListView_OnClick(object sender, EventArgs e)
+        {
 
+            if (Papers[journalsResultsListView.FocusedItem.Index].NumberOfCitations > 0)
+            {
+
+                CitationPapers = Scraper.getCitations(Papers[journalsResultsListView.FocusedItem.Index].CitedByURL);
+                for (int i = 0; i < CitationPapers.Count; i++)
+                {
+                    item = new ListViewItem(CitationPapers[i].Title);
+                    citationsDetailsListView.Items.Add(item);
+
+                }
+
+            }
+                    
+        
+        
+        }
         private void authorsSuggestions_Click(object sender, EventArgs e)
         {
 
