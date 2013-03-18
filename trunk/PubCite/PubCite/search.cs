@@ -59,15 +59,16 @@ namespace PubCite
                 else if (siteComboBox.SelectedItem.ToString().Equals("Microsoft Academic Search"))
                     System.Console.WriteLine("MAS Not available");
 
-               
+                Console.WriteLine(authSug.getSuggestions());
 
                 if (authSug == null || !authSug.isSet())
                 {
+                    
                     authorResultsListView.Items.Clear();
                     Results = new SG.ClassifyAuthors();
                     if (a[0] == true) Results = Parser.getAuthors(searchField.Text);
                     else if (a[1] == true) Results = Scraper.getAuthors(searchField.Text);
-                    Papers = Results.Papers;
+                    Papers =(Results.Papers);
                     for (int i = 0; i < Papers.Count; i++)
                     {
 
