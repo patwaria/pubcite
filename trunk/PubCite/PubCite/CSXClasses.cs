@@ -88,6 +88,9 @@ namespace PubCite
             if (searchType == 1)
             {
                 nextURL = "http://citeseerx.ist.psu.edu/search?q=venue%3A" + searchElement +"&ic=1&t=doc&sort=cite&start=" + PageNo + "0";
+                PageNo++;
+                CiteDoc = CitePage.Load(nextURL);
+                return 1;
             }
             return 0;
         }
