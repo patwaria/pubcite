@@ -129,6 +129,12 @@ namespace SG
             else return 0;
         }
 
+        //method to get average number of cites per year
+        public float getCitesPerYear()
+        {
+            return 10;
+        }
+
         //property to access list of papers
         public List<Paper> getPapers()
         {

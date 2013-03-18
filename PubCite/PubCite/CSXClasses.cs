@@ -50,7 +50,7 @@ namespace PubCite
             if (searchType == 0)
                 initialURL = "http://citeseerx.ist.psu.edu/search?q=author%3A%28" + searchElement + "%29&submit=Search&ic=1&sort=cite&t=doc";
             else if (searchType == 1)
-                initialURL = "http://citeseerx.ist.psu.edu/search?q=venue%3A" + searchElement + "&sort=cite&ic=1&t=doc";
+                initialURL = "http://citeseerx.ist.psu.edu/search?q="+searchElement+"&submit=Search&ic=1&sort=rlv&t=doc";
             else
                 initialURL = "";
 
@@ -66,8 +66,10 @@ namespace PubCite
         private void getNoResult()
         {
             HtmlNode noResultNode = CiteDoc.DocumentNode.SelectSingleNode("//*[@id=\"result_info\"]/strong[2]");
-            noResult = Convert.ToInt32(noResultNode.InnerText);
-            if (noResult > 100)
+            Console.WriteLine(noResultNode.InnerText);
+            //noResult = Convert.ToInt32(noResultNode.InnerText);
+            
+            //if (noResult > 100)
                 noResult = 100;
         }
 
@@ -85,7 +87,7 @@ namespace PubCite
             }
             if (searchType == 1)
             {
-                nextURL = "http://citeseerx.ist.psu.edu/search?q=venue%3A" + searchElement + "&ic=1&t=doc&sort=cite&start=" + PageNo + "0";
+                nextURL = "http://citeseerx.ist.psu.edu/search?q="+searchElement+"&ic=1&t=doc&sort=rlv&start="+PageNo+"0";
             }
             return 0;
         }
@@ -96,17 +98,26 @@ namespace PubCite
             HtmlNode entryNoNode, paperNode, authorNode, journalNode, yearNode, citationNode;
             string paperName, authorName, journalName, publishYear, noCitations, citationLink;
             int citno;
+
+            int j111 = 0;
+
             do
             {
                 for (int i = 1; i <= 10; i++)
                 {
+                    Console.WriteLine(j111++);
+
                     entryNoNode = mainTable.SelectSingleNode("div[" + i + "]");
                     if (entryNoNode == null)
                         break;
 
-                    paperNode = entryNoNode.SelectSingleNode("h3/span");
+                    paperNode = entryNoNode.SelectSingleNode("h3/a");
+                    if (paperNode == null)
+                        paperNode = entryNoNode.SelectSingleNode("h3/span");
                     paperName = paperNode.InnerText;
                     paperName = paperName.Substring(37);
+
+                    Console.WriteLine(paperName);
                     //Now remove unwanted preceding character and spaces from paperName
 
                     authorNode = entryNoNode.SelectSingleNode("div[1]/span[1]");
@@ -134,7 +145,9 @@ namespace PubCite
                     //Process publishYear and journalNode to get important data
 
                     citationNode = entryNoNode.SelectSingleNode("div[3]/a");
-                    noCitations = citationNode.InnerText;                            //remove unnecessary details from the number of citations
+                    if (citationNode.InnerText == "Abstract")
+                        citationNode = entryNoNode.SelectSingleNode("div[3]/a[2]");
+                    noCitations = citationNode.InnerText;   //remove unnecessary details from the number of citations
                     noCitations = noCitations.Substring(9);
                     citationLink = citationNode.Attributes["href"].Value;
 

@@ -10,11 +10,18 @@ namespace SG
     [Serializable()]
     public class Author:SearchEntity, ISerializable
     {
+        private string affiliation;
+        private string homepageURL;
 
         //constructor
-        public Author(string name, int h, int i)
-            : base(name, h, i)
+        public Author(string Name, int h, int i)
+            : base(Name, h, i)
         {
+        }
+        public Author(string Name, string Affiliation, string HomePageURL, int h, int i)
+            : base(Name, h, i)
+        {
+
         }
         public Author(string name)
             : base(name, -1, -1)
