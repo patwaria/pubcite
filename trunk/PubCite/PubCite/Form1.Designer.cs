@@ -42,7 +42,6 @@
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.toolStripbackButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripforwardButton = new System.Windows.Forms.ToolStripButton();
-            this.CloseButton = new System.Windows.Forms.Button();
             this.Filemenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.eventLog1)).BeginInit();
             this.maintabControl.SuspendLayout();
@@ -161,22 +160,11 @@
             this.toolStripforwardButton.Size = new System.Drawing.Size(35, 35);
             this.toolStripforwardButton.Text = "toolStripforwardButton";
             // 
-            // CloseButton
-            // 
-            this.CloseButton.Location = new System.Drawing.Point(927, 77);
-            this.CloseButton.Name = "CloseButton";
-            this.CloseButton.Size = new System.Drawing.Size(75, 23);
-            this.CloseButton.TabIndex = 6;
-            this.CloseButton.Text = "Close";
-            this.CloseButton.UseVisualStyleBackColor = true;
-            this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click_1);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1006, 663);
-            this.Controls.Add(this.CloseButton);
             this.Controls.Add(this.toolStrip);
             this.Controls.Add(this.maintabControl);
             this.Controls.Add(this.Filemenu);
@@ -203,7 +191,6 @@
         private System.Windows.Forms.TabControl maintabControl;
         private System.Windows.Forms.TabPage searchTab1;
         private System.Windows.Forms.ToolStrip toolStrip;
-        private System.Windows.Forms.Button CloseButton;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem searchToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem favouritesToolStripMenuItem1;

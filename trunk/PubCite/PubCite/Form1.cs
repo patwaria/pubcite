@@ -11,14 +11,21 @@ namespace PubCite
 {
     public partial class Form1 : Form
     {
+        public static TabControl dub_tab;
+        public static SG.Favorite favorites;
         public Form1()
         {
             InitializeComponent();
             search Nsearch = new search();
             searchTab1.Controls.Add(Nsearch);
             Nsearch.get_sugg().Visible = false;
+            dub_tab = maintabControl;
+            favorites = new SG.Favorite();
+            favorites.populateFavorites();
         }
+
         
+
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
             
@@ -30,17 +37,14 @@ namespace PubCite
            
         }
 
+       
+
         private void searchToolStripMenuItem_Click(object sender, EventArgs e)
         {
             
         }
 
-        private void CloseButton_Click_1(object sender, EventArgs e)
-        {
-            maintabControl.TabPages.Remove(maintabControl.SelectedTab);
-            if (maintabControl.TabCount == 0)
-                CloseButton.Visible = false;
-        }
+       
 
         
 
@@ -52,8 +56,7 @@ namespace PubCite
             search Nsearch = new search();
             MyTab.Controls.Add(Nsearch);
             Nsearch.get_sugg().Visible = false;
-            if (CloseButton.Visible == false)
-                CloseButton.Visible = true;
+           
         }
 
         private void favouritesToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -63,10 +66,14 @@ namespace PubCite
             maintabControl.TabPages.Add(MyTab);
             FavPanel NFav = new FavPanel();
             MyTab.Controls.Add(NFav);
-            if (CloseButton.Visible == false)
-                CloseButton.Visible = true;
+           
         }
 
+        public static TabControl get_maintab() {
+
+            return dub_tab;
+        
+        }
         private void toolStripbackButton_Click(object sender, EventArgs e)
         {
 
