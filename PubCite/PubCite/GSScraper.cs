@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using HtmlAgilityPack;
+using System.Text.RegularExpressions;
 
 namespace PubCite
 {
@@ -15,14 +16,15 @@ namespace PubCite
         private string latestSearch = "default";
         private HtmlDocument doc;
 
-        private void loadHtmlDocument(string authName)
+        private void loadHtmlDocument(string authName,int auth_pub)
         {
 
             // CONNECTIONS
             latestSearch = authName;
-            authName = authName.Replace(" ", "+");
+            authName.Trim();
+            authName = Regex.Replace(authName, @"\s+", "+");
             string url = "http://scholar.google.com/scholar?q=" + authName + "&btnG=&hl=en&as_sdt=0,5";
-             Console.WriteLine("loaded !!!");
+            //Console.WriteLine("loaded !!!");
             HtmlWeb web = new HtmlWeb();
             doc = web.Load(url);
         }
@@ -31,16 +33,16 @@ namespace PubCite
         // SUGGESTIONS FROM SEARCH PAGE
         public SG.AuthSuggestion getAuthSuggestions(string authName)
         {
-            Console.WriteLine(authName + " in sugg");
             List<string> names = new List<string>();
             List<string> links = new List<string>();
 
+            /*
             if (latestSearch.Equals("default") || (!latestSearch.Equals(authName)))
             {
                 loadHtmlDocument(authName);
             }
 
-            /*
+            
             // DID U MEAN TAG
             string xpath = "//*[@class=\"gs_med\"]";
             HtmlNode dymNode = doc.DocumentNode.SelectSingleNode(xpath);
@@ -53,14 +55,21 @@ namespace PubCite
             */
 
             // AUTHOR SUGGESTIONS
+            authName.Trim();
+            authName = Regex.Replace(authName, @"\s+", "+");
+            string url = "http://scholar.google.co.in/citations?view_op=search_authors&mauthors=" + authName + "&hl=en&oi=ao";
+            HtmlWeb web = new HtmlWeb();
+            doc = web.Load(url);
+
             string profiles_url = null;
-            string xpath = "//*[@class=\"gs_rt2\"]";
+            string xpath = "//*[@class=\"cit-dark-large-link\"]";
+            //string xpath = "//*[@class=\"\"]";
             HtmlNodeCollection profileNode = doc.DocumentNode.SelectNodes(xpath);
             if (profileNode != null)
             {
-                foreach (HtmlNode node in profileNode)
+                foreach (HtmlNode urlNode in profileNode)
                 {
-                    HtmlNode urlNode = node.SelectSingleNode(".//a");
+                    //HtmlNode urlNode = node.SelectSingleNode(".//a");
                     if (urlNode != null)
                     {
                         profiles_url = urlNode.GetAttributeValue("href", "Not Found");
@@ -89,10 +98,16 @@ namespace PubCite
             SG.Author author = new SG.Author(authScraper.getName(), authScraper.getHIndex(), authScraper.getIIndex());
 
             //Console.WriteLine(author.Name + "," + author.getHIndex() + "," + author.getI10Index());
-            foreach (SG.Paper paper in authScraper.getPapersOfCurrentPage())
-            {
-                author.addPaper(paper);
+            List<SG.Paper> papers = authScraper.getPapersOfCurrentPage();
+            do{
+                authScraper.nextPage(2);
+                
+                foreach (SG.Paper paper in papers)
+                {
+                    author.addPaper(paper);
+                }
             }
+            while(papers[papers.Count-1].NumberOfCitations > 2);
             return author;
         }
 
@@ -107,7 +122,7 @@ namespace PubCite
             // IF THIS IS THE FIRST SEARCH OR PREVIOUS SEARCH IS DIFFERENT
             if (latestSearch.Equals("default") || (!latestSearch.Equals(authName)))
             {
-                loadHtmlDocument(authName);
+                loadHtmlDocument(authName,1);
             }
 
             SG.ClassifyAuthors results = new SG.ClassifyAuthors();
@@ -225,7 +240,7 @@ namespace PubCite
             // IF THIS IS THE FIRST SEARCH OR PREVIOUS SEARCH IS DIFFERENT
             if (latestSearch.Equals("default") || (!latestSearch.Equals(journalName)))
             {
-                loadHtmlDocument(journalName);
+                loadHtmlDocument(journalName,2);
             }
 
             SG.ClassifyJournals results = new SG.ClassifyJournals();
