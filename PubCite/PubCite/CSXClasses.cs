@@ -113,9 +113,13 @@ namespace PubCite
 
                     paperNode = entryNoNode.SelectSingleNode("h3/a");
                     if (paperNode == null)
+                    {
                         paperNode = entryNoNode.SelectSingleNode("h3/span");
-                    paperName = paperNode.InnerText;
-                    paperName = paperName.Substring(37);
+                        paperName = paperNode.InnerText;
+                        paperName = paperName.Substring(37);
+                    }
+                    else
+                        paperName = paperNode.InnerText.Substring(5);
 
                     Console.WriteLine(paperName);
                     //Now remove unwanted preceding character and spaces from paperName
