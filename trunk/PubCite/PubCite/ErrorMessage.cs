@@ -7,11 +7,11 @@ namespace PubCite
 {
     public class ErrorMessage
     {
-        public const int COULD_NOT_CONNECT = 1;
-        public const int COULD_NOT_SAVE = 2;
-        public const int COULD_NOT_READ = 3;
-        public const int ADMINISTRATIVE_LIMIT_EXCEEDED = 4;
-        public const int NO_MATCH_FOUND = 5;
+        public static readonly int COULD_NOT_CONNECT = 1;
+        public static readonly int COULD_NOT_SAVE = 2;
+        public static readonly int COULD_NOT_READ = 3;
+        public static readonly int ADMINISTRATIVE_LIMIT_EXCEEDED = 4;
+        public static readonly int NO_MATCH_FOUND = 5;
         private int error;
         public ErrorMessage(int ErrorType)
         {
