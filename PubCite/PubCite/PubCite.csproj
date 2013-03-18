@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Author.cs" />
     <Compile Include="AuthorList.cs" />
+    <Compile Include="ErrorMessage.cs" />
     <Compile Include="GSAuthorPageScraper.cs" />
     <Compile Include="AuthSuggestion.cs" />
     <Content Include="Authors.txt" />
