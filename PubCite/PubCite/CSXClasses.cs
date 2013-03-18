@@ -102,13 +102,10 @@ namespace PubCite
             string paperName, authorName, journalName, publishYear, noCitations, citationLink;
             int citno;
 
-            int j111 = 0;
-
             do
             {
                 for (int i = 1; i <= 10; i++)
                 {
-                    Console.WriteLine(j111++);
 
                     entryNoNode = mainTable.SelectSingleNode("div[" + i + "]");
                     if (entryNoNode == null)
@@ -122,7 +119,7 @@ namespace PubCite
                         paperName = paperName.Substring(37);
                     }
                     else
-                        paperName = paperNode.InnerText.Substring(5);
+                        paperName = paperNode.InnerText.Substring(19);
 
                     Console.WriteLine(paperName);
                     //Now remove unwanted preceding character and spaces from paperName
