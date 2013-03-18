@@ -50,7 +50,7 @@ namespace PubCite
             if (searchType == 0)
                 initialURL = "http://citeseerx.ist.psu.edu/search?q=author%3A%28" + searchElement + "%29&submit=Search&ic=1&sort=cite&t=doc";
             else if (searchType == 1)
-                initialURL = "http://citeseerx.ist.psu.edu/search?q="+searchElement+"&submit=Search&ic=1&sort=rlv&t=doc";
+                initialURL = "http://citeseerx.ist.psu.edu/search?q=venue%3A" + searchElement + "&sort=cite&ic=1&t=doc";
             else
                 initialURL = "";
 
@@ -87,7 +87,7 @@ namespace PubCite
             }
             if (searchType == 1)
             {
-                nextURL = "http://citeseerx.ist.psu.edu/search?q="+searchElement+"&ic=1&t=doc&sort=rlv&start="+PageNo+"0";
+                nextURL = "http://citeseerx.ist.psu.edu/search?q=venue%3A" + searchElement +"&ic=1&t=doc&sort=cite&start=" + PageNo + "0";
             }
             return 0;
         }
