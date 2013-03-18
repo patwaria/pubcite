@@ -158,10 +158,10 @@ namespace PubCite
         private void populateJournals() {
 
             if (a[0] == true)
-                JournalResu = Parser.getJournals(searchField.Text);
+                JournalResults = Parser.getJournals(searchField.Text);
             else if (a[1] == true)
-                JournalResu = Scraper.getJournals(searchField.Text);
-            Papers = JournalResu.papers;
+                JournalResults = Scraper.getJournals(searchField.Text);
+            Papers = JournalResults.papers;
             for (int i = 0; i < Papers.Count; i++) {
 
                 item = new ListViewItem(Papers[i].Title);
@@ -174,9 +174,10 @@ namespace PubCite
             }
 
             journalsResultsListView.FullRowSelect = true;
-            journalsResultsListView.Click+= new EventHandler(journalsResultsListView_OnClick);
+            //journalsResultsListView.Click+= new EventHandler(journalsResultsListView_OnClick);
         
         }
+        /*
         private void journalsResultsListView_OnClick(object sender, EventArgs e)
         {
             citationsDetailsListView.Items.Clear();
@@ -195,7 +196,7 @@ namespace PubCite
                     
         
         
-        }
+        } */
         private void authorsSuggestions_Click(object sender, EventArgs e)
         {
 
@@ -243,12 +244,12 @@ namespace PubCite
 
             }
             authorResultsListView.FullRowSelect=true;
-            authorResultsListView.Click += new EventHandler(authorResultsListView_OnClick);
+           // authorResultsListView.Click += new EventHandler(authorResultsListView_OnClick);
         }
 
        
 
-        private void authorResultsListView_OnClick(object sender, EventArgs e)
+     /*   private void authorResultsListView_OnClick(object sender, EventArgs e)
         {
             citationsDetailsListView.Items.Clear();
             if (Papers[authorResultsListView.FocusedItem.Index].NumberOfCitations > 0) {
@@ -261,7 +262,7 @@ namespace PubCite
               }
             
             }
-        }
+        } */
 
         private void resultsGroupBox_Enter(object sender, EventArgs e)
         {
@@ -276,10 +277,31 @@ namespace PubCite
         SG.AuthSuggestion authSug;
         SG.Author authstats;
         SG.ClassifyAuthors Results;
+        SG.Favorite favorite;
         List<SG.Paper> Papers;
         List<SG.Paper> CitationPapers;
-        SG.ClassifyJournals JournalResu;
+        SG.ClassifyJournals JournalResults;
         Boolean[] a = { false, false, false };
+
+       
+
+        private void Ciations_Click(object sender, EventArgs e)
+        {
+           // Form1.dub_tab.
+        }
+
+        
+       
+
+        private void Favorites_Click_1(object sender, EventArgs e)
+        {
+            Form1.favorites.AddAuthor(authstats);
+        }
+
+        private void CloseButton_Click_2(object sender, EventArgs e)
+        {
+            Form1.dub_tab.TabPages.Remove(Form1.dub_tab.SelectedTab);
+        }
 
     }
     
