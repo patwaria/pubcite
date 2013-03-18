@@ -429,7 +429,6 @@
             this.authorsSuggestions.TabIndex = 0;
             this.authorsSuggestions.UseCompatibleStateImageBehavior = false;
             this.authorsSuggestions.View = System.Windows.Forms.View.Details;
-            
             // 
             // Authors
             // 
