@@ -31,7 +31,7 @@ namespace PubCite
         // SUGGESTIONS FROM SEARCH PAGE
         public SG.AuthSuggestion getAuthSuggestions(string authName)
         {
-
+            Console.WriteLine(authName + " in sugg");
             List<string> names = new List<string>();
             List<string> links = new List<string>();
 
