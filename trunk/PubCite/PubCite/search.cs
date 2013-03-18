@@ -33,6 +33,7 @@ namespace PubCite
             authorsSuggestions.Items.Clear();
             if (authorRadioButton.Checked == true)
             {
+                Console.WriteLine("in gs22");
                 authorResultsListView.Visible = true;
                 journalsResultsListView.Visible = false;
              
@@ -52,6 +53,8 @@ namespace PubCite
                     a[1] = true;
                     a[2] = false;
                     Scraper = new GSScraper();
+                    Console.WriteLine("in gs" + searchField.Text);
+                    
                     authSug = Scraper.getAuthSuggestions(searchField.Text);
                     
                 
@@ -61,6 +64,7 @@ namespace PubCite
 
                 Console.WriteLine(authSug.getSuggestions());
 
+                Console.WriteLine(authSug.isSet());
                 if (authSug == null || !authSug.isSet())
                 {
                     
