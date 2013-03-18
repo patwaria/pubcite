@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using HtmlAgilityPack;
 
-namespace PubCite
+namespace scraper
 {
 
     class GSScraper
@@ -77,6 +77,8 @@ namespace PubCite
             }
             else return new SG.AuthSuggestion(null, null, false);
         }
+
+
 
 
         // RESULTS FROM AUTHOR PROFILE PAGE
@@ -186,12 +188,6 @@ namespace PubCite
                     if (child != null)
                     {
                         string text = child.InnerText;
-                        cited_by_url = child.GetAttributeValue("href", "Not Found");
-                        if (!cited_by_url.Equals("Not Found"))
-                        {
-                            cited_by_url = "http://scholar.google.com" + cited_by_url;
-                            cited_by_url = cited_by_url.Replace("amp;", "");
-                        }
 
                         try
                         {
@@ -200,6 +196,14 @@ namespace PubCite
                             no_of_citations = Convert.ToInt32(text);
                         }
                         catch (Exception e) { }
+
+                        cited_by_url = no_of_citations != 0 ? child.GetAttributeValue("href", "Not Found") : "Not Found";
+                        if (!cited_by_url.Equals("Not Found"))
+                        {
+                            cited_by_url = "http://scholar.google.com" + cited_by_url;
+                            cited_by_url = cited_by_url.Replace("amp;", "");
+                        }
+
                     }
 
                     publisher.Trim();
@@ -329,15 +333,134 @@ namespace PubCite
         }
 
 
+        // GET CITATIONS FROM CITATION-PAGE
+        public List<SG.Paper> getCitations(string url)
+        {
 
-        /*
-                static void Main(string[] args)
+
+            HtmlWeb web = new HtmlWeb();
+            doc = web.Load(url);
+            List<SG.Paper> results = new List<SG.Paper>();
+
+            string xpath = "//div[@class=\"gs_ri\"]";
+            string title, titleLink, authors, publication, publisher, cited_by_url;
+            int year, rank = 1, no_of_citations;
+            HtmlNodeCollection searchResults = doc.DocumentNode.SelectNodes(xpath);
+            if (searchResults == null) return null;
+            else
+            {
+
+                foreach (HtmlNode n in searchResults)
                 {
 
-                    Console.WriteLine("here1");
-                    string url = "http://scholar.google.com/scholar?q=albert+einstin&btnG=&hl=en&as_sdt=0,5";
-                    HtmlWeb web = new HtmlWeb();
-                    HtmlDocument doc = web.Load(url);
+                    // TITLE AND TITLE LINK
+                    HtmlNode child = n.SelectSingleNode(".//*[@class=\"gs_rt\"]");
+                    title = child.InnerText;
+                    HtmlNode url_node = child.SelectSingleNode(".//a");
+                    if (url_node != null)
+                    {
+                        titleLink = url_node.GetAttributeValue("href", "Not Found");
+                        if (!titleLink.Equals("Not Found"))
+                        {
+                            titleLink = "http://scholar.google.com" + titleLink;
+                            titleLink = titleLink.Replace("amp;", "");
+                        }
+                    }
+
+                    // AUTHORS AND PUBLICATION
+                    child = n.SelectSingleNode(".//*[@class=\"gs_a\"]");
+                    authors = "Not Found";
+                    publication = "Not Found";
+                    publisher = "Not Found";
+                    year = 1970;
+                    if (child != null)
+                    {
+                        string[] names = child.InnerText.Split('-');
+                        if (names.Length == 1) authors = names[0];
+                        else if (names.Length == 2)
+                        {
+                            authors = names[0];
+                            bool flag = false;
+                            names[1].Trim();
+                            try { year = Convert.ToInt32(names[1]); }
+                            catch (FormatException fe) { flag = true; }
+                            if (flag)
+                            {
+                                string[] p = names[1].Split(',');
+                                try { year = Convert.ToInt32(p[1]); }
+                                catch (Exception e) { }
+                                publication = p[0];
+                            }
+                        }
+                        else
+                        {
+                            authors = names[0];
+                            publisher = names[2];
+                            bool flag = false;
+                            names[1].Trim();
+                            try { year = Convert.ToInt32(names[1]); }
+                            catch (FormatException fe) { flag = true; }
+                            if (flag)
+                            {
+                                string[] p = names[1].Split(',');
+                                try { year = Convert.ToInt32(p[1]); }
+                                catch (Exception e) { }
+                                publication = p[0];
+                            }
+                        }
+                    }
+
+
+                    // CITATION STUFF
+                    no_of_citations = 0;
+                    cited_by_url = "Not Found";
+                    child = n.SelectSingleNode(".//*[@class=\"gs_fl\"]");
+                    if (child != null) child = child.FirstChild;
+                    if (child != null)
+                    {
+                        string text = child.InnerText;
+                        cited_by_url = child.GetAttributeValue("href", "Not Found");
+                        if (!cited_by_url.Equals("Not Found"))
+                        {
+                            cited_by_url = "http://scholar.google.com" + cited_by_url;
+                            cited_by_url = cited_by_url.Replace("amp;", "");
+                        }
+                        try
+                        {
+                            text = text.Replace("Cited by", "");
+                            text = text.Trim();
+                            no_of_citations = Convert.ToInt32(text);
+                        }
+                        catch (Exception e) { }
+                    }
+
+
+                    SG.Paper paper = new SG.Paper(title, authors, year, publication, publisher, no_of_citations, cited_by_url, rank);
+                    results.Add(paper);
+                    rank++;
+                }
+
+            }
+            return results;
+        }
+
+    }
+}
+
+
+
+
+
+
+
+/*
+        static void Main(string[] args)
+        {
+
+            Console.WriteLine("here1");
+            string url = "http://scholar.google.com/scholar?q=albert+einstin&btnG=&hl=en&as_sdt=0,5";
+            HtmlWeb web = new HtmlWeb();
+            HtmlDocument doc = web.Load(url);
 
 
 
@@ -345,99 +468,96 @@ namespace PubCite
 
 
 
-                    // USER PROFILES TAG
-                    string profiles_url = "No Url";
-                    int flag = 0;
-                    string xpath = "//*[@class=\"gs_rt\"]";
-                    HtmlNode profileNode = doc.DocumentNode.SelectSingleNode(xpath);
-                    if (profileNode != null)
+            // USER PROFILES TAG
+            string profiles_url = "No Url";
+            int flag = 0;
+            string xpath = "//*[@class=\"gs_rt\"]";
+            HtmlNode profileNode = doc.DocumentNode.SelectSingleNode(xpath);
+            if (profileNode != null)
+            {
+                HtmlNode urlNode = profileNode.SelectSingleNode(".//a");
+                if (urlNode != null)
+                {
+                    profiles_url = urlNode.GetAttributeValue("href", "No url");
+                    if (profiles_url == "No Url") Console.WriteLine("Profile Url not found..!!!");
+                    Console.WriteLine("\nUSER PROFILES INFO==============================");
+                    Console.WriteLine(urlNode.InnerText + " => " + profiles_url);
+                    HtmlNodeCollection urls = profileNode.ParentNode.SelectNodes("./table//a");
+                    foreach (HtmlNode n in urls)
                     {
-                        HtmlNode urlNode = profileNode.SelectSingleNode(".//a");
-                        if (urlNode != null)
-                        {
-                            profiles_url = urlNode.GetAttributeValue("href", "No url");
-                            if (profiles_url == "No Url") Console.WriteLine("Profile Url not found..!!!");
-                            Console.WriteLine("\nUSER PROFILES INFO==============================");
-                            Console.WriteLine(urlNode.InnerText + " => " + profiles_url);
-                            HtmlNodeCollection urls = profileNode.ParentNode.SelectNodes("./table//a");
-                            foreach (HtmlNode n in urls)
-                            {
-                                flag++;
-                                Console.WriteLine(n.InnerText + " => " + n.GetAttributeValue("href", "No URL"));
-                            }
-                        }
+                        flag++;
+                        Console.WriteLine(n.InnerText + " => " + n.GetAttributeValue("href", "No URL"));
                     }
+                }
+            }
 
 
-                    if (flag == 1)
-                    {
-                        // AUTHOR PAGE
-                        profiles_url = "http://scholar.google.com" + profiles_url;
-                        profiles_url = profiles_url.Replace("amp;", "");
-                       // Program prog = new Program(profiles_url);
-                       // prog.getData();
-                    }
+            if (flag == 1)
+            {
+                // AUTHOR PAGE
+                profiles_url = "http://scholar.google.com" + profiles_url;
+                profiles_url = profiles_url.Replace("amp;", "");
+               // Program prog = new Program(profiles_url);
+               // prog.getData();
+            }
 
+            else
+            {
+                //SEARCH RESULTS PAGE
+
+                var count = 0;
+                do
+                {
+
+                    xpath = "//div[@class=\"gs_ri\"]";
+                    HtmlNodeCollection searchResults = doc.DocumentNode.SelectNodes(xpath);
+                    if (searchResults == null) Console.WriteLine("No results found");
                     else
                     {
-                        //SEARCH RESULTS PAGE
 
-                        var count = 0;
-                        do
+                        foreach (HtmlNode n in searchResults)
                         {
+                            count++;
+                            HtmlNode child = n.FirstChild;
+                            Console.WriteLine("=====================================================\n");
+                            Console.WriteLine("SEARCH RESULT : " + count);
+                            Console.WriteLine("TITLE : " + child.InnerText);
+                            HtmlNode url_node = child.SelectSingleNode(".//a");
+                            if (url_node != null) Console.WriteLine("TITLE-LINK : " + child.SelectSingleNode(".//a").GetAttributeValue("href", "No url"));
 
-                            xpath = "//div[@class=\"gs_ri\"]";
-                            HtmlNodeCollection searchResults = doc.DocumentNode.SelectNodes(xpath);
-                            if (searchResults == null) Console.WriteLine("No results found");
-                            else
+                            child = child.NextSibling;
+                            HtmlNodeCollection cit_urls = child.SelectNodes(".//a");
+                            if (cit_urls != null)
                             {
-
-                                foreach (HtmlNode n in searchResults)
-                                {
-                                    count++;
-                                    HtmlNode child = n.FirstChild;
-                                    Console.WriteLine("=====================================================\n");
-                                    Console.WriteLine("SEARCH RESULT : " + count);
-                                    Console.WriteLine("TITLE : " + child.InnerText);
-                                    HtmlNode url_node = child.SelectSingleNode(".//a");
-                                    if (url_node != null) Console.WriteLine("TITLE-LINK : " + child.SelectSingleNode(".//a").GetAttributeValue("href", "No url"));
-
-                                    child = child.NextSibling;
-                                    HtmlNodeCollection cit_urls = child.SelectNodes(".//a");
-                                    if (cit_urls != null)
-                                    {
-                                        Console.WriteLine("CITATIONS : ");
-                                        foreach (HtmlNode cn in cit_urls) Console.WriteLine(cn.InnerText + " => " + cn.GetAttributeValue("href", "No URL"));
-                                    }
-                                    child = child.NextSibling;
-                                    Console.WriteLine("SUMMARY :");
-                                    Console.WriteLine(child.InnerText);
-
-                                    child = child.NextSibling;
-                                    if (child != null) child = child.FirstChild;
-                                    if (child != null) Console.WriteLine(child.FirstChild.InnerText + " => " + child.FirstChild.GetAttributeValue("href", "No URL"));
-
-                                }
-
-                                //next page
-                                xpath = "//div[@id=\"gs_n\"]//table//td[@align=\"left\"]//a";
-                                HtmlNode next_node = doc.DocumentNode.SelectSingleNode(xpath);
-                                if (next_node == null) { Console.WriteLine("No more results"); break; }
-                                string next_url = next_node.GetAttributeValue("href", "No url");
-                                if (next_url.Equals("No url")) { Console.WriteLine("No more results"); break; }
-                                next_url = "http://scholar.google.com" + next_url;
-                                next_url = next_url.Replace("amp;", "");
-                                Console.WriteLine(next_url);
-                                doc = web.Load(next_url);
-
+                                Console.WriteLine("CITATIONS : ");
+                                foreach (HtmlNode cn in cit_urls) Console.WriteLine(cn.InnerText + " => " + cn.GetAttributeValue("href", "No URL"));
                             }
+                            child = child.NextSibling;
+                            Console.WriteLine("SUMMARY :");
+                            Console.WriteLine(child.InnerText);
 
-                        } while (count < 100);
+                            child = child.NextSibling;
+                            if (child != null) child = child.FirstChild;
+                            if (child != null) Console.WriteLine(child.FirstChild.InnerText + " => " + child.FirstChild.GetAttributeValue("href", "No URL"));
 
+                        }
+
+                        //next page
+                        xpath = "//div[@id=\"gs_n\"]//table//td[@align=\"left\"]//a";
+                        HtmlNode next_node = doc.DocumentNode.SelectSingleNode(xpath);
+                        if (next_node == null) { Console.WriteLine("No more results"); break; }
+                        string next_url = next_node.GetAttributeValue("href", "No url");
+                        if (next_url.Equals("No url")) { Console.WriteLine("No more results"); break; }
+                        next_url = "http://scholar.google.com" + next_url;
+                        next_url = next_url.Replace("amp;", "");
+                        Console.WriteLine(next_url);
+                        doc = web.Load(next_url);
 
                     }
-                    Console.ReadLine();
-                }*/
-    }
-}
 
+                } while (count < 100);
+
+
+            }
+            Console.ReadLine();
+        }*/
