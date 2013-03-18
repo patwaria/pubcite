@@ -22,7 +22,7 @@ namespace PubCite
             latestSearch = authName;
             authName = authName.Replace(" ", "+");
             string url = "http://scholar.google.com/scholar?q=" + authName + "&btnG=&hl=en&as_sdt=0,5";
-            // Console.WriteLine("loaded !!!");
+             Console.WriteLine("loaded !!!");
             HtmlWeb web = new HtmlWeb();
             doc = web.Load(url);
         }
@@ -260,7 +260,7 @@ namespace PubCite
                     authors = "Not Found";
                     publication = "Not Found";
                     publisher = "Not Found";
-                    year = 1970;
+                    year = -1;
                     if (child != null)
                     {
                         string[] names = child.InnerText.Split('-');
@@ -306,13 +306,9 @@ namespace PubCite
                     if (child != null) child = child.FirstChild;
                     if (child != null)
                     {
+                        
                         string text = child.InnerText;
-                        cited_by_url = child.GetAttributeValue("href", "Not Found");
-                        if (!cited_by_url.Equals("Not Found"))
-                        {
-                            cited_by_url = "http://scholar.google.com" + cited_by_url;
-                            cited_by_url = cited_by_url.Replace("amp;", "");
-                        }
+
                         try
                         {
                             text = text.Replace("Cited by", "");
@@ -320,6 +316,14 @@ namespace PubCite
                             no_of_citations = Convert.ToInt32(text);
                         }
                         catch (Exception e) { }
+
+                        cited_by_url = no_of_citations != 0 ? child.GetAttributeValue("href", "Not Found") : "Not Found";
+                        if (!cited_by_url.Equals("Not Found"))
+                        {
+                            cited_by_url = "http://scholar.google.com" + cited_by_url;
+                            cited_by_url = cited_by_url.Replace("amp;", "");
+                        }
+                        
                     }
 
 
