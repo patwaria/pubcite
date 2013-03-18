@@ -30,11 +30,6 @@ namespace PubCite
 
         private void searchButton_Click(object sender, EventArgs e)
         {
-            authorsSuggestions.Items.Clear();
-            
-          
-
-
             if (authorRadioButton.Checked == true)
             {
                 authorResultsListView.Visible = true;
@@ -57,7 +52,7 @@ namespace PubCite
                     a[2] = false;
                     Scraper = new GSScraper();
                     authSug = Scraper.getAuthSuggestions(searchField.Text);
-                                   
+                    
                 
                 }
                 else if (siteComboBox.SelectedItem.ToString().Equals("Microsoft Academic Search"))
@@ -68,11 +63,9 @@ namespace PubCite
                 if (authSug == null || !authSug.isSet())
                 {
                     authorResultsListView.Items.Clear();
-                    // TODO : show message to user and gofor exhaustive search results
-                   
-                  
+                    Results = new SG.ClassifyAuthors();
                     if (a[0] == true) Results = Parser.getAuthors(searchField.Text);
-                    else if(a[1]==true) Results = Scraper.getAuthors(searchField.Text);
+                    else if (a[1] == true) Results = Scraper.getAuthors(searchField.Text);
                     Papers = Results.Papers;
                     for (int i = 0; i < Papers.Count; i++)
                     {
@@ -87,24 +80,34 @@ namespace PubCite
 
 
                     }
-                   
-
+                    
+                    // TODO : show message to user and gofor exhaustive search results
                     System.Console.WriteLine("Data Not Available!");
+                    
                 }
                 else
                 {
                     //System.Console.WriteLine(authSug.isSet());
-                    Suggestions.Visible = true;
                    authors = authSug.getSuggestions();
                    auth_url = authSug.getSuggestionsURL();
 
                    // System.Console.WriteLine(authors[0]);
-                  
-                    for (int i = 0; i < authors.Count; i++)
-                    {
-                        item = new ListViewItem(authors[i]);
-                        authorsSuggestions.Items.Add(item);
-                    }
+                   if (authors.Count == 1)
+                   {
+                       populatePapers(0);
+                   }
+                   else
+                   {
+                       System.Console.WriteLine("I'm called 1");
+                       Suggestions.Visible = true;
+                       System.Console.WriteLine("I'm called 2");
+                       for (int i = 0; i < authors.Count; i++)
+                       {
+                           
+                           item = new ListViewItem(authors[i]);
+                           authorsSuggestions.Items.Add(item);
+                       }
+                   }
                     authorsSuggestions.FullRowSelect = true;
                     authorsSuggestions.Click += new EventHandler(authorsSuggestions_Click);
                 }
@@ -121,33 +124,8 @@ namespace PubCite
 
         private void authorsSuggestions_Click(object sender, EventArgs e)
         {
-            authorResultsListView.Items.Clear();
-            if(a[0]==true)
-             authstats = Parser.getAuthStatistics(auth_url[authorsSuggestions.FocusedItem.Index]);
-            else if(a[1]==true)
-                 authstats = Scraper.getAuthStatistics(auth_url[authorsSuggestions.FocusedItem.Index]);
-            Papers = authstats.getPapers();
-            Console.WriteLine(Papers.Count);
-            for (int i = 0; i < Papers.Count; i++) {
 
-
-                /*populating */
-                authorNameLabel.Text = authstats.Name;
-                citesperPaper.Text = authstats.getCitesPerPaper().ToString();
-                //citesperYear.Text = authstats.get
-                hindex.Text = authstats.getHIndex().ToString();
-                i10index.Text = authstats.getI10Index().ToString();
-                citationsNumberLabel.Text = authstats.getTotalNumberofCitations().ToString();
-
-                item = new ListViewItem(Papers[i].Title);
-                item.SubItems.Add(Papers[i].Year.ToString());
-                item.SubItems.Add(Papers[i].NumberOfCitations.ToString());
-                authorResultsListView.Items.Add(item);
-                Console.WriteLine(Papers[i].Title + Papers[i].Year + Papers[i].NumberOfCitations);
-               
-            
-            }
-            
+            populatePapers(authorsSuggestions.FocusedItem.Index);
             
         }
 
@@ -161,7 +139,36 @@ namespace PubCite
 
         }
 
-        
+        private void populatePapers(int index) {
+            authorResultsListView.Items.Clear();
+            if (a[0] == true)
+                authstats = Parser.getAuthStatistics(auth_url[index]);
+            else if (a[1] == true)
+                authstats = Scraper.getAuthStatistics(auth_url[index]);
+            Papers = authstats.getPapers();
+            Console.WriteLine(Papers.Count);
+            authorNameLabel.Text = authstats.Name;
+            citesperPaper.Text = authstats.getCitesPerPaper().ToString();
+            //citesperYear.Text = authstats.get
+            hindex.Text = authstats.getHIndex().ToString();
+            i10index.Text = authstats.getI10Index().ToString();
+            citationsNumberLabel.Text = authstats.getTotalNumberofCitations().ToString();
+            for (int i = 0; i < Papers.Count; i++)
+            {
+
+
+                /*populating */
+
+
+                item = new ListViewItem(Papers[i].Title);
+                item.SubItems.Add(Papers[i].Year.ToString());
+                item.SubItems.Add(Papers[i].NumberOfCitations.ToString());
+                authorResultsListView.Items.Add(item);
+                Console.WriteLine(Papers[i].Title + Papers[i].Year + Papers[i].NumberOfCitations);
+
+
+            }
+        }
 
         List<string> auth_url;
         List<string> authors;
