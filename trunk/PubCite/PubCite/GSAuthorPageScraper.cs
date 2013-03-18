@@ -48,7 +48,7 @@ namespace PubCite
             catch (Exception e) { }
         }
 
-        private bool nextPage(int callFirstTime)   //callFirstTime must be 1 if this is called first time
+        public bool nextPage(int callFirstTime)   //callFirstTime must be 1 if this is called first time
         {
             bool pageStatus = false;
             String next_URL;
