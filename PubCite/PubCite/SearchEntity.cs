@@ -52,6 +52,26 @@ namespace SG
             papers.Add(p);
         }
 
+        //method to return list of papers on the basis of the year range
+        public List<Paper> getPaperByYearRange(int begin, int end)
+        {
+            List<Paper> newList = new List<Paper>();
+            foreach (Paper p in papers)
+            {
+                if (p.Year >= begin)
+                {
+                    if(end == -1 || p.Year <=end)
+                        newList.Add(p);
+                }
+            }
+            return newList;
+        }
+
+        public List<Paper> getPaperByYearRange(int begin)
+        {
+            return getPaperByYearRange(begin, -1);
+        }
+
         //method to get total number of citations of the search entity
         public int getTotalNumberofCitations()
         {
