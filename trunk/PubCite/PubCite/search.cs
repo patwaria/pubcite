@@ -30,6 +30,7 @@ namespace PubCite
 
         private void searchButton_Click(object sender, EventArgs e)
         {
+            authorsSuggestions.Items.Clear();
             if (authorRadioButton.Checked == true)
             {
                 authorResultsListView.Visible = true;
