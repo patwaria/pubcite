@@ -174,7 +174,7 @@
             this.authorResultsListView.TabIndex = 1;
             this.authorResultsListView.UseCompatibleStateImageBehavior = false;
             this.authorResultsListView.View = System.Windows.Forms.View.Details;
-           
+            this.authorResultsListView.SelectedIndexChanged += new System.EventHandler(this.authorResultsListView_SelectedIndexChanged);
             // 
             // columnHeader6
             // 

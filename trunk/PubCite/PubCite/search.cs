@@ -179,7 +179,7 @@ namespace PubCite
         }
         private void journalsResultsListView_OnClick(object sender, EventArgs e)
         {
-
+            citationsDetailsListView.Items.Clear();
             if (Papers[journalsResultsListView.FocusedItem.Index].NumberOfCitations > 0)
             {
 
@@ -246,21 +246,11 @@ namespace PubCite
             authorResultsListView.Click += new EventHandler(authorResultsListView_OnClick);
         }
 
-        List<string> auth_url;
-        List<string> authors;
-        CSXParser Parser;
-        GSScraper Scraper;
-        ListViewItem item;
-        SG.AuthSuggestion authSug;
-        SG.Author authstats;
-        SG.ClassifyAuthors Results;
-        List<SG.Paper> Papers;
-        List<SG.Paper> CitationPapers;
-        SG.ClassifyJournals JournalResu;
-        Boolean[] a = { false,false,false };
+       
 
         private void authorResultsListView_OnClick(object sender, EventArgs e)
         {
+            citationsDetailsListView.Items.Clear();
             if (Papers[authorResultsListView.FocusedItem.Index].NumberOfCitations > 0) {
 
               CitationPapers = Scraper.getCitations(Papers[authorResultsListView.FocusedItem.Index].CitedByURL);
@@ -277,6 +267,20 @@ namespace PubCite
         {
 
         }
+
+        List<string> auth_url;
+        List<string> authors;
+        CSXParser Parser;
+        GSScraper Scraper;
+        ListViewItem item;
+        SG.AuthSuggestion authSug;
+        SG.Author authstats;
+        SG.ClassifyAuthors Results;
+        List<SG.Paper> Papers;
+        List<SG.Paper> CitationPapers;
+        SG.ClassifyJournals JournalResu;
+        Boolean[] a = { false, false, false };
+
     }
     
     
