@@ -208,7 +208,7 @@ namespace PubCite
             }
             searchElement = new string(searchElementTemp);
 
-            String searchURL="http://citeseer.ist.psu.edu/search?q=" +searchElement+ "&submit=Search&uauth=1&sort=ndocs&t=auth";
+            String searchURL = "http://citeseer.ist.psu.edu/search?q=" + searchElement + "&submit=Search&uauth=1&sort=ndocs&t=auth";
 
             web = new HtmlWeb();
             doc = web.Load(searchURL);
@@ -241,11 +241,13 @@ namespace PubCite
             {
                 Console.WriteLine("*** *** ***");
 
-                /**/sugList.Add(rows[i].SelectSingleNode("h3").InnerText);
+                /**/
+                sugList.Add(rows[i].SelectSingleNode("h3").InnerText);
                 Console.WriteLine(rows[i].SelectSingleNode("h3").InnerText);
 
-                /**/urlList.Add("http://citeseer.ist.psu.edu" + rows[i].SelectSingleNode("h3/a").GetAttributeValue("href", ""));                
-                Console.WriteLine("http://citeseer.ist.psu.edu" + rows[i].SelectSingleNode("h3/a").GetAttributeValue("href", ""));
+                /**/
+                urlList.Add("http://citeseer.ist.psu.edu" + rows[i].SelectSingleNode("h3/a").GetAttributeValue("href", "") + "&list=full");
+                Console.WriteLine("http://citeseer.ist.psu.edu" + rows[i].SelectSingleNode("h3/a").GetAttributeValue("href", "") + "&list=full");
 
             }
 
@@ -267,17 +269,17 @@ namespace PubCite
         public String affiliation;//e.g. university or organisation
         public int numPub;//no. of publications
         public int hIndex, i10Index;
-        public publiData[] publiList;//array containing info about all the publications
+        public List<publiData> publiList;//array containing info about all the publications
 
         HtmlWeb web;
         HtmlDocument doc;
-        
+
         public CSXAuth(String authURL)
         {
             web = new HtmlWeb();
             doc = web.Load(authURL);
 
-            if(doc!=null)
+            if (doc != null)
                 Console.WriteLine("Document Loaded!");
             else
                 Console.WriteLine("Load Error!");
@@ -287,16 +289,16 @@ namespace PubCite
 
         String[] Split(String s)//Gets a string containing publication information and divides it into title, journal and year strings
         {
-            String[] list=new String[3];
-            int st=0,i,j;
+            String[] list = new String[3];
+            int st = 0, i, j;
 
-            for (i = 0,j = 0; i < s.Length; i++)
+            for (i = 0, j = 0; i < s.Length; i++)
             {
                 if (s[i] == '\n')
                 {
-                    while (Char.IsWhiteSpace(s[i])) { i++; if (i >= s.Length)break; }                   
+                    while (Char.IsWhiteSpace(s[i])) { i++; if (i >= s.Length)break; }
                     list[j++] = s.Substring(st, i - st).Trim();
-                    st = i + 1;                    
+                    st = i + 1;
                 }
             }
 
@@ -307,7 +309,7 @@ namespace PubCite
         {
             HtmlNode name = doc.DocumentNode.SelectSingleNode("//*[@id=\"viewHeader\"]/h2");
             Console.Write("\nName: ");
-            String namet = name.InnerText;            
+            String namet = name.InnerText;
             authName = namet.Remove(namet.Length - 5);
             Console.WriteLine(authName);
 
@@ -334,13 +336,14 @@ namespace PubCite
 
             HtmlNodeCollection rows = doc.DocumentNode.SelectNodes("//*[@id=\"viewContent-inner\"]/table/tr");
             String[] list;
-            int i10 = 0 ;
+            int i10 = 0;
 
-            List<publiData> tempPubliList = new List<publiData>();
-            publiData tempPubliObj=new publiData();
+            publiList = new List<publiData>();
+            publiData tempPubliObj = new publiData();
 
             for (int i = 1; i < rows.Count; i++)
             {
+                tempPubliObj = new publiData();
                 Console.WriteLine("*** *** ***");
                 Console.WriteLine(rows[i].XPath);
 
@@ -348,29 +351,28 @@ namespace PubCite
                     tempPubliObj.numCit = Convert.ToInt32(rows[i].SelectSingleNode("td[1]").InnerText);
                 else
                     tempPubliObj.numCit = 0;
-                Console.WriteLine("No. of citations: "+tempPubliObj.numCit);
+                Console.WriteLine("No. of citations: " + tempPubliObj.numCit);
 
                 if (rows[i].SelectSingleNode("td[1]").InnerText.ToString().Trim().Length > 0)
                     if (Convert.ToInt32(rows[i].SelectSingleNode("td[1]").InnerText) >= 10) i10++;
-                
+
                 list = Split(rows[i].SelectSingleNode("td[2]").InnerText);
                 tempPubliObj.title = list[0];
                 tempPubliObj.journal = list[1];
-                tempPubliObj.year = Convert.ToInt32(list[2]);                
-                tempPubliObj.url = "http://citeseer.ist.psu.edu"+rows[i].SelectSingleNode("td[2]/a").GetAttributeValue("href","");
-                Console.WriteLine(tempPubliObj.title + "|" + tempPubliObj.journal+ "|" + tempPubliObj.year + "|" + tempPubliObj.url);
-                tempPubliList.Add(tempPubliObj);
+                tempPubliObj.year = Convert.ToInt32(list[2]);
+                tempPubliObj.url = "http://citeseer.ist.psu.edu" + rows[i].SelectSingleNode("td[2]/a").GetAttributeValue("href", "");
+                Console.WriteLine(tempPubliObj.title + "|" + tempPubliObj.journal + "|" + tempPubliObj.year + "|" + tempPubliObj.url);
+                publiList.Add(tempPubliObj);
             }
-            publiList = tempPubliList.ToArray();
 
-            numPub = publiList.Length;
-            Console.WriteLine(numPub);
+            numPub = publiList.Count;
+            Console.WriteLine(numPub + "|" + rows.Count);
 
             i10Index = i10;
             Console.WriteLine(i10Index);
         }
 
-        
+
         /*public static void Main(string[] args)
         {
             String authURL = "http://citeseer.ist.psu.edu/viewauth/summary?aid=7229&list=full";
