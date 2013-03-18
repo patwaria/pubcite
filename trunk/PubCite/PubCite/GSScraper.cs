@@ -31,7 +31,7 @@ namespace PubCite
         // SUGGESTIONS FROM SEARCH PAGE
         public SG.AuthSuggestion getAuthSuggestions(string authName)
         {
-            Console.WriteLine("in gs33");
+
             List<string> names = new List<string>();
             List<string> links = new List<string>();
 
@@ -73,15 +73,9 @@ namespace PubCite
                         links.Add(profiles_url);
                     }
                 }
-                Console.WriteLine("in gs");
                 return new SG.AuthSuggestion(names, links, true);
             }
-            else {
-                Console.WriteLine("in gs555");
-                return new SG.AuthSuggestion(null, null, false);
-                    
-            
-            }
+            else return new SG.AuthSuggestion(null, null, false);
         }
 
 
