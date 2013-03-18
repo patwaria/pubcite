@@ -362,7 +362,8 @@ namespace PubCite
                 tempPubliObj.year = Convert.ToInt32(list[2]);
                 tempPubliObj.url = "http://citeseer.ist.psu.edu" + rows[i].SelectSingleNode("td[2]/a").GetAttributeValue("href", "");
                 Console.WriteLine(tempPubliObj.title + "|" + tempPubliObj.journal + "|" + tempPubliObj.year + "|" + tempPubliObj.url);
-                publiList.Add(tempPubliObj);
+                if(tempPubliObj.numCit>0)
+                    publiList.Add(tempPubliObj);
             }
 
             numPub = publiList.Count;
