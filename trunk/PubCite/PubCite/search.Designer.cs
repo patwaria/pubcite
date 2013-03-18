@@ -158,6 +158,7 @@
             this.resultsGroupBox.TabIndex = 0;
             this.resultsGroupBox.TabStop = false;
             this.resultsGroupBox.Text = "Results ";
+            this.resultsGroupBox.Enter += new System.EventHandler(this.resultsGroupBox_Enter);
             // 
             // authorResultsListView
             // 
@@ -173,6 +174,7 @@
             this.authorResultsListView.TabIndex = 1;
             this.authorResultsListView.UseCompatibleStateImageBehavior = false;
             this.authorResultsListView.View = System.Windows.Forms.View.Details;
+           
             // 
             // columnHeader6
             // 
