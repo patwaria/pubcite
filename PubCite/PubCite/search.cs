@@ -104,9 +104,9 @@ namespace PubCite
                    }
                    else
                    {
-                       System.Console.WriteLine("I'm called 1");
+                      
                        Suggestions.Visible = true;
-                       System.Console.WriteLine("I'm called 2");
+                       
                        for (int i = 0; i < authors.Count; i++)
                        {
                            
@@ -123,9 +123,57 @@ namespace PubCite
             {
                 authorResultsListView.Visible = false;
                 journalsResultsListView.Visible = true;
+
+                if (siteComboBox.SelectedItem.ToString().Equals("Citeseer"))
+                {
+                    a[0] = true;
+                    a[1] = false;
+                    a[2] = false;
+                    Parser = new CSXParser();
+                    populateJournals();
+
+                }
+                else if (siteComboBox.SelectedItem.ToString().Equals("Google Scholar"))
+                {
+                    a[0] = false;
+                    a[1] = true;
+                    a[2] = false;
+                    Scraper = new GSScraper();
+                    populateJournals();
+
+                  
+
+
+                }
+                else if (siteComboBox.SelectedItem.ToString().Equals("Microsoft Academic Search"))
+                    System.Console.WriteLine("MAS Not available");
+
+
+
             }
 
             System.Console.WriteLine();
+        }
+
+        private void populateJournals() {
+
+            if (a[0] == true)
+                JournalResu = Parser.getJournals(searchField.Text);
+            else if (a[1] == true)
+                JournalResu = Scraper.getJournals(searchField.Text);
+            Papers = JournalResu.papers;
+            for (int i = 0; i < Papers.Count; i++) {
+
+                item = new ListViewItem(Papers[i].Title);
+                item.SubItems.Add(Papers[i].Authors);
+                item.SubItems.Add(Papers[i].Citations.ToString());
+                item.SubItems.Add(Papers[i].Year.ToString());
+                journalsResultsListView.Items.Add(item);
+            
+            }
+            
+            
+        
         }
 
         private void authorsSuggestions_Click(object sender, EventArgs e)
@@ -174,6 +222,8 @@ namespace PubCite
 
 
             }
+            authorResultsListView.FullRowSelect=true;
+            authorResultsListView.Click += new EventHandler(authorResultsListView_OnClick);
         }
 
         List<string> auth_url;
@@ -185,7 +235,28 @@ namespace PubCite
         SG.Author authstats;
         SG.ClassifyAuthors Results;
         List<SG.Paper> Papers;
+        List<SG.Paper> CitationPapers;
+        SG.ClassifyJournals JournalResu;
         Boolean[] a = { false,false,false };
+
+        private void authorResultsListView_OnClick(object sender, EventArgs e)
+        {
+            if (Papers[authorResultsListView.FocusedItem.Index].NumberOfCitations > 0) {
+
+              CitationPapers = Scraper.getCitations(Papers[authorResultsListView.FocusedItem.Index].CitedByURL);
+              for (int i = 0; i < CitationPapers.Count; i++) {
+                  item = new ListViewItem(CitationPapers[i].Title);
+                  citationsDetailsListView.Items.Add(item);
+              
+              }
+            
+            }
+        }
+
+        private void resultsGroupBox_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
     
     
