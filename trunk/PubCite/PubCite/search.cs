@@ -166,8 +166,9 @@ namespace PubCite
 
                 item = new ListViewItem(Papers[i].Title);
                 item.SubItems.Add(Papers[i].Authors);
-                item.SubItems.Add(Papers[i].Citations.ToString());
-                item.SubItems.Add(Papers[i].Year.ToString());
+                item.SubItems.Add(Papers[i].NumberOfCitations.ToString());
+                if (Papers[i].Year == -1) item.SubItems.Add("--");
+                else item.SubItems.Add(Papers[i].Year.ToString());
                 journalsResultsListView.Items.Add(item);
             
             }
