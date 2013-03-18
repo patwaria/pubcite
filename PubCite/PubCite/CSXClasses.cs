@@ -87,9 +87,14 @@ namespace PubCite
             }
             if (searchType == 1)
             {
-                nextURL = "http://citeseerx.ist.psu.edu/search?q=venue%3A" + searchElement +"&ic=1&t=doc&sort=cite&start=" + PageNo + "0";
+                nextURL = "http://citeseerx.ist.psu.edu/search?q=venue%3A" + searchElement +"&ic=1&t=doc&sort=cite&start=" + Convert.ToString(PageNo) + "0";
+
                 PageNo++;
+
+                
                 CiteDoc = CitePage.Load(nextURL);
+
+                Console.WriteLine(CiteDoc.ToString());
                 return 1;
             }
             return 0;
@@ -104,6 +109,7 @@ namespace PubCite
 
             do
             {
+                mainTable = CiteDoc.DocumentNode.SelectSingleNode("//*[@id=\"result_list\"]");
                 for (int i = 1; i <= 10; i++)
                 {
 
