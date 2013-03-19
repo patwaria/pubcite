@@ -98,16 +98,21 @@ namespace PubCite
             SG.Author author = new SG.Author(authScraper.getName(), authScraper.getHIndex(), authScraper.getIIndex());
 
             //Console.WriteLine(author.Name + "," + author.getHIndex() + "," + author.getI10Index());
-            List<SG.Paper> papers = authScraper.getPapersOfCurrentPage();
+            int count = 1;
+            List<SG.Paper> papers;
             do{
-                authScraper.nextPage(2);
-                
-                foreach (SG.Paper paper in papers)
+                papers = authScraper.getPapersOfCurrentPage();
+                if (authScraper.nextPage(count))
                 {
-                    author.addPaper(paper);
+                    foreach (SG.Paper paper in papers)
+                    {
+                        author.addPaper(paper);
+                    }
                 }
+                else break;
+                count++;
             }
-            while(papers[papers.Count-1].NumberOfCitations > 2);
+            while(papers[papers.Count-1].NumberOfCitations > 1);
             return author;
         }
 
@@ -119,11 +124,15 @@ namespace PubCite
         public SG.ClassifyAuthors getAuthors(string authName)
         {
 
-            // IF THIS IS THE FIRST SEARCH OR PREVIOUS SEARCH IS DIFFERENT
-            if (latestSearch.Equals("default") || (!latestSearch.Equals(authName)))
-            {
-                loadHtmlDocument(authName,1);
-            }
+            // CONNECTIONS
+            authName.Trim();
+            authName = Regex.Replace(authName, @"\s+", " author:");
+            authName = authName.Insert(0,"author:");
+            string url = "http://scholar.google.com/scholar?q=" + authName + "&btnG=&hl=en&as_sdt=0,5";
+            //Console.WriteLine("loaded !!!");
+            HtmlWeb web = new HtmlWeb();
+            doc = web.Load(url);
+
 
             SG.ClassifyAuthors results = new SG.ClassifyAuthors();
 
@@ -237,11 +246,13 @@ namespace PubCite
         public SG.ClassifyJournals getJournals(string journalName)
         {
 
-            // IF THIS IS THE FIRST SEARCH OR PREVIOUS SEARCH IS DIFFERENT
-            if (latestSearch.Equals("default") || (!latestSearch.Equals(journalName)))
-            {
-                loadHtmlDocument(journalName,2);
-            }
+            // CONNECTIONS
+            journalName.Trim();
+            journalName = Regex.Replace(journalName, @"\s+", "+");
+            string url = "http://scholar.google.co.in/scholar?as_q=&as_epq=&as_oq=&as_eq=&as_occt=any&as_sauthors=&as_publication=" + journalName  + "&as_ylo=&as_yhi=&btnG=&hl=en&as_sdt=0%2C5";
+            //Console.WriteLine("loaded !!!");
+            HtmlWeb web = new HtmlWeb();
+            doc = web.Load(url);
 
             SG.ClassifyJournals results = new SG.ClassifyJournals();
 
