@@ -36,15 +36,15 @@
             this.Ciations = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
             this.resultsGroupBox = new System.Windows.Forms.GroupBox();
+            this.authorResultsListView = new System.Windows.Forms.ListView();
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.journalsResultsListView = new System.Windows.Forms.ListView();
             this.Paper = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Author = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Cites = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Year = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.authorResultsListView = new System.Windows.Forms.ListView();
-            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.statisticsGroupBox = new System.Windows.Forms.GroupBox();
             this.i10index = new System.Windows.Forms.Label();
             this.hindex = new System.Windows.Forms.Label();
@@ -60,9 +60,7 @@
             this.citationsLabel = new System.Windows.Forms.Label();
             this.authorLabel = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.Suggestions = new System.Windows.Forms.GroupBox();
             this.authorsSuggestions = new System.Windows.Forms.ListView();
             this.Authors = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -73,6 +71,8 @@
             this.searchSiteLabel = new System.Windows.Forms.Label();
             this.searchButton = new System.Windows.Forms.Button();
             this.searchField = new System.Windows.Forms.TextBox();
+            this.StartYearTextBox = new System.Windows.Forms.TextBox();
+            this.EndYearTextBox = new System.Windows.Forms.TextBox();
             this.SearchPanel.SuspendLayout();
             this.panel3.SuspendLayout();
             this.citationsDetailsGroupBox.SuspendLayout();
@@ -164,6 +164,36 @@
             this.resultsGroupBox.Text = "Results ";
             this.resultsGroupBox.Enter += new System.EventHandler(this.resultsGroupBox_Enter);
             // 
+            // authorResultsListView
+            // 
+            this.authorResultsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader6,
+            this.columnHeader7,
+            this.columnHeader8});
+            this.authorResultsListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.authorResultsListView.GridLines = true;
+            this.authorResultsListView.Location = new System.Drawing.Point(3, 16);
+            this.authorResultsListView.MultiSelect = false;
+            this.authorResultsListView.Name = "authorResultsListView";
+            this.authorResultsListView.Size = new System.Drawing.Size(523, 362);
+            this.authorResultsListView.TabIndex = 1;
+            this.authorResultsListView.UseCompatibleStateImageBehavior = false;
+            this.authorResultsListView.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "Paper";
+            this.columnHeader6.Width = 374;
+            // 
+            // columnHeader7
+            // 
+            this.columnHeader7.Text = "Year";
+            // 
+            // columnHeader8
+            // 
+            this.columnHeader8.Text = "No.Of Cites";
+            this.columnHeader8.Width = 86;
+            // 
             // journalsResultsListView
             // 
             this.journalsResultsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -201,36 +231,6 @@
             // 
             this.Year.Text = "Year";
             this.Year.Width = 66;
-            // 
-            // authorResultsListView
-            // 
-            this.authorResultsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader6,
-            this.columnHeader7,
-            this.columnHeader8});
-            this.authorResultsListView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.authorResultsListView.GridLines = true;
-            this.authorResultsListView.Location = new System.Drawing.Point(3, 16);
-            this.authorResultsListView.MultiSelect = false;
-            this.authorResultsListView.Name = "authorResultsListView";
-            this.authorResultsListView.Size = new System.Drawing.Size(523, 362);
-            this.authorResultsListView.TabIndex = 1;
-            this.authorResultsListView.UseCompatibleStateImageBehavior = false;
-            this.authorResultsListView.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader6
-            // 
-            this.columnHeader6.Text = "Paper";
-            this.columnHeader6.Width = 374;
-            // 
-            // columnHeader7
-            // 
-            this.columnHeader7.Text = "Year";
-            // 
-            // columnHeader8
-            // 
-            this.columnHeader8.Text = "No.Of Cites";
-            this.columnHeader8.Width = 86;
             // 
             // statisticsGroupBox
             // 
@@ -372,9 +372,9 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.comboBox2);
+            this.panel2.Controls.Add(this.EndYearTextBox);
+            this.panel2.Controls.Add(this.StartYearTextBox);
             this.panel2.Controls.Add(this.label2);
-            this.panel2.Controls.Add(this.comboBox1);
             this.panel2.Controls.Add(this.Suggestions);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.siteComboBox);
@@ -388,14 +388,6 @@
             this.panel2.Size = new System.Drawing.Size(267, 525);
             this.panel2.TabIndex = 0;
             // 
-            // comboBox2
-            // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(189, 149);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(51, 21);
-            this.comboBox2.TabIndex = 11;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -404,14 +396,6 @@
             this.label2.Size = new System.Drawing.Size(23, 13);
             this.label2.TabIndex = 10;
             this.label2.Text = "To:";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(104, 149);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(51, 21);
-            this.comboBox1.TabIndex = 9;
             // 
             // Suggestions
             // 
@@ -511,6 +495,21 @@
             this.searchField.Size = new System.Drawing.Size(180, 20);
             this.searchField.TabIndex = 1;
             // 
+            // StartYearTextBox
+            // 
+            this.StartYearTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.StartYearTextBox.Location = new System.Drawing.Point(106, 149);
+            this.StartYearTextBox.Name = "StartYearTextBox";
+            this.StartYearTextBox.Size = new System.Drawing.Size(49, 20);
+            this.StartYearTextBox.TabIndex = 11;
+            // 
+            // EndYearTextBox
+            // 
+            this.EndYearTextBox.Location = new System.Drawing.Point(189, 149);
+            this.EndYearTextBox.Name = "EndYearTextBox";
+            this.EndYearTextBox.Size = new System.Drawing.Size(49, 20);
+            this.EndYearTextBox.TabIndex = 12;
+            // 
             // search
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -553,9 +552,7 @@
         private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.TextBox searchField;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.GroupBox Suggestions;
         private System.Windows.Forms.ListView authorsSuggestions;
         private System.Windows.Forms.ColumnHeader Authors;
@@ -580,5 +577,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader6;
         private System.Windows.Forms.ColumnHeader columnHeader7;
         private System.Windows.Forms.ColumnHeader columnHeader8;
+        private System.Windows.Forms.TextBox EndYearTextBox;
+        private System.Windows.Forms.TextBox StartYearTextBox;
     }
 }
