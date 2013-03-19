@@ -31,8 +31,11 @@ namespace PubCite
         private void searchButton_Click(object sender, EventArgs e)
         {
             authorsSuggestions.Items.Clear();
+            authorResultsListView.Items.Clear();
             if (authorRadioButton.Checked == true)
             {
+
+
                 Console.WriteLine("in gs22");
                 authorResultsListView.Visible = true;
                 journalsResultsListView.Visible = false;
@@ -72,7 +75,7 @@ namespace PubCite
                     Results = new SG.ClassifyAuthors();
                     if (a[0] == true) Results = Parser.getAuthors(searchField.Text);
                     else if (a[1] == true) Results = Scraper.getAuthors(searchField.Text);
-                    Papers =(Results.Papers);
+                    
                     for (int i = 0; i < Papers.Count; i++)
                     {
 
@@ -220,6 +223,7 @@ namespace PubCite
                 authstats = Parser.getAuthStatistics(auth_url[index]);
             else if (a[1] == true)
                 authstats = Scraper.getAuthStatistics(auth_url[index]);
+            
             Papers = authstats.getPapers();
             Console.WriteLine(Papers.Count);
             authorNameLabel.Text = authstats.Name;
