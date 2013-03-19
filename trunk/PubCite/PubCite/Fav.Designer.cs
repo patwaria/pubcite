@@ -37,6 +37,21 @@
             treeNode3});
             this.panel6 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.resultsGroupBox = new System.Windows.Forms.GroupBox();
+            this.authorResultsListView = new System.Windows.Forms.ListView();
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.journalsResultsListView = new System.Windows.Forms.ListView();
+            this.Paper = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Author = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Cites = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Year = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.citationsDetailsGroupBox = new System.Windows.Forms.GroupBox();
+            this.Favorites = new System.Windows.Forms.Button();
+            this.Ciations = new System.Windows.Forms.Button();
+            this.CloseButton = new System.Windows.Forms.Button();
             this.statisticsGroupBox = new System.Windows.Forms.GroupBox();
             this.i10index = new System.Windows.Forms.Label();
             this.hindex = new System.Windows.Forms.Label();
@@ -53,29 +68,14 @@
             this.authorLabel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.favouritesTreeView = new System.Windows.Forms.TreeView();
-            this.CloseButton = new System.Windows.Forms.Button();
-            this.citationsDetailsGroupBox = new System.Windows.Forms.GroupBox();
-            this.Favorites = new System.Windows.Forms.Button();
-            this.Ciations = new System.Windows.Forms.Button();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.resultsGroupBox = new System.Windows.Forms.GroupBox();
-            this.authorResultsListView = new System.Windows.Forms.ListView();
-            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.journalsResultsListView = new System.Windows.Forms.ListView();
-            this.Paper = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Author = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Cites = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Year = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel6.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.resultsGroupBox.SuspendLayout();
+            this.citationsDetailsGroupBox.SuspendLayout();
             this.statisticsGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.authorImageBox)).BeginInit();
             this.panel1.SuspendLayout();
-            this.citationsDetailsGroupBox.SuspendLayout();
-            this.panel4.SuspendLayout();
-            this.resultsGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel6
@@ -98,6 +98,132 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(700, 535);
             this.panel3.TabIndex = 2;
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.resultsGroupBox);
+            this.panel4.Location = new System.Drawing.Point(3, 145);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(566, 393);
+            this.panel4.TabIndex = 7;
+            // 
+            // resultsGroupBox
+            // 
+            this.resultsGroupBox.Controls.Add(this.authorResultsListView);
+            this.resultsGroupBox.Controls.Add(this.journalsResultsListView);
+            this.resultsGroupBox.Location = new System.Drawing.Point(3, 6);
+            this.resultsGroupBox.Name = "resultsGroupBox";
+            this.resultsGroupBox.Size = new System.Drawing.Size(560, 381);
+            this.resultsGroupBox.TabIndex = 0;
+            this.resultsGroupBox.TabStop = false;
+            this.resultsGroupBox.Text = "Results ";
+            // 
+            // authorResultsListView
+            // 
+            this.authorResultsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader6,
+            this.columnHeader7,
+            this.columnHeader8});
+            this.authorResultsListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.authorResultsListView.GridLines = true;
+            this.authorResultsListView.Location = new System.Drawing.Point(3, 16);
+            this.authorResultsListView.Name = "authorResultsListView";
+            this.authorResultsListView.Size = new System.Drawing.Size(554, 362);
+            this.authorResultsListView.TabIndex = 1;
+            this.authorResultsListView.UseCompatibleStateImageBehavior = false;
+            this.authorResultsListView.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "Paper";
+            this.columnHeader6.Width = 386;
+            // 
+            // columnHeader7
+            // 
+            this.columnHeader7.Text = "Year";
+            this.columnHeader7.Width = 68;
+            // 
+            // columnHeader8
+            // 
+            this.columnHeader8.Text = "No.Of Cites";
+            this.columnHeader8.Width = 96;
+            // 
+            // journalsResultsListView
+            // 
+            this.journalsResultsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Paper,
+            this.Author,
+            this.Cites,
+            this.Year});
+            this.journalsResultsListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.journalsResultsListView.GridLines = true;
+            this.journalsResultsListView.Location = new System.Drawing.Point(3, 16);
+            this.journalsResultsListView.Name = "journalsResultsListView";
+            this.journalsResultsListView.Size = new System.Drawing.Size(554, 362);
+            this.journalsResultsListView.TabIndex = 0;
+            this.journalsResultsListView.UseCompatibleStateImageBehavior = false;
+            this.journalsResultsListView.View = System.Windows.Forms.View.Details;
+            this.journalsResultsListView.Visible = false;
+            // 
+            // Paper
+            // 
+            this.Paper.Text = "Paper";
+            this.Paper.Width = 151;
+            // 
+            // Author
+            // 
+            this.Author.Text = "Author";
+            this.Author.Width = 166;
+            // 
+            // Cites
+            // 
+            this.Cites.Text = "No.Of Cites";
+            this.Cites.Width = 83;
+            // 
+            // Year
+            // 
+            this.Year.Text = "Year";
+            this.Year.Width = 66;
+            // 
+            // citationsDetailsGroupBox
+            // 
+            this.citationsDetailsGroupBox.Controls.Add(this.Favorites);
+            this.citationsDetailsGroupBox.Controls.Add(this.Ciations);
+            this.citationsDetailsGroupBox.Location = new System.Drawing.Point(575, 143);
+            this.citationsDetailsGroupBox.Name = "citationsDetailsGroupBox";
+            this.citationsDetailsGroupBox.Size = new System.Drawing.Size(122, 383);
+            this.citationsDetailsGroupBox.TabIndex = 6;
+            this.citationsDetailsGroupBox.TabStop = false;
+            this.citationsDetailsGroupBox.Text = "options";
+            // 
+            // Favorites
+            // 
+            this.Favorites.Location = new System.Drawing.Point(6, 32);
+            this.Favorites.Name = "Favorites";
+            this.Favorites.Size = new System.Drawing.Size(106, 23);
+            this.Favorites.TabIndex = 2;
+            this.Favorites.Text = "Remove From Favorite";
+            this.Favorites.UseVisualStyleBackColor = true;
+            this.Favorites.Click += new System.EventHandler(this.Favorites_Click);
+            // 
+            // Ciations
+            // 
+            this.Ciations.Location = new System.Drawing.Point(6, 73);
+            this.Ciations.Name = "Ciations";
+            this.Ciations.Size = new System.Drawing.Size(106, 23);
+            this.Ciations.TabIndex = 1;
+            this.Ciations.Text = "View Citations";
+            this.Ciations.UseVisualStyleBackColor = true;
+            // 
+            // CloseButton
+            // 
+            this.CloseButton.Location = new System.Drawing.Point(565, 3);
+            this.CloseButton.Name = "CloseButton";
+            this.CloseButton.Size = new System.Drawing.Size(107, 23);
+            this.CloseButton.TabIndex = 5;
+            this.CloseButton.Text = "Close";
+            this.CloseButton.UseVisualStyleBackColor = true;
+            this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click_1);
             // 
             // statisticsGroupBox
             // 
@@ -263,131 +389,7 @@
             this.favouritesTreeView.Size = new System.Drawing.Size(180, 175);
             this.favouritesTreeView.TabIndex = 0;
             this.favouritesTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
-            // 
-            // CloseButton
-            // 
-            this.CloseButton.Location = new System.Drawing.Point(510, 4);
-            this.CloseButton.Name = "CloseButton";
-            this.CloseButton.Size = new System.Drawing.Size(107, 23);
-            this.CloseButton.TabIndex = 5;
-            this.CloseButton.Text = "Close";
-            this.CloseButton.UseVisualStyleBackColor = true;
-            this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click_1);
-            // 
-            // citationsDetailsGroupBox
-            // 
-            this.citationsDetailsGroupBox.Controls.Add(this.Favorites);
-            this.citationsDetailsGroupBox.Controls.Add(this.Ciations);
-            this.citationsDetailsGroupBox.Location = new System.Drawing.Point(575, 143);
-            this.citationsDetailsGroupBox.Name = "citationsDetailsGroupBox";
-            this.citationsDetailsGroupBox.Size = new System.Drawing.Size(122, 383);
-            this.citationsDetailsGroupBox.TabIndex = 6;
-            this.citationsDetailsGroupBox.TabStop = false;
-            this.citationsDetailsGroupBox.Text = "options";
-            // 
-            // Favorites
-            // 
-            this.Favorites.Location = new System.Drawing.Point(6, 32);
-            this.Favorites.Name = "Favorites";
-            this.Favorites.Size = new System.Drawing.Size(106, 23);
-            this.Favorites.TabIndex = 2;
-            this.Favorites.Text = "Remove From Favorite";
-            this.Favorites.UseVisualStyleBackColor = true;
-            // 
-            // Ciations
-            // 
-            this.Ciations.Location = new System.Drawing.Point(22, 73);
-            this.Ciations.Name = "Ciations";
-            this.Ciations.Size = new System.Drawing.Size(75, 23);
-            this.Ciations.TabIndex = 1;
-            this.Ciations.Text = "Citations";
-            this.Ciations.UseVisualStyleBackColor = true;
-            // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.resultsGroupBox);
-            this.panel4.Location = new System.Drawing.Point(3, 145);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(566, 393);
-            this.panel4.TabIndex = 7;
-            // 
-            // resultsGroupBox
-            // 
-            this.resultsGroupBox.Controls.Add(this.authorResultsListView);
-            this.resultsGroupBox.Controls.Add(this.journalsResultsListView);
-            this.resultsGroupBox.Location = new System.Drawing.Point(3, 6);
-            this.resultsGroupBox.Name = "resultsGroupBox";
-            this.resultsGroupBox.Size = new System.Drawing.Size(560, 381);
-            this.resultsGroupBox.TabIndex = 0;
-            this.resultsGroupBox.TabStop = false;
-            this.resultsGroupBox.Text = "Results ";
-            // 
-            // authorResultsListView
-            // 
-            this.authorResultsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader6,
-            this.columnHeader7,
-            this.columnHeader8});
-            this.authorResultsListView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.authorResultsListView.GridLines = true;
-            this.authorResultsListView.Location = new System.Drawing.Point(3, 16);
-            this.authorResultsListView.Name = "authorResultsListView";
-            this.authorResultsListView.Size = new System.Drawing.Size(554, 362);
-            this.authorResultsListView.TabIndex = 1;
-            this.authorResultsListView.UseCompatibleStateImageBehavior = false;
-            this.authorResultsListView.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader6
-            // 
-            this.columnHeader6.Text = "Paper";
-            this.columnHeader6.Width = 386;
-            // 
-            // columnHeader7
-            // 
-            this.columnHeader7.Text = "Year";
-            this.columnHeader7.Width = 68;
-            // 
-            // columnHeader8
-            // 
-            this.columnHeader8.Text = "No.Of Cites";
-            this.columnHeader8.Width = 96;
-            // 
-            // journalsResultsListView
-            // 
-            this.journalsResultsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.Paper,
-            this.Author,
-            this.Cites,
-            this.Year});
-            this.journalsResultsListView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.journalsResultsListView.GridLines = true;
-            this.journalsResultsListView.Location = new System.Drawing.Point(3, 16);
-            this.journalsResultsListView.Name = "journalsResultsListView";
-            this.journalsResultsListView.Size = new System.Drawing.Size(554, 362);
-            this.journalsResultsListView.TabIndex = 0;
-            this.journalsResultsListView.UseCompatibleStateImageBehavior = false;
-            this.journalsResultsListView.View = System.Windows.Forms.View.Details;
-            this.journalsResultsListView.Visible = false;
-            // 
-            // Paper
-            // 
-            this.Paper.Text = "Paper";
-            this.Paper.Width = 151;
-            // 
-            // Author
-            // 
-            this.Author.Text = "Author";
-            this.Author.Width = 166;
-            // 
-            // Cites
-            // 
-            this.Cites.Text = "No.Of Cites";
-            this.Cites.Width = 83;
-            // 
-            // Year
-            // 
-            this.Year.Text = "Year";
-            this.Year.Width = 66;
+           // this.favouritesTreeView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.favouritesTreeView_MouseClick);
             // 
             // FavPanel
             // 
@@ -398,13 +400,13 @@
             this.Size = new System.Drawing.Size(1011, 558);
             this.panel6.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
+            this.resultsGroupBox.ResumeLayout(false);
+            this.citationsDetailsGroupBox.ResumeLayout(false);
             this.statisticsGroupBox.ResumeLayout(false);
             this.statisticsGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.authorImageBox)).EndInit();
             this.panel1.ResumeLayout(false);
-            this.citationsDetailsGroupBox.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
-            this.resultsGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
