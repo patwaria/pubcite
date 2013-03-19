@@ -19,7 +19,10 @@ namespace PubCite
         {
             InitializeComponent();
             ArrangeTree();
+            
         }
+
+        private void favouritesTreeView_MouseClick(object sender, TreeViewEventArgs e) { }
 
         private void ArrangeTree() {
 
@@ -46,12 +49,14 @@ namespace PubCite
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
+            Console.WriteLine("here..");
+            authorResultsListView.Items.Clear();
             if (favouritesTreeView.SelectedNode.Parent.Level == 1) {
 
 
                 if (favouritesTreeView.SelectedNode.Parent.Index == 0) {
 
-                    authorResultsListView.Items.Clear();
+                    
                     Papers = FavAuthorList[favouritesTreeView.SelectedNode.Index].getPapers();
 
                     authorNameLabel.Text = FavAuthorList[favouritesTreeView.SelectedNode.Index].Name;
@@ -93,6 +98,12 @@ namespace PubCite
         private void CloseButton_Click_1(object sender, EventArgs e)
         {
             Form1.dub_tab.TabPages.Remove(Form1.dub_tab.SelectedTab);
+        }
+
+        private void Favorites_Click(object sender, EventArgs e)
+        {
+            Form1.favorites.removeAuthor(favouritesTreeView.SelectedNode.Index);
+            favouritesTreeView.SelectedNode.Remove();
         }
     }
 }
