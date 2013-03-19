@@ -260,7 +260,7 @@ namespace PubCite
         }
     }
 
-    public class publiData
+    public class publiListEle//for author page
     {
         public int numCit;
         public String title;
@@ -269,13 +269,184 @@ namespace PubCite
         public int year;
     }
 
+    //interface the next two classes with the UI
+    public class publiListEle2//for publi page
+    {
+        public int numCit;
+        public String title;
+        public String url;
+        public String authNames;
+        public int year;
+    }
+
+    public class CSXPubli
+    {
+        public List<string> authNames;
+        string abstrText;
+        public List<publiListEle2> citeList;
+
+        HtmlWeb web;
+        HtmlDocument doc;
+
+        public CSXPubli(String publiURL)
+        {
+            web = new HtmlWeb();
+            doc = web.Load(publiURL);
+
+            if (doc != null)
+                Console.WriteLine("Document Loaded!");
+            else
+                Console.WriteLine("Load Error!");
+
+            if (publiURL.Contains("viewdoc"))//e.g. http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.31.3487
+                extractData();
+            else//e.g. http://citeseer.ist.psu.edu/showciting?cid=2131272
+                extractData2();
+        }
+
+        String[] Split(String s)//Gets a string containing publication information and divides it into title, journal and year strings
+        {
+            String[] list = new String[3];
+            int st = 0, i, j;
+            s = s.Trim();
+            for (i = 0, j = 0; i < s.Length; i++)
+            {
+                if (s[i] == '\n')
+                {
+                    while (Char.IsWhiteSpace(s[i])) { i++; if (i >= s.Length)break; }
+                    list[j++] = s.Substring(st, i - st).Trim();
+                    st = i + 1;
+                }
+            }
+            list[j] = s.Substring(st, i - st);
+
+            return list;
+        }
+
+        public List<string> SplitAuth(string authl)
+        {
+            List<string> authList = new List<string>();
+
+            int st = 0, i, j;
+            for (i = 0, j = 0; i < authl.Length; i++)
+            {
+                if (authl[i] == ',')
+                {
+                    while (Char.IsWhiteSpace(authl[i])) { i++; if (i >= authl.Length)break; }
+                    authList.Add(authl.Substring(st, i - st).Trim()); j++;
+                    st = i + 1;
+                }
+            }
+            authList.Add(authl.Substring(st, i - st).Trim());
+
+            return authList;
+        }
+
+        void extractData()
+        {
+            HtmlNode authn = doc.DocumentNode.SelectSingleNode("//*[@id=\"docAuthors\"]");
+            String authl = authn.InnerText.Trim().Substring(2).Trim();
+
+            authNames = SplitAuth(authl);
+            for (int i = 0; i < authNames.Count; i++)
+                Console.WriteLine("Name[i] " + authNames[i]);
+
+            HtmlNode absn = doc.DocumentNode.SelectSingleNode("//*[@id=\"abstract\"]/p");
+            Console.Write("absn: " + absn.InnerText);
+
+            HtmlNodeCollection rows = doc.DocumentNode.SelectNodes("//*[@id=\"citations\"]/table/tr");
+            String[] list;
+
+            citeList = new List<publiListEle2>();
+            publiListEle2 tempPubliObj = new publiListEle2();
+
+            for (int i = 1; i < rows.Count; i++)
+            {
+                tempPubliObj = new publiListEle2();
+                Console.WriteLine("*** *** ***");
+                Console.WriteLine(rows[i].XPath);
+
+                if (rows[i].SelectSingleNode("td[1]").InnerText.ToString().Trim().Length > 0)
+                    tempPubliObj.numCit = Convert.ToInt32(rows[i].SelectSingleNode("td[1]").InnerText);
+                else
+                    tempPubliObj.numCit = 0;
+
+                Console.WriteLine("No. of citations: " + tempPubliObj.numCit);
+
+                list = Split(rows[i].SelectSingleNode("td[2]").InnerText);
+                tempPubliObj.title = list[0];
+                tempPubliObj.authNames = list[1];
+                tempPubliObj.year = Convert.ToInt32(list[2]);
+                tempPubliObj.url = "http://citeseer.ist.psu.edu" + rows[i].SelectSingleNode("td[2]/a").GetAttributeValue("href", "");
+                Console.WriteLine(tempPubliObj.title + "|" + tempPubliObj.authNames + "|" + tempPubliObj.year + "|" + tempPubliObj.url);
+                if (tempPubliObj.numCit > 0)
+                    citeList.Add(tempPubliObj);
+            }
+        }
+
+        void extractData2()
+        {
+            HtmlNode authn = doc.DocumentNode.SelectSingleNode("//*[@id=\"docAuthors\"]");
+            String authl = authn.InnerText.Trim().Substring(2).Trim();
+
+            authNames = SplitAuth(authl);
+            for (int i = 0; i < authNames.Count; i++)
+                Console.WriteLine("Name[i] " + authNames[i]);
+
+            abstrText = "";
+            Console.WriteLine("absrText: " + abstrText);
+
+            HtmlNodeCollection rows = doc.DocumentNode.SelectNodes("//*[@id=\"result_list\"]/div");
+            String[] list;
+
+            citeList = new List<publiListEle2>();
+            publiListEle2 tempPubliObj = new publiListEle2();
+
+            for (int i = 0; i < rows.Count; i++)
+            {
+                tempPubliObj = new publiListEle2();
+                Console.WriteLine("*** *** ***");
+
+                if (rows[i].SelectSingleNode("div[3]/a[@title=\"number of citations\"]") != null)
+                {
+                    int comI = rows[i].SelectSingleNode("div[3]/a[@title=\"number of citations\"]").InnerText.Substring(9).IndexOf(' ');
+                    if (rows[i].SelectSingleNode("div[3]/a[@title=\"number of citations\"]").InnerText.Substring(9).Remove(comI) != null)
+                        tempPubliObj.numCit = Convert.ToInt32((rows[i].SelectSingleNode("div[3]/a[@title=\"number of citations\"]").InnerText.Substring(9).Remove(comI)));
+                }
+                else
+                    tempPubliObj.numCit = 0;
+                Console.WriteLine("No. of citations: " + tempPubliObj.numCit);
+
+                tempPubliObj.title = rows[i].SelectSingleNode("h3/a").InnerText.Trim();
+                tempPubliObj.authNames = rows[i].SelectSingleNode("div[1]/span[1]").InnerText.Substring(3).Trim();
+
+                String tempYear;
+                if (rows[i].SelectSingleNode("div[1]/span[@class=\"pubyear\"]") != null)
+                {
+                    tempYear = rows[i].SelectSingleNode("div[1]/span[@class=\"pubyear\"]").InnerText;
+                    Console.WriteLine(tempYear);
+                    if (tempYear != null)
+                        tempPubliObj.year = Convert.ToInt32(tempYear.Substring(2));
+                }
+                else tempPubliObj.year = 0;
+
+                tempPubliObj.url = "http://citeseer.ist.psu.edu" + rows[i].SelectSingleNode("h3/a").GetAttributeValue("href", "");
+
+                Console.WriteLine(tempPubliObj.title + "|" + tempPubliObj.authNames + "|" + tempPubliObj.year + "|" + tempPubliObj.url);
+                if (tempPubliObj.numCit > 0)
+                    citeList.Add(tempPubliObj);
+            }
+        }
+
+    }
+
     public class CSXAuth
     {
         public String authName, homePageURL;
         public String affiliation;//e.g. university or organisation
         public int numPub;//no. of publications
         public int hIndex, i10Index;
-        public List<publiData> publiList;//array containing info about all the publications
+        public List<publiListEle> publiList;//array containing info about all the publications
 
         HtmlWeb web;
         HtmlDocument doc;
@@ -311,7 +482,7 @@ namespace PubCite
             return list;
         }
 
-        public void extractData()//Extracts all the data from author page and stores them in the respective variables
+        void extractData()//Extracts all the data from author page and stores them in the respective variables
         {
             HtmlNode name = doc.DocumentNode.SelectSingleNode("//*[@id=\"viewHeader\"]/h2");
             Console.Write("\nName: ");
@@ -344,12 +515,12 @@ namespace PubCite
             String[] list;
             int i10 = 0;
 
-            publiList = new List<publiData>();
-            publiData tempPubliObj = new publiData();
+            publiList = new List<publiListEle>();
+            publiListEle tempPubliObj = new publiListEle();
 
             for (int i = 1; i < rows.Count; i++)
             {
-                tempPubliObj = new publiData();
+                tempPubliObj = new publiListEle();
                 Console.WriteLine("*** *** ***");
                 Console.WriteLine(rows[i].XPath);
 
