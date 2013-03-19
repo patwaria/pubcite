@@ -51,6 +51,15 @@
   <ItemGroup>
     <Compile Include="Author.cs" />
     <Compile Include="AuthorList.cs" />
+    <Compile Include="CitationsTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CitationsTab.Designer.cs">
+      <DependentUpon>CitationsTab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NumericTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ErrorMessage.cs" />
     <Compile Include="GSAuthorPageScraper.cs" />
     <Compile Include="AuthSuggestion.cs" />
@@ -87,6 +96,9 @@
     </Compile>
     <Compile Include="SearchEntity.cs" />
     <Compile Include="Session.cs" />
+    <EmbeddedResource Include="CitationsTab.resx">
+      <DependentUpon>CitationsTab.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Fav.resx">
       <DependentUpon>Fav.cs</DependentUpon>
     </EmbeddedResource>

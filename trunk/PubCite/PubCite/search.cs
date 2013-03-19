@@ -223,8 +223,18 @@ namespace PubCite
                 authstats = Parser.getAuthStatistics(auth_url[index]);
             else if (a[1] == true)
                 authstats = Scraper.getAuthStatistics(auth_url[index]);
+            if (StartYear.getintval() == 0 && EndYear.getintval() == 0) Papers = authstats.getPapers();
+            else if (StartYear.getintval() != 0 && EndYear.getintval() == 0) Papers = authstats.getPaperByYearRange(StartYear.getintval());
+            else if (StartYear.getintval() == 0 && EndYear.getintval() != 0) Papers = authstats.getPaperUptoYear(EndYear.getintval());
+            else if (StartYear.getintval() != 0 && EndYear.getintval() != 0)
+            {
+                
+                Papers = authstats.getPaperByYearRange(StartYear.getintval(), EndYear.getintval());
+           
+              
             
-            Papers = authstats.getPapers();
+            }
+           
             Console.WriteLine(Papers.Count);
             authorNameLabel.Text = authstats.Name;
             citesperPaper.Text = authstats.getCitesPerPaper().ToString();
