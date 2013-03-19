@@ -102,14 +102,8 @@ namespace PubCite
             List<SG.Paper> papers;
             do{
                 papers = authScraper.getPapersOfCurrentPage();
-                if (authScraper.nextPage(count))
-                {
-                    foreach (SG.Paper paper in papers)
-                    {
-                        author.addPaper(paper);
-                    }
-                }
-                else break;
+                foreach (SG.Paper paper in papers) author.addPaper(paper);
+                if (!authScraper.nextPage(count))    break;
                 count++;
             }
             while(papers[papers.Count-1].NumberOfCitations > 1);
@@ -126,10 +120,11 @@ namespace PubCite
 
             // CONNECTIONS
             authName.Trim();
-            authName = Regex.Replace(authName, @"\s+", " author:");
+            authName = Regex.Replace(authName, @"\s+", "+author:");
             authName = authName.Insert(0,"author:");
+            Console.WriteLine(authName);
             string url = "http://scholar.google.com/scholar?q=" + authName + "&btnG=&hl=en&as_sdt=0,5";
-            //Console.WriteLine("loaded !!!");
+            Console.WriteLine(url);
             HtmlWeb web = new HtmlWeb();
             doc = web.Load(url);
 
