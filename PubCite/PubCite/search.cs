@@ -75,7 +75,7 @@ namespace PubCite
                     Results = new SG.ClassifyAuthors();
                     if (a[0] == true) Results = Parser.getAuthors(searchField.Text);
                     else if (a[1] == true) Results = Scraper.getAuthors(searchField.Text);
-                    
+                    Papers = Results.Papers;
                     for (int i = 0; i < Papers.Count; i++)
                     {
 
