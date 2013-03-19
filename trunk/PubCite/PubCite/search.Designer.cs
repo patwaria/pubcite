@@ -37,9 +37,9 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.resultsGroupBox = new System.Windows.Forms.GroupBox();
             this.authorResultsListView = new System.Windows.Forms.ListView();
-            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.PaperHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.YearHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.NumOfCitesHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.journalsResultsListView = new System.Windows.Forms.ListView();
             this.Paper = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Author = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -167,9 +167,9 @@
             // authorResultsListView
             // 
             this.authorResultsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader6,
-            this.columnHeader7,
-            this.columnHeader8});
+            this.PaperHeader,
+            this.YearHeader,
+            this.NumOfCitesHeader});
             this.authorResultsListView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.authorResultsListView.GridLines = true;
             this.authorResultsListView.Location = new System.Drawing.Point(3, 16);
@@ -179,20 +179,22 @@
             this.authorResultsListView.TabIndex = 1;
             this.authorResultsListView.UseCompatibleStateImageBehavior = false;
             this.authorResultsListView.View = System.Windows.Forms.View.Details;
+           
             // 
             // columnHeader6
             // 
-            this.columnHeader6.Text = "Paper";
-            this.columnHeader6.Width = 374;
+            this.PaperHeader.Text = "Paper";
+            this.PaperHeader.Width = 374;
+          
             // 
             // columnHeader7
             // 
-            this.columnHeader7.Text = "Year";
+            this.YearHeader.Text = "Year";
             // 
             // columnHeader8
             // 
-            this.columnHeader8.Text = "No.Of Cites";
-            this.columnHeader8.Width = 86;
+            this.NumOfCitesHeader.Text = "No.Of Cites";
+            this.NumOfCitesHeader.Width = 86;
             // 
             // journalsResultsListView
             // 
@@ -575,9 +577,9 @@
         private System.Windows.Forms.ColumnHeader Cites;
         private System.Windows.Forms.ColumnHeader Year;
         private System.Windows.Forms.ListView authorResultsListView;
-        private System.Windows.Forms.ColumnHeader columnHeader6;
-        private System.Windows.Forms.ColumnHeader columnHeader7;
-        private System.Windows.Forms.ColumnHeader columnHeader8;
+        private System.Windows.Forms.ColumnHeader PaperHeader;
+        private System.Windows.Forms.ColumnHeader YearHeader;
+        private System.Windows.Forms.ColumnHeader NumOfCitesHeader;
         private NumericTextBox StartYear;
         private NumericTextBox EndYear;
     }

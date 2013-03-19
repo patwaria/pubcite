@@ -317,6 +317,7 @@ namespace PubCite
             Form1.dub_tab.TabPages.Remove(Form1.dub_tab.SelectedTab);
         }
 
+
     }
     
     
