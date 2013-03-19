@@ -87,59 +87,66 @@ namespace PubCite
 
         private int getCitationData(/*Probably pass the array of objects and the index it has to write to*/) //Return the index of next free index
         {
-            HtmlNodeCollection rows, cols;
-            HtmlNode nameNode;
             int index = 1; //Initialize index with free index
-
-            rows = tables[4].SelectNodes(".//tr");   // The table 4 contains the main data in our html
-
+            HtmlNodeCollection rows = tables[4].SelectNodes(".//tr[@class=\"cit-table item\"]");
             string title, titleLink, authors, publication, publisher, cited_by_url;
             int year, no_of_citations;
 
-            for (int i = 1; i < rows.Count; ++i)
+            foreach (HtmlNode row in rows)
             {
 
-                cols = rows[i].SelectNodes(".//td");
-
-                //set the year of publication to cols[4].InnerText
+                //YEAR OF PUBLICATION
+                HtmlNode yearNode = row.SelectSingleNode(".//*[@id=\"col-year\"]");
                 year = -1;
-                try { year = Convert.ToInt32(cols[4].InnerText); }
-                catch (Exception e) { }
-                //Console.WriteLine("YEAR OF PUBLICATION : " + cols[4].InnerText);
+                if (yearNode != null)
+                {
+                    String yr = yearNode.InnerText;
+                    yr.Trim();
+                    try { year = Convert.ToInt32(yr); }
+                    catch (Exception e) { }
+                    //Console.WriteLine("YEAR OF PUBLICATION : " + cols[4].InnerText);
+                }
 
-                nameNode = cols[1].SelectSingleNode("a");
+                HtmlNode titleNode = row.SelectSingleNode(".//*[@id=\"col-title\"]");
                 //set the paper name to nameNode.InnerText
                 //Console.WriteLine("PAPER NAME : " + nameNode.InnerText);
+                HtmlNode nameNode = titleNode.SelectSingleNode(".//a");
                 title = nameNode.InnerText;
 
+                /*
                 //titleLink = nameNode.Attributes["href"].Value;
                 //set the paper link to url_link.Inner_Text. First check if link begins with "http://...". If not add "http://scholar.google.co.in/"
                 //titleLink=url_link;
                 titleLink = nameNode.GetAttributeValue("href", "Not Found");
                 if (!titleLink.Equals("Not Found"))
                 {
-                    titleLink = "http://scholar.google.com" + titleLink;
-                    titleLink = titleLink.Replace("amp;", "");
+                                titleLink = "http://scholar.google.com" + titleLink;
+                                titleLink = titleLink.Replace("amp;", "");
                 }
 
-                HtmlNodeCollection nodes = cols[1].SelectNodes("span");
+                 */
+
+                HtmlNodeCollection nodes = titleNode.SelectNodes(".//span");
                 //set the author name string to nameNode.InnerText
                 //Console.WriteLine("AUTHOR NAME : " + nameNode.InnerText);
 
-                authors = nodes[0].InnerText;
-
+                authors = "Not Found";
                 publication = "Not Found";
-                if (nodes.Count > 1) publication = nodes[1].InnerText;
-
                 publisher = "Not Found";
+                if (nodes != null)
+                {
+                    authors = nodes[0].InnerText;
+                    if (nodes.Count > 1) publication = nodes[1].InnerText;
+                }
 
-                nameNode = cols[2].SelectSingleNode("a");
+                nameNode = row.SelectSingleNode(".//*[@id=\"col-citedby\"]");
                 //set the number of citations to nameNode.InnerText
                 //Console.WriteLine("NO OF CITATIONS : " + nameNode.InnerText);
                 no_of_citations = 0;
-                try { no_of_citations = Convert.ToInt32(nameNode.InnerText); }
+                try { no_of_citations = Convert.ToInt32(nameNode.InnerText.Trim()); }
                 catch (Exception e) { }
-                cited_by_url = nameNode.GetAttributeValue("href", "Not Found");
+                if (nameNode != null) cited_by_url = nameNode.GetAttributeValue("href", "Not Found");
+                else cited_by_url = "Not Found";
                 if (!cited_by_url.Equals("Not Found"))
                 {
                     // cited_by_url = "http://scholar.google.com" + cited_by_url;
