@@ -99,14 +99,15 @@ namespace PubCite
 
             //Console.WriteLine(author.Name + "," + author.getHIndex() + "," + author.getI10Index());
             int count = 1;
-            List<SG.Paper> papers;
-            do{
+            List<SG.Paper> papers = authScraper.getPapersOfCurrentPage();
+            foreach (SG.Paper paper in papers) author.addPaper(paper);
+            while(papers[papers.Count-1].NumberOfCitations > 1){
+                papers.Clear();
+                if (!authScraper.nextPage(count)) break;
                 papers = authScraper.getPapersOfCurrentPage();
                 foreach (SG.Paper paper in papers) author.addPaper(paper);
-                if (!authScraper.nextPage(count))    break;
                 count++;
             }
-            while(papers[papers.Count-1].NumberOfCitations > 1);
             return author;
         }
 
