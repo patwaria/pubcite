@@ -14,6 +14,7 @@ namespace PubCite
         private int h_index, i_index;
         private string name;
         private List<SG.Paper> papers;
+        int index;
 
         public GSAuthScraper(String inital_URL)
         {
@@ -23,6 +24,7 @@ namespace PubCite
             h_index = i_index = -1;
             name = doc.DocumentNode.SelectSingleNode(".//*[@id=\"cit-name-display\"]").InnerText;
             getCitationStats();
+            index = 1;
             papers = new List<SG.Paper>();
         }
 
@@ -55,12 +57,15 @@ namespace PubCite
             HtmlNode next;
             if (callFirstTime == 1)
             {
-                next = doc.DocumentNode.SelectSingleNode("//*[@id=\"citationsForm\"]/div[1]/div/table/tbody/tr/td[2]/a");
+
+                // Console.WriteLine(doc.DocumentNode.InnerHtml);
+                next = doc.DocumentNode.SelectSingleNode("//*[@class=\"g-section cit-dgb\"]//tr/td[2]/a");
                 if (next != null)
                 {
                     next_URL = next.Attributes["href"].Value;
+                    next_URL = "http://scholar.google.com" + next_URL;
+                    next_URL = next_URL.Replace("amp;", "");
                     doc = web.Load(next_URL);
-
                     tables = doc.DocumentNode.SelectNodes("//table");
                     pageStatus = true;
                     return pageStatus;
@@ -69,15 +74,16 @@ namespace PubCite
             }
             else
             {
-                next = doc.DocumentNode.SelectSingleNode("//*[@id=\"citationsForm\"]/div[1]/div/table/tbody/tr/td[2]/a[2]");
-
+                next = doc.DocumentNode.SelectSingleNode("//*[@class=\"g-section cit-dgb\"]//tr/td[2]/a[2]");
                 if (next != null)
                 {
                     next_URL = next.Attributes["href"].Value;
+                    next_URL = "http://scholar.google.com" + next_URL;
+                    next_URL = next_URL.Replace("amp;", "");
                     doc = web.Load(next_URL);
 
                     tables = doc.DocumentNode.SelectNodes("//table");
-                    Console.WriteLine(tables.ToString());
+                    // Console.WriteLine(tables.ToString());
                     pageStatus = true;
                     return pageStatus;
                 }
@@ -87,7 +93,6 @@ namespace PubCite
 
         private int getCitationData(/*Probably pass the array of objects and the index it has to write to*/) //Return the index of next free index
         {
-            int index = 1; //Initialize index with free index
             HtmlNodeCollection rows = tables[4].SelectNodes(".//tr[@class=\"cit-table item\"]");
             string title, titleLink, authors, publication, publisher, cited_by_url;
             int year, no_of_citations;
