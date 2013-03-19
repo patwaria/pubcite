@@ -60,6 +60,8 @@
             this.citationsLabel = new System.Windows.Forms.Label();
             this.authorLabel = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.EndYear = new PubCite.NumericTextBox();
+            this.StartYear = new PubCite.NumericTextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.Suggestions = new System.Windows.Forms.GroupBox();
             this.authorsSuggestions = new System.Windows.Forms.ListView();
@@ -71,8 +73,6 @@
             this.searchSiteLabel = new System.Windows.Forms.Label();
             this.searchButton = new System.Windows.Forms.Button();
             this.searchField = new System.Windows.Forms.TextBox();
-            this.StartYearTextBox = new System.Windows.Forms.TextBox();
-            this.EndYearTextBox = new System.Windows.Forms.TextBox();
             this.SearchPanel.SuspendLayout();
             this.panel3.SuspendLayout();
             this.citationsDetailsGroupBox.SuspendLayout();
@@ -372,8 +372,8 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.EndYearTextBox);
-            this.panel2.Controls.Add(this.StartYearTextBox);
+            this.panel2.Controls.Add(this.EndYear);
+            this.panel2.Controls.Add(this.StartYear);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.Suggestions);
             this.panel2.Controls.Add(this.label1);
@@ -387,6 +387,22 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(267, 525);
             this.panel2.TabIndex = 0;
+            // 
+            // EndYear
+            // 
+            this.EndYear.AllowSpace = false;
+            this.EndYear.Location = new System.Drawing.Point(189, 149);
+            this.EndYear.Name = "EndYear";
+            this.EndYear.Size = new System.Drawing.Size(62, 20);
+            this.EndYear.TabIndex = 0;
+            // 
+            // StartYear
+            // 
+            this.StartYear.AllowSpace = false;
+            this.StartYear.Location = new System.Drawing.Point(104, 149);
+            this.StartYear.Name = "StartYear";
+            this.StartYear.Size = new System.Drawing.Size(51, 20);
+            this.StartYear.TabIndex = 0;
             // 
             // label2
             // 
@@ -495,21 +511,6 @@
             this.searchField.Size = new System.Drawing.Size(180, 20);
             this.searchField.TabIndex = 1;
             // 
-            // StartYearTextBox
-            // 
-            this.StartYearTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.StartYearTextBox.Location = new System.Drawing.Point(106, 149);
-            this.StartYearTextBox.Name = "StartYearTextBox";
-            this.StartYearTextBox.Size = new System.Drawing.Size(49, 20);
-            this.StartYearTextBox.TabIndex = 11;
-            // 
-            // EndYearTextBox
-            // 
-            this.EndYearTextBox.Location = new System.Drawing.Point(189, 149);
-            this.EndYearTextBox.Name = "EndYearTextBox";
-            this.EndYearTextBox.Size = new System.Drawing.Size(49, 20);
-            this.EndYearTextBox.TabIndex = 12;
-            // 
             // search
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -577,7 +578,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader6;
         private System.Windows.Forms.ColumnHeader columnHeader7;
         private System.Windows.Forms.ColumnHeader columnHeader8;
-        private System.Windows.Forms.TextBox EndYearTextBox;
-        private System.Windows.Forms.TextBox StartYearTextBox;
+        private NumericTextBox StartYear;
+        private NumericTextBox EndYear;
     }
 }
