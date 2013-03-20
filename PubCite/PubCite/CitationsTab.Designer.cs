@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.CitationsButton = new System.Windows.Forms.Button();
             this.CloseButton = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
             this.resultsGroupBox = new System.Windows.Forms.GroupBox();
@@ -51,10 +51,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.optionMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.viewCitationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewUrlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.resultsGroupBox.SuspendLayout();
             this.publicationsDetailsGroupBox.SuspendLayout();
+            this.optionMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel3
@@ -64,16 +68,6 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1009, 612);
             this.panel3.TabIndex = 2;
-            // 
-            // CitationsButton
-            // 
-            this.CitationsButton.Location = new System.Drawing.Point(904, 99);
-            this.CitationsButton.Name = "CitationsButton";
-            this.CitationsButton.Size = new System.Drawing.Size(84, 23);
-            this.CitationsButton.TabIndex = 9;
-            this.CitationsButton.Text = "View Citations";
-            this.CitationsButton.UseVisualStyleBackColor = true;
-            this.CitationsButton.Click += new System.EventHandler(this.CitationsButton_Click);
             // 
             // CloseButton
             // 
@@ -180,7 +174,6 @@
             this.publicationsDetailsGroupBox.Controls.Add(this.label2);
             this.publicationsDetailsGroupBox.Controls.Add(this.richTextBox1);
             this.publicationsDetailsGroupBox.Controls.Add(this.label1);
-            this.publicationsDetailsGroupBox.Controls.Add(this.CitationsButton);
             this.publicationsDetailsGroupBox.Controls.Add(this.CloseButton);
             this.publicationsDetailsGroupBox.Controls.Add(this.label6);
             this.publicationsDetailsGroupBox.Controls.Add(this.label5);
@@ -260,6 +253,28 @@
             this.label2.TabIndex = 12;
             this.label2.Text = "Abstract/Summary :";
             // 
+            // optionMenuStrip
+            // 
+            this.optionMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.viewCitationsToolStripMenuItem,
+            this.viewUrlToolStripMenuItem});
+            this.optionMenuStrip.Name = "optionMenuStrip";
+            this.optionMenuStrip.Size = new System.Drawing.Size(153, 70);
+            // 
+            // viewCitationsToolStripMenuItem
+            // 
+            this.viewCitationsToolStripMenuItem.Name = "viewCitationsToolStripMenuItem";
+            this.viewCitationsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.viewCitationsToolStripMenuItem.Text = "View Citations";
+            this.viewCitationsToolStripMenuItem.Click += new System.EventHandler(this.viewCitationsToolStripMenuItem_Click);
+            // 
+            // viewUrlToolStripMenuItem
+            // 
+            this.viewUrlToolStripMenuItem.Name = "viewUrlToolStripMenuItem";
+            this.viewUrlToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.viewUrlToolStripMenuItem.Text = "View Url";
+            this.viewUrlToolStripMenuItem.Click += new System.EventHandler(this.viewUrlToolStripMenuItem_Click);
+            // 
             // CitationsTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -272,6 +287,7 @@
             this.resultsGroupBox.ResumeLayout(false);
             this.publicationsDetailsGroupBox.ResumeLayout(false);
             this.publicationsDetailsGroupBox.PerformLayout();
+            this.optionMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -291,7 +307,6 @@
         private System.Windows.Forms.ColumnHeader Author;
         private System.Windows.Forms.ColumnHeader Cites;
         private System.Windows.Forms.ColumnHeader Year;
-        private System.Windows.Forms.Button CitationsButton;
         private System.Windows.Forms.GroupBox publicationsDetailsGroupBox;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
@@ -301,6 +316,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ContextMenuStrip optionMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem viewCitationsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem viewUrlToolStripMenuItem;
 
 
     }
