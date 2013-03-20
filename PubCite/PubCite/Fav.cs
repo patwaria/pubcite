@@ -24,10 +24,11 @@ namespace PubCite
 
         private void favouritesTreeView_MouseClick(object sender, TreeViewEventArgs e) { }
 
-        private void ArrangeTree() {
+        public void ArrangeTree() {
 
            FavAuthorList = Form1.favorites.AuthorList;
            Console.WriteLine(FavAuthorList.Count);
+           favouritesTreeView.Nodes[0].Nodes[0].Nodes.Clear();
            for (int i = 0; i < FavAuthorList.Count; i++) {
 
                favouritesTreeView.Nodes[0].Nodes[0].Nodes.Add(new TreeNode(FavAuthorList[i].Name));
