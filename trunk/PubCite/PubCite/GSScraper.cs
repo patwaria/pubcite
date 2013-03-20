@@ -116,10 +116,12 @@ namespace PubCite
 
 
         // SEARCH PAGE RESULTS
-        public SG.ClassifyAuthors getAuthors(string authName)
+        public SG.Author getAuthors(string authName)
         {
 
             // CONNECTIONS
+
+            SG.Author result = new SG.Author(authName);
             authName.Trim();
             authName = Regex.Replace(authName, @"\s+", "+author:");
             authName = authName.Insert(0,"author:");
@@ -129,8 +131,6 @@ namespace PubCite
             HtmlWeb web = new HtmlWeb();
             doc = web.Load(url);
 
-
-            SG.ClassifyAuthors results = new SG.ClassifyAuthors();
 
             string xpath = "//div[@class=\"gs_ri\"]";
             string title, titleLink, authors, publication, publisher, cited_by_url;
@@ -146,6 +146,7 @@ namespace PubCite
                     // TITLE AND TITLE LINK
                     HtmlNode child = n.SelectSingleNode(".//*[@class=\"gs_rt\"]");
                     title = child.InnerText;
+                    titleLink = "Not Found";
                     HtmlNode url_node = child.SelectSingleNode(".//a");
                     if (url_node != null)
                     {
@@ -228,13 +229,13 @@ namespace PubCite
 
                     publisher.Trim();
                     publication.Trim();
-                    SG.Paper paper = new SG.Paper(title, authors, year, publication, publisher, no_of_citations, cited_by_url, rank);
-                    results.addPaper(paper);
+                    SG.Paper paper = new SG.Paper(title,titleLink,authors, year, publication, publisher, no_of_citations, cited_by_url, rank);
+                    result.addPaper(paper);
                     rank++;
                 }
 
             }
-            return results;
+            return result;
         }
 
 
@@ -267,6 +268,7 @@ namespace PubCite
                     // TITLE AND TITLE LINK
                     HtmlNode child = n.SelectSingleNode(".//*[@class=\"gs_rt\"]");
                     title = child.InnerText;
+                    titleLink = "Not Found";
                     HtmlNode url_node = child.SelectSingleNode(".//a");
                     if (url_node != null)
                     {
@@ -350,7 +352,7 @@ namespace PubCite
                     }
 
 
-                    SG.Paper paper = new SG.Paper(title, authors, year, publication, publisher, no_of_citations, cited_by_url, rank);
+                    SG.Paper paper = new SG.Paper(title,titleLink, authors, year, publication, publisher, no_of_citations, cited_by_url, rank);
                     result.addPaper(paper);
                     rank++;
                 }
