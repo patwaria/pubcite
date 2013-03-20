@@ -166,6 +166,7 @@ namespace PubCite
 
         private void populateJournals() {
 
+            journalsResultsListView.Items.Clear();
             if (a[0] == true)
                 JournalResults = CSParser.getJournals(searchField.Text);
             else if (a[1] == true)
