@@ -19,6 +19,7 @@ namespace SG
         private string CiteURL;
         private int gsRank;
         private string titleURL;
+        private string summary;
         private List<Paper> citations; 
 
         //constructor
@@ -29,7 +30,8 @@ namespace SG
             this.publication = publication;
             this.publisher = publisher;
             this.num_cites = numOfCitations;
-
+            this.titleURL = "Not Found";
+            this.summary = "Not Found";
             //contains the URL which link to the citations of the paper
             this.CiteURL = CiteURL;
 
@@ -47,6 +49,24 @@ namespace SG
             this.publication = publication;
             this.publisher = publisher;
             this.num_cites = numOfCitations;
+            this.summary = "Not Found";
+            //contains the URL which link to the citations of the paper
+            this.CiteURL = CiteURL;
+
+            //It contains the rank at which the paper appeared in the google scholar search
+            this.gsRank = GSRank;
+            //citations = new List<Paper>();
+        }
+
+        public Paper(string title, string titleURL, string authors,string summary, int year, string publication, string publisher, int numOfCitations, string CiteURL, int GSRank)
+        {
+            this.title = title;
+            this.titleURL = titleURL;
+            this.authors = authors;
+            this.year = year;
+            this.publication = publication;
+            this.publisher = publisher;
+            this.num_cites = numOfCitations;
 
             //contains the URL which link to the citations of the paper
             this.CiteURL = CiteURL;
@@ -55,6 +75,7 @@ namespace SG
             this.gsRank = GSRank;
             //citations = new List<Paper>();
         }
+
         public Paper(SerializationInfo info, StreamingContext ctxt)
         {
            title = (string)info.GetValue("title",typeof(string));
@@ -101,6 +122,14 @@ namespace SG
             get 
             {
                 return authors;
+            }
+        }
+
+        public string Summary
+        {
+            get
+            {
+                return summary;
             }
         }
 
