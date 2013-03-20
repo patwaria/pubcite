@@ -46,8 +46,8 @@ namespace PubCite
                     a[0] = true;
                     a[1] = false;
                     a[2] = false;
-                    Parser = new CSXParser();
-                    authSug = Parser.getAuthSuggestions(searchField.Text);
+                    CSParser = new CSXParser();
+                    authSug = CSParser.getAuthSuggestions(searchField.Text);
                 
                 }
                 else if (siteComboBox.SelectedItem.ToString().Equals("Google Scholar"))
@@ -55,17 +55,23 @@ namespace PubCite
                     a[0] = false;
                     a[1] = true;
                     a[2] = false;
-                    Scraper = new GSScraper();
+                    GSScraper = new GSScraper();
                     Console.WriteLine("in gs" + searchField.Text);
                     
-                    authSug = Scraper.getAuthSuggestions(searchField.Text);
-                    
-                
+                    authSug = GSScraper.getAuthSuggestions(searchField.Text);
+
                 }
                 else if (siteComboBox.SelectedItem.ToString().Equals("Microsoft Academic Search"))
-                    System.Console.WriteLine("MAS Not available");
+                {
+                    a[0] = false;
+                    a[1] = false;
+                    a[2] = true;
+                    MSParser = new MicrosoftScholarParser();
+                    Console.WriteLine("in MS : " + searchField.Text);
 
-                Console.WriteLine(authSug.getSuggestions());
+                    authSug = MSParser.getAuthSuggestions(searchField.Text);
+                }
+
 
                 Console.WriteLine(authSug.isSet());
                 if (authSug == null || !authSug.isSet())
@@ -73,8 +79,8 @@ namespace PubCite
                     
                     authorResultsListView.Items.Clear();
                     Results = new SG.ClassifyAuthors();
-                    if (a[0] == true) Results = Parser.getAuthors(searchField.Text);
-                    else if (a[1] == true) Results = Scraper.getAuthors(searchField.Text);
+                    if (a[0] == true) Results = CSParser.getAuthors(searchField.Text);
+                    else if (a[1] == true) Results = GSScraper.getAuthors(searchField.Text);
                     Papers = Results.Papers;
                     for (int i = 0; i < Papers.Count; i++)
                     {
@@ -132,7 +138,7 @@ namespace PubCite
                     a[0] = true;
                     a[1] = false;
                     a[2] = false;
-                    Parser = new CSXParser();
+                    CSParser = new CSXParser();
                     populateJournals();
 
                 }
@@ -141,11 +147,8 @@ namespace PubCite
                     a[0] = false;
                     a[1] = true;
                     a[2] = false;
-                    Scraper = new GSScraper();
+                    GSScraper = new GSScraper();
                     populateJournals();
-
-                  
-
 
                 }
                 else if (siteComboBox.SelectedItem.ToString().Equals("Microsoft Academic Search"))
@@ -161,10 +164,14 @@ namespace PubCite
         private void populateJournals() {
 
             if (a[0] == true)
-                JournalResults = Parser.getJournals(searchField.Text);
+                JournalResults = CSParser.getJournals(searchField.Text);
             else if (a[1] == true)
-                JournalResults = Scraper.getJournals(searchField.Text);
+                JournalResults = GSScraper.getJournals(searchField.Text);
+            else if(a[2] == true)
+                JournalResults = MSParser.getJournals(searchField.Text);
+            
             Papers = JournalResults.papers;
+            
             for (int i = 0; i < Papers.Count; i++) {
 
                 item = new ListViewItem(Papers[i].Title);
@@ -187,7 +194,7 @@ namespace PubCite
             if (Papers[journalsResultsListView.FocusedItem.Index].NumberOfCitations > 0)
             {
 
-                CitationPapers = Scraper.getCitations(Papers[journalsResultsListView.FocusedItem.Index].CitedByURL);
+                CitationPapers = GSScraper.getCitations(Papers[journalsResultsListView.FocusedItem.Index].CitedByURL);
                 for (int i = 0; i < CitationPapers.Count; i++)
                 {
                     item = new ListViewItem(CitationPapers[i].Title);
@@ -218,11 +225,15 @@ namespace PubCite
         }
 
         private void populatePapers(int index) {
+            
             authorResultsListView.Items.Clear();
             if (a[0] == true)
-                authstats = Parser.getAuthStatistics(auth_url[index]);
+                authstats = CSParser.getAuthStatistics(auth_url[index]);
             else if (a[1] == true)
-                authstats = Scraper.getAuthStatistics(auth_url[index]);
+                authstats = GSScraper.getAuthStatistics(auth_url[index]);
+            else if (a[2] == true)
+                authstats = MSParser.getAuthStatistics(auth_url[index]);
+
             if (StartYear.getintval() == 0 && EndYear.getintval() == 0) Papers = authstats.getPapers();
             else if (StartYear.getintval() != 0 && EndYear.getintval() == 0) Papers = authstats.getPaperByYearRange(StartYear.getintval());
             else if (StartYear.getintval() == 0 && EndYear.getintval() != 0) Papers = authstats.getPaperUptoYear(EndYear.getintval());
@@ -244,11 +255,7 @@ namespace PubCite
             citationsNumberLabel.Text = authstats.getTotalNumberofCitations().ToString();
             for (int i = 0; i < Papers.Count; i++)
             {
-
-
                 /*populating */
-
-
                 item = new ListViewItem(Papers[i].Title);
                 item.SubItems.Add(Papers[i].Year.ToString());
                 item.SubItems.Add(Papers[i].NumberOfCitations.ToString());
@@ -268,7 +275,7 @@ namespace PubCite
             citationsDetailsListView.Items.Clear();
             if (Papers[authorResultsListView.FocusedItem.Index].NumberOfCitations > 0) {
 
-              CitationPapers = Scraper.getCitations(Papers[authorResultsListView.FocusedItem.Index].CitedByURL);
+              CitationPapers = GSScraper.getCitations(Papers[authorResultsListView.FocusedItem.Index].CitedByURL);
               for (int i = 0; i < CitationPapers.Count; i++) {
                   item = new ListViewItem(CitationPapers[i].Title);
                   citationsDetailsListView.Items.Add(item);
@@ -285,8 +292,9 @@ namespace PubCite
 
         List<string> auth_url;
         List<string> authors;
-        CSXParser Parser;
-        GSScraper Scraper;
+        CSXParser CSParser;
+        GSScraper GSScraper;
+        MicrosoftScholarParser MSParser;
         ListViewItem item;
         SG.AuthSuggestion authSug;
         SG.Author authstats;
@@ -303,9 +311,6 @@ namespace PubCite
         {
            // Form1.dub_tab.
         }
-
-        
-       
 
         private void Favorites_Click_1(object sender, EventArgs e)
         {
@@ -329,21 +334,12 @@ namespace PubCite
             else if (a[1] == true)
             {
                 Console.WriteLine("URL:" + Papers[authorResultsListView.FocusedItem.Index].CitedByURL + "Paper Name:" + Papers[authorResultsListView.FocusedItem.Index].Title);
-                NcitTab.populateCitations(Scraper.getCitations(Papers[authorResultsListView.FocusedItem.Index].CitedByURL));
+                NcitTab.populateCitations(GSScraper.getCitations(Papers[authorResultsListView.FocusedItem.Index].CitedByURL));
                
             }
            // NcitTab.populateCitations(); 
 
 
         }
-        
-
-       
-
-
-
     }
-    
-    
-
 }
