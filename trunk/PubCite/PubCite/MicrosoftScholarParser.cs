@@ -264,10 +264,17 @@ namespace PubCite
             }
 
 
-            journ.getHIndex();
-            journ.getI10Index();
             return journ;
         }
+
+
+        public SG.Author getAuthors(string authName)
+        {
+
+        }
+
+
+
 
         /*static void Main(string[] args)
         {
