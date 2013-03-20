@@ -208,12 +208,16 @@ namespace PubCite
         public Author returnAuthor()                                  //for getting the ClassifyAuthors call this function
         {
             extractDataAllPage();
+            auth1.getHIndex();
+            auth1.getI10Index();
             return auth1;
         }
 
         public Journal returnJournal()                                      // //for getting the ClassifyJournals call this function
         {
             extractDataAllPage();
+            auth1.getHIndex();
+            auth1.getI10Index();
             return journ1;
         }
     }
