@@ -160,8 +160,7 @@ namespace PubCite
                 Console.WriteLine(numOfCitations);
                 Console.ReadLine();*/
             }
-
-
+            auth.getI10Index();
             return auth;
         }
 
