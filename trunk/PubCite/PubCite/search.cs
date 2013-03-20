@@ -91,7 +91,7 @@ namespace PubCite
                         item.SubItems.Add(Papers[i].Year.ToString());
                         item.SubItems.Add(Papers[i].NumberOfCitations.ToString());
                         authorResultsListView.Items.Add(item);
-                        Console.WriteLine(Papers[i].Title + Papers[i].Year + Papers[i].NumberOfCitations);
+                        //Console.WriteLine(Papers[i].Title + Papers[i].Year + Papers[i].NumberOfCitations);
 
 
                     }
@@ -152,9 +152,13 @@ namespace PubCite
 
                 }
                 else if (siteComboBox.SelectedItem.ToString().Equals("Microsoft Academic Search"))
-                    System.Console.WriteLine("MAS Not available");
-
-
+                {
+                    a[0] = false;
+                    a[1] = false;
+                    a[2] = true;
+                    MSParser = new MicrosoftScholarParser();
+                    populateJournals();
+                }
 
             }
 
@@ -241,9 +245,7 @@ namespace PubCite
             {
                 
                 Papers = authstats.getPaperByYearRange(StartYear.getintval(), EndYear.getintval());
-           
-              
-            
+
             }
            
             Console.WriteLine(Papers.Count);
@@ -260,7 +262,7 @@ namespace PubCite
                 item.SubItems.Add(Papers[i].Year.ToString());
                 item.SubItems.Add(Papers[i].NumberOfCitations.ToString());
                 authorResultsListView.Items.Add(item);
-                Console.WriteLine(Papers[i].Title + Papers[i].Year + Papers[i].NumberOfCitations);
+                //Console.WriteLine(Papers[i].Title + Papers[i].Year + Papers[i].NumberOfCitations);
 
 
             }
