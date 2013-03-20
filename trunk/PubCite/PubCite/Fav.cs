@@ -74,12 +74,8 @@ namespace PubCite
                         Console.WriteLine(Papers[i].Title + Papers[i].Year + Papers[i].NumberOfCitations);
 
 
-                    }
-                    
-                        
-                
+                    }                  
                 }
-            
             }
         }
 
