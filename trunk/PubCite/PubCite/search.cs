@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Net;
 
 namespace PubCite
 {
@@ -352,8 +353,12 @@ namespace PubCite
         private void viewUrl_Click(object sender, EventArgs e)
         {
             TabPage bpage = new TabPage("Browser");
-            Browser browser = new Browser("www.gmail.com");
-            bpage.Controls.Add(browser);
+            Browser browser;
+            if (authorResultsListView.Visible == true)
+                browser = new Browser(Papers[authorResultsListView.FocusedItem.Index].CitedByURL);
+            else
+                browser = new Browser(Papers[journalsResultsListView.FocusedItem.Index].CitedByURL);
+                bpage.Controls.Add(browser);
             Form1.dub_tab.TabPages.Add(bpage);
         }
     }
