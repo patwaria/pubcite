@@ -35,8 +35,7 @@ namespace PubCite
             if (authorRadioButton.Checked == true)
             {
 
-
-                Console.WriteLine("in gs22");
+                prevSelectedIndex = -1;
                 authorResultsListView.Visible = true;
                 journalsResultsListView.Visible = false;
              
@@ -46,6 +45,7 @@ namespace PubCite
                     a[0] = true;
                     a[1] = false;
                     a[2] = false;
+                    Console.WriteLine("in CS: " + searchField.Text);
                     CSParser = new CSXParser();
                     authSug = CSParser.getAuthSuggestions(searchField.Text);
                 
@@ -213,7 +213,6 @@ namespace PubCite
         } */
         private void authorsSuggestions_Click(object sender, EventArgs e)
         {
-
             populatePapers(authorsSuggestions.FocusedItem.Index);
             
         }
@@ -231,12 +230,17 @@ namespace PubCite
         private void populatePapers(int index) {
             
             authorResultsListView.Items.Clear();
-            if (a[0] == true)
-                authstats = CSParser.getAuthStatistics(auth_url[index]);
-            else if (a[1] == true)
-                authstats = GSScraper.getAuthStatistics(auth_url[index]);
-            else if (a[2] == true)
-                authstats = MSParser.getAuthStatistics(auth_url[index]);
+
+            if (prevSelectedIndex != index)
+            {
+                if (a[0] == true)
+                    authstats = CSParser.getAuthStatistics(auth_url[index]);
+                else if (a[1] == true)
+                    authstats = GSScraper.getAuthStatistics(auth_url[index]);
+                else if (a[2] == true)
+                    authstats = MSParser.getAuthStatistics(auth_url[index]);
+                prevSelectedIndex = index;
+            }
 
             if (StartYear.getintval() == 0 && EndYear.getintval() == 0) Papers = authstats.getPapers();
             else if (StartYear.getintval() != 0 && EndYear.getintval() == 0) Papers = authstats.getPaperByYearRange(StartYear.getintval());
@@ -306,6 +310,7 @@ namespace PubCite
         List<SG.Paper> CitationPapers;
         SG.ClassifyJournals JournalResults;
         Boolean[] a = { false, false, false };
+        int prevSelectedIndex;
         int citationsIndex;
        
 
