@@ -56,7 +56,7 @@ namespace PubCite
 
                 Console.WriteLine(name);
                 Console.WriteLine(id);
-                Console.ReadLine();
+               // Console.ReadLine();
             }
 
             authSuggest = new SG.AuthSuggestion(authNM, authID, true);
