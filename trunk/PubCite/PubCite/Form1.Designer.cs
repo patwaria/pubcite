@@ -58,19 +58,18 @@
             this.searchToolStripMenuItem.Name = "searchToolStripMenuItem";
             this.searchToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.searchToolStripMenuItem.Text = "Open";
-            this.searchToolStripMenuItem.Click += new System.EventHandler(this.searchToolStripMenuItem_Click);
             // 
             // searchToolStripMenuItem1
             // 
             this.searchToolStripMenuItem1.Name = "searchToolStripMenuItem1";
-            this.searchToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.searchToolStripMenuItem1.Size = new System.Drawing.Size(128, 22);
             this.searchToolStripMenuItem1.Text = "Search";
             this.searchToolStripMenuItem1.Click += new System.EventHandler(this.searchToolStripMenuItem1_Click);
             // 
             // favouritesToolStripMenuItem1
             // 
             this.favouritesToolStripMenuItem1.Name = "favouritesToolStripMenuItem1";
-            this.favouritesToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.favouritesToolStripMenuItem1.Size = new System.Drawing.Size(128, 22);
             this.favouritesToolStripMenuItem1.Text = "Favourites";
             this.favouritesToolStripMenuItem1.Click += new System.EventHandler(this.favouritesToolStripMenuItem1_Click);
             // 
@@ -80,17 +79,18 @@
             // 
             // searchTab1
             // 
-            this.searchTab1.BackColor = System.Drawing.SystemColors.Control;
+            this.searchTab1.BackColor = System.Drawing.SystemColors.Window;
             this.searchTab1.Location = new System.Drawing.Point(4, 22);
             this.searchTab1.Name = "searchTab1";
             this.searchTab1.Padding = new System.Windows.Forms.Padding(3);
             this.searchTab1.Size = new System.Drawing.Size(983, 598);
             this.searchTab1.TabIndex = 0;
-            this.searchTab1.Text = "Favourites";
+            this.searchTab1.Text = "Search";
             // 
             // maintabControl
             // 
             this.maintabControl.Controls.Add(this.searchTab1);
+            this.maintabControl.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.maintabControl.Location = new System.Drawing.Point(3, 27);
             this.maintabControl.Name = "maintabControl";
             this.maintabControl.SelectedIndex = 0;
