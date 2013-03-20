@@ -93,7 +93,6 @@ namespace PubCite
                         authorResultsListView.Items.Add(item);
                         //Console.WriteLine(Papers[i].Title + Papers[i].Year + Papers[i].NumberOfCitations);
 
-
                     }
                     
                     // TODO : show message to user and gofor exhaustive search results
