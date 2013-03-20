@@ -93,17 +93,18 @@ namespace PubCite
 
         private int getCitationData(/*Probably pass the array of objects and the index it has to write to*/) //Return the index of next free index
         {
-            HtmlNodeCollection rows = tables[4].SelectNodes(".//tr[@class=\"cit-table item\"]");
+            HtmlNodeCollection rows = doc.DocumentNode.SelectNodes(".//tr[@class=\"cit-table item\"]");
             string title, titleLink, authors, publication, publisher, cited_by_url;
             int year, no_of_citations;
 
             foreach (HtmlNode row in rows)
             {
 
+                //Console.WriteLine(rows.Count);
                 //YEAR OF PUBLICATION
                 HtmlNode yearNode = row.SelectSingleNode(".//*[@id=\"col-year\"]");
                 year = -1;
-                if (yearNode != null)
+                if (yearNode != null && !yearNode.InnerText.Equals(""))
                 {
                     String yr = yearNode.InnerText;
                     yr.Trim();
@@ -111,6 +112,7 @@ namespace PubCite
                     catch (Exception e) { }
                     //Console.WriteLine("YEAR OF PUBLICATION : " + cols[4].InnerText);
                 }
+                //Console.WriteLine(year);
 
                 HtmlNode titleNode = row.SelectSingleNode(".//*[@id=\"col-title\"]");
                 //set the paper name to nameNode.InnerText
@@ -148,16 +150,18 @@ namespace PubCite
                 //set the number of citations to nameNode.InnerText
                 //Console.WriteLine("NO OF CITATIONS : " + nameNode.InnerText);
                 no_of_citations = 0;
-                try { no_of_citations = Convert.ToInt32(nameNode.InnerText.Trim()); }
-                catch (Exception e) { }
-                if (nameNode != null) cited_by_url = nameNode.GetAttributeValue("href", "Not Found");
-                else cited_by_url = "Not Found";
-                if (!cited_by_url.Equals("Not Found"))
+                cited_by_url = "Not Found";
+                if (nameNode != null && nameNode.FirstChild != null)
                 {
-                    // cited_by_url = "http://scholar.google.com" + cited_by_url;
-                    cited_by_url = cited_by_url.Replace("amp;", "");
+                    try { no_of_citations = Convert.ToInt32(nameNode.FirstChild.InnerText.Trim()); }
+                    catch (Exception e) { }
+                    cited_by_url = nameNode.FirstChild.GetAttributeValue("href", "Not Found");
+                    if (!cited_by_url.Equals("Not Found"))
+                    {
+                        // cited_by_url = "http://scholar.google.com" + cited_by_url;
+                        cited_by_url = cited_by_url.Replace("amp;", "");
+                    }
                 }
-
 
                 //url_link = nameNode.Attributes["href"].Value;
                 //set the citations link to url_link.Inner_Text. First check if link begins with "http://...". If not add "http://scholar.google.co.in/". If "javascript void(0)" is found set citation link to null
