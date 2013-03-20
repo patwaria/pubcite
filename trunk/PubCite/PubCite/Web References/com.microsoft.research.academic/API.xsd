@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://research.microsoft.com" elementFormDefault="qualified" targetNamespace="http://research.microsoft.com" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://academic.research.microsoft.com/common/api/API.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Libra.Service.API" />
+  <xs:import schemaLocation="http://academic.research.microsoft.com/common/api/API.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:element name="GetDomainList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDomainListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetDomainListResult" nillable="true" type="tns:DomainResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="DomainResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ResultCollection">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Result" nillable="true" type="tns:ArrayOfDomain" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="DomainResponse" nillable="true" type="tns:DomainResponse" />
+  <xs:complexType name="ResultCollection">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="EndIdx" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="StartIdx" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="TotalItem" type="xs:unsignedInt" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResultCollection" nillable="true" type="tns:ResultCollection" />
+  <xs:complexType name="ArrayOfDomain">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Domain" nillable="true" type="tns:Domain" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDomain" nillable="true" type="tns:ArrayOfDomain" />
+  <xs:complexType name="Domain">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CitationCount" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="DomainID" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PublicationCount" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="SubDomainID" type="xs:unsignedInt" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Domain" nillable="true" type="tns:Domain" />
+  <xs:element name="GetSubDomainList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="domainID" type="xs:unsignedInt" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSubDomainListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetSubDomainListResult" nillable="true" type="tns:DomainResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Search">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="request" nillable="true" type="tns:Request" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="Request">
+    <xs:sequence>
+      <xs:element name="AppID" nillable="true" type="xs:string" />
+      <xs:element name="AuthorID" type="xs:unsignedInt" />
+      <xs:element name="AuthorQuery" nillable="true" type="xs:string" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Libra.Service.API" minOccurs="0" name="AuthorReltiaonship" type="q1:AuthorRelationshipType" />
+      <xs:element name="ConferenceID" type="xs:unsignedInt" />
+      <xs:element name="ConferenceQuery" nillable="true" type="xs:string" />
+      <xs:element name="DomainID" type="xs:unsignedInt" />
+      <xs:element name="EndIdx" type="xs:unsignedInt" />
+      <xs:element name="FulltextQuery" nillable="true" type="xs:string" />
+      <xs:element name="JournalID" type="xs:unsignedInt" />
+      <xs:element name="JournalQuery" nillable="true" type="xs:string" />
+      <xs:element name="KeywordID" type="xs:unsignedInt" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Libra.Service.API" name="OrderBy" type="q2:OrderType" />
+      <xs:element name="OrganizationID" type="xs:unsignedInt" />
+      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Libra.Service.API" name="PublicationContent" nillable="true" type="q3:ArrayOfPublicationContentType" />
+      <xs:element name="PublicationID" type="xs:unsignedInt" />
+      <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Libra.Service.API" name="ReferenceType" type="q4:ReferenceRelationship" />
+      <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Libra.Service.API" name="ResultObjects" type="q5:ObjectType" />
+      <xs:element name="StartIdx" type="xs:unsignedInt" />
+      <xs:element name="SubDomainID" type="xs:unsignedInt" />
+      <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Libra.Service.API" name="Suggestion" type="q6:SuggestionType" />
+      <xs:element name="TitleQuery" nillable="true" type="xs:string" />
+      <xs:element name="Version" nillable="true" type="xs:string" />
+      <xs:element name="YearEnd" type="xs:short" />
+      <xs:element name="YearStart" type="xs:short" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Request" nillable="true" type="tns:Request" />
+  <xs:element name="SearchResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SearchResult" nillable="true" type="tns:Response" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="Response">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Author" nillable="true" type="tns:AuthorResponse" />
+      <xs:element minOccurs="0" name="Conference" nillable="true" type="tns:ConferenceResponse" />
+      <xs:element minOccurs="0" name="Domain" nillable="true" type="tns:DomainResponse" />
+      <xs:element minOccurs="0" name="Journal" nillable="true" type="tns:JournalResponse" />
+      <xs:element minOccurs="0" name="Keyword" nillable="true" type="tns:KeywordResponse" />
+      <xs:element minOccurs="0" name="Organization" nillable="true" type="tns:OrganizationResponse" />
+      <xs:element minOccurs="0" name="Publication" nillable="true" type="tns:PublicationResponse" />
+      <xs:element minOccurs="0" name="ResultCode" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="Trend" nillable="true" type="tns:TrendGraph" />
+      <xs:element minOccurs="0" name="Version" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Response" nillable="true" type="tns:Response" />
+  <xs:complexType name="AuthorResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ResultCollection">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Result" nillable="true" type="tns:ArrayOfAuthor" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AuthorResponse" nillable="true" type="tns:AuthorResponse" />
+  <xs:complexType name="ArrayOfAuthor">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Author" nillable="true" type="tns:Author" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAuthor" nillable="true" type="tns:ArrayOfAuthor" />
+  <xs:complexType name="Author">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Affiliation" nillable="true" type="tns:Organization" />
+      <xs:element minOccurs="0" name="CitationCount" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="DisplayPhotoURL" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GIndex" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="HIndex" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="HomepageURL" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ID" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MiddleName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NativeName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PublicationCount" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="ResearchInterestDomain" nillable="true" type="tns:ArrayOfDomain" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Author" nillable="true" type="tns:Author" />
+  <xs:complexType name="Organization">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AuthorCount" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="CitationCount" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="HomepageURL" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ID" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PublicationCount" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="ResearchInterestDomain" nillable="true" type="tns:ArrayOfDomain" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Organization" nillable="true" type="tns:Organization" />
+  <xs:complexType name="ConferenceResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ResultCollection">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Result" nillable="true" type="tns:ArrayOfConference" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ConferenceResponse" nillable="true" type="tns:ConferenceResponse" />
+  <xs:complexType name="ArrayOfConference">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Conference" nillable="true" type="tns:Conference" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfConference" nillable="true" type="tns:ArrayOfConference" />
+  <xs:complexType name="Conference">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CFP" nillable="true" type="tns:CFPInfo" />
+      <xs:element minOccurs="0" name="CitationCount" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="EndYear" type="xs:unsignedShort" />
+      <xs:element minOccurs="0" name="FullName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="HomepageURL" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ID" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="PublicationCount" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="ResearchInterestDomain" nillable="true" type="tns:ArrayOfDomain" />
+      <xs:element minOccurs="0" name="ShortName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StartYear" type="xs:unsignedShort" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Conference" nillable="true" type="tns:Conference" />
+  <xs:complexType name="CFPInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AbstractSubmissionDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="AgendaUrl" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="City" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ConferenceEndDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ConferenceStartDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Country" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FinalVersionDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="HomepageURL" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PaperSubmissionDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ResultNotificationDate" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CFPInfo" nillable="true" type="tns:CFPInfo" />
+  <xs:complexType name="JournalResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ResultCollection">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Result" nillable="true" type="tns:ArrayOfJournal" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="JournalResponse" nillable="true" type="tns:JournalResponse" />
+  <xs:complexType name="ArrayOfJournal">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Journal" nillable="true" type="tns:Journal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfJournal" nillable="true" type="tns:ArrayOfJournal" />
+  <xs:complexType name="Journal">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CitationCount" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="EndYear" type="xs:unsignedShort" />
+      <xs:element minOccurs="0" name="FullName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="HomepageURL" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ID" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="ISSN" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PublicationCount" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="ResearchInterestDomain" nillable="true" type="tns:ArrayOfDomain" />
+      <xs:element minOccurs="0" name="ShortName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StartYear" type="xs:unsignedShort" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Journal" nillable="true" type="tns:Journal" />
+  <xs:complexType name="KeywordResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ResultCollection">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Result" nillable="true" type="tns:ArrayOfKeyword" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="KeywordResponse" nillable="true" type="tns:KeywordResponse" />
+  <xs:complexType name="ArrayOfKeyword">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Keyword" nillable="true" type="tns:Keyword" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfKeyword" nillable="true" type="tns:ArrayOfKeyword" />
+  <xs:complexType name="Keyword">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CitationCount" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="ID" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PublicationCount" type="xs:unsignedInt" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Keyword" nillable="true" type="tns:Keyword" />
+  <xs:complexType name="OrganizationResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ResultCollection">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Result" nillable="true" type="tns:ArrayOfOrganization" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="OrganizationResponse" nillable="true" type="tns:OrganizationResponse" />
+  <xs:complexType name="ArrayOfOrganization">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Organization" nillable="true" type="tns:Organization" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOrganization" nillable="true" type="tns:ArrayOfOrganization" />
+  <xs:complexType name="PublicationResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ResultCollection">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Result" nillable="true" type="tns:ArrayOfPublication" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="PublicationResponse" nillable="true" type="tns:PublicationResponse" />
+  <xs:complexType name="ArrayOfPublication">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Publication" nillable="true" type="tns:Publication" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPublication" nillable="true" type="tns:ArrayOfPublication" />
+  <xs:complexType name="Publication">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Abstract" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Author" nillable="true" type="tns:ArrayOfAuthor" />
+      <xs:element xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="CitationContext" nillable="true" type="q7:ArrayOfstring" />
+      <xs:element minOccurs="0" name="CitationCount" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="Conference" nillable="true" type="tns:Conference" />
+      <xs:element minOccurs="0" name="DOI" nillable="true" type="xs:string" />
+      <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="FullVersionURL" nillable="true" type="q8:ArrayOfstring" />
+      <xs:element minOccurs="0" name="ID" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="Journal" nillable="true" type="tns:Journal" />
+      <xs:element minOccurs="0" name="Keyword" nillable="true" type="tns:ArrayOfKeyword" />
+      <xs:element minOccurs="0" name="ReferenceCount" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
+      <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Libra.Service.API" minOccurs="0" name="Type" type="q9:PublicationType" />
+      <xs:element minOccurs="0" name="Year" type="xs:unsignedShort" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Publication" nillable="true" type="tns:Publication" />
+  <xs:complexType name="TrendGraph">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Trend" nillable="true" type="tns:ArrayOfTrendPoint" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TrendGraph" nillable="true" type="tns:TrendGraph" />
+  <xs:complexType name="ArrayOfTrendPoint">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TrendPoint" nillable="true" type="tns:TrendPoint" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTrendPoint" nillable="true" type="tns:ArrayOfTrendPoint" />
+  <xs:complexType name="TrendPoint">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CitationCount" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="PublicationCount" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="Year" type="xs:unsignedShort" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TrendPoint" nillable="true" type="tns:TrendPoint" />
+  <xs:element name="GetMostViewedAuthorList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="domainId" type="xs:unsignedInt" />
+        <xs:element minOccurs="0" name="subDomainId" type="xs:unsignedInt" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMostViewedAuthorListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetMostViewedAuthorListResult" nillable="true" type="tns:AuthorResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMostViewedPublicationList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="domainId" type="xs:unsignedInt" />
+        <xs:element minOccurs="0" name="subDomainId" type="xs:unsignedInt" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMostViewedPublicationListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetMostViewedPublicationListResult" nillable="true" type="tns:PublicationResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPublicationByDOI">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="doi" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPublicationByDOIResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetPublicationByDOIResult" nillable="true" type="tns:PublicationResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetLatestUpdatedAuthorList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetLatestUpdatedAuthorListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetLatestUpdatedAuthorListResult" nillable="true" type="tns:AuthorResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetLatestUpdatedPublicationList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetLatestUpdatedPublicationListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetLatestUpdatedPublicationListResult" nillable="true" type="tns:PublicationResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

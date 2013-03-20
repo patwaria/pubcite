@@ -39,7 +39,9 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Management.Instrumentation" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -58,12 +60,18 @@
     <Compile Include="CitationsTab.Designer.cs">
       <DependentUpon>CitationsTab.cs</DependentUpon>
     </Compile>
+    <Compile Include="MicrosoftScholarParser.cs" />
     <Compile Include="NumericTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="ErrorMessage.cs" />
     <Compile Include="GSAuthorPageScraper.cs" />
     <Compile Include="AuthSuggestion.cs" />
+    <Compile Include="Web References\com.microsoft.research.academic\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Content Include="Authors.txt" />
     <Compile Include="ClassifyAuthors.cs" />
     <Compile Include="ClassifyJournals.cs" />
@@ -118,6 +126,7 @@
     <EmbeddedResource Include="search.resx">
       <DependentUpon>search.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -127,9 +136,55 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Web References\com.microsoft.research.academic\API.wsdl" />
+    <None Include="Web References\com.microsoft.research.academic\API.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\com.microsoft.research.academic\API0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\com.microsoft.research.academic\API1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\com.microsoft.research.academic\API2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\com.microsoft.research.academic\APIService.wsdl" />
+    <None Include="Web References\com.microsoft.research.academic\AuthorResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\com.microsoft.research.academic\DomainResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\com.microsoft.research.academic\PublicationResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\com.microsoft.research.academic\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\com.microsoft.research.academic\Response.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://academic.research.microsoft.com/api.svc%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\com.microsoft.research.academic\</RelPath>
+      <UpdateFromURL>http://academic.research.microsoft.com/api.svc%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>PubCite_com_microsoft_research_academic_APIService</CachedSettingsPropName>
+    </WebReferenceUrl>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

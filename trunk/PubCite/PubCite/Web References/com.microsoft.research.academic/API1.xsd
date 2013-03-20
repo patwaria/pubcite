@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Libra.Service.API" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Libra.Service.API" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="AuthorRelationshipType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="CoAuthor" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="AuthorRelationshipType" nillable="true" type="tns:AuthorRelationshipType" />
+  <xs:simpleType name="OrderType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Rank" />
+      <xs:enumeration value="Year" />
+      <xs:enumeration value="CitationCount" />
+      <xs:enumeration value="PublicationCount" />
+      <xs:enumeration value="HIndex" />
+      <xs:enumeration value="GIndex" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="OrderType" nillable="true" type="tns:OrderType" />
+  <xs:complexType name="ArrayOfPublicationContentType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PublicationContentType" type="tns:PublicationContentType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPublicationContentType" nillable="true" type="tns:ArrayOfPublicationContentType" />
+  <xs:simpleType name="PublicationContentType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="AllInfo" />
+      <xs:enumeration value="MetaOnly" />
+      <xs:enumeration value="Title" />
+      <xs:enumeration value="Author" />
+      <xs:enumeration value="Abstract" />
+      <xs:enumeration value="ConferenceAndJournalInfo" />
+      <xs:enumeration value="FullVersionURL" />
+      <xs:enumeration value="Keyword" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="PublicationContentType" nillable="true" type="tns:PublicationContentType" />
+  <xs:simpleType name="ReferenceRelationship">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="Reference" />
+      <xs:enumeration value="Citation" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ReferenceRelationship" nillable="true" type="tns:ReferenceRelationship" />
+  <xs:simpleType name="ObjectType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Publication" />
+      <xs:enumeration value="Author" />
+      <xs:enumeration value="Conference" />
+      <xs:enumeration value="Journal" />
+      <xs:enumeration value="Organization" />
+      <xs:enumeration value="Domain" />
+      <xs:enumeration value="Keyword" />
+      <xs:enumeration value="PublicationTrend" />
+      <xs:enumeration value="CitationContext" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ObjectType" nillable="true" type="tns:ObjectType" />
+  <xs:simpleType name="SuggestionType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="NameSuggestion" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="SuggestionType" nillable="true" type="tns:SuggestionType" />
+  <xs:simpleType name="PublicationType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unkown" />
+      <xs:enumeration value="Paper" />
+      <xs:enumeration value="Book" />
+      <xs:enumeration value="Poster" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="PublicationType" nillable="true" type="tns:PublicationType" />
+</xs:schema>
