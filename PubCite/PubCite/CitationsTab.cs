@@ -23,6 +23,7 @@ namespace PubCite
 
         public void populateCitations(List<SG.Paper> Papers) {
             MainPapers = Papers;
+            authorResultsListView.Items.Clear();
             for (int i = 0; i < Papers.Count; i++)
             {
 
