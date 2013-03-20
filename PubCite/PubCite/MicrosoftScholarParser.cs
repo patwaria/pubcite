@@ -123,7 +123,9 @@ namespace PubCite
                     if (response2.Publication.Result[i].FullVersionURL.Length != 0)
                         url = response2.Publication.Result[i].FullVersionURL[0];
 
-                    paper = new Paper(title, authors, year, "", "", numOfCitations, url, i);
+                    String id = Convert.ToString(response2.Publication.Result[i].ID);
+
+                    paper = new Paper(title,url, authors, year, "", "", numOfCitations, id, i);
 
                     auth.addPaper(paper);
 
@@ -160,7 +162,9 @@ namespace PubCite
                 if (response2.Publication.Result[i].FullVersionURL.Length != 0)
                     url = response2.Publication.Result[i].FullVersionURL[0];
 
-                paper = new Paper(title, authors, year, "", "", numOfCitations, url, i);
+                String id = Convert.ToString(response2.Publication.Result[i].ID);
+
+                paper = new Paper(title, url, authors, year, "", "", numOfCitations, id, i);
 
                 auth.addPaper(paper);
 
@@ -213,7 +217,9 @@ namespace PubCite
                     if (response.Publication.Result[i].FullVersionURL.Length != 0)
                         url = response.Publication.Result[i].FullVersionURL[0];
 
-                    paper = new Paper(title, authors, year, "", "", numOfCitations, url, i);
+                    String id = Convert.ToString(response2.Publication.Result[i].ID);
+
+                    paper = new Paper(title, url, authors, year, "", "", numOfCitations, id, i);
 
                     journ.addPaper(paper);
 
@@ -251,7 +257,9 @@ namespace PubCite
                 if (response.Publication.Result[i].FullVersionURL.Length != 0)
                     url = response.Publication.Result[i].FullVersionURL[0];
 
-                paper = new Paper(title, authors, year, "", "", numOfCitations, url, i);
+                String id = Convert.ToString(response.Publication.Result[i].ID);
+
+                paper = new Paper(title, url, authors, year, "", "", numOfCitations, id, i);
 
                 journ.addPaper(paper);
 
