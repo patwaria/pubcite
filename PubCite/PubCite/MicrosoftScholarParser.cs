@@ -174,13 +174,13 @@ namespace PubCite
             return auth;
         }
 
-        public ClassifyJournals getJournals(string journalName)
+        public SG.Journal getJournals(string journalName)
         {
             Request requestJournal = new Request();
             requestJournal.AppID = "c49b4e59-08dd-4f27-a53b-53cc72f169af";
             Response response;
 
-            ClassifyJournals journ = new ClassifyJournals();
+            SG.Journal journ = new SG.Journal(journalName);
 
             requestJournal.ResultObjects = ObjectType.Publication;
             requestJournal.JournalQuery = journalName;
@@ -263,6 +263,9 @@ namespace PubCite
                  Console.ReadLine();*/
             }
 
+
+            journ.getHIndex();
+            journ.getI10Index();
             return journ;
         }
 
