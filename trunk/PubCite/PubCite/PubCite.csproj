@@ -54,6 +54,12 @@
   <ItemGroup>
     <Compile Include="Author.cs" />
     <Compile Include="AuthorList.cs" />
+    <Compile Include="Browser.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Browser.Designer.cs">
+      <DependentUpon>Browser.cs</DependentUpon>
+    </Compile>
     <Compile Include="CitationsTab.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -105,6 +111,11 @@
     </Compile>
     <Compile Include="SearchEntity.cs" />
     <Compile Include="Session.cs" />
+    <None Include="Resources\search-button1.png" />
+    <None Include="Resources\search-button.png" />
+    <EmbeddedResource Include="Browser.resx">
+      <DependentUpon>Browser.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CitationsTab.resx">
       <DependentUpon>CitationsTab.cs</DependentUpon>
     </EmbeddedResource>
@@ -122,6 +133,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="search.resx">
       <DependentUpon>search.cs</DependentUpon>
@@ -186,6 +198,7 @@
       <CachedSettingsPropName>PubCite_com_microsoft_research_academic_APIService</CachedSettingsPropName>
     </WebReferenceUrl>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
