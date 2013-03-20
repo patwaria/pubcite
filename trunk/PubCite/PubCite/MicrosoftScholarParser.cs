@@ -270,7 +270,94 @@ namespace PubCite
 
         public SG.Author getAuthors(string authName)
         {
+            SG.Author auth = new SG.Author(authName);
 
+            Request requestPaper = new Request();
+            requestPaper.AppID = "c49b4e59-08dd-4f27-a53b-53cc72f169af";
+            Response response2;
+
+            requestPaper.ResultObjects = ObjectType.Publication;
+            requestPaper.AuthorQuery = authName;
+            requestPaper.StartIdx = 1;
+            requestPaper.EndIdx = 100;
+            response2 = client.Search(requestPaper);
+
+            uint range = response2.Publication.TotalItem;
+            range = range > 250 ? 250 : range;
+
+            //Console.WriteLine(response2.Publication.TotalItem + " " + response2.Publication.TotalItem);
+            for (int k = 0; k < range / 100; k++)
+            {
+                for (int i = 0; i < 100; i++)
+                {
+                    Paper paper;
+                    String title, authors, publication;
+                    int numOfCitations, year;
+
+                    authors = "";
+                    title = response2.Publication.Result[i].Title;
+                    for (int j = 0; j < response2.Publication.Result[i].Author.Length; j++)
+                    {
+                        authors = authors + generateName(response2.Publication.Result[i].Author[j].FirstName, response2.Publication.Result[i].Author[j].MiddleName, response2.Publication.Result[i].Author[j].LastName) + ", ";
+                    }
+                    numOfCitations = Convert.ToInt32(response2.Publication.Result[i].CitationCount);
+                    year = Convert.ToInt32(response2.Publication.Result[i].Year);
+                    //publication = response2.Publication.Result[i].Journal.;
+
+                    String url = "";
+                    if (response2.Publication.Result[i].FullVersionURL.Length != 0)
+                        url = response2.Publication.Result[i].FullVersionURL[0];
+
+                    paper = new Paper(title, authors, year, "", "", numOfCitations, url, i);
+
+                    auth.addPaper(paper);
+
+                    /*Console.WriteLine(title);
+                    Console.WriteLine(authors);
+                    Console.WriteLine(year);
+                    Console.WriteLine(numOfCitations);
+                    Console.ReadLine();*/
+                }
+                requestPaper.StartIdx = Convert.ToUInt32(101 + k * 100);
+                requestPaper.EndIdx = Convert.ToUInt32(200 + k * 100);
+                response2 = client.Search(requestPaper);
+            }
+
+
+            for (int i = 0; i < range % 100; i++)
+            {
+                Paper paper;
+                String title, authors, publication;
+                int numOfCitations, year;
+
+                authors = "";
+                title = response2.Publication.Result[i].Title;
+                for (int j = 0; j < response2.Publication.Result[i].Author.Length; j++)
+                {
+                    authors = authors + generateName(response2.Publication.Result[i].Author[j].FirstName, response2.Publication.Result[i].Author[j].MiddleName, response2.Publication.Result[i].Author[j].LastName) + ", ";
+                }
+                numOfCitations = Convert.ToInt32(response2.Publication.Result[i].CitationCount);
+                year = Convert.ToInt32(response2.Publication.Result[i].Year);
+                //publication = response2.Publication.Result[i].Journal.;
+
+
+                String url = "";
+                if (response2.Publication.Result[i].FullVersionURL.Length != 0)
+                    url = response2.Publication.Result[i].FullVersionURL[0];
+
+                paper = new Paper(title, authors, year, "", "", numOfCitations, url, i);
+
+                auth.addPaper(paper);
+
+                /*Console.WriteLine(title);
+                Console.WriteLine(authors);
+                Console.WriteLine(year);
+                Console.WriteLine(numOfCitations);
+                Console.ReadLine();*/
+            }
+            auth.getI10Index();
+
+            return auth;
         }
 
 
