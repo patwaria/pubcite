@@ -338,13 +338,15 @@ namespace PubCite
             CitaTab.Controls.Add(NcitTab);
             
             if (a[0] == true)
-                Console.WriteLine("citeseer no citations"); // Papers[authorResultsListView.FocusedItem.Index].CitedByURL
+               
+                NcitTab.populateCitations(CSParser.getCitations(Papers[authorResultsListView.FocusedItem.Index].CitedByURL));
             else if (a[1] == true)
             {
-                Console.WriteLine("URL:" + Papers[authorResultsListView.FocusedItem.Index].CitedByURL + "Paper Name:" + Papers[authorResultsListView.FocusedItem.Index].Title);
+               // Console.WriteLine("URL:" + Papers[authorResultsListView.FocusedItem.Index].CitedByURL + "Paper Name:" + Papers[authorResultsListView.FocusedItem.Index].Title);
                 NcitTab.populateCitations(GSScraper.getCitations(Papers[authorResultsListView.FocusedItem.Index].CitedByURL));
                
             }
+           
            // NcitTab.populateCitations(); 
 
 
