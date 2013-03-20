@@ -84,7 +84,7 @@ namespace PubCite
 
             name = generateName(response1.Author.Result[0].FirstName, response1.Author.Result[0].MiddleName, response1.Author.Result[0].LastName);
             Hindex = Convert.ToInt32(response1.Author.Result[0].HIndex);
-            auth = new SG.Author(name, Hindex, 0);
+            auth = new SG.Author(name, Hindex,0);
 
 
             Request requestPaper = new Request();
@@ -98,6 +98,7 @@ namespace PubCite
             response2 = client.Search(requestPaper);
 
             uint range = response2.Publication.TotalItem;
+            range = range > 250 ? 250 : range;
 
             //Console.WriteLine(response2.Publication.TotalItem + " " + response2.Publication.TotalItem);
             for(int k = 0; k < range/100; k++)
@@ -166,20 +167,55 @@ namespace PubCite
 
         public ClassifyJournals getJournals(string journalName)
         {
-            Request request = new Request();
-            request.AppID = "c49b4e59-08dd-4f27-a53b-53cc72f169af";
+            Request requestJournal = new Request();
+            requestJournal.AppID = "c49b4e59-08dd-4f27-a53b-53cc72f169af";
             Response response;
 
             ClassifyJournals journ = new ClassifyJournals();
 
-            request.ResultObjects = ObjectType.Publication;
-            request.JournalQuery = journalName;
-            request.StartIdx = 1;
-            request.EndIdx = 100;
-            response = client.Search(request);
+            requestJournal.ResultObjects = ObjectType.Publication;
+            requestJournal.JournalQuery = journalName;
+            requestJournal.StartIdx = 1;
+            requestJournal.EndIdx = 100;
+            response = client.Search(requestJournal);
 
-            uint range = response.Publication.TotalItem < 100 ? response.Publication.TotalItem : 100;
-            for (int i = 0; i < range; i++)
+            uint range = response.Publication.TotalItem;
+            for (int k = 0; k < range / 100; k++)
+            {
+                for (int i = 0; i < range; i++)
+                {
+                    Paper paper;
+                    String title, authors, publication;
+                    int numOfCitations, year;
+
+                    authors = "";
+                    title = response.Publication.Result[i].Title;
+                    for (int j = 0; j < response.Publication.Result[i].Author.Length; j++)
+                    {
+                        authors = authors + generateName(response.Publication.Result[i].Author[j].FirstName, response.Publication.Result[i].Author[j].MiddleName, response.Publication.Result[i].Author[j].LastName) + ", ";
+                    }
+                    numOfCitations = Convert.ToInt32(response.Publication.Result[i].CitationCount);
+                    year = Convert.ToInt32(response.Publication.Result[i].Year);
+                    //publication = response.Publication.Result[i].Journal.ShortName;
+
+                    paper = new Paper(title, authors, year, "", "", numOfCitations, "", i);
+
+                    journ.addPaper(paper);
+
+
+                   /* Console.WriteLine(title);
+                    Console.WriteLine(authors);
+                    Console.WriteLine(year);
+                    Console.WriteLine(numOfCitations);
+                    Console.ReadLine();*/
+                }
+
+                requestJournal.StartIdx = Convert.ToUInt32(101 + k * 100);
+                requestJournal.EndIdx = Convert.ToUInt32(200 + k * 100);
+                response = client.Search(requestJournal);
+            }
+
+            for (int i = 0; i < range%100; i++)
             {
                 Paper paper;
                 String title, authors, publication;
@@ -200,11 +236,11 @@ namespace PubCite
                 journ.addPaper(paper);
 
 
-                Console.WriteLine(title);
-                Console.WriteLine(authors);
-                Console.WriteLine(year);
-                Console.WriteLine(numOfCitations);
-                Console.ReadLine();
+                /* Console.WriteLine(title);
+                 Console.WriteLine(authors);
+                 Console.WriteLine(year);
+                 Console.WriteLine(numOfCitations);
+                 Console.ReadLine();*/
             }
 
             return journ;
