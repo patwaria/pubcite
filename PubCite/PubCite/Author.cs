@@ -18,10 +18,11 @@ namespace SG
             : base(Name, h, i)
         {
         }
-        public Author(string Name, string Affiliation, string HomePageURL, int h, int i)
+        public Author(string Name, string affiliation, string homePageURL, int h, int i)
             : base(Name, h, i)
         {
-
+            this.affiliation = affiliation;
+            this.homepageURL = homePageURL;
         }
         public Author(string name)
             : base(name, -1, -1)
