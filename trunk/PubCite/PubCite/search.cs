@@ -296,7 +296,7 @@ namespace PubCite
         List<SG.Paper> CitationPapers;
         SG.ClassifyJournals JournalResults;
         Boolean[] a = { false, false, false };
-
+        int citationsIndex;
        
 
         private void Ciations_Click(object sender, EventArgs e)
@@ -316,6 +316,30 @@ namespace PubCite
         {
             Form1.dub_tab.TabPages.Remove(Form1.dub_tab.SelectedTab);
         }
+
+        private void Ciations_Click_1(object sender, EventArgs e)
+        {
+            TabPage CitaTab = new TabPage("Citations");
+            Form1.dub_tab.TabPages.Add(CitaTab);
+            CitationsTab NcitTab = new CitationsTab();
+            CitaTab.Controls.Add(NcitTab);
+            /*
+            if (a[0] == true)
+                Console.WriteLine("citeseer no citations"); // Papers[authorResultsListView.FocusedItem.Index].CitedByURL
+            else if (a[1] == true)
+            {
+                Console.WriteLine("URL:" + Papers[authorResultsListView.FocusedItem.Index].CitedByURL + "Paper Name:" + Papers[authorResultsListView.FocusedItem.Index].Title);
+                NcitTab.populateCitations(Scraper.getCitations(Papers[authorResultsListView.FocusedItem.Index].CitedByURL));
+               
+            }
+           // NcitTab.populateCitations(); */
+
+
+        }
+        
+
+       
+
 
 
     }

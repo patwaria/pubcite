@@ -137,12 +137,13 @@
             // 
             // Ciations
             // 
-            this.Ciations.Location = new System.Drawing.Point(22, 73);
+            this.Ciations.Location = new System.Drawing.Point(6, 73);
             this.Ciations.Name = "Ciations";
-            this.Ciations.Size = new System.Drawing.Size(75, 23);
+            this.Ciations.Size = new System.Drawing.Size(106, 23);
             this.Ciations.TabIndex = 1;
             this.Ciations.Text = "Citations";
             this.Ciations.UseVisualStyleBackColor = true;
+            this.Ciations.Click += new System.EventHandler(this.Ciations_Click_1);
             // 
             // panel4
             // 
@@ -179,19 +180,17 @@
             this.authorResultsListView.TabIndex = 1;
             this.authorResultsListView.UseCompatibleStateImageBehavior = false;
             this.authorResultsListView.View = System.Windows.Forms.View.Details;
-           
             // 
-            // columnHeader6
+            // PaperHeader
             // 
             this.PaperHeader.Text = "Paper";
             this.PaperHeader.Width = 374;
-          
             // 
-            // columnHeader7
+            // YearHeader
             // 
             this.YearHeader.Text = "Year";
             // 
-            // columnHeader8
+            // NumOfCitesHeader
             // 
             this.NumOfCitesHeader.Text = "No.Of Cites";
             this.NumOfCitesHeader.Width = 86;
