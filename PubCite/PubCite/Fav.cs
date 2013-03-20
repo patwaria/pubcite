@@ -34,8 +34,6 @@ namespace PubCite
                favouritesTreeView.Nodes[0].Nodes[0].Nodes.Add(new TreeNode(FavAuthorList[i].Name));
            
            }
-
-            ;
            Console.WriteLine(FavAuthorList.Count);
            for (int i = 0; i < Form1.favorites.JournalList.Count; i++)
            {

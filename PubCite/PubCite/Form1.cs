@@ -13,7 +13,7 @@ namespace PubCite
     {
         public static TabControl dub_tab;
         public static SG.Favorite favorites;
-        public static FavPanel favPanel;
+        
         public Form1()
         {
             InitializeComponent();
@@ -22,33 +22,9 @@ namespace PubCite
             favorites = new SG.Favorite();
             favorites.populateFavorites();
 
-            favPanel = new FavPanel();
-            searchTab1.Controls.Add(favPanel);
+            search nSearch = new search();
+            searchTab1.Controls.Add(nSearch);
         }
-
-        
-
-        private void radioButton2_CheckedChanged(object sender, EventArgs e)
-        {
-            
-
-        }
-
-        private void pictureBox3_Click(object sender, EventArgs e)
-        {
-           
-        }
-
-       
-
-        private void searchToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-       
-
-        
 
         private void searchToolStripMenuItem1_Click(object sender, EventArgs e)
         {
@@ -75,14 +51,6 @@ namespace PubCite
 
             return dub_tab;
         
-        }
-        private void toolStripbackButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-       
-
-        
+        }        
     }
 }

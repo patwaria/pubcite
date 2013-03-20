@@ -12,6 +12,9 @@ namespace PubCite
 {
     public partial class search : UserControl
     {
+        List<SG.Author> FavAuthorList;
+        List<SG.Journal> FavJournalList;
+
         List<string> auth_url;
         List<string> authors;
         CSXParser CSParser;
@@ -32,12 +35,56 @@ namespace PubCite
         public search()
         {
             InitializeComponent();
+            ArrangeTree();
+            authorResultsListView.FullRowSelect = true;
+            authorResultsListView.MouseClick += new MouseEventHandler(authorResultsListView_MouseClick);
         }
 
         public GroupBox get_sugg() {
 
             return Suggestions;    
         
+        }
+
+        public void ArrangeTree()
+        {
+
+            FavAuthorList = Form1.favorites.AuthorList;
+            FavJournalList = Form1.favorites.JournalList;
+
+            for (int i = 0; i < FavAuthorList.Count; i++)
+                favouritesTreeView.Nodes[0].Nodes[0].Nodes.Add(new TreeNode(FavAuthorList[i].Name));
+            for (int i = 0; i < Form1.favorites.JournalList.Count; i++)
+                favouritesTreeView.Nodes[0].Nodes[1].Nodes.Add(new TreeNode(FavJournalList[i].Name));
+        }
+
+        public void UpdateTree()
+        {
+
+            FavAuthorList = Form1.favorites.AuthorList;
+            FavJournalList = Form1.favorites.JournalList;
+
+            Console.WriteLine(FavAuthorList.Count);
+
+            if (authorRadioButton.Checked == true)
+            {
+                favouritesTreeView.Nodes[0].Nodes[0].Nodes.Clear();
+                for (int i = 0; i < FavAuthorList.Count; i++)
+                {
+
+                    favouritesTreeView.Nodes[0].Nodes[0].Nodes.Add(new TreeNode(FavAuthorList[i].Name));
+
+                }
+            } else if (journalsRadioButton.Checked == true)
+            {
+                favouritesTreeView.Nodes[0].Nodes[1].Nodes.Clear();
+                for (int i = 0; i < Form1.favorites.JournalList.Count; i++)
+                {
+
+                    favouritesTreeView.Nodes[0].Nodes[1].Nodes.Add(new TreeNode(FavJournalList[i].Name));
+
+                }
+            }
         }
 
         private void closeButton_Click(object sender, EventArgs e)
@@ -273,8 +320,6 @@ namespace PubCite
 
 
             }
-            authorResultsListView.FullRowSelect=true;
-            authorResultsListView.MouseClick += new MouseEventHandler(authorResultsListView_MouseClick);
         }
 
         private void authorResultsListView_MouseClick(object sender, MouseEventArgs e) {
@@ -516,9 +561,79 @@ namespace PubCite
 
         private void addToFavourite_Click(object sender, EventArgs e)
         {
-            Form1.favorites.AddAuthor(authStats);
-            Form1.favPanel.ArrangeTree();
+            if (authorRadioButton.Checked == true)
+                Form1.favorites.AddAuthor(authStats);
+            else if (journalsRadioButton.Checked == true)
+                Form1.favorites.AddJournal(journalStats);
+            UpdateTree();
         }
 
+        private void favouritesTreeView_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            Console.WriteLine("here..");
+            authorResultsListView.Items.Clear();
+            journalsResultsListView.Items.Clear();
+
+            if (favouritesTreeView.SelectedNode.Level == 2)
+            {
+                // author selected
+                if (favouritesTreeView.SelectedNode.Parent.Index == 0)
+                {
+
+                    Papers = FavAuthorList[favouritesTreeView.SelectedNode.Index].getPapers();
+
+                    authorNameLabel.Text = FavAuthorList[favouritesTreeView.SelectedNode.Index].Name;
+                    citesperPaper.Text = FavAuthorList[favouritesTreeView.SelectedNode.Index].getCitesPerPaper().ToString();
+                    //citesperYear.Text = FavAuthorList[favouritesTreeView.SelectedNode.Index].get
+                    hindex.Text = FavAuthorList[favouritesTreeView.SelectedNode.Index].getHIndex().ToString();
+                    i10index.Text = FavAuthorList[favouritesTreeView.SelectedNode.Index].getI10Index().ToString();
+                    citationsNumberLabel.Text = FavAuthorList[favouritesTreeView.SelectedNode.Index].getTotalNumberofCitations().ToString();
+                    for (int i = 0; i < Papers.Count; i++)
+                    {
+                        /*populating */
+                        item = new ListViewItem(Papers[i].Title);
+                        item.SubItems.Add(Papers[i].Publication);
+                        item.SubItems.Add(Papers[i].Year.ToString());
+                        item.SubItems.Add(Papers[i].NumberOfCitations.ToString());
+                        authorResultsListView.Items.Add(item);
+                        Console.WriteLine(Papers[i].Title + Papers[i].Year + Papers[i].NumberOfCitations);
+                    }
+                } else if (favouritesTreeView.SelectedNode.Parent.Index == 1) // Journal selected
+                {
+
+                    Papers = FavJournalList[favouritesTreeView.SelectedNode.Index].getPapers();
+
+                    authorNameLabel.Text = FavJournalList[favouritesTreeView.SelectedNode.Index].Name;
+                    citesperPaper.Text = FavJournalList[favouritesTreeView.SelectedNode.Index].getCitesPerPaper().ToString();
+                    //citesperYear.Text = FavAuthorList[favouritesTreeView.SelectedNode.Index].get
+                    hindex.Text = FavJournalList[favouritesTreeView.SelectedNode.Index].getHIndex().ToString();
+                    i10index.Text = FavJournalList[favouritesTreeView.SelectedNode.Index].getI10Index().ToString();
+                    citationsNumberLabel.Text = FavJournalList[favouritesTreeView.SelectedNode.Index].getTotalNumberofCitations().ToString();
+                    for (int i = 0; i < Papers.Count; i++)
+                    {
+                        /*populating */
+                        item = new ListViewItem(Papers[i].Title);
+                        item.SubItems.Add(Papers[i].Publication);
+                        item.SubItems.Add(Papers[i].Year.ToString());
+                        item.SubItems.Add(Papers[i].NumberOfCitations.ToString());
+                        authorResultsListView.Items.Add(item);
+                        Console.WriteLine(Papers[i].Title + Papers[i].Year + Papers[i].NumberOfCitations);
+                    }
+                }
+            }
+        }
+
+        private void removeFavourite_Click(object sender, EventArgs e)
+        {
+            // do for journals also
+            Form1.favorites.removeAuthor(favouritesTreeView.SelectedNode.Index);
+            favouritesTreeView.SelectedNode.Remove();
+        }
+
+        private void removeJournal_Click(object sender, EventArgs e)
+        {
+            Form1.favorites.removeJournal(favouritesTreeView.SelectedNode.Index);
+            favouritesTreeView.SelectedNode.Remove();
+        }
     }
 }
