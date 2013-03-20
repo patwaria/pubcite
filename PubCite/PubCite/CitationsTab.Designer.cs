@@ -41,6 +41,7 @@
             this.Author = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Cites = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Year = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.CitationsButton = new System.Windows.Forms.Button();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.resultsGroupBox.SuspendLayout();
@@ -48,6 +49,7 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.CitationsButton);
             this.panel3.Controls.Add(this.CloseButton);
             this.panel3.Controls.Add(this.panel4);
             this.panel3.Location = new System.Drawing.Point(3, 3);
@@ -63,6 +65,7 @@
             this.CloseButton.TabIndex = 8;
             this.CloseButton.Text = "Close";
             this.CloseButton.UseVisualStyleBackColor = true;
+            this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
             // 
             // panel4
             // 
@@ -151,6 +154,16 @@
             this.Year.Text = "Year";
             this.Year.Width = 66;
             // 
+            // CitationsButton
+            // 
+            this.CitationsButton.Location = new System.Drawing.Point(852, 75);
+            this.CitationsButton.Name = "CitationsButton";
+            this.CitationsButton.Size = new System.Drawing.Size(107, 23);
+            this.CitationsButton.TabIndex = 9;
+            this.CitationsButton.Text = "View Citations";
+            this.CitationsButton.UseVisualStyleBackColor = true;
+            this.CitationsButton.Click += new System.EventHandler(this.CitationsButton_Click);
+            // 
             // CitationsTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -180,6 +193,7 @@
         private System.Windows.Forms.ColumnHeader Author;
         private System.Windows.Forms.ColumnHeader Cites;
         private System.Windows.Forms.ColumnHeader Year;
+        private System.Windows.Forms.Button CitationsButton;
 
 
     }
