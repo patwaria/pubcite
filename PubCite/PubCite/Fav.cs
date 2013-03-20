@@ -51,12 +51,11 @@ namespace PubCite
         {
             Console.WriteLine("here..");
             authorResultsListView.Items.Clear();
-            if (favouritesTreeView.SelectedNode.Parent.Level == 1) {
+            if (favouritesTreeView.SelectedNode.Level == 2) {
 
 
                 if (favouritesTreeView.SelectedNode.Parent.Index == 0) {
 
-                    
                     Papers = FavAuthorList[favouritesTreeView.SelectedNode.Index].getPapers();
 
                     authorNameLabel.Text = FavAuthorList[favouritesTreeView.SelectedNode.Index].Name;
@@ -67,11 +66,7 @@ namespace PubCite
                     citationsNumberLabel.Text = FavAuthorList[favouritesTreeView.SelectedNode.Index].getTotalNumberofCitations().ToString();
                     for (int i = 0; i < Papers.Count; i++)
                     {
-
-
                         /*populating */
-
-
                         item = new ListViewItem(Papers[i].Title);
                         item.SubItems.Add(Papers[i].Year.ToString());
                         item.SubItems.Add(Papers[i].NumberOfCitations.ToString());
