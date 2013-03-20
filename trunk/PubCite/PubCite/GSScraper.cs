@@ -133,7 +133,7 @@ namespace PubCite
 
 
             string xpath = "//div[@class=\"gs_ri\"]";
-            string title, titleLink, authors, publication, publisher, cited_by_url;
+            string title, titleLink, authors, publication, publisher, cited_by_url, summary;
             int year, rank = 1, no_of_citations;
             HtmlNodeCollection searchResults = doc.DocumentNode.SelectNodes(xpath);
             if (searchResults == null) return null;
@@ -200,6 +200,13 @@ namespace PubCite
                         }
                     }
 
+                    // SUMMARY
+                    child = n.SelectSingleNode(".//*[@class=\"gs_rs\"]");
+                    summary = "Not Found";
+                    if (child != null) {
+                        summary = child.InnerText;   
+                    }
+
 
                     // CITATION STUFF
                     no_of_citations = 0;
@@ -229,7 +236,7 @@ namespace PubCite
 
                     publisher.Trim();
                     publication.Trim();
-                    SG.Paper paper = new SG.Paper(title,titleLink,authors, year, publication, publisher, no_of_citations, cited_by_url, rank);
+                    SG.Paper paper = new SG.Paper(title,titleLink,authors,summary, year, publication, publisher, no_of_citations, cited_by_url, rank);
                     result.addPaper(paper);
                     rank++;
                 }
@@ -255,7 +262,7 @@ namespace PubCite
 
             
             string xpath = "//div[@class=\"gs_ri\"]";
-            string title, titleLink, authors, publication, publisher, cited_by_url;
+            string title, titleLink, authors, publication, publisher, cited_by_url ,summary;
             int year, rank = 1, no_of_citations;
             HtmlNodeCollection searchResults = doc.DocumentNode.SelectNodes(xpath);
             if (searchResults == null) return null;
@@ -322,6 +329,14 @@ namespace PubCite
                             }
                         }
                     }
+                    
+                    // SUMMARY
+                    child = n.SelectSingleNode(".//*[@class=\"gs_rs\"]");
+                    summary = "Not Found";
+                    if (child != null)
+                    {
+                        summary = child.InnerText;
+                    }
 
 
                     // CITATION STUFF
@@ -352,7 +367,7 @@ namespace PubCite
                     }
 
 
-                    SG.Paper paper = new SG.Paper(title,titleLink, authors, year, publication, publisher, no_of_citations, cited_by_url, rank);
+                    SG.Paper paper = new SG.Paper(title,titleLink, authors,summary, year, publication, publisher, no_of_citations, cited_by_url, rank);
                     result.addPaper(paper);
                     rank++;
                 }
