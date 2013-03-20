@@ -111,6 +111,7 @@
     </Compile>
     <Compile Include="SearchEntity.cs" />
     <Compile Include="Session.cs" />
+    <Content Include="TODO.txt" />
     <None Include="Resources\bookmark.png" />
     <None Include="Resources\search-button1.png" />
     <None Include="Resources\search-button.png" />
