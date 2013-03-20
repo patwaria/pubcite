@@ -43,7 +43,7 @@ namespace PubCite
 
             for (int i = 0; i < a.numPub; i++)
             {
-                Paper p = new Paper(a.publiList[i].title, a.authName, a.publiList[i].year, a.publiList[i].journal, "", a.publiList[i].numCit,"",0);
+                Paper p = new Paper(a.publiList[i].title, a.authName, a.publiList[i].year, a.publiList[i].journal, "", a.publiList[i].numCit,a.publiList[i].url,0);
                 authObj.addPaper(p);
             }
 
