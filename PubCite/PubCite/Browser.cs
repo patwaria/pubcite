@@ -35,5 +35,10 @@ namespace PubCite
             this.url = this.UrlBox.Text;
             showUrlContents();
         }
+
+        private void closeBrowser_Click(object sender, EventArgs e)
+        {
+            Form1.dub_tab.TabPages.Remove(Form1.dub_tab.SelectedTab);
+        }
     }
 }

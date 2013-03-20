@@ -32,6 +32,7 @@
             this.UrlLabel = new System.Windows.Forms.Label();
             this.searchButton = new System.Windows.Forms.PictureBox();
             this.webBrowser = new System.Windows.Forms.WebBrowser();
+            this.closeBrowser = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.searchButton)).BeginInit();
             this.SuspendLayout();
             // 
@@ -39,7 +40,7 @@
             // 
             this.UrlBox.Location = new System.Drawing.Point(64, 3);
             this.UrlBox.Name = "UrlBox";
-            this.UrlBox.Size = new System.Drawing.Size(865, 20);
+            this.UrlBox.Size = new System.Drawing.Size(777, 20);
             this.UrlBox.TabIndex = 0;
             // 
             // UrlLabel
@@ -54,7 +55,7 @@
             // searchButton
             // 
             this.searchButton.Image = global::PubCite.Properties.Resources.search_button2;
-            this.searchButton.Location = new System.Drawing.Point(935, 3);
+            this.searchButton.Location = new System.Drawing.Point(857, 3);
             this.searchButton.Name = "searchButton";
             this.searchButton.Size = new System.Drawing.Size(23, 23);
             this.searchButton.TabIndex = 2;
@@ -69,10 +70,21 @@
             this.webBrowser.Size = new System.Drawing.Size(960, 498);
             this.webBrowser.TabIndex = 3;
             // 
+            // closeBrowser
+            // 
+            this.closeBrowser.Location = new System.Drawing.Point(895, 1);
+            this.closeBrowser.Name = "closeBrowser";
+            this.closeBrowser.Size = new System.Drawing.Size(75, 23);
+            this.closeBrowser.TabIndex = 4;
+            this.closeBrowser.Text = "Close";
+            this.closeBrowser.UseVisualStyleBackColor = true;
+            this.closeBrowser.Click += new System.EventHandler(this.closeBrowser_Click);
+            // 
             // Browser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.closeBrowser);
             this.Controls.Add(this.webBrowser);
             this.Controls.Add(this.searchButton);
             this.Controls.Add(this.UrlLabel);
@@ -91,6 +103,7 @@
         private System.Windows.Forms.Label UrlLabel;
         private System.Windows.Forms.PictureBox searchButton;
         private System.Windows.Forms.WebBrowser webBrowser;
+        private System.Windows.Forms.Button closeBrowser;
 
     }
 }
