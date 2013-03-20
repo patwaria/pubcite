@@ -16,7 +16,7 @@ namespace SG
         private int i10_ind;             // i10 index of the search entity
 
         //constructors
-        public  SearchEntity(string name, int h=-1, int i=-1)
+        public  SearchEntity(string name, int h, int i)
         {
             this.name = name;
             h_ind = h;
