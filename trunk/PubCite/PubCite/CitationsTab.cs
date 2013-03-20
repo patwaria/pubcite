@@ -13,16 +13,19 @@ namespace PubCite
     {
         ListViewItem item;
         List<SG.Paper> MainPapers;
-        GSScraper Scraper;
+        GSScraper GSScraper;
+        CSXParser CSParser;
 
+        int type;
         public CitationsTab()
         {
             InitializeComponent();
         }
 
 
-        public void populateCitations(List<SG.Paper> Papers) {
+        public void populateCitations(List<SG.Paper> Papers,int t) {
             MainPapers = Papers;
+            type = t;
             authorResultsListView.Items.Clear();
             for (int i = 0; i < Papers.Count; i++)
             {
@@ -49,8 +52,16 @@ namespace PubCite
 
         private void CitationsButton_Click(object sender, EventArgs e)
         {
-            Scraper = new GSScraper();
-            populateCitations(Scraper.getCitations(MainPapers[authorResultsListView.FocusedItem.Index].CitedByURL));
+            if (type == 0) {
+                CSParser = new CSXParser();
+                populateCitations(CSParser.getCitations(MainPapers[authorResultsListView.FocusedItem.Index].CitedByURL), type);
+            
+            }
+            else if (type == 1)
+            {
+                GSScraper = new GSScraper();
+                populateCitations(GSScraper.getCitations(MainPapers[authorResultsListView.FocusedItem.Index].CitedByURL), type);
+            }
 
         }
 

@@ -13,15 +13,17 @@ namespace PubCite
     {
         public static TabControl dub_tab;
         public static SG.Favorite favorites;
+        public static FavPanel favPanel;
         public Form1()
         {
             InitializeComponent();
-            search Nsearch = new search();
-            searchTab1.Controls.Add(Nsearch);
-            Nsearch.get_sugg().Visible = false;
+            
             dub_tab = maintabControl;
             favorites = new SG.Favorite();
             favorites.populateFavorites();
+
+            favPanel = new FavPanel();
+            searchTab1.Controls.Add(favPanel);
         }
 
         
