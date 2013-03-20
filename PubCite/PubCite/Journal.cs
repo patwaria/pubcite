@@ -12,7 +12,7 @@ namespace SG
     {
 
         //constructors
-        public Journal(string name, int h, int i)
+        public Journal(string name, int h=-1, int i=-1)
             : base(name, h, i)
         {
         }
