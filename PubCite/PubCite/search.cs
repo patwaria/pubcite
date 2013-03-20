@@ -323,7 +323,7 @@ namespace PubCite
             Form1.dub_tab.TabPages.Add(CitaTab);
             CitationsTab NcitTab = new CitationsTab();
             CitaTab.Controls.Add(NcitTab);
-            /*
+            
             if (a[0] == true)
                 Console.WriteLine("citeseer no citations"); // Papers[authorResultsListView.FocusedItem.Index].CitedByURL
             else if (a[1] == true)
@@ -332,7 +332,7 @@ namespace PubCite
                 NcitTab.populateCitations(Scraper.getCitations(Papers[authorResultsListView.FocusedItem.Index].CitedByURL));
                
             }
-           // NcitTab.populateCitations(); */
+           // NcitTab.populateCitations(); 
 
 
         }
