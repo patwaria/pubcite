@@ -169,7 +169,16 @@ namespace PubCite
                     }
 
                     //Now the processed strings are to be entered on the type of author
-                    Paper paper1 = new Paper(paperName, authorName, Convert.ToInt32(publishYear), journalName, "", citno, citationLink, (PageNo - 1) * 10 + i);
+                    int year;
+                    try
+                    {
+                        year = Convert.ToInt32(publishYear);
+                    }
+                    catch(Exception e)
+                    {
+                        year=0;
+                    }
+                    Paper paper1 = new Paper(paperName, authorName, year, journalName, "", citno, citationLink, (PageNo - 1) * 10 + i);
                     if (searchType == 0)
                         auth1.addPaper(paper1);
                     else
