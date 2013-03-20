@@ -18,11 +18,30 @@ namespace SG
         private int num_cites;
         private string CiteURL;
         private int gsRank;
+        private string titleURL;
         private List<Paper> citations; 
 
         //constructor
         public Paper(string title, string authors, int year, string publication, string publisher, int numOfCitations, string CiteURL, int GSRank){
             this.title = title;
+            this.authors = authors;
+            this.year = year;
+            this.publication = publication;
+            this.publisher = publisher;
+            this.num_cites = numOfCitations;
+
+            //contains the URL which link to the citations of the paper
+            this.CiteURL = CiteURL;
+
+            //It contains the rank at which the paper appeared in the google scholar search
+            this.gsRank = GSRank;
+            //citations = new List<Paper>();
+        }
+
+        public Paper(string title,string titleURL, string authors, int year, string publication, string publisher, int numOfCitations, string CiteURL, int GSRank)
+        {
+            this.title = title;
+            this.titleURL = titleURL;
             this.authors = authors;
             this.year = year;
             this.publication = publication;
@@ -65,6 +84,14 @@ namespace SG
             get
             {
                 return title;
+            }
+        }
+        //property - "Title" of the paper - read only
+        public string TitleURL
+        {
+            get
+            {
+                return titleURL;
             }
         }
 
