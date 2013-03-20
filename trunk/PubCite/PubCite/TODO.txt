@@ -1,0 +1,21 @@
+﻿
+Parser Teams:
+Error Handling
+Advanced search
+Abstract if not already done
+
+Ayush/Sachin:
+Caching
+
+
+GUI Team:
+display all info for author/paper
+sorting actions
+modify favs
+
+Harsha:
+actions listeners
+Close on tab
+new tab
+
+Testing....
