@@ -239,19 +239,20 @@ namespace PubCite
 
 
         //  JOURNAL SEARCH RESULTS
-        public SG.ClassifyJournals getJournals(string journalName)
+        public SG.Journal getJournals(string journalName)
         {
 
             // CONNECTIONS
             journalName.Trim();
-            journalName = Regex.Replace(journalName, @"\s+", "+");
-            string url = "http://scholar.google.co.in/scholar?as_q=&as_epq=&as_oq=&as_eq=&as_occt=any&as_sauthors=&as_publication=" + journalName  + "&as_ylo=&as_yhi=&btnG=&hl=en&as_sdt=0%2C5";
+            SG.Journal result = new SG.Journal(journalName);
+
+            string name = Regex.Replace(journalName, @"\s+", "+");
+            string url = "http://scholar.google.co.in/scholar?as_q=&as_epq=&as_oq=&as_eq=&as_occt=any&as_sauthors=&as_publication=" + name  + "&as_ylo=&as_yhi=&btnG=&hl=en&as_sdt=0%2C5";
             //Console.WriteLine("loaded !!!");
             HtmlWeb web = new HtmlWeb();
             doc = web.Load(url);
 
-            SG.ClassifyJournals results = new SG.ClassifyJournals();
-
+            
             string xpath = "//div[@class=\"gs_ri\"]";
             string title, titleLink, authors, publication, publisher, cited_by_url;
             int year, rank = 1, no_of_citations;
@@ -350,12 +351,12 @@ namespace PubCite
 
 
                     SG.Paper paper = new SG.Paper(title, authors, year, publication, publisher, no_of_citations, cited_by_url, rank);
-                    results.addPaper(paper);
+                    result.addPaper(paper);
                     rank++;
                 }
 
             }
-            return results;
+            return result;
         }
 
 
