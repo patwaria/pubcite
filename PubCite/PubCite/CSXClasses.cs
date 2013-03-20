@@ -139,8 +139,13 @@ namespace PubCite
                     {
                         journalName = "";
                         yearNode = entryNoNode.SelectSingleNode("div[1]/span[2]");
-                        publishYear = yearNode.InnerText;
-                        publishYear = publishYear.Substring(2);
+                        if (yearNode == null)
+                            publishYear = "0";
+                        else
+                        {
+                            publishYear = yearNode.InnerText;
+                            publishYear = publishYear.Substring(2);
+                        }
                     }
                     else
                     {
@@ -159,10 +164,15 @@ namespace PubCite
                         citationNode = entryNoNode.SelectSingleNode("div[3]/a[2]");
                     noCitations = citationNode.InnerText;   //remove unnecessary details from the number of citations
                     noCitations = noCitations.Substring(9);
-                    citationLink = citationNode.Attributes["href"].Value;
+                    Console.WriteLine(noCitations);
+                    if (citationNode.Attributes["href"] == null)
+                        citationLink = "";
+                    else
+                        citationLink = citationNode.Attributes["href"].Value;
 
 
                     citno = 0;
+                    if(noCitations[0]!='t')
                     for (int j = 0; noCitations[j] != ' '; j++)
                     {
                         citno = citno * 10 + Convert.ToInt32(noCitations[j]) - 48;
