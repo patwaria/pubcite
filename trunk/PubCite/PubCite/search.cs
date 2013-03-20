@@ -289,15 +289,7 @@ namespace PubCite
         
         }
 
-        private void resultsGroupBox_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Ciations_Click(object sender, EventArgs e)
-        {
-           // Form1.dub_tab.
-        }
+       
 
         private void Favorites_Click_1(object sender, EventArgs e)
         {
@@ -485,15 +477,7 @@ namespace PubCite
             System.Console.WriteLine();
         }
 
-        private void authorResultsListView_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void journalsResultsListView_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
+       
 
         private void viewURLToolStripMenuItem_Click(object sender, EventArgs e)
         {

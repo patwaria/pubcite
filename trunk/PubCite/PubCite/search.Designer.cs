@@ -172,7 +172,7 @@
             this.resultsGroupBox.TabIndex = 0;
             this.resultsGroupBox.TabStop = false;
             this.resultsGroupBox.Text = "Results ";
-            this.resultsGroupBox.Enter += new System.EventHandler(this.resultsGroupBox_Enter);
+            
             // 
             // authorResultsListView
             // 
@@ -190,7 +190,6 @@
             this.authorResultsListView.TabIndex = 1;
             this.authorResultsListView.UseCompatibleStateImageBehavior = false;
             this.authorResultsListView.View = System.Windows.Forms.View.Details;
-            this.authorResultsListView.SelectedIndexChanged += new System.EventHandler(this.authorResultsListView_SelectedIndexChanged);
             // 
             // PaperHeader
             // 
@@ -229,7 +228,7 @@
             this.journalsResultsListView.UseCompatibleStateImageBehavior = false;
             this.journalsResultsListView.View = System.Windows.Forms.View.Details;
             this.journalsResultsListView.Visible = false;
-            this.journalsResultsListView.SelectedIndexChanged += new System.EventHandler(this.journalsResultsListView_SelectedIndexChanged);
+            
             // 
             // Paper
             // 
