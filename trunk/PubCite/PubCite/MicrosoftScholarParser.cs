@@ -119,7 +119,11 @@ namespace PubCite
                     year = Convert.ToInt32(response2.Publication.Result[i].Year);
                     //publication = response2.Publication.Result[i].Journal.;
 
-                    paper = new Paper(title, authors, year, "", "", numOfCitations, "", i);
+                    String url = "";
+                    if (response2.Publication.Result[i].FullVersionURL.Length != 0)
+                        url = response2.Publication.Result[i].FullVersionURL[0];
+
+                    paper = new Paper(title, authors, year, "", "", numOfCitations, url, i);
 
                     auth.addPaper(paper);
 
@@ -151,7 +155,12 @@ namespace PubCite
                 year = Convert.ToInt32(response2.Publication.Result[i].Year);
                 //publication = response2.Publication.Result[i].Journal.;
 
-                paper = new Paper(title, authors, year, "", "", numOfCitations, "", i);
+
+                String url = "";
+                if (response2.Publication.Result[i].FullVersionURL.Length != 0)
+                    url = response2.Publication.Result[i].FullVersionURL[0];
+
+                paper = new Paper(title, authors, year, "", "", numOfCitations, url, i);
 
                 auth.addPaper(paper);
 
@@ -200,8 +209,11 @@ namespace PubCite
                     numOfCitations = Convert.ToInt32(response.Publication.Result[i].CitationCount);
                     year = Convert.ToInt32(response.Publication.Result[i].Year);
                     //publication = response.Publication.Result[i].Journal.ShortName;
+                    String url = "";
+                    if (response.Publication.Result[i].FullVersionURL.Length != 0)
+                        url = response.Publication.Result[i].FullVersionURL[0];
 
-                    paper = new Paper(title, authors, year, "", "", numOfCitations, "", i);
+                    paper = new Paper(title, authors, year, "", "", numOfCitations, url, i);
 
                     journ.addPaper(paper);
 
@@ -234,7 +246,12 @@ namespace PubCite
                 year = Convert.ToInt32(response.Publication.Result[i].Year);
                 //publication = response.Publication.Result[i].Journal.ShortName;
 
-                paper = new Paper(title, authors, year, "", "", numOfCitations, "", i);
+
+                String url = "";
+                if (response.Publication.Result[i].FullVersionURL.Length != 0)
+                    url = response.Publication.Result[i].FullVersionURL[0];
+
+                paper = new Paper(title, authors, year, "", "", numOfCitations, url, i);
 
                 journ.addPaper(paper);
 
