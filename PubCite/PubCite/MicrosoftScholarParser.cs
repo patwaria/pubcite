@@ -97,8 +97,44 @@ namespace PubCite
             requestPaper.EndIdx = 100;
             response2 = client.Search(requestPaper);
 
-            uint range = response2.Publication.TotalItem < 100 ? response2.Publication.TotalItem : 100;
-            for (int i = 0; i < range; i++)
+            uint range = response2.Publication.TotalItem;
+
+            //Console.WriteLine(response2.Publication.TotalItem + " " + response2.Publication.TotalItem);
+            for(int k = 0; k < range/100; k++)
+            {
+                for (int i = 0; i < 100; i++)
+                {
+                    Paper paper;
+                    String title, authors, publication;
+                    int numOfCitations, year;
+
+                    authors = "";
+                    title = response2.Publication.Result[i].Title;
+                    for (int j = 0; j < response2.Publication.Result[i].Author.Length; j++)
+                    {
+                        authors = authors + generateName(response2.Publication.Result[i].Author[j].FirstName, response2.Publication.Result[i].Author[j].MiddleName, response2.Publication.Result[i].Author[j].LastName) + ", ";
+                    }
+                    numOfCitations = Convert.ToInt32(response2.Publication.Result[i].CitationCount);
+                    year = Convert.ToInt32(response2.Publication.Result[i].Year);
+                    //publication = response2.Publication.Result[i].Journal.;
+
+                    paper = new Paper(title, authors, year, "", "", numOfCitations, "", i);
+
+                    auth.addPaper(paper);
+
+                    /*Console.WriteLine(title);
+                    Console.WriteLine(authors);
+                    Console.WriteLine(year);
+                    Console.WriteLine(numOfCitations);
+                    Console.ReadLine();*/
+                }
+                requestPaper.StartIdx = Convert.ToUInt32(101 + k * 100);
+                requestPaper.EndIdx = Convert.ToUInt32(200 + k * 100);
+                response2 = client.Search(requestPaper);
+            }
+
+
+            for (int i = 0; i < range%100; i++)
             {
                 Paper paper;
                 String title, authors, publication;
@@ -118,13 +154,13 @@ namespace PubCite
 
                 auth.addPaper(paper);
 
-
                 /*Console.WriteLine(title);
                 Console.WriteLine(authors);
                 Console.WriteLine(year);
                 Console.WriteLine(numOfCitations);
                 Console.ReadLine();*/
             }
+
 
             return auth;
         }
