@@ -84,7 +84,7 @@ namespace PubCite
 
             name = generateName(response1.Author.Result[0].FirstName, response1.Author.Result[0].MiddleName, response1.Author.Result[0].LastName);
             Hindex = Convert.ToInt32(response1.Author.Result[0].HIndex);
-            auth = new SG.Author(name, Hindex,0);
+            auth = new SG.Author(name,Hindex,-1);
 
 
             Request requestPaper = new Request();
@@ -180,9 +180,12 @@ namespace PubCite
             response = client.Search(requestJournal);
 
             uint range = response.Publication.TotalItem;
+            range = range > 250 ? 250 : range;
+            //Console.WriteLine(range+" "+range);
+
             for (int k = 0; k < range / 100; k++)
             {
-                for (int i = 0; i < range; i++)
+                for (int i = 0; i < 100; i++)
                 {
                     Paper paper;
                     String title, authors, publication;
