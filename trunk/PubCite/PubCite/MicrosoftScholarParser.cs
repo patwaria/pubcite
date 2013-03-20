@@ -180,7 +180,7 @@ namespace PubCite
             response = client.Search(request);
 
             uint range = response.Publication.TotalItem < 100 ? response.Publication.TotalItem : 100;
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < range; i++)
             {
                 Paper paper;
                 String title, authors, publication;
