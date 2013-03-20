@@ -52,7 +52,6 @@
             this.citesperYear = new System.Windows.Forms.Label();
             this.citationsNumberLabel = new System.Windows.Forms.Label();
             this.authorNameLabel = new System.Windows.Forms.Label();
-            this.authorImageBox = new System.Windows.Forms.PictureBox();
             this.i10indexLabel = new System.Windows.Forms.Label();
             this.hindexLabel = new System.Windows.Forms.Label();
             this.citerperPaperLabel = new System.Windows.Forms.Label();
@@ -60,8 +59,6 @@
             this.citationsLabel = new System.Windows.Forms.Label();
             this.authorLabel = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.EndYear = new PubCite.NumericTextBox();
-            this.StartYear = new PubCite.NumericTextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.Suggestions = new System.Windows.Forms.GroupBox();
             this.authorsSuggestions = new System.Windows.Forms.ListView();
@@ -73,15 +70,19 @@
             this.searchSiteLabel = new System.Windows.Forms.Label();
             this.searchButton = new System.Windows.Forms.Button();
             this.searchField = new System.Windows.Forms.TextBox();
+            this.EndYear = new PubCite.NumericTextBox();
+            this.StartYear = new PubCite.NumericTextBox();
+            this.authorImageBox = new System.Windows.Forms.PictureBox();
+            this.viewUrl = new System.Windows.Forms.Button();
             this.SearchPanel.SuspendLayout();
             this.panel3.SuspendLayout();
             this.citationsDetailsGroupBox.SuspendLayout();
             this.panel4.SuspendLayout();
             this.resultsGroupBox.SuspendLayout();
             this.statisticsGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.authorImageBox)).BeginInit();
             this.panel2.SuspendLayout();
             this.Suggestions.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.authorImageBox)).BeginInit();
             this.SuspendLayout();
             // 
             // SearchPanel
@@ -116,18 +117,19 @@
             // 
             // citationsDetailsGroupBox
             // 
+            this.citationsDetailsGroupBox.Controls.Add(this.viewUrl);
             this.citationsDetailsGroupBox.Controls.Add(this.Favorites);
             this.citationsDetailsGroupBox.Controls.Add(this.Ciations);
             this.citationsDetailsGroupBox.Location = new System.Drawing.Point(550, 152);
             this.citationsDetailsGroupBox.Name = "citationsDetailsGroupBox";
-            this.citationsDetailsGroupBox.Size = new System.Drawing.Size(122, 383);
+            this.citationsDetailsGroupBox.Size = new System.Drawing.Size(122, 380);
             this.citationsDetailsGroupBox.TabIndex = 7;
             this.citationsDetailsGroupBox.TabStop = false;
             this.citationsDetailsGroupBox.Text = "options";
             // 
             // Favorites
             // 
-            this.Favorites.Location = new System.Drawing.Point(6, 32);
+            this.Favorites.Location = new System.Drawing.Point(10, 259);
             this.Favorites.Name = "Favorites";
             this.Favorites.Size = new System.Drawing.Size(106, 23);
             this.Favorites.TabIndex = 2;
@@ -137,11 +139,11 @@
             // 
             // Ciations
             // 
-            this.Ciations.Location = new System.Drawing.Point(6, 73);
+            this.Ciations.Location = new System.Drawing.Point(10, 288);
             this.Ciations.Name = "Ciations";
             this.Ciations.Size = new System.Drawing.Size(106, 23);
             this.Ciations.TabIndex = 1;
-            this.Ciations.Text = "Citations";
+            this.Ciations.Text = "View Citations";
             this.Ciations.UseVisualStyleBackColor = true;
             this.Ciations.Click += new System.EventHandler(this.Ciations_Click_1);
             // 
@@ -309,14 +311,6 @@
             this.authorNameLabel.TabIndex = 15;
             this.authorNameLabel.Text = "Author Name";
             // 
-            // authorImageBox
-            // 
-            this.authorImageBox.Location = new System.Drawing.Point(90, 28);
-            this.authorImageBox.Name = "authorImageBox";
-            this.authorImageBox.Size = new System.Drawing.Size(76, 64);
-            this.authorImageBox.TabIndex = 14;
-            this.authorImageBox.TabStop = false;
-            // 
             // i10indexLabel
             // 
             this.i10indexLabel.AutoSize = true;
@@ -388,22 +382,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(267, 525);
             this.panel2.TabIndex = 0;
-            // 
-            // EndYear
-            // 
-            this.EndYear.AllowSpace = false;
-            this.EndYear.Location = new System.Drawing.Point(189, 149);
-            this.EndYear.Name = "EndYear";
-            this.EndYear.Size = new System.Drawing.Size(62, 20);
-            this.EndYear.TabIndex = 0;
-            // 
-            // StartYear
-            // 
-            this.StartYear.AllowSpace = false;
-            this.StartYear.Location = new System.Drawing.Point(104, 149);
-            this.StartYear.Name = "StartYear";
-            this.StartYear.Size = new System.Drawing.Size(51, 20);
-            this.StartYear.TabIndex = 0;
             // 
             // label2
             // 
@@ -512,6 +490,40 @@
             this.searchField.Size = new System.Drawing.Size(180, 20);
             this.searchField.TabIndex = 1;
             // 
+            // EndYear
+            // 
+            this.EndYear.AllowSpace = false;
+            this.EndYear.Location = new System.Drawing.Point(189, 149);
+            this.EndYear.Name = "EndYear";
+            this.EndYear.Size = new System.Drawing.Size(62, 20);
+            this.EndYear.TabIndex = 0;
+            // 
+            // StartYear
+            // 
+            this.StartYear.AllowSpace = false;
+            this.StartYear.Location = new System.Drawing.Point(104, 149);
+            this.StartYear.Name = "StartYear";
+            this.StartYear.Size = new System.Drawing.Size(51, 20);
+            this.StartYear.TabIndex = 0;
+            // 
+            // authorImageBox
+            // 
+            this.authorImageBox.Location = new System.Drawing.Point(90, 28);
+            this.authorImageBox.Name = "authorImageBox";
+            this.authorImageBox.Size = new System.Drawing.Size(76, 64);
+            this.authorImageBox.TabIndex = 14;
+            this.authorImageBox.TabStop = false;
+            // 
+            // viewUrl
+            // 
+            this.viewUrl.Location = new System.Drawing.Point(10, 318);
+            this.viewUrl.Name = "viewUrl";
+            this.viewUrl.Size = new System.Drawing.Size(106, 23);
+            this.viewUrl.TabIndex = 3;
+            this.viewUrl.Text = "View Url";
+            this.viewUrl.UseVisualStyleBackColor = true;
+            this.viewUrl.Click += new System.EventHandler(this.viewUrl_Click);
+            // 
             // search
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -526,10 +538,10 @@
             this.resultsGroupBox.ResumeLayout(false);
             this.statisticsGroupBox.ResumeLayout(false);
             this.statisticsGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.authorImageBox)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.Suggestions.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.authorImageBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -581,5 +593,6 @@
         private System.Windows.Forms.ColumnHeader NumOfCitesHeader;
         private NumericTextBox StartYear;
         private NumericTextBox EndYear;
+        private System.Windows.Forms.Button viewUrl;
     }
 }
