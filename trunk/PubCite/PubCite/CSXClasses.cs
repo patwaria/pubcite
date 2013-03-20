@@ -27,8 +27,8 @@ namespace PubCite
         private int PageNo;
         private string searchElement;
         private int searchType;
-        private ClassifyAuthors auth1;
-        private ClassifyJournals journ1;
+        private Author auth1;
+        private Journal journ1;
 
         public CiteSeerJournal_FinalAuthorSearch(string searchEle, int searchTy)  //searchType 0 for authorSearch, 1 for journalSearch
         {
@@ -36,8 +36,8 @@ namespace PubCite
             searchElement = searchEle;
             searchType = searchTy;
 
-            auth1 = new ClassifyAuthors();
-            journ1 = new ClassifyJournals();
+            auth1 = new Author(searchEle);
+            journ1 = new Journal(searchEle);
 
             char[] searchElementTemp = searchElement.ToCharArray();
             for (int i = 0; i < searchElement.Length; i++)
@@ -67,9 +67,13 @@ namespace PubCite
         {
             HtmlNode noResultNode = CiteDoc.DocumentNode.SelectSingleNode("//*[@id=\"result_info\"]/strong[2]");
             Console.WriteLine(noResultNode.InnerText);
-            //noResult = Convert.ToInt32(noResultNode.InnerText);
+
+            String noResults = noResultNode.InnerText;
+            noResults.Replace(",", "");
             
-            //if (noResult > 100)
+            noResult = Convert.ToInt32(noResultNode.InnerText);
+            
+            if (noResult > 100)
                 noResult = 100;
         }
 
@@ -180,6 +184,7 @@ namespace PubCite
 
                     //Now the processed strings are to be entered on the type of author
                     int year;
+
                     try
                     {
                         year = Convert.ToInt32(publishYear);
@@ -188,6 +193,7 @@ namespace PubCite
                     {
                         year=0;
                     }
+
                     Paper paper1 = new Paper(paperName, authorName, year, journalName, "", citno, citationLink, (PageNo - 1) * 10 + i);
                     if (searchType == 0)
                         auth1.addPaper(paper1);
@@ -199,13 +205,13 @@ namespace PubCite
         }
 
 
-        public ClassifyAuthors returnAuthor()                                  //for getting the ClassifyAuthors call this function
+        public Author returnAuthor()                                  //for getting the ClassifyAuthors call this function
         {
             extractDataAllPage();
             return auth1;
         }
 
-        public ClassifyJournals returnJournal()                                      // //for getting the ClassifyJournals call this function
+        public Journal returnJournal()                                      // //for getting the ClassifyJournals call this function
         {
             extractDataAllPage();
             return journ1;
