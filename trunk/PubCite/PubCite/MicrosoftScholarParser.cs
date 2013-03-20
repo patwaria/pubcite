@@ -45,7 +45,8 @@ namespace PubCite
             request.EndIdx = 10;
             response = client.Search(request);
 
-            for (int i = 0; i < 10; i++)
+            uint range = response.Author.TotalItem < 10 ? response.Author.TotalItem : 10;
+            for (int i = 0; i < range; i++)
             {
                 name = generateName(response.Author.Result[i].FirstName, response.Author.Result[i].MiddleName, response.Author.Result[i].LastName);
                 id = response.Author.Result[i].ID;
@@ -79,6 +80,8 @@ namespace PubCite
             requestAuth.EndIdx = 1;
             response1 = client.Search(requestAuth);
 
+            Console.WriteLine(response1.Author.TotalItem);
+
             name = generateName(response1.Author.Result[0].FirstName, response1.Author.Result[0].MiddleName, response1.Author.Result[0].LastName);
             Hindex = Convert.ToInt32(response1.Author.Result[0].HIndex);
             auth = new SG.Author(name, Hindex, 0);
@@ -94,7 +97,8 @@ namespace PubCite
             requestPaper.EndIdx = 100;
             response2 = client.Search(requestPaper);
 
-            for (int i = 0; i < 100; i++)
+            uint range = response2.Publication.TotalItem < 100 ? response2.Publication.TotalItem : 100;
+            for (int i = 0; i < range; i++)
             {
                 Paper paper;
                 String title, authors, publication;
@@ -115,11 +119,11 @@ namespace PubCite
                 auth.addPaper(paper);
 
 
-                Console.WriteLine(title);
+                /*Console.WriteLine(title);
                 Console.WriteLine(authors);
                 Console.WriteLine(year);
                 Console.WriteLine(numOfCitations);
-                Console.ReadLine();
+                Console.ReadLine();*/
             }
 
             return auth;
@@ -139,6 +143,7 @@ namespace PubCite
             request.EndIdx = 100;
             response = client.Search(request);
 
+            uint range = response.Publication.TotalItem < 100 ? response.Publication.TotalItem : 100;
             for (int i = 0; i < 100; i++)
             {
                 Paper paper;
