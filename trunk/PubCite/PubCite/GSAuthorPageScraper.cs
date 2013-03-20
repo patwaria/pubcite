@@ -19,6 +19,7 @@ namespace PubCite
         public GSAuthScraper(String inital_URL)
         {
             web = new HtmlWeb();
+            inital_URL += "&pagesize=100";
             doc = web.Load(inital_URL);
             tables = doc.DocumentNode.SelectNodes("//table");
             h_index = i_index = -1;
@@ -120,7 +121,7 @@ namespace PubCite
                 HtmlNode nameNode = titleNode.SelectSingleNode(".//a");
                 title = nameNode.InnerText;
 
-                /*
+                
                 //titleLink = nameNode.Attributes["href"].Value;
                 //set the paper link to url_link.Inner_Text. First check if link begins with "http://...". If not add "http://scholar.google.co.in/"
                 //titleLink=url_link;
@@ -131,7 +132,7 @@ namespace PubCite
                                 titleLink = titleLink.Replace("amp;", "");
                 }
 
-                 */
+                 
 
                 HtmlNodeCollection nodes = titleNode.SelectNodes(".//span");
                 //set the author name string to nameNode.InnerText
@@ -165,7 +166,7 @@ namespace PubCite
 
                 //url_link = nameNode.Attributes["href"].Value;
                 //set the citations link to url_link.Inner_Text. First check if link begins with "http://...". If not add "http://scholar.google.co.in/". If "javascript void(0)" is found set citation link to null
-                papers.Add(new SG.Paper(title, authors, year, publication, publisher, no_of_citations, cited_by_url, index));
+                papers.Add(new SG.Paper(title,titleLink, authors, year, publication, publisher, no_of_citations, cited_by_url, index));
                 index++;
             }
 
