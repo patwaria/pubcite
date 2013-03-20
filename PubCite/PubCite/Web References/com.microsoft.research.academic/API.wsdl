@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://research.microsoft.com" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://research.microsoft.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://research.microsoft.com/Imports">
+      <xsd:import schemaLocation="http://academic.research.microsoft.com/common/api/API.svc?xsd=xsd0" namespace="http://research.microsoft.com" />
+      <xsd:import schemaLocation="http://academic.research.microsoft.com/common/api/API.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://academic.research.microsoft.com/common/api/API.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Libra.Service.API" />
+      <xsd:import schemaLocation="http://academic.research.microsoft.com/common/api/API.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IAPIService_GetDomainList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDomainList" />
+  </wsdl:message>
+  <wsdl:message name="IAPIService_GetDomainList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDomainListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAPIService_GetSubDomainList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSubDomainList" />
+  </wsdl:message>
+  <wsdl:message name="IAPIService_GetSubDomainList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSubDomainListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAPIService_Search_InputMessage">
+    <wsdl:part name="parameters" element="tns:Search" />
+  </wsdl:message>
+  <wsdl:message name="IAPIService_Search_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SearchResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAPIService_GetMostViewedAuthorList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMostViewedAuthorList" />
+  </wsdl:message>
+  <wsdl:message name="IAPIService_GetMostViewedAuthorList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMostViewedAuthorListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAPIService_GetMostViewedPublicationList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMostViewedPublicationList" />
+  </wsdl:message>
+  <wsdl:message name="IAPIService_GetMostViewedPublicationList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMostViewedPublicationListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAPIService_GetPublicationByDOI_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPublicationByDOI" />
+  </wsdl:message>
+  <wsdl:message name="IAPIService_GetPublicationByDOI_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPublicationByDOIResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAPIService_GetLatestUpdatedAuthorList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetLatestUpdatedAuthorList" />
+  </wsdl:message>
+  <wsdl:message name="IAPIService_GetLatestUpdatedAuthorList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetLatestUpdatedAuthorListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAPIService_GetLatestUpdatedPublicationList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetLatestUpdatedPublicationList" />
+  </wsdl:message>
+  <wsdl:message name="IAPIService_GetLatestUpdatedPublicationList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetLatestUpdatedPublicationListResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IAPIService">
+    <wsdl:operation name="GetDomainList">
+      <wsdl:input wsaw:Action="http://research.microsoft.com/IAPIService/GetDomainList" message="tns:IAPIService_GetDomainList_InputMessage" />
+      <wsdl:output wsaw:Action="http://research.microsoft.com/IAPIService/GetDomainListResponse" message="tns:IAPIService_GetDomainList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSubDomainList">
+      <wsdl:input wsaw:Action="http://research.microsoft.com/IAPIService/GetSubDomainList" message="tns:IAPIService_GetSubDomainList_InputMessage" />
+      <wsdl:output wsaw:Action="http://research.microsoft.com/IAPIService/GetSubDomainListResponse" message="tns:IAPIService_GetSubDomainList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Search">
+      <wsdl:input wsaw:Action="http://research.microsoft.com/IAPIService/Search" message="tns:IAPIService_Search_InputMessage" />
+      <wsdl:output wsaw:Action="http://research.microsoft.com/IAPIService/SearchResponse" message="tns:IAPIService_Search_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMostViewedAuthorList">
+      <wsdl:input wsaw:Action="http://research.microsoft.com/IAPIService/GetMostViewedAuthorList" message="tns:IAPIService_GetMostViewedAuthorList_InputMessage" />
+      <wsdl:output wsaw:Action="http://research.microsoft.com/IAPIService/GetMostViewedAuthorListResponse" message="tns:IAPIService_GetMostViewedAuthorList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMostViewedPublicationList">
+      <wsdl:input wsaw:Action="http://research.microsoft.com/IAPIService/GetMostViewedPublicationList" message="tns:IAPIService_GetMostViewedPublicationList_InputMessage" />
+      <wsdl:output wsaw:Action="http://research.microsoft.com/IAPIService/GetMostViewedPublicationListResponse" message="tns:IAPIService_GetMostViewedPublicationList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPublicationByDOI">
+      <wsdl:input wsaw:Action="http://research.microsoft.com/IAPIService/GetPublicationByDOI" message="tns:IAPIService_GetPublicationByDOI_InputMessage" />
+      <wsdl:output wsaw:Action="http://research.microsoft.com/IAPIService/GetPublicationByDOIResponse" message="tns:IAPIService_GetPublicationByDOI_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLatestUpdatedAuthorList">
+      <wsdl:input wsaw:Action="http://research.microsoft.com/IAPIService/GetLatestUpdatedAuthorList" message="tns:IAPIService_GetLatestUpdatedAuthorList_InputMessage" />
+      <wsdl:output wsaw:Action="http://research.microsoft.com/IAPIService/GetLatestUpdatedAuthorListResponse" message="tns:IAPIService_GetLatestUpdatedAuthorList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLatestUpdatedPublicationList">
+      <wsdl:input wsaw:Action="http://research.microsoft.com/IAPIService/GetLatestUpdatedPublicationList" message="tns:IAPIService_GetLatestUpdatedPublicationList_InputMessage" />
+      <wsdl:output wsaw:Action="http://research.microsoft.com/IAPIService/GetLatestUpdatedPublicationListResponse" message="tns:IAPIService_GetLatestUpdatedPublicationList_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>
