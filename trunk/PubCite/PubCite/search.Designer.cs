@@ -35,9 +35,7 @@
             treeNode1,
             treeNode2});
             this.SearchPanel = new System.Windows.Forms.Panel();
-            this.addToFavourite = new System.Windows.Forms.PictureBox();
             this.CloseButton = new System.Windows.Forms.Button();
-            this.searchIcon = new System.Windows.Forms.PictureBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.resultsGroupBox = new System.Windows.Forms.GroupBox();
@@ -82,11 +80,11 @@
             this.favouriteMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.viewStatisticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeFromFavouritesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addToFavourite = new System.Windows.Forms.PictureBox();
+            this.searchIcon = new System.Windows.Forms.PictureBox();
             this.EndYear = new PubCite.NumericTextBox();
             this.StartYear = new PubCite.NumericTextBox();
             this.SearchPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.addToFavourite)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchIcon)).BeginInit();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.resultsGroupBox.SuspendLayout();
@@ -95,6 +93,8 @@
             this.Suggestions.SuspendLayout();
             this.optionsMenuStrip.SuspendLayout();
             this.favouriteMenuStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.addToFavourite)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchIcon)).BeginInit();
             this.SuspendLayout();
             // 
             // SearchPanel
@@ -120,16 +120,6 @@
             this.SearchPanel.Size = new System.Drawing.Size(979, 595);
             this.SearchPanel.TabIndex = 2;
             // 
-            // addToFavourite
-            // 
-            this.addToFavourite.Image = global::PubCite.Properties.Resources.star;
-            this.addToFavourite.Location = new System.Drawing.Point(939, 0);
-            this.addToFavourite.Name = "addToFavourite";
-            this.addToFavourite.Size = new System.Drawing.Size(25, 28);
-            this.addToFavourite.TabIndex = 21;
-            this.addToFavourite.TabStop = false;
-            this.addToFavourite.Click += new System.EventHandler(this.addToFavourite_Click);
-            // 
             // CloseButton
             // 
             this.CloseButton.Location = new System.Drawing.Point(918, 49);
@@ -139,16 +129,6 @@
             this.CloseButton.Text = "Close";
             this.CloseButton.UseVisualStyleBackColor = true;
             this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click_2);
-            // 
-            // searchIcon
-            // 
-            this.searchIcon.Image = global::PubCite.Properties.Resources.search_button2;
-            this.searchIcon.Location = new System.Drawing.Point(909, 0);
-            this.searchIcon.Name = "searchIcon";
-            this.searchIcon.Size = new System.Drawing.Size(24, 28);
-            this.searchIcon.TabIndex = 11;
-            this.searchIcon.TabStop = false;
-            this.searchIcon.Click += new System.EventHandler(this.searchIcon_Click);
             // 
             // panel3
             // 
@@ -557,6 +537,26 @@
             this.removeFromFavouritesToolStripMenuItem.Text = "Remove from Favourites";
             this.removeFromFavouritesToolStripMenuItem.Click += new System.EventHandler(this.removeFromFavouritesToolStripMenuItem_Click);
             // 
+            // addToFavourite
+            // 
+            this.addToFavourite.Image = global::PubCite.Properties.Resources.star;
+            this.addToFavourite.Location = new System.Drawing.Point(939, 0);
+            this.addToFavourite.Name = "addToFavourite";
+            this.addToFavourite.Size = new System.Drawing.Size(25, 28);
+            this.addToFavourite.TabIndex = 21;
+            this.addToFavourite.TabStop = false;
+            this.addToFavourite.Click += new System.EventHandler(this.addToFavourite_Click);
+            // 
+            // searchIcon
+            // 
+            this.searchIcon.Image = global::PubCite.Properties.Resources.search_button2;
+            this.searchIcon.Location = new System.Drawing.Point(909, 0);
+            this.searchIcon.Name = "searchIcon";
+            this.searchIcon.Size = new System.Drawing.Size(24, 28);
+            this.searchIcon.TabIndex = 11;
+            this.searchIcon.TabStop = false;
+            this.searchIcon.Click += new System.EventHandler(this.searchIcon_Click);
+            // 
             // EndYear
             // 
             this.EndYear.AllowSpace = false;
@@ -584,8 +584,6 @@
             this.Size = new System.Drawing.Size(981, 599);
             this.SearchPanel.ResumeLayout(false);
             this.SearchPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.addToFavourite)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchIcon)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.resultsGroupBox.ResumeLayout(false);
@@ -595,6 +593,8 @@
             this.Suggestions.ResumeLayout(false);
             this.optionsMenuStrip.ResumeLayout(false);
             this.favouriteMenuStrip.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.addToFavourite)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchIcon)).EndInit();
             this.ResumeLayout(false);
 
         }
