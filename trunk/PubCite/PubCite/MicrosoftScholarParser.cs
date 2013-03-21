@@ -376,6 +376,8 @@ namespace PubCite
 
         public List<Paper> getCitations(String id)
         {
+            Console.WriteLine("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+
             List<Paper> cited = new List<Paper>();
             UInt32 paperID;
             try
