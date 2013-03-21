@@ -116,6 +116,9 @@ namespace PubCite
             string paperName, authorName, journalName, publishYear, noCitations, citationLink;
             int citno;
 
+            if (noResult == 0)
+                return;
+
             do
             {
                 mainTable = CiteDoc.DocumentNode.SelectSingleNode("//*[@id=\"result_list\"]");
