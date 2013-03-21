@@ -21,12 +21,13 @@ namespace PubCite
         GSScraper GSScraper;
         MicrosoftScholarParser MSParser;
         ListViewItem item;
-        SG.AuthSuggestion authSug;
-        SG.Author authStats;
+        SG.AuthSuggestion authSug=null;
+        SG.Author authStats = null;
         SG.Journal journalStats;
         List<SG.Paper> Papers;
         Boolean[] a = { false, false, false };
         int prevSelectedIndex;
+        Boolean[] prevSortedColum = { false, false, false, false };
 
         public search()
         {
@@ -36,11 +37,15 @@ namespace PubCite
             
             authorResultsListView.FullRowSelect = true;
             authorResultsListView.MouseClick += new MouseEventHandler(authorResultsListView_MouseClick);
+            authorResultsListView.ColumnClick += new ColumnClickEventHandler(authorResultsListView_ColumnClick);
+
             journalResultsListView.FullRowSelect = true;
             journalResultsListView.MouseClick += new MouseEventHandler(journalResultsListView_MouseClick);
-
+            journalResultsListView.ColumnClick += new ColumnClickEventHandler(journalResultsListView_ColumnClick);
             authorsSuggestions.MouseDoubleClick += new MouseEventHandler(authorsSuggestions_MouseClick);
             authorsSuggestions.FullRowSelect = true;
+            
+
         }
 
         public GroupBox get_sugg()
@@ -49,6 +54,117 @@ namespace PubCite
             return Suggestions;
 
         }
+
+        private void journalResultsListView_ColumnClick(object sender, ColumnClickEventArgs e) {
+
+            if (journalStats != null)
+            {
+                if (e.Column == 0)
+                {
+
+                    if (prevSortedColum[0] == false)
+                    {
+                        journalStats.sortPapersByTitle(true);
+                        prevSortedColum[0] = true;
+                    }
+                    else
+                    {
+                        journalStats.sortPapersByTitle(false);
+                        prevSortedColum[0] = false;
+                    }
+                }
+               
+                else if (e.Column == 3)
+                {
+                    if (prevSortedColum[3] == false)
+                    {
+                        journalStats.sortPapersByYear(true);
+                        prevSortedColum[3] = true;
+                    }
+                    else
+                    {
+                        journalStats.sortPapersByYear(false);
+                        prevSortedColum[3] = false;
+
+                    }
+                }
+                else if (e.Column == 2)
+                {
+                    if (prevSortedColum[2] == false)
+                    {
+                        journalStats.sortPapersByCitations(true);
+                        prevSortedColum[2] = true;
+                    }
+                    else
+                    {
+                        journalStats.sortPapersByCitations(false);
+                        prevSortedColum[2] = false;
+                    }
+                }
+                populateJournal(journalStats);
+            }
+        
+        
+        
+        }
+
+        private void authorResultsListView_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            if (authStats != null)
+            {
+                if (e.Column == 0) {
+
+                    if (prevSortedColum[0] == false)
+                    {
+                        authStats.sortPapersByTitle(true);
+                        prevSortedColum[0] = true;
+                    }
+                    else {
+                        authStats.sortPapersByTitle(false);
+                        prevSortedColum[0] = false;                    
+                    }                
+                }
+                else if (e.Column == 1) {
+                if (prevSortedColum[1] == false)
+                    {
+                        authStats.sortPapersByPublication(true);
+                        prevSortedColum[1] = true;
+                    }
+                    else {
+                        authStats.sortPapersByPublication(false);
+                        prevSortedColum[1] = false;
+                    
+                    }
+                
+                }
+                else if (e.Column == 2){
+                    if (prevSortedColum[2] == false)
+                    {
+                       authStats.sortPapersByYear(true);
+                        prevSortedColum[2] = true;
+                    }
+                    else {
+                       authStats.sortPapersByYear(false);
+                        prevSortedColum[2] = false;
+                    
+                    }                                
+                }
+                else if (e.Column == 3) {
+                    if (prevSortedColum[3] == false)
+                    {
+                        authStats.sortPapersByCitations(true);
+                        prevSortedColum[3] = true;
+                    }
+                    else
+                    {
+                        authStats.sortPapersByCitations(false);
+                        prevSortedColum[3] = false;
+                    }                
+                } 
+                populateAuthor(authStats);
+            }                           
+        }
+
 
         public void ArrangeTree()
         {
@@ -227,6 +343,7 @@ namespace PubCite
 
         private void searchIcon_Click(object sender, EventArgs e)
         {
+            for (int i = 0; i < 4; i++) prevSortedColum[i] = false;
             authorsSuggestions.Items.Clear();
             authorResultsListView.Items.Clear();
             journalResultsListView.Items.Clear();

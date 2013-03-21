@@ -437,7 +437,7 @@
             // Authors
             // 
             this.Authors.Text = "Authors";
-            this.Authors.Width = 190;
+            this.Authors.Width = 204;
             // 
             // label2
             // 
