@@ -359,6 +359,8 @@ namespace PubCite
                 browser = new Browser(Papers[journalResultsListView.FocusedItem.Index].TitleURL);
             bpage.Controls.Add(browser);
 
+            Console.WriteLine(Papers[authorResultsListView.FocusedItem.Index].TitleURL);
+
             Form1.dub_tab.TabPages.Insert(Form1.dub_tab.TabPages.Count - 1, bpage);
             Form1.dub_tab.SelectedTab = bpage;
         }
