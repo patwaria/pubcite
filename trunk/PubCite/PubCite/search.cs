@@ -354,9 +354,9 @@ namespace PubCite
             TabPage bpage = new TabPage("Browser");
             Browser browser;
             if (authorResultsListView.Visible == true)
-                browser = new Browser(Papers[authorResultsListView.FocusedItem.Index].CitedByURL);
+                browser = new Browser(Papers[authorResultsListView.FocusedItem.Index].TitleURL);
             else
-                browser = new Browser(Papers[journalResultsListView.FocusedItem.Index].CitedByURL);
+                browser = new Browser(Papers[journalResultsListView.FocusedItem.Index].TitleURL);
             bpage.Controls.Add(browser);
 
             Form1.dub_tab.TabPages.Insert(Form1.dub_tab.TabPages.Count - 1, bpage);
@@ -381,6 +381,9 @@ namespace PubCite
                 // Console.WriteLine("URL:" + Papers[authorResultsListView.FocusedItem.Index].CitedByURL + "Paper Name:" + Papers[authorResultsListView.FocusedItem.Index].Title);
                 NcitTab.populateCitations(Papers[authorResultsListView.FocusedItem.Index], GSScraper.getCitations(Papers[authorResultsListView.FocusedItem.Index].CitedByURL), 1);
 
+            } else if(a[2] == true) {
+
+                NcitTab.populateCitations(Papers[authorResultsListView.FocusedItem.Index], MSParser.getCitations(Papers[authorResultsListView.FocusedItem.Index].CitedByURL), 2);
             }
 
             Form1.dub_tab.SelectedTab = citationsPage;
