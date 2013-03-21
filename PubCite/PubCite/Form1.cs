@@ -13,6 +13,7 @@ namespace PubCite
     {
         public static TabControl dub_tab;
         public static SG.Favorite favorites;
+        private TabPage newTabPage;
         
         public Form1()
         {
@@ -24,8 +25,26 @@ namespace PubCite
 
             search nSearch = new search();
             searchTab1.Controls.Add(nSearch);
+
+            maintabControl.ImageList = imageList1;
+            newTabPage = new TabPage();
+            newTabPage.ImageIndex = 0;
+            maintabControl.Controls.Add(newTabPage);
+            maintabControl.SelectedIndexChanged += new EventHandler(tabChangeHandler);
+                
         }
 
+        private void tabChangeHandler(object sender, EventArgs e)
+        {
+            if (maintabControl.SelectedTab == newTabPage)
+            {
+                search nSearch = new search();
+                TabPage createdTabPage = new TabPage("Search");
+                createdTabPage.Controls.Add(nSearch);
+                maintabControl.TabPages.Insert(maintabControl.TabPages.Count - 1, createdTabPage);
+                maintabControl.SelectedTab = createdTabPage;
+            }
+        }
         private void searchToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             string s = "Search";

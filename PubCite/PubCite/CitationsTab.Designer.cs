@@ -228,7 +228,7 @@
             this.columnHeader8.Text = "No.Of Cites";
             this.columnHeader8.Width = 98;
             // 
-            // journalsResultsListView
+            // journalResultsListView
             // 
             this.journalsResultsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Paper,

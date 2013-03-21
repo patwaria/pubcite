@@ -313,7 +313,7 @@
             this.resultsGroupBox.TabStop = false;
             this.resultsGroupBox.Text = "Results ";
             // 
-            // journalsResultsListView
+            // journalResultsListView
             // 
             this.journalsResultsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Paper,
