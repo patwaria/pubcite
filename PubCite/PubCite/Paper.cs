@@ -67,7 +67,7 @@ namespace SG
             this.publication = publication;
             this.publisher = publisher;
             this.num_cites = numOfCitations;
-
+            this.summary = summary;
             //contains the URL which link to the citations of the paper
             this.CiteURL = CiteURL;
 

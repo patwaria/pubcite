@@ -28,7 +28,7 @@ namespace PubCite
             searchTab1.Controls.Add(nSearch);
 
             maintabControl.ImageList = imageList1;
-            maintabControl.ContextMenuStrip = tabMenuStrip;
+            //maintabControl.ContextMenuStrip = tabMenuStrip;
             newTabPage = new TabPage();
             newTabPage.ImageIndex = 0;
             maintabControl.Controls.Add(newTabPage);
@@ -77,10 +77,6 @@ namespace PubCite
             return dub_tab;
         
         }
-
-        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            maintabControl.TabPages.Remove(maintabControl.SelectedTab);
-        }        
+       
     }
 }
