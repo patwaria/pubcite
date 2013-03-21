@@ -378,12 +378,12 @@ namespace PubCite
 
         void extractData()
         {
-            HtmlNode authn = doc.DocumentNode.SelectSingleNode("//*[@id=\"docAuthors\"]");
+            /*HtmlNode authn = doc.DocumentNode.SelectSingleNode("//*[@id=\"docAuthors\"]");
             String authl = authn.InnerText.Trim().Substring(2).Trim();
 
             authNames = SplitAuth(authl);
             for (int i = 0; i < authNames.Count; i++)
-                Console.WriteLine("Name[i] " + authNames[i]);
+                Console.WriteLine("Name[i] " + authNames[i]);*/
 
             HtmlNode absn = doc.DocumentNode.SelectSingleNode("//*[@id=\"abstract\"]/p");
             Console.Write("absn: " + absn.InnerText);
@@ -435,11 +435,14 @@ namespace PubCite
         void extractData2()
         {
             HtmlNode authn = doc.DocumentNode.SelectSingleNode("//*[@id=\"docAuthors\"]");
-            String authl = authn.InnerText.Trim().Substring(2).Trim();
+            if (authn != null)
+            {
+                String authl = authn.InnerText.Trim().Substring(2).Trim();
 
-            authNames = SplitAuth(authl);
-            for (int i = 0; i < authNames.Count; i++)
-                Console.WriteLine("Name[i] " + authNames[i]);
+                authNames = SplitAuth(authl);
+                for (int i = 0; i < authNames.Count; i++)
+                    Console.WriteLine("Name[i] " + authNames[i]);
+            }
 
             abstrText = "";
             Console.WriteLine("absrText: " + abstrText);
