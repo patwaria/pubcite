@@ -31,11 +31,16 @@ namespace PubCite
         public search()
         {
             InitializeComponent();
+            
             ArrangeTree();
+            
             authorResultsListView.FullRowSelect = true;
             authorResultsListView.MouseClick += new MouseEventHandler(authorResultsListView_MouseClick);
             journalResultsListView.FullRowSelect = true;
             journalResultsListView.MouseClick += new MouseEventHandler(journalResultsListView_MouseClick);
+
+            authorsSuggestions.MouseDoubleClick += new MouseEventHandler(authorsSuggestions_MouseClick);
+            authorsSuggestions.FullRowSelect = true;
         }
 
         public GroupBox get_sugg()
@@ -52,9 +57,15 @@ namespace PubCite
             FavJournalList = Form1.favorites.JournalList;
 
             for (int i = 0; i < FavAuthorList.Count; i++)
+            {
                 favouritesTreeView.Nodes[0].Nodes[0].Nodes.Add(new TreeNode(FavAuthorList[i].Name));
+                favouritesTreeView.Nodes[0].Nodes[0].Nodes[i].ContextMenuStrip = favouriteMenuStrip;
+            }
             for (int i = 0; i < Form1.favorites.JournalList.Count; i++)
+            {
                 favouritesTreeView.Nodes[0].Nodes[1].Nodes.Add(new TreeNode(FavJournalList[i].Name));
+                favouritesTreeView.Nodes[0].Nodes[1].Nodes[i].ContextMenuStrip = favouriteMenuStrip;
+            }
         }
 
         public void UpdateTree()
@@ -69,17 +80,23 @@ namespace PubCite
             {
                 favouritesTreeView.Nodes[0].Nodes[0].Nodes.Clear();
                 for (int i = 0; i < FavAuthorList.Count; i++)
+                {
                     favouritesTreeView.Nodes[0].Nodes[0].Nodes.Add(new TreeNode(FavAuthorList[i].Name));
+                    favouritesTreeView.Nodes[0].Nodes[0].Nodes[i].ContextMenuStrip = favouriteMenuStrip;
+                }
             }
             else if (journalsRadioButton.Checked == true)
             {
                 favouritesTreeView.Nodes[0].Nodes[1].Nodes.Clear();
                 for (int i = 0; i < Form1.favorites.JournalList.Count; i++)
+                {
                     favouritesTreeView.Nodes[0].Nodes[1].Nodes.Add(new TreeNode(FavJournalList[i].Name));
+                    favouritesTreeView.Nodes[0].Nodes[1].Nodes[i].ContextMenuStrip = favouriteMenuStrip;
+                }
             }
         }
 
-        private void authorsSuggestions_Click(object sender, EventArgs e)
+        private void authorsSuggestions_MouseClick(object sender, EventArgs e)
         {
             int index = authorsSuggestions.FocusedItem.Index;
             if (prevSelectedIndex != index)
@@ -128,8 +145,10 @@ namespace PubCite
                 item = new ListViewItem(Papers[i].Title);
                 item.SubItems.Add(Papers[i].Authors);
                 item.SubItems.Add(Papers[i].NumberOfCitations.ToString());
-                if (Papers[i].Year == -1) item.SubItems.Add("--");
-                else item.SubItems.Add(Papers[i].Year.ToString());
+                if (Papers[i].Year == -1 || Papers[i].Year == -1) 
+                    item.SubItems.Add("--");
+                else 
+                    item.SubItems.Add(Papers[i].Year.ToString());
                 journalResultsListView.Items.Add(item);
 
             }
@@ -165,7 +184,10 @@ namespace PubCite
                 /*populating */
                 item = new ListViewItem(Papers[i].Title);
                 item.SubItems.Add(Papers[i].Publication);
-                item.SubItems.Add(Papers[i].Year.ToString());
+                if (Papers[i].Year == -1 || Papers[i].Year == -1)
+                    item.SubItems.Add("--");
+                else
+                    item.SubItems.Add(Papers[i].Year.ToString());
                 item.SubItems.Add(Papers[i].NumberOfCitations.ToString());
                 authorResultsListView.Items.Add(item);
             }
@@ -206,7 +228,7 @@ namespace PubCite
         {
             authorsSuggestions.Items.Clear();
             authorResultsListView.Items.Clear();
-            journalResultsListView.Clear();
+            journalResultsListView.Items.Clear();
 
             if (authorRadioButton.Checked == true)
             {
@@ -290,8 +312,6 @@ namespace PubCite
                             authorsSuggestions.Items.Add(item);
                         }
                     }
-                    authorsSuggestions.FullRowSelect = true;
-                    authorsSuggestions.Click += new EventHandler(authorsSuggestions_Click);
                 }
 
             }
@@ -374,33 +394,30 @@ namespace PubCite
             UpdateTree();
         }
 
-        private void favouritesTreeView_AfterSelect(object sender, TreeViewEventArgs e)
+        private void viewStatisticsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Console.WriteLine("here..");
+            // author selected
+            if (favouritesTreeView.SelectedNode.Parent.Index == 0)
+                populateAuthor(FavAuthorList[favouritesTreeView.SelectedNode.Index]);
+            else if (favouritesTreeView.SelectedNode.Parent.Index == 1) // Journal selected
+                populateJournal(FavJournalList[favouritesTreeView.SelectedNode.Index]);
 
-            if (favouritesTreeView.SelectedNode.Level == 2)
+            Console.WriteLine(favouritesTreeView.SelectedNode.Level);
+        }
+
+        private void removeFromFavouritesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+            if (favouritesTreeView.SelectedNode.Parent.Index == 0)
             {
-                // author selected
-                if (favouritesTreeView.SelectedNode.Parent.Index == 0)
-                    populateAuthor(FavAuthorList[favouritesTreeView.SelectedNode.Index]);
-                else if (favouritesTreeView.SelectedNode.Parent.Index == 1) // Journal selected
-                    populateJournal(FavJournalList[favouritesTreeView.SelectedNode.Index]);
-                   
+                Form1.favorites.removeAuthor(favouritesTreeView.SelectedNode.Index);
+                favouritesTreeView.SelectedNode.Remove();
             }
-        }
-
-        private void removeFavourite_Click(object sender, EventArgs e)
-        {
-            // do error checking
-            Form1.favorites.removeAuthor(favouritesTreeView.SelectedNode.Index);
-            favouritesTreeView.SelectedNode.Remove();
-        }
-
-        private void removeJournal_Click(object sender, EventArgs e)
-        {
-            // do error checking
-            Form1.favorites.removeJournal(favouritesTreeView.SelectedNode.Index);
-            favouritesTreeView.SelectedNode.Remove();
+            else if (favouritesTreeView.SelectedNode.Parent.Index == 1)
+            {
+                Form1.favorites.removeJournal(favouritesTreeView.SelectedNode.Index);
+                favouritesTreeView.SelectedNode.Remove();
+            }
         }
     }
 }

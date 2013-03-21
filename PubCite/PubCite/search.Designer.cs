@@ -38,6 +38,7 @@
             this.addToFavourite = new System.Windows.Forms.PictureBox();
             this.CloseButton = new System.Windows.Forms.Button();
             this.searchIcon = new System.Windows.Forms.PictureBox();
+            this.EndYear = new PubCite.NumericTextBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.resultsGroupBox = new System.Windows.Forms.GroupBox();
@@ -67,9 +68,8 @@
             this.citesperYearLabel = new System.Windows.Forms.Label();
             this.citationsLabel = new System.Windows.Forms.Label();
             this.authorLabel = new System.Windows.Forms.Label();
+            this.StartYear = new PubCite.NumericTextBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.removeJournal = new System.Windows.Forms.Button();
-            this.removeFavourite = new System.Windows.Forms.Button();
             this.favouritesTreeView = new System.Windows.Forms.TreeView();
             this.Suggestions = new System.Windows.Forms.GroupBox();
             this.authorsSuggestions = new System.Windows.Forms.ListView();
@@ -84,8 +84,9 @@
             this.optionsMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.viewCitationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewURLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.EndYear = new PubCite.NumericTextBox();
-            this.StartYear = new PubCite.NumericTextBox();
+            this.favouriteMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.viewStatisticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.removeFromFavouritesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SearchPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.addToFavourite)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchIcon)).BeginInit();
@@ -97,6 +98,7 @@
             this.panel2.SuspendLayout();
             this.Suggestions.SuspendLayout();
             this.optionsMenuStrip.SuspendLayout();
+            this.favouriteMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // SearchPanel
@@ -151,6 +153,14 @@
             this.searchIcon.TabIndex = 11;
             this.searchIcon.TabStop = false;
             this.searchIcon.Click += new System.EventHandler(this.searchIcon_Click);
+            // 
+            // EndYear
+            // 
+            this.EndYear.AllowSpace = false;
+            this.EndYear.Location = new System.Drawing.Point(581, 31);
+            this.EndYear.Name = "EndYear";
+            this.EndYear.Size = new System.Drawing.Size(44, 22);
+            this.EndYear.TabIndex = 0;
             // 
             // panel3
             // 
@@ -418,36 +428,22 @@
             this.authorLabel.TabIndex = 8;
             this.authorLabel.Text = "Name:";
             // 
+            // StartYear
+            // 
+            this.StartYear.AllowSpace = false;
+            this.StartYear.Location = new System.Drawing.Point(498, 32);
+            this.StartYear.Name = "StartYear";
+            this.StartYear.Size = new System.Drawing.Size(45, 22);
+            this.StartYear.TabIndex = 0;
+            // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.removeJournal);
-            this.panel2.Controls.Add(this.removeFavourite);
             this.panel2.Controls.Add(this.favouritesTreeView);
             this.panel2.Controls.Add(this.Suggestions);
             this.panel2.Location = new System.Drawing.Point(8, 88);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(222, 504);
             this.panel2.TabIndex = 0;
-            // 
-            // removeJournal
-            // 
-            this.removeJournal.Location = new System.Drawing.Point(100, 190);
-            this.removeJournal.Name = "removeJournal";
-            this.removeJournal.Size = new System.Drawing.Size(95, 23);
-            this.removeJournal.TabIndex = 11;
-            this.removeJournal.Text = "RemoveJournal";
-            this.removeJournal.UseVisualStyleBackColor = true;
-            this.removeJournal.Click += new System.EventHandler(this.removeJournal_Click);
-            // 
-            // removeFavourite
-            // 
-            this.removeFavourite.Location = new System.Drawing.Point(19, 190);
-            this.removeFavourite.Name = "removeFavourite";
-            this.removeFavourite.Size = new System.Drawing.Size(75, 23);
-            this.removeFavourite.TabIndex = 10;
-            this.removeFavourite.Text = "Remove";
-            this.removeFavourite.UseVisualStyleBackColor = true;
-            this.removeFavourite.Click += new System.EventHandler(this.removeFavourite_Click);
             // 
             // favouritesTreeView
             // 
@@ -464,7 +460,6 @@
             treeNode3});
             this.favouritesTreeView.Size = new System.Drawing.Size(213, 224);
             this.favouritesTreeView.TabIndex = 9;
-            this.favouritesTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.favouritesTreeView_AfterSelect);
             // 
             // Suggestions
             // 
@@ -571,6 +566,7 @@
             this.viewCitationsToolStripMenuItem,
             this.viewURLToolStripMenuItem});
             this.optionsMenuStrip.Name = "optionsMenuStrip";
+            this.optionsMenuStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.optionsMenuStrip.Size = new System.Drawing.Size(150, 48);
             // 
             // viewCitationsToolStripMenuItem
@@ -587,21 +583,28 @@
             this.viewURLToolStripMenuItem.Text = "View Url";
             this.viewURLToolStripMenuItem.Click += new System.EventHandler(this.viewURLToolStripMenuItem_Click);
             // 
-            // EndYear
+            // favouriteMenuStrip
             // 
-            this.EndYear.AllowSpace = false;
-            this.EndYear.Location = new System.Drawing.Point(581, 31);
-            this.EndYear.Name = "EndYear";
-            this.EndYear.Size = new System.Drawing.Size(44, 22);
-            this.EndYear.TabIndex = 0;
+            this.favouriteMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.viewStatisticsToolStripMenuItem,
+            this.removeFromFavouritesToolStripMenuItem});
+            this.favouriteMenuStrip.Name = "favouriteMenuStrip";
+            this.favouriteMenuStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.favouriteMenuStrip.Size = new System.Drawing.Size(204, 48);
             // 
-            // StartYear
+            // viewStatisticsToolStripMenuItem
             // 
-            this.StartYear.AllowSpace = false;
-            this.StartYear.Location = new System.Drawing.Point(498, 32);
-            this.StartYear.Name = "StartYear";
-            this.StartYear.Size = new System.Drawing.Size(45, 22);
-            this.StartYear.TabIndex = 0;
+            this.viewStatisticsToolStripMenuItem.Name = "viewStatisticsToolStripMenuItem";
+            this.viewStatisticsToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.viewStatisticsToolStripMenuItem.Text = "View Statistics";
+            this.viewStatisticsToolStripMenuItem.Click += new System.EventHandler(this.viewStatisticsToolStripMenuItem_Click);
+            // 
+            // removeFromFavouritesToolStripMenuItem
+            // 
+            this.removeFromFavouritesToolStripMenuItem.Name = "removeFromFavouritesToolStripMenuItem";
+            this.removeFromFavouritesToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.removeFromFavouritesToolStripMenuItem.Text = "Remove from Favourites";
+            this.removeFromFavouritesToolStripMenuItem.Click += new System.EventHandler(this.removeFromFavouritesToolStripMenuItem_Click);
             // 
             // search
             // 
@@ -623,6 +626,7 @@
             this.panel2.ResumeLayout(false);
             this.Suggestions.ResumeLayout(false);
             this.optionsMenuStrip.ResumeLayout(false);
+            this.favouriteMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -676,10 +680,11 @@
         private System.Windows.Forms.ToolStripMenuItem viewURLToolStripMenuItem;
         private System.Windows.Forms.PictureBox addToFavourite;
         private System.Windows.Forms.TreeView favouritesTreeView;
-        private System.Windows.Forms.Button removeFavourite;
-        private System.Windows.Forms.Button removeJournal;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.ContextMenuStrip favouriteMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem viewStatisticsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem removeFromFavouritesToolStripMenuItem;
     }
 }
