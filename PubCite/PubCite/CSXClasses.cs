@@ -444,51 +444,67 @@ namespace PubCite
             abstrText = "";
             Console.WriteLine("absrText: " + abstrText);
 
-            HtmlNodeCollection rows = doc.DocumentNode.SelectNodes("//*[@id=\"result_list\"]/div");
+            HtmlNodeCollection rows;
             String[] list;
+            publiListEle2 tempPubliObj;
 
             citeList = new List<publiListEle2>();
-            publiListEle2 tempPubliObj = new publiListEle2();
 
-            for (int i = 0; i < rows.Count; i++)
-            {
-                tempPubliObj = new publiListEle2();
-                Console.WriteLine("*** *** ***");
+            //insert loop for going to next result pages
+            /*
+             * 
+            HtmlNode nextLink = doc.DocumentNode.SelectSingleNode("//*[@id=\"pager\"]/a");
 
-                if (rows[i].SelectSingleNode("div[3]/a[@title=\"number of citations\"]") != null)
+            if (nextLink != null)
+                Console.WriteLine(nextLink.GetAttributeValue("href",""));
+            else
+                Console.WriteLine("next link NULL");
+             * 
+             */
+            //'next' loop starts
+
+            rows = doc.DocumentNode.SelectNodes("//*[@id=\"result_list\"]/div");
+
+                for (int i = 0; i < rows.Count; i++)
                 {
-                    int comI = rows[i].SelectSingleNode("div[3]/a[@title=\"number of citations\"]").InnerText.Substring(9).IndexOf(' ');
-                    if (rows[i].SelectSingleNode("div[3]/a[@title=\"number of citations\"]").InnerText.Substring(9).Remove(comI) != null)
-                        tempPubliObj.numCit = Convert.ToInt32((rows[i].SelectSingleNode("div[3]/a[@title=\"number of citations\"]").InnerText.Substring(9).Remove(comI)));
+                    tempPubliObj = new publiListEle2();
+                    Console.WriteLine("*** *** ***");
+
+                    if (rows[i].SelectSingleNode("div[3]/a[@title=\"number of citations\"]") != null)
+                    {
+                        int comI = rows[i].SelectSingleNode("div[3]/a[@title=\"number of citations\"]").InnerText.Substring(9).IndexOf(' ');
+                        if (rows[i].SelectSingleNode("div[3]/a[@title=\"number of citations\"]").InnerText.Substring(9).Remove(comI) != null)
+                            tempPubliObj.numCit = Convert.ToInt32((rows[i].SelectSingleNode("div[3]/a[@title=\"number of citations\"]").InnerText.Substring(9).Remove(comI)));
+                    }
+                    else
+                        tempPubliObj.numCit = 0;
+                    Console.WriteLine("No. of citations: " + tempPubliObj.numCit);
+
+                    tempPubliObj.title = rows[i].SelectSingleNode("h3/a").InnerText.Trim();
+                    tempPubliObj.authNames = rows[i].SelectSingleNode("div[1]/span[1]").InnerText.Substring(3).Trim();
+
+                    String tempYear;
+                    if (rows[i].SelectSingleNode("div[1]/span[@class=\"pubyear\"]") != null)
+                    {
+                        tempYear = rows[i].SelectSingleNode("div[1]/span[@class=\"pubyear\"]").InnerText;
+                        Console.WriteLine(tempYear);
+                        if (tempYear != null)
+                            tempPubliObj.year = Convert.ToInt32(tempYear.Substring(2));
+                    }
+                    else tempPubliObj.year = 0;
+
+                    if (rows[i].SelectSingleNode("div[2]") != null)
+                        tempPubliObj.abs = rows[i].SelectSingleNode("div[2]").InnerText;
+                    else
+                        tempPubliObj.abs = "";
+
+                    tempPubliObj.url = "http://citeseer.ist.psu.edu" + rows[i].SelectSingleNode("h3/a").GetAttributeValue("href", "");
+
+                    Console.WriteLine(tempPubliObj.title + "|" + tempPubliObj.authNames + "|" + tempPubliObj.year + "|" + tempPubliObj.url);
+                    if (tempPubliObj.numCit > 0)
+                        citeList.Add(tempPubliObj);
                 }
-                else
-                    tempPubliObj.numCit = 0;
-                Console.WriteLine("No. of citations: " + tempPubliObj.numCit);
-
-                tempPubliObj.title = rows[i].SelectSingleNode("h3/a").InnerText.Trim();
-                tempPubliObj.authNames = rows[i].SelectSingleNode("div[1]/span[1]").InnerText.Substring(3).Trim();
-
-                String tempYear;
-                if (rows[i].SelectSingleNode("div[1]/span[@class=\"pubyear\"]") != null)
-                {
-                    tempYear = rows[i].SelectSingleNode("div[1]/span[@class=\"pubyear\"]").InnerText;
-                    Console.WriteLine(tempYear);
-                    if (tempYear != null)
-                        tempPubliObj.year = Convert.ToInt32(tempYear.Substring(2));
-                }
-                else tempPubliObj.year = 0;
-
-                if (rows[i].SelectSingleNode("div[2]") != null)
-                    tempPubliObj.abs = rows[i].SelectSingleNode("div[2]").InnerText;
-                else
-                    tempPubliObj.abs = "";
-
-                tempPubliObj.url = "http://citeseer.ist.psu.edu" + rows[i].SelectSingleNode("h3/a").GetAttributeValue("href", "");
-
-                Console.WriteLine(tempPubliObj.title + "|" + tempPubliObj.authNames + "|" + tempPubliObj.year + "|" + tempPubliObj.url);
-                if (tempPubliObj.numCit > 0)
-                    citeList.Add(tempPubliObj);
-            }
+            //next ends, update doc - load new page before looping again
         }
 
     }
@@ -547,6 +563,8 @@ namespace PubCite
             Console.Write("Home Page URL: ");
             homePageURL = hpurl.InnerText;
             Console.WriteLine(homePageURL);
+            if (homePageURL.Contains("Not found"))
+                homePageURL = "";
 
             HtmlNode affl = doc.DocumentNode.SelectSingleNode("//*[@id=\"authInfo\"]/tr[2]/td[2]");
             Console.Write("Affiliation: ");
