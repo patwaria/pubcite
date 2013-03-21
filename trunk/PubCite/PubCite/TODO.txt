@@ -1,21 +1,17 @@
-﻿
+﻿Priority:
+1. Testing
+2. Error Handling
+2. Advanced search options for general author/journal
+
+
+
 Parser Teams:
 Error Handling
 Advanced search
-Abstract if not already done
 
-Ayush/Sachin:
+Ayush/Anil:
 Caching
 
 
-GUI Team:
-display all info for author/paper
-sorting actions
-modify favs
-
 Harsha:
-actions listeners
 Close on tab
-new tab
-
-Testing....
