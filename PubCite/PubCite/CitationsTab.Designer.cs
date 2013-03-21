@@ -54,6 +54,11 @@
             this.optionMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.viewCitationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewUrlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.authorsName = new System.Windows.Forms.Label();
+            this.venue = new System.Windows.Forms.Label();
+            this.yearLabel = new System.Windows.Forms.Label();
+            this.numCitations = new System.Windows.Forms.Label();
+            this.publisher = new System.Windows.Forms.Label();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.publicationsDetailsGroupBox.SuspendLayout();
@@ -81,6 +86,11 @@
             // 
             // publicationsDetailsGroupBox
             // 
+            this.publicationsDetailsGroupBox.Controls.Add(this.publisher);
+            this.publicationsDetailsGroupBox.Controls.Add(this.numCitations);
+            this.publicationsDetailsGroupBox.Controls.Add(this.yearLabel);
+            this.publicationsDetailsGroupBox.Controls.Add(this.venue);
+            this.publicationsDetailsGroupBox.Controls.Add(this.authorsName);
             this.publicationsDetailsGroupBox.Controls.Add(this.label2);
             this.publicationsDetailsGroupBox.Controls.Add(this.richTextBox1);
             this.publicationsDetailsGroupBox.Controls.Add(this.label1);
@@ -99,7 +109,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(180, 20);
+            this.label2.Location = new System.Drawing.Point(377, 18);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(105, 13);
             this.label2.TabIndex = 12;
@@ -109,16 +119,16 @@
             // 
             this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBox1.Font = new System.Drawing.Font("Georgia", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox1.Location = new System.Drawing.Point(183, 36);
+            this.richTextBox1.Location = new System.Drawing.Point(377, 36);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(715, 106);
+            this.richTextBox1.Size = new System.Drawing.Size(484, 106);
             this.richTextBox1.TabIndex = 11;
             this.richTextBox1.Text = "";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(5, 109);
+            this.label1.Location = new System.Drawing.Point(6, 106);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(61, 13);
             this.label1.TabIndex = 10;
@@ -137,7 +147,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(8, 87);
+            this.label6.Location = new System.Drawing.Point(6, 86);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(59, 13);
             this.label6.TabIndex = 3;
@@ -146,7 +156,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(26, 65);
+            this.label5.Location = new System.Drawing.Point(6, 66);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(34, 13);
             this.label5.TabIndex = 2;
@@ -155,7 +165,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(17, 46);
+            this.label4.Location = new System.Drawing.Point(6, 46);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(46, 13);
             this.label4.TabIndex = 1;
@@ -278,6 +288,50 @@
             this.viewUrlToolStripMenuItem.Text = "View Url";
             this.viewUrlToolStripMenuItem.Click += new System.EventHandler(this.viewUrlToolStripMenuItem_Click);
             // 
+            // authorsName
+            // 
+            this.authorsName.AutoSize = true;
+            this.authorsName.Location = new System.Drawing.Point(92, 26);
+            this.authorsName.Name = "authorsName";
+            this.authorsName.Size = new System.Drawing.Size(54, 13);
+            this.authorsName.TabIndex = 13;
+            this.authorsName.Text = "Author(s)";
+            // 
+            // venue
+            // 
+            this.venue.AutoSize = true;
+            this.venue.Location = new System.Drawing.Point(92, 46);
+            this.venue.Name = "venue";
+            this.venue.Size = new System.Drawing.Size(40, 13);
+            this.venue.TabIndex = 14;
+            this.venue.Text = "Venue";
+            // 
+            // yearLabel
+            // 
+            this.yearLabel.AutoSize = true;
+            this.yearLabel.Location = new System.Drawing.Point(92, 66);
+            this.yearLabel.Name = "yearLabel";
+            this.yearLabel.Size = new System.Drawing.Size(28, 13);
+            this.yearLabel.TabIndex = 15;
+            this.yearLabel.Text = "Year";
+            // 
+            // numCitations
+            // 
+            this.numCitations.AutoSize = true;
+            this.numCitations.Location = new System.Drawing.Point(92, 86);
+            this.numCitations.Name = "numCitations";
+            this.numCitations.Size = new System.Drawing.Size(14, 13);
+            this.numCitations.TabIndex = 16;
+            this.numCitations.Text = "#";
+            // 
+            // publisher
+            // 
+            this.publisher.AutoSize = true;
+            this.publisher.Location = new System.Drawing.Point(92, 106);
+            this.publisher.Name = "publisher";
+            this.publisher.Size = new System.Drawing.Size(0, 13);
+            this.publisher.TabIndex = 17;
+            // 
             // CitationsTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -323,6 +377,11 @@
         private System.Windows.Forms.ContextMenuStrip optionMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem viewCitationsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem viewUrlToolStripMenuItem;
+        private System.Windows.Forms.Label authorsName;
+        private System.Windows.Forms.Label venue;
+        private System.Windows.Forms.Label publisher;
+        private System.Windows.Forms.Label numCitations;
+        private System.Windows.Forms.Label yearLabel;
 
 
     }
