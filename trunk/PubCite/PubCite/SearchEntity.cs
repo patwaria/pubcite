@@ -192,7 +192,7 @@ namespace SG
             }
             else
             {
-                papers.Sort((y, x) => x.Year.CompareTo(x.Year));
+                papers.Sort((y, x) => x.Year.CompareTo(y.Year));
             }
         }
         public void sortPapersByGSRank(bool order)
