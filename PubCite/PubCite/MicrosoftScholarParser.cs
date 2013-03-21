@@ -374,7 +374,7 @@ namespace PubCite
         }
 
 
-        public List<Paper> getCitedPapers(String id)
+        public List<Paper> getCitations(String id)
         {
             List<Paper> cited = new List<Paper>();
             UInt32 paperID;
