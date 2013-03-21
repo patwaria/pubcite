@@ -106,7 +106,7 @@ namespace PubCite
                 for (int i = 0; i < 100; i++)
                 {
                     Paper paper;
-                    String title, authors, publication;
+                    String title, authors, publication, pap_abstract;
                     int numOfCitations, year;
 
                     authors = "";
@@ -125,7 +125,11 @@ namespace PubCite
 
                     String id = Convert.ToString(response2.Publication.Result[i].ID);
 
-                    paper = new Paper(title,url, authors, year, "", "", numOfCitations, id, i+k*100);
+                    pap_abstract = response2.Publication.Result[i].Abstract;
+                    if (pap_abstract == null)
+                        pap_abstract = "";
+
+                    paper = new Paper(title,url, authors,pap_abstract, year, "", "", numOfCitations, id, i+k*100);
 
                     auth.addPaper(paper);
 
@@ -144,7 +148,7 @@ namespace PubCite
             for (int i = 0; i < range%100; i++)
             {
                 Paper paper;
-                String title, authors, publication;
+                String title, authors, publication,pap_abstract;
                 int numOfCitations, year;
 
                 authors = "";
@@ -163,9 +167,12 @@ namespace PubCite
                     url = response2.Publication.Result[i].FullVersionURL[0];
 
                 String id = Convert.ToString(response2.Publication.Result[i].ID);
-                
 
-                paper = new Paper(title, url, authors, year, "", "", numOfCitations, id, Convert.ToInt32(i+(range/100)*100));
+                pap_abstract = response2.Publication.Result[i].Abstract;
+                if (pap_abstract == null)
+                    pap_abstract = "";
+
+                paper = new Paper(title, url, authors,pap_abstract, year, "", "", numOfCitations, id, Convert.ToInt32(i+(range/100)*100));
 
                 auth.addPaper(paper);
 
@@ -202,7 +209,7 @@ namespace PubCite
                 for (int i = 0; i < 100; i++)
                 {
                     Paper paper;
-                    String title, authors, publication;
+                    String title, authors, publication, pap_abstract;
                     int numOfCitations, year;
 
                     authors = "";
@@ -220,7 +227,11 @@ namespace PubCite
 
                     String id = Convert.ToString(response.Publication.Result[i].ID);
 
-                    paper = new Paper(title, url, authors, year, "", "", numOfCitations, id, k*100+i);
+                    pap_abstract = response.Publication.Result[i].Abstract;
+                    if (pap_abstract == null)
+                        pap_abstract = "";
+
+                    paper = new Paper(title, url, authors,pap_abstract, year, "", "", numOfCitations, id, k*100+i);
 
                     journ.addPaper(paper);
 
@@ -240,7 +251,7 @@ namespace PubCite
             for (int i = 0; i < range%100; i++)
             {
                 Paper paper;
-                String title, authors, publication;
+                String title, authors, publication, pap_abstract;
                 int numOfCitations, year;
 
                 authors = "";
@@ -260,7 +271,11 @@ namespace PubCite
 
                 String id = Convert.ToString(response.Publication.Result[i].ID);
 
-                paper = new Paper(title, url, authors, year, "", "", numOfCitations, id, Convert.ToInt32(i + (range / 100) * 100));
+                pap_abstract = response.Publication.Result[i].Abstract;
+                if (pap_abstract == null)
+                    pap_abstract = "";
+
+                paper = new Paper(title, url, authors,pap_abstract, year, "", "", numOfCitations, id, Convert.ToInt32(i + (range / 100) * 100));
 
                 journ.addPaper(paper);
 
@@ -300,7 +315,7 @@ namespace PubCite
                 for (int i = 0; i < 100; i++)
                 {
                     Paper paper;
-                    String title, authors, publication;
+                    String title, authors, publication, pap_abstract;
                     int numOfCitations, year;
 
                     authors = "";
@@ -319,7 +334,11 @@ namespace PubCite
 
                     String id = Convert.ToString(response2.Publication.Result[i].ID);
 
-                    paper = new Paper(title, url, authors, year, "", "", numOfCitations, id, i+k*100);
+                    pap_abstract = response2.Publication.Result[i].Abstract;
+                    if (pap_abstract == null)
+                        pap_abstract = "";
+
+                    paper = new Paper(title, url, authors,pap_abstract, year, "", "", numOfCitations, id, i+k*100);
 
                     auth.addPaper(paper);
 
@@ -338,7 +357,7 @@ namespace PubCite
             for (int i = 0; i < range % 100; i++)
             {
                 Paper paper;
-                String title, authors, publication;
+                String title, authors, publication, pap_abstract;
                 int numOfCitations, year;
 
                 authors = "";
@@ -358,7 +377,11 @@ namespace PubCite
 
                 String id = Convert.ToString(response2.Publication.Result[i].ID);
 
-                paper = new Paper(title, url, authors, year, "", "", numOfCitations, id, Convert.ToInt32(i + (range / 100) * 100));
+                pap_abstract = response2.Publication.Result[i].Abstract;
+                if (pap_abstract == null)
+                    pap_abstract = "";
+
+                paper = new Paper(title, url, authors,pap_abstract, year, "", "", numOfCitations, id, Convert.ToInt32(i + (range / 100) * 100));
 
                 auth.addPaper(paper);
 
@@ -410,7 +433,7 @@ namespace PubCite
                 for (int i = 0; i < 100; i++)
                 {
                     Paper paper;
-                    String title, authors, publication;
+                    String title, authors, publication, pap_abstract;
                     int numOfCitations, year;
 
                     authors = "";
@@ -429,7 +452,11 @@ namespace PubCite
 
                     String id_ = Convert.ToString(response.Publication.Result[i].ID);
 
-                    paper = new Paper(title, url, authors, year, "", "", numOfCitations, id_, i + k * 100);
+                    pap_abstract = response.Publication.Result[i].Abstract;
+                    if (pap_abstract == null)
+                        pap_abstract = "";
+
+                    paper = new Paper(title, url, authors,pap_abstract, year, "", "", numOfCitations, id_, i + k * 100);
 
                     cited.Add(paper);
 
@@ -448,7 +475,7 @@ namespace PubCite
             for (int i = 0; i < range % 100; i++)
             {
                 Paper paper;
-                String title, authors, publication;
+                String title, authors, publication, pap_abstract;
                 int numOfCitations, year;
 
                 authors = "";
@@ -468,7 +495,11 @@ namespace PubCite
 
                 String id_ = Convert.ToString(response.Publication.Result[i].ID);
 
-                paper = new Paper(title, url, authors, year, "", "", numOfCitations, id_, Convert.ToInt32(i + (range / 100) * 100));
+                pap_abstract = response.Publication.Result[i].Abstract;
+                if (pap_abstract == null)
+                    pap_abstract = "";
+
+                paper = new Paper(title, url, authors,pap_abstract, year, "", "", numOfCitations, id_, Convert.ToInt32(i + (range / 100) * 100));
 
                 cited.Add(paper);
 
