@@ -180,7 +180,7 @@ namespace PubCite
                     if (citationNode.Attributes["href"] == null)
                         citationLink = "";
                     else
-                        citationLink = citationNode.Attributes["href"].Value;
+                        citationLink = "http://citeseer.ist.psu.edu" + citationNode.Attributes["href"].Value;
 
 
                     citno = 0;
