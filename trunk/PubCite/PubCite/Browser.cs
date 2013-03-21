@@ -39,6 +39,7 @@ namespace PubCite
         private void closeBrowser_Click(object sender, EventArgs e)
         {
             Form1.dub_tab.TabPages.Remove(Form1.dub_tab.SelectedTab);
+            Form1.dub_tab.SelectedIndex = Form1.dub_tab.TabCount - 2;
         }
     }
 }
