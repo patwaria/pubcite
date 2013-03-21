@@ -94,11 +94,13 @@ namespace PubCite
             TabPage bpage = new TabPage("Browser");
             Browser browser;
             if (authorResultsListView.Visible == true)
-                browser = new Browser(MainPapers[authorResultsListView.FocusedItem.Index].CitedByURL);
+                browser = new Browser(MainPapers[authorResultsListView.FocusedItem.Index].TitleURL);
             else
-                browser = new Browser(MainPapers[journalsResultsListView.FocusedItem.Index].CitedByURL);
+                browser = new Browser(MainPapers[journalsResultsListView.FocusedItem.Index].TitleURL);
             bpage.Controls.Add(browser);
-            Form1.dub_tab.TabPages.Add(bpage);
+
+            Form1.dub_tab.TabPages.Insert(Form1.dub_tab.TabPages.Count - 1, bpage);
+            Form1.dub_tab.SelectedTab = bpage;
         }
     }
 }
