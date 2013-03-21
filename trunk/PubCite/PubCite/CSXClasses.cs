@@ -309,13 +309,14 @@ namespace PubCite
         public String title;
         public String url;
         public String authNames;
+        public String abs;
         public int year;
     }
 
     public class CSXPubli
     {
         public List<string> authNames;
-        string abstrText;
+        string abstrText;//not required, would've been stored in list processing via publiListEle2.abs, if available
         public List<publiListEle2> citeList;
 
         HtmlWeb web;
@@ -387,7 +388,21 @@ namespace PubCite
             HtmlNode absn = doc.DocumentNode.SelectSingleNode("//*[@id=\"abstract\"]/p");
             Console.Write("absn: " + absn.InnerText);
 
-            HtmlNodeCollection rows = doc.DocumentNode.SelectNodes("//*[@id=\"citations\"]/table/tr");
+            abstrText = "";
+            Console.WriteLine("absrText: " + abstrText);
+
+            HtmlNode citUrl = doc.DocumentNode.SelectSingleNode("//*[@id=\"docCites\"]/td[2]/a");
+            String publiURL = "http://citeseer.ist.psu.edu" + citUrl.GetAttributeValue("href", "");
+            doc = web.Load(publiURL);
+
+            if (doc != null)
+                Console.WriteLine("extractData2()'s Document Loaded!");
+            else
+                Console.WriteLine("extractData2()'s Load Error!");
+
+            extractData2();
+
+            /*HtmlNodeCollection rows = doc.DocumentNode.SelectNodes("//*[@id=\"citations\"]/table/tr");
             String[] list;
 
             citeList = new List<publiListEle2>();
@@ -414,7 +429,7 @@ namespace PubCite
                 Console.WriteLine(tempPubliObj.title + "|" + tempPubliObj.authNames + "|" + tempPubliObj.year + "|" + tempPubliObj.url);
                 if (tempPubliObj.numCit > 0)
                     citeList.Add(tempPubliObj);
-            }
+            }*/
         }
 
         void extractData2()
@@ -462,6 +477,11 @@ namespace PubCite
                         tempPubliObj.year = Convert.ToInt32(tempYear.Substring(2));
                 }
                 else tempPubliObj.year = 0;
+
+                if (rows[i].SelectSingleNode("div[2]") != null)
+                    tempPubliObj.abs = rows[i].SelectSingleNode("div[2]").InnerText;
+                else
+                    tempPubliObj.abs = "";
 
                 tempPubliObj.url = "http://citeseer.ist.psu.edu" + rows[i].SelectSingleNode("h3/a").GetAttributeValue("href", "");
 

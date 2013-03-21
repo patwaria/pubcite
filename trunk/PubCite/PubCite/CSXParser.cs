@@ -19,7 +19,7 @@ namespace PubCite
             for (int i = 0; i < c.citeList.Count; i++)
             {
                 //(string title, string authors, int year, string publication, string publisher, int numOfCitations, string CiteURL, int GSRank)
-                pEle = new Paper(c.citeList[i].title, c.citeList[i].authNames, c.citeList[i].year, "", "", c.citeList[i].numCit, c.citeList[i].url, 0);
+                pEle = new Paper(c.citeList[i].title, c.citeList[i].authNames, c.citeList[i].abs,c.citeList[i].year, "", "", c.citeList[i].numCit, c.citeList[i].url, 0);
                 p.Add(pEle);
             }
             return p;
