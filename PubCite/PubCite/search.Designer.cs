@@ -545,7 +545,6 @@
             this.siteComboBox.Size = new System.Drawing.Size(120, 21);
             this.siteComboBox.TabIndex = 6;
             this.siteComboBox.Text = "Citeseer";
-            this.siteComboBox.SelectedIndexChanged += new System.EventHandler(this.siteComboBox_SelectedIndexChanged);
             // 
             // journalsRadioButton
             // 
