@@ -29,16 +29,21 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Authors");
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Journals");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Favourites", new System.Windows.Forms.TreeNode[] {
-            treeNode4,
-            treeNode5});
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Authors");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Journals");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Favourites", new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2});
             this.SearchPanel = new System.Windows.Forms.Panel();
+            this.addToFavourite = new System.Windows.Forms.PictureBox();
             this.CloseButton = new System.Windows.Forms.Button();
+            this.searchIcon = new System.Windows.Forms.PictureBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.resultsGroupBox = new System.Windows.Forms.GroupBox();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.authorResultsListView = new System.Windows.Forms.ListView();
             this.PaperHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.venueHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -79,24 +84,19 @@
             this.optionsMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.viewCitationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewURLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.EndYear = new PubCite.NumericTextBox();
             this.StartYear = new PubCite.NumericTextBox();
-            this.addToFavourite = new System.Windows.Forms.PictureBox();
-            this.searchIcon = new System.Windows.Forms.PictureBox();
             this.SearchPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.addToFavourite)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchIcon)).BeginInit();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.resultsGroupBox.SuspendLayout();
+            this.tabControl1.SuspendLayout();
             this.statisticsGroupBox.SuspendLayout();
             this.panel2.SuspendLayout();
             this.Suggestions.SuspendLayout();
             this.optionsMenuStrip.SuspendLayout();
-            this.tabControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.addToFavourite)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchIcon)).BeginInit();
             this.SuspendLayout();
             // 
             // SearchPanel
@@ -122,6 +122,16 @@
             this.SearchPanel.Size = new System.Drawing.Size(979, 595);
             this.SearchPanel.TabIndex = 2;
             // 
+            // addToFavourite
+            // 
+            this.addToFavourite.Image = global::PubCite.Properties.Resources.star;
+            this.addToFavourite.Location = new System.Drawing.Point(939, 0);
+            this.addToFavourite.Name = "addToFavourite";
+            this.addToFavourite.Size = new System.Drawing.Size(25, 28);
+            this.addToFavourite.TabIndex = 21;
+            this.addToFavourite.TabStop = false;
+            this.addToFavourite.Click += new System.EventHandler(this.addToFavourite_Click);
+            // 
             // CloseButton
             // 
             this.CloseButton.Location = new System.Drawing.Point(918, 49);
@@ -131,6 +141,16 @@
             this.CloseButton.Text = "Close";
             this.CloseButton.UseVisualStyleBackColor = true;
             this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click_2);
+            // 
+            // searchIcon
+            // 
+            this.searchIcon.Image = global::PubCite.Properties.Resources.search_button2;
+            this.searchIcon.Location = new System.Drawing.Point(909, 0);
+            this.searchIcon.Name = "searchIcon";
+            this.searchIcon.Size = new System.Drawing.Size(24, 28);
+            this.searchIcon.TabIndex = 11;
+            this.searchIcon.TabStop = false;
+            this.searchIcon.Click += new System.EventHandler(this.searchIcon_Click);
             // 
             // panel3
             // 
@@ -160,6 +180,36 @@
             this.resultsGroupBox.TabIndex = 0;
             this.resultsGroupBox.TabStop = false;
             this.resultsGroupBox.Text = "Results ";
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(37, 40);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(8, 8);
+            this.tabControl1.TabIndex = 2;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(0, 0);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(0, 0);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // authorResultsListView
             // 
@@ -404,14 +454,14 @@
             this.favouritesTreeView.BackColor = System.Drawing.SystemColors.Window;
             this.favouritesTreeView.Location = new System.Drawing.Point(3, 3);
             this.favouritesTreeView.Name = "favouritesTreeView";
-            treeNode4.Name = "authorsRootNode";
-            treeNode4.Text = "Authors";
-            treeNode5.Name = "journalsRootNode";
-            treeNode5.Text = "Journals";
-            treeNode6.Name = "Favourites";
-            treeNode6.Text = "Favourites";
+            treeNode1.Name = "authorsRootNode";
+            treeNode1.Text = "Authors";
+            treeNode2.Name = "journalsRootNode";
+            treeNode2.Text = "Journals";
+            treeNode3.Name = "Favourites";
+            treeNode3.Text = "Favourites";
             this.favouritesTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode6});
+            treeNode3});
             this.favouritesTreeView.Size = new System.Drawing.Size(213, 224);
             this.favouritesTreeView.TabIndex = 9;
             this.favouritesTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.favouritesTreeView_AfterSelect);
@@ -538,36 +588,6 @@
             this.viewURLToolStripMenuItem.Text = "View Url";
             this.viewURLToolStripMenuItem.Click += new System.EventHandler(this.viewURLToolStripMenuItem_Click);
             // 
-            // tabControl1
-            // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(37, 40);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(8, 8);
-            this.tabControl1.TabIndex = 2;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(0, 0);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(0, 0);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
             // EndYear
             // 
             this.EndYear.AllowSpace = false;
@@ -584,26 +604,6 @@
             this.StartYear.Size = new System.Drawing.Size(45, 22);
             this.StartYear.TabIndex = 0;
             // 
-            // addToFavourite
-            // 
-            this.addToFavourite.Image = global::PubCite.Properties.Resources.star;
-            this.addToFavourite.Location = new System.Drawing.Point(939, 0);
-            this.addToFavourite.Name = "addToFavourite";
-            this.addToFavourite.Size = new System.Drawing.Size(25, 28);
-            this.addToFavourite.TabIndex = 21;
-            this.addToFavourite.TabStop = false;
-            this.addToFavourite.Click += new System.EventHandler(this.addToFavourite_Click);
-            // 
-            // searchIcon
-            // 
-            this.searchIcon.Image = global::PubCite.Properties.Resources.search_button2;
-            this.searchIcon.Location = new System.Drawing.Point(909, 0);
-            this.searchIcon.Name = "searchIcon";
-            this.searchIcon.Size = new System.Drawing.Size(24, 28);
-            this.searchIcon.TabIndex = 11;
-            this.searchIcon.TabStop = false;
-            this.searchIcon.Click += new System.EventHandler(this.searchIcon_Click);
-            // 
             // search
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -613,17 +613,17 @@
             this.Size = new System.Drawing.Size(981, 599);
             this.SearchPanel.ResumeLayout(false);
             this.SearchPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.addToFavourite)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchIcon)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.resultsGroupBox.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
             this.statisticsGroupBox.ResumeLayout(false);
             this.statisticsGroupBox.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.Suggestions.ResumeLayout(false);
             this.optionsMenuStrip.ResumeLayout(false);
-            this.tabControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.addToFavourite)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchIcon)).EndInit();
             this.ResumeLayout(false);
 
         }
