@@ -14,7 +14,7 @@ namespace SG
         private string homepageURL;
 
         //constructor
-        public Author(string Name, int h, int i)
+        public Author(string Name, int h=-1, int i=-1)
             : base(Name, h, i)
         {
         }
@@ -31,7 +31,21 @@ namespace SG
         public Author(SerializationInfo info, StreamingContext ctxt) : base(info, ctxt) { }
         public override void GetObjectData(SerializationInfo info, StreamingContext ctxt)
         {
-            base.GetObjectData(info,ctxt);
+            base.GetObjectData(info, ctxt);
+        }
+        public string HomePageURL
+        {
+            get
+            {
+                return homepageURL;
+            }
+        }
+        public string Affiliation
+        {
+            get
+            {
+                return affiliation;
+            }
         }
     }
 }
