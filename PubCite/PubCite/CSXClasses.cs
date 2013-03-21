@@ -66,12 +66,17 @@ namespace PubCite
         private void getNoResult()
         {
             HtmlNode noResultNode = CiteDoc.DocumentNode.SelectSingleNode("//*[@id=\"result_info\"]/strong[2]");
+            if (noResultNode == null)
+            {
+                noResult = 0;
+                return;
+            }
             Console.WriteLine(noResultNode.InnerText);
 
             String noResults = noResultNode.InnerText;
-            noResults.Replace(",", "");
-            
-            noResult = Convert.ToInt32(noResultNode.InnerText);
+            noResults = noResults.Replace(",", "");
+
+            noResult = Convert.ToInt32(noResults);
             
             if (noResult > 100)
                 noResult = 100;
