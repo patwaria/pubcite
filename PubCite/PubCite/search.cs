@@ -396,12 +396,16 @@ namespace PubCite
 
         private void viewStatisticsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // author selected
+            // author selected 
             if (favouritesTreeView.SelectedNode.Parent.Index == 0)
-                populateAuthor(FavAuthorList[favouritesTreeView.SelectedNode.Index]);
-            else if (favouritesTreeView.SelectedNode.Parent.Index == 1) // Journal selected
-                populateJournal(FavJournalList[favouritesTreeView.SelectedNode.Index]);
-
+            {
+                authStats = FavAuthorList[favouritesTreeView.SelectedNode.Index];
+                populateAuthor(authStats);
+            }
+            else if (favouritesTreeView.SelectedNode.Parent.Index == 1) {// Journal selected
+                journalStats = FavJournalList[favouritesTreeView.SelectedNode.Index];
+                populateJournal(journalStats);
+            }
             Console.WriteLine(favouritesTreeView.SelectedNode.Level);
         }
 
@@ -417,6 +421,30 @@ namespace PubCite
             {
                 Form1.favorites.removeJournal(favouritesTreeView.SelectedNode.Index);
                 favouritesTreeView.SelectedNode.Remove();
+            }
+        }
+
+        private void StartYear_TextChanged(object sender, EventArgs e)
+        {
+            Console.WriteLine(StartYear.Text);
+            if (StartYear.Text.Length == 4 || StartYear.getintval() == 0)
+            {
+                if (authorRadioButton.Checked == true && authStats != null)
+                    populateAuthor(authStats);
+                else if (journalStats != null)
+                    populateJournal(journalStats);
+            }
+        }
+
+        private void EndYear_TextChanged(object sender, EventArgs e)
+        {
+            
+            if (EndYear.Text.Length == 4 || EndYear.getintval() == 0)
+            {
+                if (authorRadioButton.Checked == true && authStats != null)
+                    populateAuthor(authStats);
+                else if (journalStats != null)
+                    populateJournal(journalStats);
             }
         }
     }

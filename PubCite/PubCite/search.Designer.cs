@@ -562,6 +562,7 @@
             this.EndYear.Name = "EndYear";
             this.EndYear.Size = new System.Drawing.Size(44, 22);
             this.EndYear.TabIndex = 0;
+            this.EndYear.TextChanged += new System.EventHandler(this.EndYear_TextChanged);
             // 
             // StartYear
             // 
@@ -570,6 +571,7 @@
             this.StartYear.Name = "StartYear";
             this.StartYear.Size = new System.Drawing.Size(45, 22);
             this.StartYear.TabIndex = 0;
+            this.StartYear.TextChanged += new System.EventHandler(this.StartYear_TextChanged);
             // 
             // search
             // 
