@@ -15,7 +15,7 @@ namespace PubCite
         List<SG.Paper> MainPapers;
         GSScraper GSScraper;
         CSXParser CSParser;
-
+        MicrosoftScholarParser MSParser;
         int type;
         public CitationsTab()
         {
@@ -86,6 +86,11 @@ namespace PubCite
             {
                 GSScraper = new GSScraper();
                 populateCitations(MainPapers[authorResultsListView.FocusedItem.Index], GSScraper.getCitations(MainPapers[authorResultsListView.FocusedItem.Index].CitedByURL), type);
+            }
+            else if (type == 2)
+            {
+                MSParser = new MicrosoftScholarParser();
+                populateCitations(MainPapers[authorResultsListView.FocusedItem.Index], MSParser.getCitations(MainPapers[authorResultsListView.FocusedItem.Index].CitedByURL), type);
             }
         }
 
