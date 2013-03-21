@@ -153,7 +153,7 @@ namespace PubCite
                         titleLink = url_node.GetAttributeValue("href", "Not Found");
                         if (!titleLink.Equals("Not Found"))
                         {
-                            titleLink = "http://scholar.google.com" + titleLink;
+                            //titleLink = "http://scholar.google.com" + titleLink;
                             titleLink = titleLink.Replace("amp;", "");
                         }
                     }
@@ -253,9 +253,11 @@ namespace PubCite
             // CONNECTIONS
             journalName.Trim();
             SG.Journal result = new SG.Journal(journalName);
+            
 
             string name = Regex.Replace(journalName, @"\s+", "+");
             string url = "http://scholar.google.co.in/scholar?as_q=&as_epq=&as_oq=&as_eq=&as_occt=any&as_sauthors=&as_publication=" + name  + "&as_ylo=&as_yhi=&btnG=&hl=en&as_sdt=0%2C5";
+           
             //Console.WriteLine("loaded !!!");
             HtmlWeb web = new HtmlWeb();
             doc = web.Load(url);
@@ -268,7 +270,6 @@ namespace PubCite
             if (searchResults == null) return null;
             else
             {
-
                 foreach (HtmlNode n in searchResults)
                 {
 
@@ -282,7 +283,7 @@ namespace PubCite
                         titleLink = url_node.GetAttributeValue("href", "Not Found");
                         if (!titleLink.Equals("Not Found"))
                         {
-                            titleLink = "http://scholar.google.com" + titleLink;
+                            //titleLink = "http://scholar.google.com" + titleLink;
                             titleLink = titleLink.Replace("amp;", "");
                         }
                     }
@@ -387,7 +388,7 @@ namespace PubCite
             List<SG.Paper> results = new List<SG.Paper>();
 
             string xpath = "//div[@class=\"gs_ri\"]";
-            string title, titleLink, authors, publication, publisher, cited_by_url;
+            string title, titleLink, authors, publication, publisher, cited_by_url,summary;
             int year, rank = 1, no_of_citations;
             HtmlNodeCollection searchResults = doc.DocumentNode.SelectNodes(xpath);
             if (searchResults == null) return null;
@@ -400,13 +401,14 @@ namespace PubCite
                     // TITLE AND TITLE LINK
                     HtmlNode child = n.SelectSingleNode(".//*[@class=\"gs_rt\"]");
                     title = child.InnerText;
+                    titleLink = "Not Found";
                     HtmlNode url_node = child.SelectSingleNode(".//a");
                     if (url_node != null)
                     {
                         titleLink = url_node.GetAttributeValue("href", "Not Found");
                         if (!titleLink.Equals("Not Found"))
                         {
-                            titleLink = "http://scholar.google.com" + titleLink;
+                            //titleLink = "http://scholar.google.com" + titleLink;
                             titleLink = titleLink.Replace("amp;", "");
                         }
                     }
@@ -454,6 +456,14 @@ namespace PubCite
                         }
                     }
 
+                    // SUMMARY
+                    child = n.SelectSingleNode(".//*[@class=\"gs_rs\"]");
+                    summary = "Not Found";
+                    if (child != null)
+                    {
+                        summary = child.InnerText;
+                    }
+
 
                     // CITATION STUFF
                     no_of_citations = 0;
@@ -479,7 +489,7 @@ namespace PubCite
                     }
 
 
-                    SG.Paper paper = new SG.Paper(title, authors, year, publication, publisher, no_of_citations, cited_by_url, rank);
+                    SG.Paper paper = new SG.Paper(title, titleLink,  authors,summary, year, publication, publisher, no_of_citations, cited_by_url, rank);
                     results.Add(paper);
                     rank++;
                 }
