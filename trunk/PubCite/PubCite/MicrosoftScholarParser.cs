@@ -54,8 +54,8 @@ namespace PubCite
                 authNM.Add(name);
                 authID.Add(Convert.ToString(id));
 
-                Console.WriteLine(name);
-                Console.WriteLine(id);
+                //Console.WriteLine(name);
+                //Console.WriteLine(id);
                // Console.ReadLine();
             }
 
@@ -125,7 +125,7 @@ namespace PubCite
 
                     String id = Convert.ToString(response2.Publication.Result[i].ID);
 
-                    paper = new Paper(title,url, authors, year, "", "", numOfCitations, id, i);
+                    paper = new Paper(title,url, authors, year, "", "", numOfCitations, id, i+k*100);
 
                     auth.addPaper(paper);
 
@@ -163,8 +163,9 @@ namespace PubCite
                     url = response2.Publication.Result[i].FullVersionURL[0];
 
                 String id = Convert.ToString(response2.Publication.Result[i].ID);
+                
 
-                paper = new Paper(title, url, authors, year, "", "", numOfCitations, id, i);
+                paper = new Paper(title, url, authors, year, "", "", numOfCitations, id, Convert.ToInt32(i+(range/100)*100));
 
                 auth.addPaper(paper);
 
@@ -219,7 +220,7 @@ namespace PubCite
 
                     String id = Convert.ToString(response.Publication.Result[i].ID);
 
-                    paper = new Paper(title, url, authors, year, "", "", numOfCitations, id, i);
+                    paper = new Paper(title, url, authors, year, "", "", numOfCitations, id, k*100+i);
 
                     journ.addPaper(paper);
 
@@ -259,7 +260,7 @@ namespace PubCite
 
                 String id = Convert.ToString(response.Publication.Result[i].ID);
 
-                paper = new Paper(title, url, authors, year, "", "", numOfCitations, id, i);
+                paper = new Paper(title, url, authors, year, "", "", numOfCitations, id, Convert.ToInt32(i + (range / 100) * 100));
 
                 journ.addPaper(paper);
 
@@ -318,7 +319,7 @@ namespace PubCite
 
                     String id = Convert.ToString(response2.Publication.Result[i].ID);
 
-                    paper = new Paper(title, url, authors, year, "", "", numOfCitations, id, i);
+                    paper = new Paper(title, url, authors, year, "", "", numOfCitations, id, i+k*100);
 
                     auth.addPaper(paper);
 
@@ -357,7 +358,7 @@ namespace PubCite
 
                 String id = Convert.ToString(response2.Publication.Result[i].ID);
 
-                paper = new Paper(title, url, authors, year, "", "", numOfCitations, id, i);
+                paper = new Paper(title, url, authors, year, "", "", numOfCitations, id, Convert.ToInt32(i + (range / 100) * 100));
 
                 auth.addPaper(paper);
 
