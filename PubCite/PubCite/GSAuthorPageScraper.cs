@@ -12,7 +12,7 @@ namespace PubCite
         private HtmlDocument doc;
         private HtmlNodeCollection tables;
         private int h_index, i_index;
-        private string name;
+        private string name,homepageLink,affiliation;
         private List<SG.Paper> papers;
         int index;
 
@@ -27,6 +27,24 @@ namespace PubCite
             getCitationStats();
             index = 1;
             papers = new List<SG.Paper>();
+
+            // home page and affiliation
+            homepageLink = "";
+            HtmlNode homePage = doc.DocumentNode.SelectSingleNode(".//*[@id=\"cit-homepage-read\"]");
+            if (homePage != null)
+            {
+                HtmlNode urlhome = homePage.SelectSingleNode(".//a");
+                if (urlhome != null) homepageLink = urlhome.GetAttributeValue("href", "");
+            }
+
+            affiliation = "";
+            HtmlNode affPage = doc.DocumentNode.SelectSingleNode(".//*[@id=\"cit-affiliation-form\"]");
+            if (affPage != null)
+            {
+                affiliation = affPage.InnerText;
+            }
+
+
         }
 
         private void getCitationStats()
@@ -95,12 +113,12 @@ namespace PubCite
         private int getCitationData(/*Probably pass the array of objects and the index it has to write to*/) //Return the index of next free index
         {
             HtmlNodeCollection rows = doc.DocumentNode.SelectNodes(".//tr[@class=\"cit-table item\"]");
-            string title, titleLink, authors, publication, publisher, cited_by_url;
+            string title,titleLink, authors, publication, publisher, cited_by_url;
             int year, no_of_citations;
+
 
             foreach (HtmlNode row in rows)
             {
-
                 //Console.WriteLine(rows.Count);
                 //YEAR OF PUBLICATION
                 HtmlNode yearNode = row.SelectSingleNode(".//*[@id=\"col-year\"]");
@@ -177,6 +195,8 @@ namespace PubCite
         public int getHIndex() { return h_index; }
         public int getIIndex() { return i_index; }
         public string getName() { return name; }
+        public string getHomePage() { return homepageLink;   }
+        public string getAffiliation() { return affiliation;     }
         public List<SG.Paper> getPapersOfCurrentPage()
         {
             getCitationData();

@@ -95,7 +95,7 @@ namespace PubCite
         {
 
             GSAuthScraper authScraper = new GSAuthScraper(authUrl);
-            SG.Author author = new SG.Author(authScraper.getName(), authScraper.getHIndex(), authScraper.getIIndex());
+            SG.Author author = new SG.Author(authScraper.getName(), authScraper.getAffiliation(),authScraper.getHomePage(), authScraper.getHIndex(), authScraper.getIIndex());
 
             //Console.WriteLine(author.Name + "," + author.getHIndex() + "," + author.getI10Index());
             int count = 1;
