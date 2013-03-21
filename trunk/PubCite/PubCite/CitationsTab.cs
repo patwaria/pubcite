@@ -34,6 +34,7 @@ namespace PubCite
             venue.Text = paper.Publication;
             numCitations.Text = paper.NumberOfCitations.ToString();
             publisher.Text = paper.Publisher;
+            abstractBox.Text = paper.Summary;
 
             authorResultsListView.Items.Clear();
             for (int i = 0; i < Papers.Count; i++)

@@ -32,8 +32,13 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.publicationsDetailsGroupBox = new System.Windows.Forms.GroupBox();
+            this.publisher = new System.Windows.Forms.Label();
+            this.numCitations = new System.Windows.Forms.Label();
+            this.yearLabel = new System.Windows.Forms.Label();
+            this.venue = new System.Windows.Forms.Label();
+            this.authorsName = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.abstractBox = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.CloseButton = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
@@ -54,11 +59,6 @@
             this.optionMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.viewCitationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewUrlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.authorsName = new System.Windows.Forms.Label();
-            this.venue = new System.Windows.Forms.Label();
-            this.yearLabel = new System.Windows.Forms.Label();
-            this.numCitations = new System.Windows.Forms.Label();
-            this.publisher = new System.Windows.Forms.Label();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.publicationsDetailsGroupBox.SuspendLayout();
@@ -92,7 +92,7 @@
             this.publicationsDetailsGroupBox.Controls.Add(this.venue);
             this.publicationsDetailsGroupBox.Controls.Add(this.authorsName);
             this.publicationsDetailsGroupBox.Controls.Add(this.label2);
-            this.publicationsDetailsGroupBox.Controls.Add(this.richTextBox1);
+            this.publicationsDetailsGroupBox.Controls.Add(this.abstractBox);
             this.publicationsDetailsGroupBox.Controls.Add(this.label1);
             this.publicationsDetailsGroupBox.Controls.Add(this.CloseButton);
             this.publicationsDetailsGroupBox.Controls.Add(this.label6);
@@ -106,6 +106,50 @@
             this.publicationsDetailsGroupBox.TabStop = false;
             this.publicationsDetailsGroupBox.Text = "Publication Details";
             // 
+            // publisher
+            // 
+            this.publisher.AutoSize = true;
+            this.publisher.Location = new System.Drawing.Point(92, 106);
+            this.publisher.Name = "publisher";
+            this.publisher.Size = new System.Drawing.Size(0, 13);
+            this.publisher.TabIndex = 17;
+            // 
+            // numCitations
+            // 
+            this.numCitations.AutoSize = true;
+            this.numCitations.Location = new System.Drawing.Point(92, 86);
+            this.numCitations.Name = "numCitations";
+            this.numCitations.Size = new System.Drawing.Size(14, 13);
+            this.numCitations.TabIndex = 16;
+            this.numCitations.Text = "#";
+            // 
+            // yearLabel
+            // 
+            this.yearLabel.AutoSize = true;
+            this.yearLabel.Location = new System.Drawing.Point(92, 66);
+            this.yearLabel.Name = "yearLabel";
+            this.yearLabel.Size = new System.Drawing.Size(28, 13);
+            this.yearLabel.TabIndex = 15;
+            this.yearLabel.Text = "Year";
+            // 
+            // venue
+            // 
+            this.venue.AutoSize = true;
+            this.venue.Location = new System.Drawing.Point(92, 46);
+            this.venue.Name = "venue";
+            this.venue.Size = new System.Drawing.Size(40, 13);
+            this.venue.TabIndex = 14;
+            this.venue.Text = "Venue";
+            // 
+            // authorsName
+            // 
+            this.authorsName.AutoSize = true;
+            this.authorsName.Location = new System.Drawing.Point(92, 26);
+            this.authorsName.Name = "authorsName";
+            this.authorsName.Size = new System.Drawing.Size(54, 13);
+            this.authorsName.TabIndex = 13;
+            this.authorsName.Text = "Author(s)";
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -115,15 +159,15 @@
             this.label2.TabIndex = 12;
             this.label2.Text = "Abstract/Summary :";
             // 
-            // richTextBox1
+            // abstractBox
             // 
-            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox1.Font = new System.Drawing.Font("Georgia", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox1.Location = new System.Drawing.Point(377, 36);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(484, 106);
-            this.richTextBox1.TabIndex = 11;
-            this.richTextBox1.Text = "";
+            this.abstractBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.abstractBox.Font = new System.Drawing.Font("Georgia", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.abstractBox.Location = new System.Drawing.Point(377, 36);
+            this.abstractBox.Name = "abstractBox";
+            this.abstractBox.Size = new System.Drawing.Size(484, 106);
+            this.abstractBox.TabIndex = 11;
+            this.abstractBox.Text = "";
             // 
             // label1
             // 
@@ -228,7 +272,7 @@
             this.columnHeader8.Text = "No.Of Cites";
             this.columnHeader8.Width = 98;
             // 
-            // journalResultsListView
+            // journalsResultsListView
             // 
             this.journalsResultsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Paper,
@@ -288,50 +332,6 @@
             this.viewUrlToolStripMenuItem.Text = "View Url";
             this.viewUrlToolStripMenuItem.Click += new System.EventHandler(this.viewUrlToolStripMenuItem_Click);
             // 
-            // authorsName
-            // 
-            this.authorsName.AutoSize = true;
-            this.authorsName.Location = new System.Drawing.Point(92, 26);
-            this.authorsName.Name = "authorsName";
-            this.authorsName.Size = new System.Drawing.Size(54, 13);
-            this.authorsName.TabIndex = 13;
-            this.authorsName.Text = "Author(s)";
-            // 
-            // venue
-            // 
-            this.venue.AutoSize = true;
-            this.venue.Location = new System.Drawing.Point(92, 46);
-            this.venue.Name = "venue";
-            this.venue.Size = new System.Drawing.Size(40, 13);
-            this.venue.TabIndex = 14;
-            this.venue.Text = "Venue";
-            // 
-            // yearLabel
-            // 
-            this.yearLabel.AutoSize = true;
-            this.yearLabel.Location = new System.Drawing.Point(92, 66);
-            this.yearLabel.Name = "yearLabel";
-            this.yearLabel.Size = new System.Drawing.Size(28, 13);
-            this.yearLabel.TabIndex = 15;
-            this.yearLabel.Text = "Year";
-            // 
-            // numCitations
-            // 
-            this.numCitations.AutoSize = true;
-            this.numCitations.Location = new System.Drawing.Point(92, 86);
-            this.numCitations.Name = "numCitations";
-            this.numCitations.Size = new System.Drawing.Size(14, 13);
-            this.numCitations.TabIndex = 16;
-            this.numCitations.Text = "#";
-            // 
-            // publisher
-            // 
-            this.publisher.AutoSize = true;
-            this.publisher.Location = new System.Drawing.Point(92, 106);
-            this.publisher.Name = "publisher";
-            this.publisher.Size = new System.Drawing.Size(0, 13);
-            this.publisher.TabIndex = 17;
-            // 
             // CitationsTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -372,7 +372,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ColumnHeader authorColumn;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox abstractBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ContextMenuStrip optionMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem viewCitationsToolStripMenuItem;
