@@ -21,7 +21,7 @@ namespace PubCite
         GSScraper GSScraper;
         MicrosoftScholarParser MSParser;
         ListViewItem item;
-        SG.AuthSuggestion authSug=null;
+        SG.AuthSuggestion authSug = null;
         SG.Author authStats = null;
         SG.Journal journalStats;
         List<SG.Paper> Papers;
@@ -32,9 +32,9 @@ namespace PubCite
         public search()
         {
             InitializeComponent();
-            
+
             ArrangeTree();
-            
+
             authorResultsListView.FullRowSelect = true;
             authorResultsListView.MouseClick += new MouseEventHandler(authorResultsListView_MouseClick);
             authorResultsListView.ColumnClick += new ColumnClickEventHandler(authorResultsListView_ColumnClick);
@@ -44,7 +44,7 @@ namespace PubCite
             journalResultsListView.ColumnClick += new ColumnClickEventHandler(journalResultsListView_ColumnClick);
             authorsSuggestions.MouseDoubleClick += new MouseEventHandler(authorsSuggestions_MouseClick);
             authorsSuggestions.FullRowSelect = true;
-            
+
 
         }
 
@@ -55,7 +55,8 @@ namespace PubCite
 
         }
 
-        private void journalResultsListView_ColumnClick(object sender, ColumnClickEventArgs e) {
+        private void journalResultsListView_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
 
             if (journalStats != null)
             {
@@ -73,7 +74,7 @@ namespace PubCite
                         prevSortedColum[0] = false;
                     }
                 }
-               
+
                 else if (e.Column == 3)
                 {
                     if (prevSortedColum[3] == false)
@@ -103,53 +104,60 @@ namespace PubCite
                 }
                 populateJournal(journalStats);
             }
-        
-        
-        
+
+
+
         }
 
         private void authorResultsListView_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             if (authStats != null)
             {
-                if (e.Column == 0) {
+                if (e.Column == 0)
+                {
 
                     if (prevSortedColum[0] == false)
                     {
                         authStats.sortPapersByTitle(true);
                         prevSortedColum[0] = true;
                     }
-                    else {
+                    else
+                    {
                         authStats.sortPapersByTitle(false);
-                        prevSortedColum[0] = false;                    
-                    }                
+                        prevSortedColum[0] = false;
+                    }
                 }
-                else if (e.Column == 1) {
-                if (prevSortedColum[1] == false)
+                else if (e.Column == 1)
+                {
+                    if (prevSortedColum[1] == false)
                     {
                         authStats.sortPapersByPublication(true);
                         prevSortedColum[1] = true;
                     }
-                    else {
+                    else
+                    {
                         authStats.sortPapersByPublication(false);
                         prevSortedColum[1] = false;
-                    
+
                     }
-                
+
                 }
-                else if (e.Column == 2){
+                else if (e.Column == 2)
+                {
                     if (prevSortedColum[2] == false)
                     {
-                       authStats.sortPapersByYear(true);
+                        authStats.sortPapersByYear(true);
                         prevSortedColum[2] = true;
                     }
-                    else {
-                       authStats.sortPapersByYear(false);
+                    else
+                    {
+                        authStats.sortPapersByYear(false);
                         prevSortedColum[2] = false;
-                    
-                    }                                
+
+                    }
                 }
-                else if (e.Column == 3) {
+                else if (e.Column == 3)
+                {
                     if (prevSortedColum[3] == false)
                     {
                         authStats.sortPapersByCitations(true);
@@ -159,10 +167,10 @@ namespace PubCite
                     {
                         authStats.sortPapersByCitations(false);
                         prevSortedColum[3] = false;
-                    }                
-                } 
+                    }
+                }
                 populateAuthor(authStats);
-            }                           
+            }
         }
 
 
@@ -261,9 +269,9 @@ namespace PubCite
                 item = new ListViewItem(Papers[i].Title);
                 item.SubItems.Add(Papers[i].Authors);
                 item.SubItems.Add(Papers[i].NumberOfCitations.ToString());
-                if (Papers[i].Year == -1 || Papers[i].Year == -1) 
+                if (Papers[i].Year == -1 || Papers[i].Year == -1)
                     item.SubItems.Add("--");
-                else 
+                else
                     item.SubItems.Add(Papers[i].Year.ToString());
                 journalResultsListView.Items.Add(item);
 
@@ -293,7 +301,7 @@ namespace PubCite
             hindex.Text = author.getHIndex().ToString();
             i10index.Text = author.getI10Index().ToString();
             citationsNumberLabel.Text = author.getTotalNumberofCitations().ToString();
-            
+
             /* Papers */
             for (int i = 0; i < Papers.Count; i++)
             {
@@ -329,7 +337,7 @@ namespace PubCite
                     optionsMenuStrip.Show(Cursor.Position);
             }
         }
-        
+
         private void Favorites_Click_1(object sender, EventArgs e)
         {
             Form1.favorites.AddAuthor(authStats);
@@ -352,7 +360,7 @@ namespace PubCite
             {
 
                 prevSelectedIndex = -1;
-                               
+
                 if (siteComboBox.SelectedItem.ToString().Equals("Citeseer"))
                 {
                     a[0] = true;
@@ -435,7 +443,7 @@ namespace PubCite
             }
             if (journalsRadioButton.Checked == true)
             {
-                
+
                 if (siteComboBox.SelectedItem.ToString().Equals("Citeseer"))
                 {
                     a[0] = true;
@@ -484,28 +492,39 @@ namespace PubCite
 
         private void viewCitationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            TabPage citationsPage = new TabPage("Citations");
-            Form1.dub_tab.TabPages.Insert(Form1.dub_tab.TabPages.Count - 1, citationsPage);
-            CitationsTab NcitTab = new CitationsTab();
-            citationsPage.Controls.Add(NcitTab);
+            int index;
+            if (authorResultsListView.Visible == true)
+                index = authorResultsListView.FocusedItem.Index;
+            else
+                index = journalResultsListView.FocusedItem.Index;
 
-            if (a[0] == true)
+            if (Papers[index].NumberOfCitations != 0)
             {
-                Console.WriteLine("URL:" + Papers[authorResultsListView.FocusedItem.Index].CitedByURL);
-                NcitTab.populateCitations(Papers[authorResultsListView.FocusedItem.Index], CSParser.getCitations(Papers[authorResultsListView.FocusedItem.Index].CitedByURL), 0);
+                TabPage citationsPage = new TabPage("Citations");
+                Form1.dub_tab.TabPages.Insert(Form1.dub_tab.TabPages.Count - 1, citationsPage);
+                CitationsTab NcitTab = new CitationsTab();
+                citationsPage.Controls.Add(NcitTab);
 
+                if (a[0] == true)
+                {
+                    Console.WriteLine("URL:" + Papers[index].CitedByURL);
+                    NcitTab.populateCitations(Papers[index], CSParser.getCitations(Papers[index].CitedByURL), 0);
+
+                }
+                else if (a[1] == true)
+                {
+                    // Console.WriteLine("URL:" + Papers[authorResultsListView.FocusedItem.Index].CitedByURL + "Paper Name:" + Papers[authorResultsListView.FocusedItem.Index].Title);
+                    NcitTab.populateCitations(Papers[index], GSScraper.getCitations(Papers[index].CitedByURL), 1);
+
+                }
+                else if (a[2] == true)
+                {
+
+                    NcitTab.populateCitations(Papers[index], MSParser.getCitations(Papers[index].CitedByURL), 2);
+                }
+
+                Form1.dub_tab.SelectedTab = citationsPage;
             }
-            else if (a[1] == true)
-            {
-                // Console.WriteLine("URL:" + Papers[authorResultsListView.FocusedItem.Index].CitedByURL + "Paper Name:" + Papers[authorResultsListView.FocusedItem.Index].Title);
-                NcitTab.populateCitations(Papers[authorResultsListView.FocusedItem.Index], GSScraper.getCitations(Papers[authorResultsListView.FocusedItem.Index].CitedByURL), 1);
-
-            } else if(a[2] == true) {
-
-                NcitTab.populateCitations(Papers[authorResultsListView.FocusedItem.Index], MSParser.getCitations(Papers[authorResultsListView.FocusedItem.Index].CitedByURL), 2);
-            }
-
-            Form1.dub_tab.SelectedTab = citationsPage;
         }
 
         private void addToFavourite_Click(object sender, EventArgs e)
@@ -525,7 +544,8 @@ namespace PubCite
                 authStats = FavAuthorList[favouritesTreeView.SelectedNode.Index];
                 populateAuthor(authStats);
             }
-            else if (favouritesTreeView.SelectedNode.Parent.Index == 1) {// Journal selected
+            else if (favouritesTreeView.SelectedNode.Parent.Index == 1)
+            {// Journal selected
                 journalStats = FavJournalList[favouritesTreeView.SelectedNode.Index];
                 populateJournal(journalStats);
             }
@@ -534,7 +554,7 @@ namespace PubCite
 
         private void removeFromFavouritesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+
             if (favouritesTreeView.SelectedNode.Parent.Index == 0)
             {
                 Form1.favorites.removeAuthor(favouritesTreeView.SelectedNode.Index);
@@ -561,7 +581,7 @@ namespace PubCite
 
         private void EndYear_TextChanged(object sender, EventArgs e)
         {
-            
+
             if (EndYear.Text.Length == 4 || EndYear.getintval() == 0)
             {
                 if (authorRadioButton.Checked == true && authStats != null)
