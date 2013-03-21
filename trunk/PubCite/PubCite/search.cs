@@ -346,30 +346,7 @@ namespace PubCite
             Form1.dub_tab.TabPages.Remove(Form1.dub_tab.SelectedTab);
         }
 
-        private void Ciations_Click_1(object sender, EventArgs e)
-        {
-            TabPage CitaTab = new TabPage("Citations");
-            Form1.dub_tab.TabPages.Add(CitaTab);
-            CitationsTab NcitTab = new CitationsTab();
-            CitaTab.Controls.Add(NcitTab);
-
-            if (a[0] == true)
-            {
-                Console.WriteLine("URL:" + Papers[authorResultsListView.FocusedItem.Index].CitedByURL);
-                NcitTab.populateCitations(CSParser.getCitations(Papers[authorResultsListView.FocusedItem.Index].CitedByURL),0);
-
-            }
-            else if (a[1] == true)
-            {
-                // Console.WriteLine("URL:" + Papers[authorResultsListView.FocusedItem.Index].CitedByURL + "Paper Name:" + Papers[authorResultsListView.FocusedItem.Index].Title);
-                NcitTab.populateCitations(GSScraper.getCitations(Papers[authorResultsListView.FocusedItem.Index].CitedByURL),1);
-
-            }
-           
-           // NcitTab.populateCitations(); 
-
-
-        }
+        
 
         private void viewUrl_Click(object sender, EventArgs e)
         {
@@ -546,13 +523,13 @@ namespace PubCite
             if (a[0] == true)
             {
                 Console.WriteLine("URL:" + Papers[authorResultsListView.FocusedItem.Index].CitedByURL);
-                NcitTab.populateCitations(CSParser.getCitations(Papers[authorResultsListView.FocusedItem.Index].CitedByURL), 0);
+                NcitTab.populateCitations(Papers[authorResultsListView.FocusedItem.Index], CSParser.getCitations(Papers[authorResultsListView.FocusedItem.Index].CitedByURL), 0);
 
             }
             else if (a[1] == true)
             {
                 // Console.WriteLine("URL:" + Papers[authorResultsListView.FocusedItem.Index].CitedByURL + "Paper Name:" + Papers[authorResultsListView.FocusedItem.Index].Title);
-                NcitTab.populateCitations(GSScraper.getCitations(Papers[authorResultsListView.FocusedItem.Index].CitedByURL), 1);
+                NcitTab.populateCitations(Papers[authorResultsListView.FocusedItem.Index], GSScraper.getCitations(Papers[authorResultsListView.FocusedItem.Index].CitedByURL), 1);
 
             }
 
@@ -571,14 +548,15 @@ namespace PubCite
         private void favouritesTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
             Console.WriteLine("here..");
-            authorResultsListView.Items.Clear();
-            journalsResultsListView.Items.Clear();
 
             if (favouritesTreeView.SelectedNode.Level == 2)
             {
                 // author selected
                 if (favouritesTreeView.SelectedNode.Parent.Index == 0)
                 {
+                    authorResultsListView.Items.Clear();
+                    authorResultsListView.Visible = true;
+                    journalsResultsListView.Visible = false;
 
                     Papers = FavAuthorList[favouritesTreeView.SelectedNode.Index].getPapers();
 
@@ -596,11 +574,13 @@ namespace PubCite
                         item.SubItems.Add(Papers[i].Year.ToString());
                         item.SubItems.Add(Papers[i].NumberOfCitations.ToString());
                         authorResultsListView.Items.Add(item);
-                        Console.WriteLine(Papers[i].Title + Papers[i].Year + Papers[i].NumberOfCitations);
+                        //Console.WriteLine(Papers[i].Title + Papers[i].Year + Papers[i].NumberOfCitations);
                     }
                 } else if (favouritesTreeView.SelectedNode.Parent.Index == 1) // Journal selected
                 {
-
+                    journalsResultsListView.Items.Clear();
+                    authorResultsListView.Visible = false;
+                    journalsResultsListView.Visible = true;
                     Papers = FavJournalList[favouritesTreeView.SelectedNode.Index].getPapers();
 
                     authorNameLabel.Text = FavJournalList[favouritesTreeView.SelectedNode.Index].Name;
@@ -613,11 +593,12 @@ namespace PubCite
                     {
                         /*populating */
                         item = new ListViewItem(Papers[i].Title);
-                        item.SubItems.Add(Papers[i].Publication);
-                        item.SubItems.Add(Papers[i].Year.ToString());
+                        item.SubItems.Add(Papers[i].Authors);
                         item.SubItems.Add(Papers[i].NumberOfCitations.ToString());
-                        authorResultsListView.Items.Add(item);
-                        Console.WriteLine(Papers[i].Title + Papers[i].Year + Papers[i].NumberOfCitations);
+                        item.SubItems.Add(Papers[i].Year.ToString());
+                        
+                        journalsResultsListView.Items.Add(item);
+                        //Console.WriteLine(Papers[i].Title + Papers[i].Year + Papers[i].NumberOfCitations);
                     }
                 }
             }

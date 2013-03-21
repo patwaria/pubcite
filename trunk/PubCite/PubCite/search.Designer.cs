@@ -80,9 +80,9 @@
             this.viewCitationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewURLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeFavourite = new System.Windows.Forms.Button();
+            this.removeJournal = new System.Windows.Forms.Button();
             this.EndYear = new PubCite.NumericTextBox();
             this.StartYear = new PubCite.NumericTextBox();
-            this.removeJournal = new System.Windows.Forms.Button();
             this.SearchPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.addToFavourite)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchIcon)).BeginInit();
@@ -325,9 +325,9 @@
             this.authorNameLabel.AutoSize = true;
             this.authorNameLabel.Location = new System.Drawing.Point(64, 16);
             this.authorNameLabel.Name = "authorNameLabel";
-            this.authorNameLabel.Size = new System.Drawing.Size(75, 13);
+            this.authorNameLabel.Size = new System.Drawing.Size(36, 13);
             this.authorNameLabel.TabIndex = 15;
-            this.authorNameLabel.Text = "Author Name";
+            this.authorNameLabel.Text = "Name";
             // 
             // i10indexLabel
             // 
@@ -379,9 +379,9 @@
             this.authorLabel.AutoSize = true;
             this.authorLabel.Location = new System.Drawing.Point(3, 16);
             this.authorLabel.Name = "authorLabel";
-            this.authorLabel.Size = new System.Drawing.Size(46, 13);
+            this.authorLabel.Size = new System.Drawing.Size(39, 13);
             this.authorLabel.TabIndex = 8;
-            this.authorLabel.Text = "Author:";
+            this.authorLabel.Text = "Name:";
             // 
             // panel2
             // 
@@ -541,6 +541,16 @@
             this.removeFavourite.UseVisualStyleBackColor = true;
             this.removeFavourite.Click += new System.EventHandler(this.removeFavourite_Click);
             // 
+            // removeJournal
+            // 
+            this.removeJournal.Location = new System.Drawing.Point(100, 190);
+            this.removeJournal.Name = "removeJournal";
+            this.removeJournal.Size = new System.Drawing.Size(95, 23);
+            this.removeJournal.TabIndex = 11;
+            this.removeJournal.Text = "RemoveJournal";
+            this.removeJournal.UseVisualStyleBackColor = true;
+            this.removeJournal.Click += new System.EventHandler(this.removeJournal_Click);
+            // 
             // EndYear
             // 
             this.EndYear.AllowSpace = false;
@@ -556,16 +566,6 @@
             this.StartYear.Name = "StartYear";
             this.StartYear.Size = new System.Drawing.Size(45, 22);
             this.StartYear.TabIndex = 0;
-            // 
-            // removeJournal
-            // 
-            this.removeJournal.Location = new System.Drawing.Point(100, 190);
-            this.removeJournal.Name = "removeJournal";
-            this.removeJournal.Size = new System.Drawing.Size(95, 23);
-            this.removeJournal.TabIndex = 11;
-            this.removeJournal.Text = "RemoveJournal";
-            this.removeJournal.UseVisualStyleBackColor = true;
-            this.removeJournal.Click += new System.EventHandler(this.removeJournal_Click);
             // 
             // search
             // 

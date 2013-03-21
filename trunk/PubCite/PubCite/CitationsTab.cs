@@ -23,17 +23,23 @@ namespace PubCite
         }
 
 
-        public void populateCitations(List<SG.Paper> Papers,int t) {
+        public void populateCitations(SG.Paper paper, List<SG.Paper> Papers,int t) {
             MainPapers = Papers;
             type = t;
+
+            /* Add statistics */
+            publicationsDetailsGroupBox.Text = paper.Title;
+            authorsName.Text = paper.Authors;
+            yearLabel.Text = paper.Year.ToString();
+            venue.Text = paper.Publication;
+            numCitations.Text = paper.NumberOfCitations.ToString();
+            publisher.Text = paper.Publisher;
+
             authorResultsListView.Items.Clear();
             for (int i = 0; i < Papers.Count; i++)
             {
 
-
                 /*populating */
-
-
                 item = new ListViewItem(Papers[i].Title);
                 item.SubItems.Add(Papers[i].Authors);
                 item.SubItems.Add(Papers[i].Year.ToString());
@@ -62,21 +68,6 @@ namespace PubCite
 
         }
 
-        private void CitationsButton_Click(object sender, EventArgs e)
-        {
-            if (type == 0) {
-                CSParser = new CSXParser();
-                populateCitations(CSParser.getCitations(MainPapers[authorResultsListView.FocusedItem.Index].CitedByURL), type);
-            
-            }
-            else if (type == 1)
-            {
-                GSScraper = new GSScraper();
-                populateCitations(GSScraper.getCitations(MainPapers[authorResultsListView.FocusedItem.Index].CitedByURL), type);
-            }
-
-        }
-
         private void CloseButton_Click(object sender, EventArgs e)
         {
             Form1.dub_tab.TabPages.Remove(Form1.dub_tab.SelectedTab);
@@ -87,13 +78,13 @@ namespace PubCite
             if (type == 0)
             {
                 CSParser = new CSXParser();
-                populateCitations(CSParser.getCitations(MainPapers[authorResultsListView.FocusedItem.Index].CitedByURL), type);
+                populateCitations(MainPapers[authorResultsListView.FocusedItem.Index], CSParser.getCitations(MainPapers[authorResultsListView.FocusedItem.Index].CitedByURL), type);
 
             }
             else if (type == 1)
             {
                 GSScraper = new GSScraper();
-                populateCitations(GSScraper.getCitations(MainPapers[authorResultsListView.FocusedItem.Index].CitedByURL), type);
+                populateCitations(MainPapers[authorResultsListView.FocusedItem.Index], GSScraper.getCitations(MainPapers[authorResultsListView.FocusedItem.Index].CitedByURL), type);
             }
         }
 
