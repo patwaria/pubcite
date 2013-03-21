@@ -14,6 +14,7 @@ namespace PubCite
         public static TabControl dub_tab;
         public static SG.Favorite favorites;
         private TabPage newTabPage;
+        TabPage createdTabPage;
         
         public Form1()
         {
@@ -27,10 +28,12 @@ namespace PubCite
             searchTab1.Controls.Add(nSearch);
 
             maintabControl.ImageList = imageList1;
+            maintabControl.ContextMenuStrip = tabMenuStrip;
             newTabPage = new TabPage();
             newTabPage.ImageIndex = 0;
             maintabControl.Controls.Add(newTabPage);
             maintabControl.SelectedIndexChanged += new EventHandler(tabChangeHandler);
+            
                 
         }
 
@@ -39,7 +42,10 @@ namespace PubCite
             if (maintabControl.SelectedTab == newTabPage)
             {
                 search nSearch = new search();
-                TabPage createdTabPage = new TabPage("Search");
+                createdTabPage = new TabPage("Search");
+                
+                createdTabPage.ImageIndex = 1;
+               
                 createdTabPage.Controls.Add(nSearch);
                 maintabControl.TabPages.Insert(maintabControl.TabPages.Count - 1, createdTabPage);
                 maintabControl.SelectedTab = createdTabPage;
@@ -70,6 +76,11 @@ namespace PubCite
 
             return dub_tab;
         
+        }
+
+        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            maintabControl.TabPages.Remove(maintabControl.SelectedTab);
         }        
     }
 }

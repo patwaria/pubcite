@@ -34,8 +34,11 @@
             this.searchTab1 = new System.Windows.Forms.TabPage();
             this.maintabControl = new System.Windows.Forms.TabControl();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.tabMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.eventLog1)).BeginInit();
             this.maintabControl.SuspendLayout();
+            this.tabMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // eventLog1
@@ -45,6 +48,7 @@
             // searchTab1
             // 
             this.searchTab1.BackColor = System.Drawing.SystemColors.Window;
+            this.searchTab1.ImageIndex = 1;
             this.searchTab1.Location = new System.Drawing.Point(4, 22);
             this.searchTab1.Name = "searchTab1";
             this.searchTab1.Padding = new System.Windows.Forms.Padding(3);
@@ -67,6 +71,22 @@
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             this.imageList1.Images.SetKeyName(0, "plus.png");
+            this.imageList1.Images.SetKeyName(1, "close.gif");
+            // 
+            // tabMenuStrip
+            // 
+            this.tabMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.closeToolStripMenuItem});
+            this.tabMenuStrip.Name = "contextMenuStrip1";
+            this.tabMenuStrip.Size = new System.Drawing.Size(153, 48);
+            // 
+            // closeToolStripMenuItem
+            // 
+            this.closeToolStripMenuItem.Image = global::PubCite.Properties.Resources.close;
+            this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.closeToolStripMenuItem.Text = "Close";
+            this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -80,6 +100,7 @@
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.eventLog1)).EndInit();
             this.maintabControl.ResumeLayout(false);
+            this.tabMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -90,6 +111,8 @@
         private System.Windows.Forms.TabControl maintabControl;
         private System.Windows.Forms.TabPage searchTab1;
         private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.ContextMenuStrip tabMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
     }
 }
 

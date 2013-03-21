@@ -113,6 +113,7 @@
     <Compile Include="Session.cs" />
     <None Include="Resources\plus.png" />
     <None Include="Resources\star.png" />
+    <None Include="Resources\close.gif" />
     <Content Include="TODO.txt" />
     <None Include="Resources\bookmark.png" />
     <None Include="Resources\search-button1.png" />

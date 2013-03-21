@@ -476,18 +476,11 @@ namespace PubCite
 
         private void viewURLToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            TabPage bpage = new TabPage("Browser");
-            Browser browser;
+            
             if (authorResultsListView.Visible == true)
-                browser = new Browser(Papers[authorResultsListView.FocusedItem.Index].TitleURL);
+                openBrowserForUrl(Papers[authorResultsListView.FocusedItem.Index].TitleURL);
             else
-                browser = new Browser(Papers[journalResultsListView.FocusedItem.Index].TitleURL);
-            bpage.Controls.Add(browser);
-
-            Console.WriteLine(Papers[authorResultsListView.FocusedItem.Index].TitleURL);
-
-            Form1.dub_tab.TabPages.Insert(Form1.dub_tab.TabPages.Count - 1, bpage);
-            Form1.dub_tab.SelectedTab = bpage;
+                openBrowserForUrl(Papers[journalResultsListView.FocusedItem.Index].TitleURL);
         }
 
         private void viewCitationsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -588,6 +581,25 @@ namespace PubCite
                     populateAuthor(authStats);
                 else if (journalStats != null)
                     populateJournal(journalStats);
+            }
+        }
+
+        private void openBrowserForUrl(string url)
+        {
+            TabPage bpage = new TabPage("Browser");
+            Browser browser;
+            browser = new Browser(url);
+            bpage.Controls.Add(browser);
+            Form1.dub_tab.TabPages.Insert(Form1.dub_tab.TabPages.Count - 1, bpage);
+            Form1.dub_tab.SelectedTab = bpage;
+        }
+
+        private void authorNameLabel_Click(object sender, EventArgs e)
+        {
+            if (authorResultsListView.Visible == true && authStats != null)
+            {
+                Console.WriteLine(authStats.HomePageURL);
+                openBrowserForUrl(authStats.HomePageURL);
             }
         }
     }
