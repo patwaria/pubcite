@@ -325,11 +325,13 @@
             // authorNameLabel
             // 
             this.authorNameLabel.AutoSize = true;
+            this.authorNameLabel.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.authorNameLabel.Location = new System.Drawing.Point(64, 16);
             this.authorNameLabel.Name = "authorNameLabel";
             this.authorNameLabel.Size = new System.Drawing.Size(36, 13);
             this.authorNameLabel.TabIndex = 15;
             this.authorNameLabel.Text = "Name";
+            this.authorNameLabel.Click += new System.EventHandler(this.authorNameLabel_Click);
             // 
             // i10indexLabel
             // 
