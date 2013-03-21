@@ -610,13 +610,14 @@ namespace PubCite
 
         private void removeFavourite_Click(object sender, EventArgs e)
         {
-            // do for journals also
+            // do error checking
             Form1.favorites.removeAuthor(favouritesTreeView.SelectedNode.Index);
             favouritesTreeView.SelectedNode.Remove();
         }
 
         private void removeJournal_Click(object sender, EventArgs e)
         {
+            // do error checking
             Form1.favorites.removeJournal(favouritesTreeView.SelectedNode.Index);
             favouritesTreeView.SelectedNode.Remove();
         }
