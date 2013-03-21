@@ -38,6 +38,8 @@ namespace PubCite
             ArrangeTree();
             authorResultsListView.FullRowSelect = true;
             authorResultsListView.MouseClick += new MouseEventHandler(authorResultsListView_MouseClick);
+            journalResultsListView.FullRowSelect = true;
+            journalResultsListView.MouseClick += new MouseEventHandler(journalResultsListView_MouseClick);
         }
 
         public GroupBox get_sugg() {
@@ -102,7 +104,7 @@ namespace PubCite
 
                 prevSelectedIndex = -1;
                 authorResultsListView.Visible = true;
-                journalsResultsListView.Visible = false;
+                journalResultsListView.Visible = false;
              
 
                 if (siteComboBox.SelectedItem.ToString().Equals("Citeseer"))
@@ -198,7 +200,7 @@ namespace PubCite
             if (journalsRadioButton.Checked == true)
             {
                 authorResultsListView.Visible = false;
-                journalsResultsListView.Visible = true;
+                journalResultsListView.Visible = true;
 
                 if (siteComboBox.SelectedItem.ToString().Equals("Citeseer"))
                 {
@@ -234,7 +236,7 @@ namespace PubCite
 
         private void populateJournals() {
 
-            journalsResultsListView.Items.Clear();
+            journalResultsListView.Items.Clear();
             if (a[0] == true)
                 journalStats = CSParser.getJournals(searchField.Text);
             else if (a[1] == true)
@@ -251,12 +253,12 @@ namespace PubCite
                 item.SubItems.Add(Papers[i].NumberOfCitations.ToString());
                 if (Papers[i].Year == -1) item.SubItems.Add("--");
                 else item.SubItems.Add(Papers[i].Year.ToString());
-                journalsResultsListView.Items.Add(item);
+                journalResultsListView.Items.Add(item);
             
             }
 
-            journalsResultsListView.FullRowSelect = true;
-            //journalsResultsListView.Click+= new EventHandler(journalsResultsListView_OnClick);
+            journalResultsListView.FullRowSelect = true;
+            //journalResultsListView.Click+= new EventHandler(journalsResultsListView_OnClick);
         
         }
         
@@ -334,6 +336,20 @@ namespace PubCite
         
         }
 
+        private void journalResultsListView_MouseClick(object sender, MouseEventArgs e)
+        {
+
+
+            if (e.Button == MouseButtons.Right)
+            {
+
+                if (journalResultsListView.FocusedItem.Bounds.Contains(e.Location) == true)
+                    optionsMenuStrip.Show(Cursor.Position);
+
+            }
+
+        }
+
        
 
         private void Favorites_Click_1(object sender, EventArgs e)
@@ -346,20 +362,6 @@ namespace PubCite
             Form1.dub_tab.TabPages.Remove(Form1.dub_tab.SelectedTab);
         }
 
-        
-
-        private void viewUrl_Click(object sender, EventArgs e)
-        {
-            TabPage bpage = new TabPage("Browser");
-            Browser browser;
-            if (authorResultsListView.Visible == true)
-                browser = new Browser(Papers[authorResultsListView.FocusedItem.Index].CitedByURL);
-            else
-                browser = new Browser(Papers[journalsResultsListView.FocusedItem.Index].CitedByURL);
-                bpage.Controls.Add(browser);
-            Form1.dub_tab.TabPages.Add(bpage);
-        }
-
         private void searchIcon_Click(object sender, EventArgs e)
         {
             authorsSuggestions.Items.Clear();
@@ -369,7 +371,7 @@ namespace PubCite
 
                 prevSelectedIndex = -1;
                 authorResultsListView.Visible = true;
-                journalsResultsListView.Visible = false;
+                journalResultsListView.Visible = false;
 
 
                 if (siteComboBox.SelectedItem.ToString().Equals("Citeseer"))
@@ -465,7 +467,7 @@ namespace PubCite
             if (journalsRadioButton.Checked == true)
             {
                 authorResultsListView.Visible = false;
-                journalsResultsListView.Visible = true;
+                journalResultsListView.Visible = true;
 
                 if (siteComboBox.SelectedItem.ToString().Equals("Citeseer"))
                 {
@@ -508,17 +510,19 @@ namespace PubCite
             if (authorResultsListView.Visible == true)
                 browser = new Browser(Papers[authorResultsListView.FocusedItem.Index].CitedByURL);
             else
-                browser = new Browser(Papers[journalsResultsListView.FocusedItem.Index].CitedByURL);
+                browser = new Browser(Papers[journalResultsListView.FocusedItem.Index].CitedByURL);
             bpage.Controls.Add(browser);
-            Form1.dub_tab.TabPages.Add(bpage);
+
+            Form1.dub_tab.TabPages.Insert(Form1.dub_tab.TabPages.Count - 1, bpage);
+            Form1.dub_tab.SelectedTab = bpage;
         }
 
         private void viewCitationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            TabPage CitaTab = new TabPage("Citations");
-            Form1.dub_tab.TabPages.Add(CitaTab);
+            TabPage citationsPage = new TabPage("Citations");
+            Form1.dub_tab.TabPages.Insert(Form1.dub_tab.TabPages.Count - 1, citationsPage);
             CitationsTab NcitTab = new CitationsTab();
-            CitaTab.Controls.Add(NcitTab);
+            citationsPage.Controls.Add(NcitTab);
 
             if (a[0] == true)
             {
@@ -533,7 +537,7 @@ namespace PubCite
 
             }
 
-            // NcitTab.populateCitations(); 
+            Form1.dub_tab.SelectedTab = citationsPage;
         }
 
         private void addToFavourite_Click(object sender, EventArgs e)
@@ -556,7 +560,7 @@ namespace PubCite
                 {
                     authorResultsListView.Items.Clear();
                     authorResultsListView.Visible = true;
-                    journalsResultsListView.Visible = false;
+                    journalResultsListView.Visible = false;
 
                     Papers = FavAuthorList[favouritesTreeView.SelectedNode.Index].getPapers();
 
@@ -578,9 +582,9 @@ namespace PubCite
                     }
                 } else if (favouritesTreeView.SelectedNode.Parent.Index == 1) // Journal selected
                 {
-                    journalsResultsListView.Items.Clear();
+                    journalResultsListView.Items.Clear();
                     authorResultsListView.Visible = false;
-                    journalsResultsListView.Visible = true;
+                    journalResultsListView.Visible = true;
                     Papers = FavJournalList[favouritesTreeView.SelectedNode.Index].getPapers();
 
                     authorNameLabel.Text = FavJournalList[favouritesTreeView.SelectedNode.Index].Name;
@@ -597,7 +601,7 @@ namespace PubCite
                         item.SubItems.Add(Papers[i].NumberOfCitations.ToString());
                         item.SubItems.Add(Papers[i].Year.ToString());
                         
-                        journalsResultsListView.Items.Add(item);
+                        journalResultsListView.Items.Add(item);
                         //Console.WriteLine(Papers[i].Title + Papers[i].Year + Papers[i].NumberOfCitations);
                     }
                 }

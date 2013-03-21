@@ -46,7 +46,7 @@
             this.venueHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.YearHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.NumOfCitesHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.journalsResultsListView = new System.Windows.Forms.ListView();
+            this.journalResultsListView = new System.Windows.Forms.ListView();
             this.Paper = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Author = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Cites = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -65,6 +65,8 @@
             this.citationsLabel = new System.Windows.Forms.Label();
             this.authorLabel = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.removeJournal = new System.Windows.Forms.Button();
+            this.removeFavourite = new System.Windows.Forms.Button();
             this.favouritesTreeView = new System.Windows.Forms.TreeView();
             this.Suggestions = new System.Windows.Forms.GroupBox();
             this.authorsSuggestions = new System.Windows.Forms.ListView();
@@ -79,10 +81,11 @@
             this.optionsMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.viewCitationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewURLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.removeFavourite = new System.Windows.Forms.Button();
-            this.removeJournal = new System.Windows.Forms.Button();
             this.EndYear = new PubCite.NumericTextBox();
             this.StartYear = new PubCite.NumericTextBox();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.SearchPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.addToFavourite)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchIcon)).BeginInit();
@@ -93,6 +96,7 @@
             this.panel2.SuspendLayout();
             this.Suggestions.SuspendLayout();
             this.optionsMenuStrip.SuspendLayout();
+            this.tabControl1.SuspendLayout();
             this.SuspendLayout();
             // 
             // SearchPanel
@@ -167,8 +171,9 @@
             // 
             // resultsGroupBox
             // 
+            this.resultsGroupBox.Controls.Add(this.tabControl1);
             this.resultsGroupBox.Controls.Add(this.authorResultsListView);
-            this.resultsGroupBox.Controls.Add(this.journalsResultsListView);
+            this.resultsGroupBox.Controls.Add(this.journalResultsListView);
             this.resultsGroupBox.Location = new System.Drawing.Point(2, 88);
             this.resultsGroupBox.Name = "resultsGroupBox";
             this.resultsGroupBox.Size = new System.Drawing.Size(731, 408);
@@ -214,23 +219,23 @@
             this.NumOfCitesHeader.Text = "No.Of Cites";
             this.NumOfCitesHeader.Width = 86;
             // 
-            // journalsResultsListView
+            // journalResultsListView
             // 
-            this.journalsResultsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.journalResultsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Paper,
             this.Author,
             this.Cites,
             this.Year});
-            this.journalsResultsListView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.journalsResultsListView.GridLines = true;
-            this.journalsResultsListView.Location = new System.Drawing.Point(3, 18);
-            this.journalsResultsListView.MultiSelect = false;
-            this.journalsResultsListView.Name = "journalsResultsListView";
-            this.journalsResultsListView.Size = new System.Drawing.Size(725, 387);
-            this.journalsResultsListView.TabIndex = 0;
-            this.journalsResultsListView.UseCompatibleStateImageBehavior = false;
-            this.journalsResultsListView.View = System.Windows.Forms.View.Details;
-            this.journalsResultsListView.Visible = false;
+            this.journalResultsListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.journalResultsListView.GridLines = true;
+            this.journalResultsListView.Location = new System.Drawing.Point(3, 18);
+            this.journalResultsListView.MultiSelect = false;
+            this.journalResultsListView.Name = "journalResultsListView";
+            this.journalResultsListView.Size = new System.Drawing.Size(725, 387);
+            this.journalResultsListView.TabIndex = 0;
+            this.journalResultsListView.UseCompatibleStateImageBehavior = false;
+            this.journalResultsListView.View = System.Windows.Forms.View.Details;
+            this.journalResultsListView.Visible = false;
             // 
             // Paper
             // 
@@ -394,6 +399,26 @@
             this.panel2.Size = new System.Drawing.Size(222, 504);
             this.panel2.TabIndex = 0;
             // 
+            // removeJournal
+            // 
+            this.removeJournal.Location = new System.Drawing.Point(100, 190);
+            this.removeJournal.Name = "removeJournal";
+            this.removeJournal.Size = new System.Drawing.Size(95, 23);
+            this.removeJournal.TabIndex = 11;
+            this.removeJournal.Text = "RemoveJournal";
+            this.removeJournal.UseVisualStyleBackColor = true;
+            this.removeJournal.Click += new System.EventHandler(this.removeJournal_Click);
+            // 
+            // removeFavourite
+            // 
+            this.removeFavourite.Location = new System.Drawing.Point(19, 190);
+            this.removeFavourite.Name = "removeFavourite";
+            this.removeFavourite.Size = new System.Drawing.Size(75, 23);
+            this.removeFavourite.TabIndex = 10;
+            this.removeFavourite.Text = "Remove";
+            this.removeFavourite.UseVisualStyleBackColor = true;
+            this.removeFavourite.Click += new System.EventHandler(this.removeFavourite_Click);
+            // 
             // favouritesTreeView
             // 
             this.favouritesTreeView.BackColor = System.Drawing.SystemColors.Window;
@@ -469,9 +494,10 @@
             // 
             this.authorRadioButton.AutoSize = true;
             this.authorRadioButton.Checked = true;
+            this.authorRadioButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.authorRadioButton.Location = new System.Drawing.Point(12, 32);
             this.authorRadioButton.Name = "authorRadioButton";
-            this.authorRadioButton.Size = new System.Drawing.Size(66, 17);
+            this.authorRadioButton.Size = new System.Drawing.Size(65, 17);
             this.authorRadioButton.TabIndex = 4;
             this.authorRadioButton.TabStop = true;
             this.authorRadioButton.Text = "Authors";
@@ -494,9 +520,10 @@
             // journalsRadioButton
             // 
             this.journalsRadioButton.AutoSize = true;
+            this.journalsRadioButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.journalsRadioButton.Location = new System.Drawing.Point(78, 32);
             this.journalsRadioButton.Name = "journalsRadioButton";
-            this.journalsRadioButton.Size = new System.Drawing.Size(68, 17);
+            this.journalsRadioButton.Size = new System.Drawing.Size(67, 17);
             this.journalsRadioButton.TabIndex = 5;
             this.journalsRadioButton.Text = "Journals";
             this.journalsRadioButton.UseVisualStyleBackColor = true;
@@ -531,26 +558,6 @@
             this.viewURLToolStripMenuItem.Text = "View Url";
             this.viewURLToolStripMenuItem.Click += new System.EventHandler(this.viewURLToolStripMenuItem_Click);
             // 
-            // removeFavourite
-            // 
-            this.removeFavourite.Location = new System.Drawing.Point(19, 190);
-            this.removeFavourite.Name = "removeFavourite";
-            this.removeFavourite.Size = new System.Drawing.Size(75, 23);
-            this.removeFavourite.TabIndex = 10;
-            this.removeFavourite.Text = "Remove";
-            this.removeFavourite.UseVisualStyleBackColor = true;
-            this.removeFavourite.Click += new System.EventHandler(this.removeFavourite_Click);
-            // 
-            // removeJournal
-            // 
-            this.removeJournal.Location = new System.Drawing.Point(100, 190);
-            this.removeJournal.Name = "removeJournal";
-            this.removeJournal.Size = new System.Drawing.Size(95, 23);
-            this.removeJournal.TabIndex = 11;
-            this.removeJournal.Text = "RemoveJournal";
-            this.removeJournal.UseVisualStyleBackColor = true;
-            this.removeJournal.Click += new System.EventHandler(this.removeJournal_Click);
-            // 
             // EndYear
             // 
             this.EndYear.AllowSpace = false;
@@ -566,6 +573,36 @@
             this.StartYear.Name = "StartYear";
             this.StartYear.Size = new System.Drawing.Size(45, 22);
             this.StartYear.TabIndex = 0;
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(37, 40);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(8, 8);
+            this.tabControl1.TabIndex = 2;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(0, 0);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(0, 0);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // search
             // 
@@ -586,6 +623,7 @@
             this.panel2.ResumeLayout(false);
             this.Suggestions.ResumeLayout(false);
             this.optionsMenuStrip.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -621,7 +659,7 @@
         private System.Windows.Forms.Button CloseButton;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.GroupBox resultsGroupBox;
-        private System.Windows.Forms.ListView journalsResultsListView;
+        private System.Windows.Forms.ListView journalResultsListView;
         private System.Windows.Forms.ColumnHeader Paper;
         private System.Windows.Forms.ColumnHeader Author;
         private System.Windows.Forms.ColumnHeader Cites;
@@ -641,5 +679,8 @@
         private System.Windows.Forms.TreeView favouritesTreeView;
         private System.Windows.Forms.Button removeFavourite;
         private System.Windows.Forms.Button removeJournal;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
     }
 }
