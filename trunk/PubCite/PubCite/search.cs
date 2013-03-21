@@ -69,21 +69,13 @@ namespace PubCite
             {
                 favouritesTreeView.Nodes[0].Nodes[0].Nodes.Clear();
                 for (int i = 0; i < FavAuthorList.Count; i++)
-                {
-
                     favouritesTreeView.Nodes[0].Nodes[0].Nodes.Add(new TreeNode(FavAuthorList[i].Name));
-
-                }
             }
             else if (journalsRadioButton.Checked == true)
             {
                 favouritesTreeView.Nodes[0].Nodes[1].Nodes.Clear();
                 for (int i = 0; i < Form1.favorites.JournalList.Count; i++)
-                {
-
                     favouritesTreeView.Nodes[0].Nodes[1].Nodes.Add(new TreeNode(FavJournalList[i].Name));
-
-                }
             }
         }
 
