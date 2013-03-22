@@ -27,6 +27,7 @@ namespace PubCite
 
         public void showUrlContents() {
 
+            this.UrlBox.Text = this.url;
             this.webBrowser.Navigate(this.url);
         }
 
