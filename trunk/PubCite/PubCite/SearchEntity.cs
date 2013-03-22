@@ -164,12 +164,12 @@ namespace SG
         {
 
             int min=0, max=0, i = 0 ;
-            do
+            while(min==0 && i<papers.Count)
             {
                 min = papers[i].Year;
                 max = papers[i].Year;
                 i++;
-            } while (min == 0);
+            }
             foreach (Paper p in papers)
             {
                 if (p.Year < min && p.Year!=0)
@@ -181,6 +181,7 @@ namespace SG
             {
                 return 0;
             }
+            
             int diff = max - min + 1;
             return (float)getTotalNumberofCitations() / diff;
         }
