@@ -67,7 +67,7 @@
             this.webBrowser.Location = new System.Drawing.Point(26, 32);
             this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser.Name = "webBrowser";
-            this.webBrowser.Size = new System.Drawing.Size(960, 498);
+            this.webBrowser.Size = new System.Drawing.Size(960, 596);
             this.webBrowser.TabIndex = 3;
             // 
             // closeBrowser
@@ -90,7 +90,7 @@
             this.Controls.Add(this.UrlLabel);
             this.Controls.Add(this.UrlBox);
             this.Name = "Browser";
-            this.Size = new System.Drawing.Size(996, 538);
+            this.Size = new System.Drawing.Size(996, 644);
             ((System.ComponentModel.ISupportInitialize)(this.searchButton)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
