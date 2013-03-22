@@ -15,8 +15,6 @@ using SG;
 namespace PubCite
 {
 
-    //ClassifyJournal and ClassifyAuthor functions start
-
     public class CiteSeerJournal_FinalAuthorSearch
     {
         private string initialURL;
@@ -231,8 +229,6 @@ namespace PubCite
             return journ1;
         }
     }
-
-    //ClassifyJournal and ClassifyAuthor functions end
 
     public class CSXAuthSug
     {
