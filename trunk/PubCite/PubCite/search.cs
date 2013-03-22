@@ -257,72 +257,79 @@ namespace PubCite
             authorResultsListView.Visible = false;
             journalResultsListView.Visible = true;
 
-            if (StartYear.getintval() == 0 && EndYear.getintval() == 0)
-                Papers = journal.getPapers();
-            else if (StartYear.getintval() != 0 && EndYear.getintval() == 0)
-                Papers = journal.getPaperByYearRange(StartYear.getintval());
-            else if (StartYear.getintval() == 0 && EndYear.getintval() != 0)
-                Papers = journal.getPaperUptoYear(EndYear.getintval());
-            else if (StartYear.getintval() != 0 && EndYear.getintval() != 0)
-                Papers = journal.getPaperByYearRange(StartYear.getintval(), EndYear.getintval());
-
-
-            authorNameLabel.Text = journal.Name;
-            citesperPaper.Text = journal.getCitesPerPaper().ToString();
-            //citesperYear.Text = FavAuthorList[favouritesTreeView.SelectedNode.Index].get
-            hindex.Text = journal.getHIndex().ToString();
-            i10index.Text = journal.getI10Index().ToString();
-            citationsNumberLabel.Text = journal.getTotalNumberofCitations().ToString();
-            for (int i = 0; i < Papers.Count; i++)
+            if (journal != null)
             {
-                item = new ListViewItem(Papers[i].Title);
-                item.SubItems.Add(Papers[i].Authors);
-                item.SubItems.Add(Papers[i].NumberOfCitations.ToString());
-                if (Papers[i].Year == -1 || Papers[i].Year == -1)
-                    item.SubItems.Add("--");
-                else
-                    item.SubItems.Add(Papers[i].Year.ToString());
-                journalResultsListView.Items.Add(item);
+                if (StartYear.getintval() == 0 && EndYear.getintval() == 0)
+                    Papers = journal.getPapers();
+                else if (StartYear.getintval() != 0 && EndYear.getintval() == 0)
+                    Papers = journal.getPaperByYearRange(StartYear.getintval());
+                else if (StartYear.getintval() == 0 && EndYear.getintval() != 0)
+                    Papers = journal.getPaperUptoYear(EndYear.getintval());
+                else if (StartYear.getintval() != 0 && EndYear.getintval() != 0)
+                    Papers = journal.getPaperByYearRange(StartYear.getintval(), EndYear.getintval());
 
+
+                authorNameLabel.Text = journal.Name;
+                citesperPaper.Text = journal.getCitesPerPaper().ToString();
+                citesperYear.Text = journal.getCitesPerYear().ToString();
+                hindex.Text = journal.getHIndex().ToString();
+                i10index.Text = journal.getI10Index().ToString();
+                citationsNumberLabel.Text = journal.getTotalNumberofCitations().ToString();
+                for (int i = 0; i < Papers.Count; i++)
+                {
+                    item = new ListViewItem(Papers[i].Title);
+                    item.SubItems.Add(Papers[i].Authors);
+                    item.SubItems.Add(Papers[i].NumberOfCitations.ToString());
+                    if (Papers[i].Year == -1 || Papers[i].Year == -1)
+                        item.SubItems.Add("--");
+                    else
+                        item.SubItems.Add(Papers[i].Year.ToString());
+                    journalResultsListView.Items.Add(item);
+
+                }
             }
         }
 
         private void populateAuthor(SG.Author author)
         {
+            authorsSuggestions.Items.Clear();
             authorResultsListView.Items.Clear();
             authorResultsListView.Visible = true;
             journalResultsListView.Visible = false;
 
-            if (StartYear.getintval() == 0 && EndYear.getintval() == 0)
-                Papers = author.getPapers();
-            else if (StartYear.getintval() != 0 && EndYear.getintval() == 0)
-                Papers = author.getPaperByYearRange(StartYear.getintval());
-            else if (StartYear.getintval() == 0 && EndYear.getintval() != 0)
-                Papers = author.getPaperUptoYear(EndYear.getintval());
-            else if (StartYear.getintval() != 0 && EndYear.getintval() != 0)
-                Papers = author.getPaperByYearRange(StartYear.getintval(), EndYear.getintval());
-            Console.WriteLine(Papers.Count);
-
-            /* Statistics */
-            authorNameLabel.Text = author.Name;
-            citesperPaper.Text = author.getCitesPerPaper().ToString();
-            citesperYear.Text = author.getCitesPerYear().ToString();
-            hindex.Text = author.getHIndex().ToString();
-            i10index.Text = author.getI10Index().ToString();
-            citationsNumberLabel.Text = author.getTotalNumberofCitations().ToString();
-
-            /* Papers */
-            for (int i = 0; i < Papers.Count; i++)
+            if (author != null)
             {
-                /*populating */
-                item = new ListViewItem(Papers[i].Title);
-                item.SubItems.Add(Papers[i].Publication);
-                if (Papers[i].Year == -1 || Papers[i].Year == -1)
-                    item.SubItems.Add("--");
-                else
-                    item.SubItems.Add(Papers[i].Year.ToString());
-                item.SubItems.Add(Papers[i].NumberOfCitations.ToString());
-                authorResultsListView.Items.Add(item);
+                if (StartYear.getintval() == 0 && EndYear.getintval() == 0)
+                    Papers = author.getPapers();
+                else if (StartYear.getintval() != 0 && EndYear.getintval() == 0)
+                    Papers = author.getPaperByYearRange(StartYear.getintval());
+                else if (StartYear.getintval() == 0 && EndYear.getintval() != 0)
+                    Papers = author.getPaperUptoYear(EndYear.getintval());
+                else if (StartYear.getintval() != 0 && EndYear.getintval() != 0)
+                    Papers = author.getPaperByYearRange(StartYear.getintval(), EndYear.getintval());
+                Console.WriteLine(Papers.Count);
+
+                /* Statistics */
+                authorNameLabel.Text = author.Name;
+                citesperPaper.Text = author.getCitesPerPaper().ToString();
+                citesperYear.Text = author.getCitesPerYear().ToString();
+                hindex.Text = author.getHIndex().ToString();
+                i10index.Text = author.getI10Index().ToString();
+                citationsNumberLabel.Text = author.getTotalNumberofCitations().ToString();
+
+                /* Papers */
+                for (int i = 0; i < Papers.Count; i++)
+                {
+                    /*populating */
+                    item = new ListViewItem(Papers[i].Title);
+                    item.SubItems.Add(Papers[i].Publication);
+                    if (Papers[i].Year == -1 || Papers[i].Year == -1)
+                        item.SubItems.Add("--");
+                    else
+                        item.SubItems.Add(Papers[i].Year.ToString());
+                    item.SubItems.Add(Papers[i].NumberOfCitations.ToString());
+                    authorResultsListView.Items.Add(item);
+                }
             }
         }
 
