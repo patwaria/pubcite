@@ -16,10 +16,13 @@ namespace PubCite
         GSScraper GSScraper;
         CSXParser CSParser;
         MicrosoftScholarParser MSParser;
+        Boolean[] prevSortedColum = { false, false, false, false };
+
         int type;
         public CitationsTab()
         {
             InitializeComponent();
+            authorResultsListView.ColumnClick += new ColumnClickEventHandler(authorResultsListView_ColumnClick);
         }
 
 
@@ -108,5 +111,12 @@ namespace PubCite
             Form1.dub_tab.TabPages.Insert(Form1.dub_tab.TabPages.Count - 1, bpage);
             Form1.dub_tab.SelectedTab = bpage;
         }
+
+        private void authorResultsListView_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+
+            Console.WriteLine("Hi");
+        }
+        
     }
 }

@@ -191,6 +191,7 @@ namespace PubCite
 
             for (int i = 0; i < FavAuthorList.Count; i++)
             {
+                Console.WriteLine("URL:" + FavAuthorList[i].HomePageURL);
                 favouritesTreeView.Nodes[0].Nodes[0].Nodes.Add(new TreeNode(FavAuthorList[i].Name));
                 favouritesTreeView.Nodes[0].Nodes[0].Nodes[i].ContextMenuStrip = favouriteMenuStrip;
             }
@@ -204,15 +205,15 @@ namespace PubCite
         public void UpdateTree()
         {
 
-            FavAuthorList = Form1.favorites.AuthorList;
-            FavJournalList = Form1.favorites.JournalList;
-            Console.WriteLine(FavAuthorList.Count);
-
+            //FavAuthorList = Form1.favorites.AuthorList;
+            //FavJournalList = Form1.favorites.JournalList;
+            
             if (authorRadioButton.Checked == true)
             {
                 favouritesTreeView.Nodes[0].Nodes[0].Nodes.Clear();
                 for (int i = 0; i < FavAuthorList.Count; i++)
                 {
+                    Console.WriteLine(FavAuthorList[i].HomePageURL);
                     favouritesTreeView.Nodes[0].Nodes[0].Nodes.Add(new TreeNode(FavAuthorList[i].Name));
                     favouritesTreeView.Nodes[0].Nodes[0].Nodes[i].ContextMenuStrip = favouriteMenuStrip;
                 }
@@ -305,7 +306,7 @@ namespace PubCite
             /* Statistics */
             authorNameLabel.Text = author.Name;
             citesperPaper.Text = author.getCitesPerPaper().ToString();
-            //citesperYear.Text = authstats.get
+            citesperYear.Text = author.getCitesPerYear().ToString();
             hindex.Text = author.getHIndex().ToString();
             i10index.Text = author.getI10Index().ToString();
             citationsNumberLabel.Text = author.getTotalNumberofCitations().ToString();
