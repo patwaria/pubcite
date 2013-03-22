@@ -296,7 +296,6 @@ namespace PubCite
         public int year;
     }
 
-    //interface the next two classes with the UI
     public class publiListEle2//for publi page
     {
         public int numCit;
