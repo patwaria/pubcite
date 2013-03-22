@@ -284,16 +284,8 @@ namespace PubCite
 
             for (int i = 0; i < rows.Count; i++)
             {
-                Console.WriteLine("*** *** ***");
-
-                /**/
-                sugList.Add(rows[i].SelectSingleNode("h3").InnerText);
-                Console.WriteLine(rows[i].SelectSingleNode("h3").InnerText);
-
-                /**/
-                urlList.Add("http://citeseer.ist.psu.edu" + rows[i].SelectSingleNode("h3/a").GetAttributeValue("href", "") + "&list=full");
-                Console.WriteLine("http://citeseer.ist.psu.edu" + rows[i].SelectSingleNode("h3/a").GetAttributeValue("href", "") + "&list=full");
-
+                sugList.Add(rows[i].SelectSingleNode("h3").InnerText);//Author Name
+                urlList.Add("http://citeseer.ist.psu.edu" + rows[i].SelectSingleNode("h3/a").GetAttributeValue("href", "") + "&list=full");//Author Page Link
             }
 
         }
@@ -391,11 +383,9 @@ namespace PubCite
             for (int i = 0; i < authNames.Count; i++)
                 Console.WriteLine("Name[i] " + authNames[i]);*/
 
-            HtmlNode absn = doc.DocumentNode.SelectSingleNode("//*[@id=\"abstract\"]/p");
-            Console.Write("absn: " + absn.InnerText);
+            HtmlNode absn = doc.DocumentNode.SelectSingleNode("//*[@id=\"abstract\"]/p");//Abstract (abs node)
 
             abstrText = "";
-            Console.WriteLine("absrText: " + abstrText);
 
             HtmlNode citUrl = doc.DocumentNode.SelectSingleNode("//*[@id=\"docCites\"]/td[2]/a");
             String publiURL = "http://citeseer.ist.psu.edu" + citUrl.GetAttributeValue("href", "");
@@ -444,36 +434,18 @@ namespace PubCite
             if (authn != null)
             {
                 String authl = authn.InnerText.Trim().Substring(2).Trim();
-
                 authNames = SplitAuth(authl);
-                for (int i = 0; i < authNames.Count; i++)
-                    Console.WriteLine("Name[i] " + authNames[i]);
             }
 
             abstrText = "";
-            Console.WriteLine("absrText: " + abstrText);
 
             HtmlNodeCollection rows;
-            String[] list;
             publiListEle2 tempPubliObj;
 
             citeList = new List<publiListEle2>();
 
             int resultLim = 30;
             int resultCount;
-
-            //insert loop for going to next result pages
-            /*
-             * 
-            HtmlNode nextLink = doc.DocumentNode.SelectSingleNode("//*[@id=\"pager\"]/a");
-
-            if (nextLink != null)
-                Console.WriteLine(nextLink.GetAttributeValue("href",""));
-            else
-                Console.WriteLine("next link NULL");
-             * 
-             */
-            //'next' loop starts            
 
             for(resultCount=0;resultCount<resultLim && doc!=null;)
             {
@@ -483,7 +455,6 @@ namespace PubCite
                 for (int i = 0; i < rows.Count; i++, resultCount++)
                 {
                     tempPubliObj = new publiListEle2();
-                    Console.WriteLine("*** *** ***");
 
                     if (rows[i].SelectSingleNode("div[3]/a[@title=\"number of citations\"]") != null)
                     {
@@ -493,7 +464,6 @@ namespace PubCite
                     }
                     else
                         tempPubliObj.numCit = 0;
-                    Console.WriteLine("No. of citations: " + tempPubliObj.numCit);
 
                     tempPubliObj.title = rows[i].SelectSingleNode("h3/a").InnerText.Trim();
                     tempPubliObj.authNames = rows[i].SelectSingleNode("div[1]/span[1]").InnerText.Substring(3).Trim();
@@ -502,7 +472,6 @@ namespace PubCite
                     if (rows[i].SelectSingleNode("div[1]/span[@class=\"pubyear\"]") != null)
                     {
                         tempYear = rows[i].SelectSingleNode("div[1]/span[@class=\"pubyear\"]").InnerText;
-                        Console.WriteLine(tempYear);
                         if (tempYear != null)
                             tempPubliObj.year = Convert.ToInt32(tempYear.Substring(2));
                     }
@@ -515,7 +484,6 @@ namespace PubCite
 
                     tempPubliObj.url = "http://citeseer.ist.psu.edu" + rows[i].SelectSingleNode("h3/a").GetAttributeValue("href", "");
 
-                    Console.WriteLine(tempPubliObj.title + "|" + tempPubliObj.authNames + "|" + tempPubliObj.year + "|" + tempPubliObj.url);
                     if (tempPubliObj.numCit > 0)
                         citeList.Add(tempPubliObj);
                 }
@@ -524,7 +492,7 @@ namespace PubCite
 
                 if (nextLink != null)
                 {
-                    Console.WriteLine("\n**" + nextLink.GetAttributeValue("href", "") + "**\n");                    
+                    Console.WriteLine("next link found: " + nextLink.GetAttributeValue("href", ""));                    
                     doc=web.Load("http://citeseer.ist.psu.edu"+nextLink.GetAttributeValue("href","").Replace("&amp;","&"));
                 }
                 else
@@ -582,22 +550,16 @@ namespace PubCite
         void extractData()//Extracts all the data from author page and stores them in the respective variables
         {
             HtmlNode name = doc.DocumentNode.SelectSingleNode("//*[@id=\"viewHeader\"]/h2");
-            Console.Write("\nName: ");
             String namet = name.InnerText;
             authName = namet.Remove(namet.Length - 5);
-            Console.WriteLine(authName);
 
             HtmlNode hpurl = doc.DocumentNode.SelectSingleNode("//*[@id=\"authInfo\"]/tr[1]/td[2]/a");
-            Console.Write("Home Page URL: ");
             homePageURL = hpurl.InnerText;
-            Console.WriteLine(homePageURL);
             if (homePageURL.Contains("Not found"))
                 homePageURL = "";
 
             HtmlNode affl = doc.DocumentNode.SelectSingleNode("//*[@id=\"authInfo\"]/tr[2]/td[2]");
-            Console.Write("Affiliation: ");
             affiliation = affl.InnerText;
-            Console.WriteLine(affiliation);
 
             /*HtmlNode npub = doc.DocumentNode.SelectSingleNode("//*[@id=\"authInfo\"]/tr[3]/td[2]");
             Console.Write("No. of publications: ");
@@ -606,9 +568,7 @@ namespace PubCite
             //Parsed number disregarded because of occasional inconsistencies in the website, list length used instead
 
             HtmlNode hindex = doc.DocumentNode.SelectSingleNode("//*[@id=\"authInfo\"]/tr[4]/td[2]");
-            Console.Write("H-index: ");
             hIndex = Convert.ToInt32(hindex.InnerText);
-            Console.WriteLine(hIndex);
 
             HtmlNodeCollection rows = doc.DocumentNode.SelectNodes("//*[@id=\"viewContent-inner\"]/table/tr");
             String[] list;
@@ -620,14 +580,11 @@ namespace PubCite
             for (int i = 1; i < rows.Count; i++)
             {
                 tempPubliObj = new publiListEle();
-                Console.WriteLine("*** *** ***");
-                Console.WriteLine(rows[i].XPath);
 
                 if (rows[i].SelectSingleNode("td[1]").InnerText.ToString().Trim().Length > 0)
                     tempPubliObj.numCit = Convert.ToInt32(rows[i].SelectSingleNode("td[1]").InnerText);
                 else
                     tempPubliObj.numCit = 0;
-                Console.WriteLine("No. of citations: " + tempPubliObj.numCit);
 
                 if (rows[i].SelectSingleNode("td[1]").InnerText.ToString().Trim().Length > 0)
                     if (Convert.ToInt32(rows[i].SelectSingleNode("td[1]").InnerText) >= 10) i10++;
@@ -637,16 +594,13 @@ namespace PubCite
                 tempPubliObj.journal = list[1];
                 tempPubliObj.year = Convert.ToInt32(list[2]);
                 tempPubliObj.url = "http://citeseer.ist.psu.edu" + rows[i].SelectSingleNode("td[2]/a").GetAttributeValue("href", "");
-                Console.WriteLine(tempPubliObj.title + "|" + tempPubliObj.journal + "|" + tempPubliObj.year + "|" + tempPubliObj.url);
                 if(tempPubliObj.numCit>0)
                     publiList.Add(tempPubliObj);
             }
 
             numPub = publiList.Count;
-            Console.WriteLine(numPub + "|" + rows.Count);
 
             i10Index = i10;
-            Console.WriteLine(i10Index);
         }
 
 
