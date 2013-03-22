@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Net;
-
+using System.Threading;
 namespace PubCite
 {
     public partial class search : UserControl
@@ -28,7 +28,9 @@ namespace PubCite
         Boolean[] a = { false, false, false };
         int prevSelectedIndex;
         Boolean[] prevSortedColum = { false, false, false, false };
+        Boolean suggestions;
 
+        
         public search()
         {
             InitializeComponent();
@@ -46,6 +48,8 @@ namespace PubCite
             authorsSuggestions.FullRowSelect = true;
 
             searchField.KeyDown += new KeyEventHandler(searchField_KeyDown);
+            backgroundWorker.DoWork += new DoWorkEventHandler(backgroundWorker_DoWork);
+            backgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(backgroundWorker_RunWorkerCompleted);
             
         }
 
@@ -62,6 +66,19 @@ namespace PubCite
 
             return Suggestions;
 
+        }
+
+        public void Barfunc() {
+            ProgressForm NProgForm = new ProgressForm();
+            NProgForm.Visible = true;
+        
+        
+        }
+
+        public void DoWork() {
+
+            while (true) Console.WriteLine("In worker...");
+        
         }
 
         private void journalResultsListView_ColumnClick(object sender, ColumnClickEventArgs e)
@@ -365,7 +382,20 @@ namespace PubCite
             Form1.dub_tab.SelectedIndex = Form1.dub_tab.TabCount - 2;
         }
 
-        private void searchIcon_Click(object sender, EventArgs e)
+
+        public void populateSuggestions()
+        {
+            Console.WriteLine("Hello");
+            Suggestions.Visible = true;
+            for (int i = 0; i < authors.Count; i++)
+            {
+
+                item = new ListViewItem(authors[i]);
+                authorsSuggestions.Items.Add(item);
+            }
+        }
+
+        public void searchWorker()
         {
             for (int i = 0; i < 4; i++) prevSortedColum[i] = false;
             authorsSuggestions.Items.Clear();
@@ -417,7 +447,7 @@ namespace PubCite
                     if (a[0] == true) authStats = CSParser.getAuthors(searchField.Text);
                     else if (a[1] == true) authStats = GSScraper.getAuthors(searchField.Text);
                     /*Add for MAS*/
-
+                    //ProgThread.Abort();
                     populateAuthor(authStats);
 
                 }
@@ -441,11 +471,12 @@ namespace PubCite
                                 authStats = MSParser.getAuthStatistics(auth_url[index]);
                             prevSelectedIndex = index;
                         }
+                        // ProgThread.Abort();
                         populateAuthor(authStats);
                     }
                     else
                     {
-
+                        
                         Suggestions.Visible = true;
                         for (int i = 0; i < authors.Count; i++)
                         {
@@ -488,6 +519,80 @@ namespace PubCite
                 }
                 populateJournal(journalStats);
             }
+        }
+
+        private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            progressBar.MarqueeAnimationSpeed = 0;
+            progressBar.Style = ProgressBarStyle.Blocks;
+            progressBar.Value = progressBar.Minimum;
+
+        }
+
+        private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            Console.WriteLine(this.authorNameLabel.Text);
+            
+            //Thread.Sleep(10000);
+
+            if (authorRadioButton.Checked == true)
+            {
+                // get suggestions
+                if (a[0])
+                    authSug = CSParser.getAuthSuggestions(searchField.Text);
+                else if(a[1])
+                    authSug = GSScraper.getAuthSuggestions(searchField.Text);
+                else
+                    authSug = MSParser.getAuthSuggestions(searchField.Text);
+
+                if (authStats != null && authSug.isSet())
+                    suggestions = true;
+                
+            }
+            else // journal
+            {
+
+            }
+        }
+       
+
+        private void searchIcon_Click(object sender, EventArgs e)
+        {
+
+            progressBar.Style = ProgressBarStyle.Marquee;
+            progressBar.MarqueeAnimationSpeed = 25;
+
+            if (siteComboBox.SelectedItem.ToString().Equals("Citeseer"))
+            {
+                a[0] = true;
+                a[1] = false;
+                a[2] = false;
+                CSParser = new CSXParser();
+            }
+            else if (siteComboBox.SelectedItem.ToString().Equals("Google Scholar"))
+            {
+                a[0] = false;
+                a[1] = true;
+                a[2] = false;
+                GSScraper = new GSScraper();
+            }
+            else if (siteComboBox.SelectedItem.ToString().Equals("Microsoft Academic Search"))
+            {
+                a[0] = false;
+                a[1] = false;
+                a[2] = true;
+                MSParser = new MicrosoftScholarParser();
+            }
+
+            backgroundWorker.RunWorkerAsync();
+            if (authorRadioButton.Checked == true)
+            {
+                if (suggestions)
+                    populateSuggestions();
+                else
+                    populateAuthor(authStats);
+            }
+            
         }
 
         private void viewURLToolStripMenuItem_Click(object sender, EventArgs e)

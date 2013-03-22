@@ -84,6 +84,10 @@
             this.removeFromFavouritesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.EndYear = new PubCite.NumericTextBox();
             this.StartYear = new PubCite.NumericTextBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.label3 = new System.Windows.Forms.Label();
+            this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.SearchPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.addToFavourite)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchIcon)).BeginInit();
@@ -95,11 +99,13 @@
             this.Suggestions.SuspendLayout();
             this.optionsMenuStrip.SuspendLayout();
             this.favouriteMenuStrip.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // SearchPanel
             // 
             this.SearchPanel.BackColor = System.Drawing.SystemColors.Window;
+            this.SearchPanel.Controls.Add(this.panel1);
             this.SearchPanel.Controls.Add(this.addToFavourite);
             this.SearchPanel.Controls.Add(this.CloseButton);
             this.SearchPanel.Controls.Add(this.searchIcon);
@@ -577,6 +583,31 @@
             this.StartYear.TabIndex = 0;
             this.StartYear.TextChanged += new System.EventHandler(this.StartYear_TextChanged);
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.progressBar);
+            this.panel1.Location = new System.Drawing.Point(148, 55);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(459, 29);
+            this.panel1.TabIndex = 22;
+            // 
+            // progressBar
+            // 
+            this.progressBar.Location = new System.Drawing.Point(180, 10);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(196, 16);
+            this.progressBar.TabIndex = 0;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(66, 10);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(76, 13);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "Please wait....";
+            // 
             // search
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -597,6 +628,8 @@
             this.Suggestions.ResumeLayout(false);
             this.optionsMenuStrip.ResumeLayout(false);
             this.favouriteMenuStrip.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -653,5 +686,9 @@
         private System.Windows.Forms.ContextMenuStrip favouriteMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem viewStatisticsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem removeFromFavouritesToolStripMenuItem;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ProgressBar progressBar;
+        private System.ComponentModel.BackgroundWorker backgroundWorker;
     }
 }
