@@ -292,7 +292,7 @@ namespace PubCite
 
         private void populateAuthor(SG.Author author)
         {
-            authorsSuggestions.Items.Clear();
+            
             authorResultsListView.Items.Clear();
             authorResultsListView.Visible = true;
             journalResultsListView.Visible = false;
