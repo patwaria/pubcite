@@ -10,8 +10,8 @@ namespace SG
     [Serializable()]
     public class Author:SearchEntity, ISerializable
     {
-        private string affiliation;
-        private string homepageURL;
+        private string affiliation="";
+        private string homepageURL="";
 
         //constructor
         public Author(string Name, int h=-1, int i=-1)
@@ -28,10 +28,17 @@ namespace SG
             : base(name, -1, -1)
         {
         }
-        public Author(SerializationInfo info, StreamingContext ctxt) : base(info, ctxt) { }
+        public Author(SerializationInfo info, StreamingContext ctxt)
+            : base(info, ctxt)
+        {
+            affiliation = (string)info.GetValue("Affiliation",typeof(string));
+            homepageURL = (string)info.GetValue("HomePageURL", typeof(string));
+        }
         public override void GetObjectData(SerializationInfo info, StreamingContext ctxt)
         {
             base.GetObjectData(info, ctxt);
+            info.AddValue("Affiliation", affiliation);
+            info.AddValue("HomePageURL", homepageURL);
         }
         public string HomePageURL
         {
