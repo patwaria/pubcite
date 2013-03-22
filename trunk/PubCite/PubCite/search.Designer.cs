@@ -470,6 +470,8 @@
             // 
             // searchField
             // 
+            this.searchField.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchField.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.searchField.Location = new System.Drawing.Point(8, 3);
             this.searchField.Name = "searchField";
             this.searchField.Size = new System.Drawing.Size(884, 22);
