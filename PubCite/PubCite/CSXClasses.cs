@@ -7,7 +7,7 @@ using System.Text;
 using HtmlAgilityPack;
 using SG;
 
-//to use the class CSXAuth, copy the code and call the constructor with the authURL as an argument.
+//to use the class CSXAuth (also CSXAuthSug, CSXPubli), copy the code and call the constructor with the authURL as an argument.
 //CSXAuth p = new CSXAuth(authURL);
 
 //Then, all the data is stored in p's data members. Access them as p.<member name>.
