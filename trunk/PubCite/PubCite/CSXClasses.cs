@@ -459,6 +459,9 @@ namespace PubCite
 
             citeList = new List<publiListEle2>();
 
+            int resultLim = 30;
+            int resultCount;
+
             //insert loop for going to next result pages
             /*
              * 
@@ -470,11 +473,14 @@ namespace PubCite
                 Console.WriteLine("next link NULL");
              * 
              */
-            //'next' loop starts
+            //'next' loop starts            
 
-            rows = doc.DocumentNode.SelectNodes("//*[@id=\"result_list\"]/div");
+            for(resultCount=0;resultCount<resultLim && doc!=null;)
+            {
+                rows = doc.DocumentNode.SelectNodes("//*[@id=\"result_list\"]/div");
+                HtmlNode nextLink = null;
 
-                for (int i = 0; i < rows.Count; i++)
+                for (int i = 0; i < rows.Count; i++, resultCount++)
                 {
                     tempPubliObj = new publiListEle2();
                     Console.WriteLine("*** *** ***");
@@ -513,7 +519,20 @@ namespace PubCite
                     if (tempPubliObj.numCit > 0)
                         citeList.Add(tempPubliObj);
                 }
-            //next ends, update doc - load new page before looping again
+                
+                nextLink = doc.DocumentNode.SelectSingleNode("//*[@id=\"pager\"]/a");
+
+                if (nextLink != null)
+                {
+                    Console.WriteLine("\n**" + nextLink.GetAttributeValue("href", "") + "**\n");                    
+                    doc=web.Load("http://citeseer.ist.psu.edu"+nextLink.GetAttributeValue("href","").Replace("&amp;","&"));
+                }
+                else
+                {
+                    Console.WriteLine("next link NULL");
+                    doc=null;
+                }
+            }
         }
 
     }
