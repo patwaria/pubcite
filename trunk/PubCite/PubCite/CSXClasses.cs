@@ -113,7 +113,7 @@ namespace PubCite
         {
             HtmlNode mainTable = CiteDoc.DocumentNode.SelectSingleNode("//*[@id=\"result_list\"]");
             HtmlNode entryNoNode, paperNode, authorNode, journalNode, yearNode, citationNode;
-            string paperName, authorName, journalName, publishYear, noCitations, citationLink;
+            string paperName, authorName, journalName, publishYear, noCitations, citationLink, paperURL;
             int citno;
 
             if (noResult == 0)
@@ -129,6 +129,7 @@ namespace PubCite
                     if (entryNoNode == null)
                         break;
 
+                    paperURL = "";
                     paperNode = entryNoNode.SelectSingleNode("h3/a");
                     if (paperNode == null)
                     {
@@ -137,7 +138,12 @@ namespace PubCite
                         paperName = paperName.Substring(37);
                     }
                     else
+                    {
                         paperName = paperNode.InnerText.Substring(19);
+
+                        if (paperNode.Attributes["href"] != null)
+                            paperURL = "http://citeseer.ist.psu.edu" + paperNode.Attributes["href"].Value;
+                    }
 
                     Console.WriteLine(paperName);
                     //Now remove unwanted preceding character and spaces from paperName
@@ -202,7 +208,7 @@ namespace PubCite
                         year=0;
                     }
 
-                    Paper paper1 = new Paper(paperName,"", authorName, year, journalName, "", citno, citationLink, (PageNo - 1) * 10 + i);
+                    Paper paper1 = new Paper(paperName, paperURL, authorName, year, journalName, "", citno, citationLink, (PageNo - 1) * 10 + i);
                     if (searchType == 0)
                         auth1.addPaper(paper1);
                     else
