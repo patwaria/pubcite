@@ -97,6 +97,7 @@ namespace SG
 
         public void AddAuthor(Author a)
         {    // ADD id TO THE AUTHOR
+            Console.WriteLine("URL:" + a.HomePageURL);
             ListofAuthor.Add(a);
             // add to file
             Stream stream = File.Open(@"Favorites\Author", FileMode.Create);

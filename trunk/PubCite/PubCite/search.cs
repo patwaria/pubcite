@@ -45,7 +45,16 @@ namespace PubCite
             authorsSuggestions.MouseDoubleClick += new MouseEventHandler(authorsSuggestions_MouseClick);
             authorsSuggestions.FullRowSelect = true;
 
+            searchField.KeyDown += new KeyEventHandler(searchField_KeyDown);
+            
+        }
 
+        public void searchField_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                searchIcon_Click(sender, e);  
+            }
         }
 
         public GroupBox get_sugg()
@@ -197,7 +206,6 @@ namespace PubCite
 
             FavAuthorList = Form1.favorites.AuthorList;
             FavJournalList = Form1.favorites.JournalList;
-
             Console.WriteLine(FavAuthorList.Count);
 
             if (authorRadioButton.Checked == true)
@@ -522,6 +530,7 @@ namespace PubCite
 
         private void addToFavourite_Click(object sender, EventArgs e)
         {
+            Console.WriteLine(authStats.HomePageURL);
             if (authorRadioButton.Checked == true)
                 Form1.favorites.AddAuthor(authStats);
             else if (journalsRadioButton.Checked == true)
@@ -547,16 +556,18 @@ namespace PubCite
 
         private void removeFromFavouritesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-            if (favouritesTreeView.SelectedNode.Parent.Index == 0)
+            if (favouritesTreeView.SelectedNode != null)
             {
-                Form1.favorites.removeAuthor(favouritesTreeView.SelectedNode.Index);
-                favouritesTreeView.SelectedNode.Remove();
-            }
-            else if (favouritesTreeView.SelectedNode.Parent.Index == 1)
-            {
-                Form1.favorites.removeJournal(favouritesTreeView.SelectedNode.Index);
-                favouritesTreeView.SelectedNode.Remove();
+                if (favouritesTreeView.SelectedNode.Parent.Index == 0)
+                {
+                    Form1.favorites.removeAuthor(favouritesTreeView.SelectedNode.Index);
+                    favouritesTreeView.SelectedNode.Remove();
+                }
+                else if (favouritesTreeView.SelectedNode.Parent.Index == 1)
+                {
+                    Form1.favorites.removeJournal(favouritesTreeView.SelectedNode.Index);
+                    favouritesTreeView.SelectedNode.Remove();
+                }
             }
         }
 
