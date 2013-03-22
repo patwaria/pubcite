@@ -202,7 +202,7 @@ namespace PubCite
                         year=0;
                     }
 
-                    Paper paper1 = new Paper(paperName, authorName, year, journalName, "", citno, citationLink, (PageNo - 1) * 10 + i);
+                    Paper paper1 = new Paper(paperName,"", authorName, year, journalName, "", citno, citationLink, (PageNo - 1) * 10 + i);
                     if (searchType == 0)
                         auth1.addPaper(paper1);
                     else
