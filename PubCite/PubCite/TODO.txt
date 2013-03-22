@@ -3,6 +3,9 @@
 2. Error Handling
 2. Advanced search options for general author/journal
 
+Errors:
+1.Home page url not updated to file
+2.out of bound exceptions when removing an author just after adding.
 
 
 Parser Teams:

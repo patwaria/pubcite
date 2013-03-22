@@ -78,13 +78,13 @@
             this.tabMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.closeToolStripMenuItem});
             this.tabMenuStrip.Name = "contextMenuStrip1";
-            this.tabMenuStrip.Size = new System.Drawing.Size(153, 48);
+            this.tabMenuStrip.Size = new System.Drawing.Size(104, 26);
             // 
             // closeToolStripMenuItem
             // 
             this.closeToolStripMenuItem.Image = global::PubCite.Properties.Resources.close;
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.closeToolStripMenuItem.Text = "Close";
             // 
             // Form1
