@@ -89,8 +89,11 @@
             this.favouriteMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.viewStatisticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeFromFavouritesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cachedListView = new System.Windows.Forms.ListView();
+            this.button1 = new System.Windows.Forms.Button();
             this.EndYear = new PubCite.NumericTextBox();
             this.StartYear = new PubCite.NumericTextBox();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SearchPanel.SuspendLayout();
             this.progressPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.addToFavourite)).BeginInit();
@@ -108,6 +111,7 @@
             // SearchPanel
             // 
             this.SearchPanel.BackColor = System.Drawing.SystemColors.Window;
+            this.SearchPanel.Controls.Add(this.cachedListView);
             this.SearchPanel.Controls.Add(this.label4);
             this.SearchPanel.Controls.Add(this.affiliation);
             this.SearchPanel.Controls.Add(this.KeywordsTextBox);
@@ -364,6 +368,7 @@
             // statisticsGroupBox
             // 
             this.statisticsGroupBox.BackColor = System.Drawing.SystemColors.Window;
+            this.statisticsGroupBox.Controls.Add(this.button1);
             this.statisticsGroupBox.Controls.Add(this.i10index);
             this.statisticsGroupBox.Controls.Add(this.hindex);
             this.statisticsGroupBox.Controls.Add(this.citesperPaper);
@@ -645,6 +650,29 @@
             this.removeFromFavouritesToolStripMenuItem.Text = "Remove from Favourites";
             this.removeFromFavouritesToolStripMenuItem.Click += new System.EventHandler(this.removeFromFavouritesToolStripMenuItem_Click);
             // 
+            // cachedListView
+            // 
+            this.cachedListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1});
+            this.cachedListView.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.cachedListView.Location = new System.Drawing.Point(128, 26);
+            this.cachedListView.Name = "cachedListView";
+            this.cachedListView.Size = new System.Drawing.Size(465, 97);
+            this.cachedListView.TabIndex = 29;
+            this.cachedListView.UseCompatibleStateImageBehavior = false;
+            this.cachedListView.View = System.Windows.Forms.View.Details;
+            this.cachedListView.Visible = false;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(520, 33);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 30;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // EndYear
             // 
             this.EndYear.AllowSpace = false;
@@ -662,6 +690,10 @@
             this.StartYear.Size = new System.Drawing.Size(45, 22);
             this.StartYear.TabIndex = 0;
             this.StartYear.TextChanged += new System.EventHandler(this.StartYear_TextChanged);
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Width = 461;
             // 
             // search
             // 
@@ -748,5 +780,8 @@
         private System.Windows.Forms.Label affiliation;
         private System.Windows.Forms.TextBox KeywordsTextBox;
         private System.Windows.Forms.TextBox affilationTextBox;
+        private System.Windows.Forms.ListView cachedListView;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
     }
 }

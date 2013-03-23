@@ -53,12 +53,31 @@ namespace PubCite
             authorsSuggestions.FullRowSelect = true;
 
             searchField.KeyDown += new KeyEventHandler(searchField_KeyDown);
+            searchField.KeyUp+=new KeyEventHandler(searchField_KeyUp);
             progressBar.SendToBack();
             progressBar.Visible = false;
 
             authorCheckBox.Click += new EventHandler(authorCheckBox_Click);
             journalCheckBox.Click += new EventHandler(journalCheckBox_Click);
 
+            cachedListView.FullRowSelect = true;
+            cachedListView.Click +=new EventHandler(cachedListView_Click);
+
+
+
+            cachedListView.SendToBack();
+
+        }
+
+        
+
+        public void cachedListView_Click(object sender, EventArgs e) {
+
+            
+            Console.WriteLine(cachedListView.FocusedItem.Text);
+            searchField.Text = cachedListView.FocusedItem.Text;
+            cachedListView.Visible = false;
+        
         }
 
         private void authorCheckBox_Click(object sender, EventArgs e)
@@ -78,6 +97,16 @@ namespace PubCite
             {
                 searchIcon_Click(sender, e);
             }
+        }
+
+        public void searchField_KeyUp(object sender,KeyEventArgs e)
+        {
+            
+
+
+
+
+
         }
 
         public GroupBox get_sugg()
@@ -418,8 +447,8 @@ namespace PubCite
                 if (authSug == null || !authSug.isSet())
                 {
                     /* Case : No suggestions */
-                    if (a[0] == true) authStats = CSParser.getAuthors(searchField.Text);
-                    else if (a[1] == true) authStats = GSScraper.getAuthors(searchField.Text);
+                    if (a[0] == true) authStats = CSParser.getAuthors(searchField.Text,affilationTextBox.Text,KeywordsTextBox.Text);
+                    else if (a[1] == true) authStats = GSScraper.getAuthors(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text);
                     /*Add for MAS*/
 
                     suggestions = false;
@@ -453,11 +482,11 @@ namespace PubCite
             else // journal
             {
                 if (a[0])
-                    journalStats = CSParser.getJournals(searchField.Text);
+                    journalStats = CSParser.getJournals(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text);
                 else if (a[1])
-                    journalStats = GSScraper.getJournals(searchField.Text);
+                    journalStats = GSScraper.getJournals(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text);
                 else
-                    journalStats = MSParser.getJournals(searchField.Text);
+                    journalStats = MSParser.getJournals(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text);
             }
         }
 
@@ -776,8 +805,8 @@ namespace PubCite
                 if (authSug == null || !authSug.isSet())
                 {
                     /* Case : No suggestions */
-                    if (a[0] == true) authStats = CSParser.getAuthors(searchField.Text);
-                    else if (a[1] == true) authStats = GSScraper.getAuthors(searchField.Text);
+                    if (a[0] == true) authStats = CSParser.getAuthors(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text);
+                    else if (a[1] == true) authStats = GSScraper.getAuthors(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text);
                     /*Add for MAS*/
                     //ProgThread.Abort();
                     populateAuthor(authStats);
@@ -829,7 +858,7 @@ namespace PubCite
                     a[1] = false;
                     a[2] = false;
                     CSParser = new CSXParser();
-                    journalStats = CSParser.getJournals(searchField.Text);
+                    journalStats = CSParser.getJournals(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text);
 
                 }
                 else if (siteComboBox.SelectedItem.ToString().Equals("Google Scholar"))
@@ -838,7 +867,7 @@ namespace PubCite
                     a[1] = true;
                     a[2] = false;
                     GSScraper = new GSScraper();
-                    journalStats = GSScraper.getJournals(searchField.Text);
+                    journalStats = GSScraper.getJournals(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text);
 
                 }
                 else if (siteComboBox.SelectedItem.ToString().Equals("Microsoft Academic Search"))
@@ -847,10 +876,21 @@ namespace PubCite
                     a[1] = false;
                     a[2] = true;
                     MSParser = new MicrosoftScholarParser();
-                    journalStats = MSParser.getJournals(searchField.Text);
+                    journalStats = MSParser.getJournals(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text);
                 }
                 populateJournal(journalStats);
             }
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            cachedListView.HeaderStyle = ColumnHeaderStyle.None;
+            cachedListView.Visible = true;
+            cachedListView.BringToFront();
+            item = new ListViewItem("authors..");
+            cachedListView.Items.Add(item);
+            item = new ListViewItem("Journals");
+            cachedListView.Items.Add(item);
         }
 
         
