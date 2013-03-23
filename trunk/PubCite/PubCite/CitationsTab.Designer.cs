@@ -59,11 +59,15 @@
             this.optionMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.viewCitationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewUrlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.progressPanel = new System.Windows.Forms.Panel();
+            this.label7 = new System.Windows.Forms.Label();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.publicationsDetailsGroupBox.SuspendLayout();
             this.resultsGroupBox.SuspendLayout();
             this.optionMenuStrip.SuspendLayout();
+            this.progressPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel3
@@ -77,6 +81,7 @@
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.progressPanel);
             this.panel4.Controls.Add(this.publicationsDetailsGroupBox);
             this.panel4.Controls.Add(this.resultsGroupBox);
             this.panel4.Location = new System.Drawing.Point(3, 3);
@@ -101,7 +106,7 @@
             this.publicationsDetailsGroupBox.Controls.Add(this.label3);
             this.publicationsDetailsGroupBox.Location = new System.Drawing.Point(3, 6);
             this.publicationsDetailsGroupBox.Name = "publicationsDetailsGroupBox";
-            this.publicationsDetailsGroupBox.Size = new System.Drawing.Size(969, 148);
+            this.publicationsDetailsGroupBox.Size = new System.Drawing.Size(969, 150);
             this.publicationsDetailsGroupBox.TabIndex = 8;
             this.publicationsDetailsGroupBox.TabStop = false;
             this.publicationsDetailsGroupBox.Text = "Publication Details";
@@ -165,7 +170,7 @@
             this.abstractBox.Font = new System.Drawing.Font("Georgia", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.abstractBox.Location = new System.Drawing.Point(377, 36);
             this.abstractBox.Name = "abstractBox";
-            this.abstractBox.Size = new System.Drawing.Size(484, 106);
+            this.abstractBox.Size = new System.Drawing.Size(484, 108);
             this.abstractBox.TabIndex = 11;
             this.abstractBox.Text = "";
             // 
@@ -228,9 +233,9 @@
             // 
             this.resultsGroupBox.Controls.Add(this.authorResultsListView);
             this.resultsGroupBox.Controls.Add(this.journalsResultsListView);
-            this.resultsGroupBox.Location = new System.Drawing.Point(0, 160);
+            this.resultsGroupBox.Location = new System.Drawing.Point(0, 183);
             this.resultsGroupBox.Name = "resultsGroupBox";
-            this.resultsGroupBox.Size = new System.Drawing.Size(972, 446);
+            this.resultsGroupBox.Size = new System.Drawing.Size(972, 423);
             this.resultsGroupBox.TabIndex = 0;
             this.resultsGroupBox.TabStop = false;
             this.resultsGroupBox.Text = "Results ";
@@ -247,7 +252,7 @@
             this.authorResultsListView.Location = new System.Drawing.Point(3, 18);
             this.authorResultsListView.MultiSelect = false;
             this.authorResultsListView.Name = "authorResultsListView";
-            this.authorResultsListView.Size = new System.Drawing.Size(966, 425);
+            this.authorResultsListView.Size = new System.Drawing.Size(966, 402);
             this.authorResultsListView.TabIndex = 1;
             this.authorResultsListView.UseCompatibleStateImageBehavior = false;
             this.authorResultsListView.View = System.Windows.Forms.View.Details;
@@ -284,7 +289,7 @@
             this.journalsResultsListView.Location = new System.Drawing.Point(3, 18);
             this.journalsResultsListView.MultiSelect = false;
             this.journalsResultsListView.Name = "journalsResultsListView";
-            this.journalsResultsListView.Size = new System.Drawing.Size(966, 425);
+            this.journalsResultsListView.Size = new System.Drawing.Size(966, 402);
             this.journalsResultsListView.TabIndex = 0;
             this.journalsResultsListView.UseCompatibleStateImageBehavior = false;
             this.journalsResultsListView.View = System.Windows.Forms.View.Details;
@@ -332,6 +337,32 @@
             this.viewUrlToolStripMenuItem.Text = "View Url";
             this.viewUrlToolStripMenuItem.Click += new System.EventHandler(this.viewUrlToolStripMenuItem_Click);
             // 
+            // progressPanel
+            // 
+            this.progressPanel.Controls.Add(this.label7);
+            this.progressPanel.Controls.Add(this.progressBar);
+            this.progressPanel.Location = new System.Drawing.Point(6, 152);
+            this.progressPanel.Name = "progressPanel";
+            this.progressPanel.Size = new System.Drawing.Size(477, 29);
+            this.progressPanel.TabIndex = 23;
+            this.progressPanel.Visible = false;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(205, 13);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(222, 13);
+            this.label7.TabIndex = 1;
+            this.label7.Text = "Please wait while we process your query...";
+            // 
+            // progressBar
+            // 
+            this.progressBar.Location = new System.Drawing.Point(3, 10);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(196, 16);
+            this.progressBar.TabIndex = 0;
+            // 
             // CitationsTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -346,6 +377,8 @@
             this.publicationsDetailsGroupBox.PerformLayout();
             this.resultsGroupBox.ResumeLayout(false);
             this.optionMenuStrip.ResumeLayout(false);
+            this.progressPanel.ResumeLayout(false);
+            this.progressPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -382,6 +415,9 @@
         private System.Windows.Forms.Label publisher;
         private System.Windows.Forms.Label numCitations;
         private System.Windows.Forms.Label yearLabel;
+        private System.Windows.Forms.Panel progressPanel;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ProgressBar progressBar;
 
 
     }
