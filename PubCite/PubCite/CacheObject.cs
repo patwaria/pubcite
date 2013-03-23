@@ -89,7 +89,7 @@ namespace PubCite
                     else
                     {
                         string temp = s;
-                        if (!s.Trim().Equals(temp)) results.Add(s);
+                        if (!s.Trim().Equals(temp)) results.Add(temp);
                     }
                 }
             if (isAuthor) { LastAuthor = results; LastAuthorkey = key; }
