@@ -53,6 +53,8 @@ namespace PubCite
             authorsSuggestions.FullRowSelect = true;
 
             searchField.KeyDown += new KeyEventHandler(searchField_KeyDown);
+            progressBar.SendToBack();
+            progressBar.Visible = false;
         }
 
         public void searchField_KeyDown(object sender, KeyEventArgs e)
@@ -367,6 +369,7 @@ namespace PubCite
 
         private void disablePanels()
         {
+            
             resultsPanel.Enabled = false;
             favouritesPanel.Enabled = false;
         }
@@ -473,8 +476,10 @@ namespace PubCite
             disablePanels();
             suggestedIndex = authorsSuggestions.FocusedItem.Index;
             progressPanel.Visible = true;
+            progressBar.BringToFront();
+            progressBar.Visible = true;
             progressBar.Style = ProgressBarStyle.Marquee;
-            progressBar.MarqueeAnimationSpeed = 25;
+            progressBar.MarqueeAnimationSpeed = 15;
 
             backgroundWorker = new BackgroundWorker();
             backgroundWorker.DoWork += new DoWorkEventHandler(backgroundWorker_authSearchWork);
@@ -488,7 +493,8 @@ namespace PubCite
             }
             enablePanels();
             progressPanel.Visible = false;
-
+            progressBar.SendToBack();
+            progressBar.Visible = false;
             populateAuthor(authStats);
         }
 
@@ -503,8 +509,10 @@ namespace PubCite
 
             disablePanels();
             progressPanel.Visible = true;
+            progressBar.BringToFront();
+            progressBar.Visible = true;
             progressBar.Style = ProgressBarStyle.Marquee;
-            progressBar.MarqueeAnimationSpeed = 25;
+            progressBar.MarqueeAnimationSpeed = 15;
 
             backgroundWorker = new BackgroundWorker();
             backgroundWorker.DoWork += new DoWorkEventHandler(backgroundWorker_genSearchWork);
@@ -542,6 +550,8 @@ namespace PubCite
 
             enablePanels();
             progressPanel.Visible = false;
+            progressBar.SendToBack();
+            progressBar.Visible = false;
             if (authorRadioButton.Checked == true)
             {
                 Console.WriteLine("Done" + suggestions);
@@ -578,7 +588,9 @@ namespace PubCite
                 disablePanels();
                 progressPanel.Visible = true;
                 progressBar.Style = ProgressBarStyle.Marquee;
-                progressBar.MarqueeAnimationSpeed = 25;
+                progressBar.MarqueeAnimationSpeed = 15;
+                progressBar.BringToFront();
+                progressBar.Visible = true;
 
                 backgroundWorker = new BackgroundWorker();
                 backgroundWorker.DoWork += new DoWorkEventHandler(backgroundWorker_citationSearchWork);
@@ -594,6 +606,8 @@ namespace PubCite
 
                 enablePanels();
                 progressPanel.Visible = false;
+                progressBar.SendToBack();
+                progressBar.Visible = false;
 
                 TabPage citationsPage = new TabPage("Citations");
                 Form1.dub_tab.TabPages.Insert(Form1.dub_tab.TabPages.Count - 1, citationsPage);

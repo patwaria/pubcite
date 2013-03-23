@@ -77,6 +77,11 @@ namespace PubCite
             return dub_tab;
         
         }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
        
     }
 }
