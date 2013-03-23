@@ -52,7 +52,8 @@ namespace PubCite
             authorsSuggestions.MouseDoubleClick += new MouseEventHandler(authorsSuggestions_MouseClick);
             authorsSuggestions.FullRowSelect = true;
 
-            searchField.KeyDown += new KeyEventHandler(searchField_KeyDown);
+            searchField.GotFocus += new EventHandler(searchField_GotFocus);
+            searchField.LostFocus += new EventHandler(searchField_LostFocus);
             searchField.KeyUp+=new KeyEventHandler(searchField_KeyUp);
             progressBar.SendToBack();
             progressBar.Visible = false;
@@ -63,13 +64,19 @@ namespace PubCite
             cachedListView.FullRowSelect = true;
             cachedListView.Click +=new EventHandler(cachedListView_Click);
             cachedListView.HeaderStyle = ColumnHeaderStyle.None;
-
-
-
             cachedListView.SendToBack();
 
         }
-
+        private void searchField_GotFocus(object sender, EventArgs e)
+        {
+            cachedListView.BringToFront();
+            cachedListView.Visible = true;
+        }
+        private void searchField_LostFocus(object sender, EventArgs e)
+        {
+            cachedListView.Visible = false;
+            cachedListView.SendToBack();
+        }
         
 
         public void cachedListView_Click(object sender, EventArgs e) {
@@ -92,16 +99,12 @@ namespace PubCite
 
         }
 
-        public void searchField_KeyDown(object sender, KeyEventArgs e)
+        public void searchField_KeyUp(object sender,KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
                 searchIcon_Click(sender, e);
             }
-        }
-
-        public void searchField_KeyUp(object sender,KeyEventArgs e)
-        {
 
             if (searchField.Text.Length > 0)
             {
