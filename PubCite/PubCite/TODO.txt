@@ -7,6 +7,7 @@
 6. Copy citations/export in different formats
 7. Make help file in html format to be shown in our browser
 8. View Citations for favourites
+9. Back/ Fwd in citation tab
 
 Anil:
 Caching
