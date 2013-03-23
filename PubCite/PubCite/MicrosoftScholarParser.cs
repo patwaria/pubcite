@@ -64,7 +64,7 @@ namespace PubCite
             return authSuggest;
         }
 
-        public SG.Author getAuthStatistics(string authid)
+        public SG.Author getAuthStatistics(string authid, int noResults=100)
         {
             SG.Author auth;
             string name;
@@ -98,7 +98,7 @@ namespace PubCite
             response2 = client.Search(requestPaper);
 
             uint range = response2.Publication.TotalItem;
-            range = range > 250 ? 250 : range;
+            range = range > noResults ? Convert.ToUInt32(noResults) : range;
 
             //Console.WriteLine(response2.Publication.TotalItem + " " + response2.Publication.TotalItem);
             for(int k = 0; k < range/100; k++)
@@ -186,7 +186,7 @@ namespace PubCite
             return auth;
         }
 
-        public SG.Journal getJournals(string journalName)
+        public SG.Journal getJournals(string journalName, int noResults=100)
         {
             Request requestJournal = new Request();
             requestJournal.AppID = "c49b4e59-08dd-4f27-a53b-53cc72f169af";
@@ -201,7 +201,7 @@ namespace PubCite
             response = client.Search(requestJournal);
 
             uint range = response.Publication.TotalItem;
-            range = range > 250 ? 250 : range;
+            range = range > noResults ? Convert.ToUInt32(noResults) : range;
             //Console.WriteLine(range+" "+range);
 
             for (int k = 0; k < range / 100; k++)
@@ -292,7 +292,7 @@ namespace PubCite
         }
 
 
-        public SG.Author getAuthors(string authName)
+        public SG.Author getAuthors(string authName, int noResults=100)
         {
             SG.Author auth = new SG.Author(authName);
 
@@ -307,7 +307,7 @@ namespace PubCite
             response2 = client.Search(requestPaper);
 
             uint range = response2.Publication.TotalItem;
-            range = range > 250 ? 250 : range;
+            range = range > noResults ? Convert.ToUInt32(noResults) : range;
 
             //Console.WriteLine(response2.Publication.TotalItem + " " + response2.Publication.TotalItem);
             for (int k = 0; k < range / 100; k++)
@@ -397,7 +397,7 @@ namespace PubCite
         }
 
 
-        public List<Paper> getCitations(String id)
+        public List<Paper> getCitations(String id, int noResults=100)
         {
             Console.WriteLine("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 
@@ -425,7 +425,7 @@ namespace PubCite
             response = client.Search(requestCitedPaper);
 
             uint range = response.Publication.TotalItem;
-            range = range > 250 ? 250 : range;
+            range = range > noResults ? Convert.ToUInt32(noResults) : range;
 
 
             for (int k = 0; k < range / 100; k++)
