@@ -69,8 +69,11 @@ namespace PubCite
         }
         private void searchField_GotFocus(object sender, EventArgs e)
         {
-            cachedListView.BringToFront();
-            cachedListView.Visible = true;
+            if (searchField.Text.Length > 0)
+            {
+                cachedListView.BringToFront();
+                cachedListView.Visible = true;
+            }
         }
         private void searchField_LostFocus(object sender, EventArgs e)
         {
@@ -85,6 +88,11 @@ namespace PubCite
             Console.WriteLine(cachedListView.FocusedItem.Text);
             searchField.Text = cachedListView.FocusedItem.Text;
             cachedListView.Visible = false;
+            /* Display cached object */
+            if (authorCheckBox.Checked)
+                populateAuthor((SG.Author)cacheObject.Get(searchField.Text, authorCheckBox.Checked));
+            else
+                populateJournal((SG.Journal)cacheObject.Get(searchField.Text, authorCheckBox.Checked));
         
         }
 
@@ -116,12 +124,8 @@ namespace PubCite
                 }
 
                 /* update cache suggestions */
-                List<String> suggestions = new List<string>();
-                suggestions.Add("Ayush");
-                suggestions.Add("Srihair");
-                suggestions.Add("Arpit");
-                suggestions.Add("Anil");
-                updateCacheSuggestions(suggestions);
+                
+                updateCacheSuggestions(cacheObject.GetMatchingkeys(searchField.Text, authorCheckBox.Checked));
             }
             else
             {
@@ -141,7 +145,9 @@ namespace PubCite
 
         public void updateCacheSuggestions(List<String> suggestions)
         {
+            
             cachedListView.Items.Clear();
+            Console.WriteLine(suggestions.Count);
             for (int i = 0; i < suggestions.Count; i++)
             {
                 item = new ListViewItem(suggestions[i]);
@@ -197,6 +203,7 @@ namespace PubCite
                     journalResultsListView.Items.Add(item);
 
                 }
+                cacheObject.Add(journal.Name, journal, true);
             }
         }
 
@@ -240,6 +247,9 @@ namespace PubCite
                     item.SubItems.Add(Papers[i].NumberOfCitations.ToString());
                     authorResultsListView.Items.Add(item);
                 }
+
+                /* Add to cache */
+                cacheObject.Add(author.Name, author, true);
             }
         }
 
@@ -584,6 +594,8 @@ namespace PubCite
             authorResultsListView.Items.Clear();
             journalResultsListView.Items.Clear();
 
+            cachedListView.Visible = false;
+            cachedListView.SendToBack();
             disablePanels();
             progressPanel.Visible = true;
             progressBar.BringToFront();
@@ -916,16 +928,6 @@ namespace PubCite
                 populateJournal(journalStats);
             }
         }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            cachedListView.HeaderStyle = ColumnHeaderStyle.None;
-            
-            item = new ListViewItem("Journals");
-            cachedListView.Items.Add(item);
-        }
-
-        
     }
 }
 
