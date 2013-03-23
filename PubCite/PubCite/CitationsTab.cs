@@ -97,7 +97,7 @@ namespace PubCite
             else if (type == 1)
                 Citations = GSScraper.getCitations(MainPapers[citationIndex].CitedByURL);
             else if (type == 2)
-                Citations = CSParser.getCitations(MainPapers[citationIndex].CitedByURL);
+                Citations = MSParser.getCitations(MainPapers[citationIndex].CitedByURL);
         }
 
         private void viewCitationsToolStripMenuItem_Click(object sender, EventArgs e)

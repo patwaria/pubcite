@@ -465,7 +465,7 @@ namespace PubCite
             else if (a[1] == true)
                 Citations = GSScraper.getCitations(Papers[citationIndex].CitedByURL);
             else if (a[2] == true)
-                Citations = CSParser.getCitations(Papers[citationIndex].CitedByURL);
+                Citations = MSParser.getCitations(Papers[citationIndex].CitedByURL);
         }
 
         private void authorsSuggestions_MouseClick(object sender, EventArgs e)
