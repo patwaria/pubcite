@@ -35,6 +35,8 @@
             treeNode1,
             treeNode2});
             this.SearchPanel = new System.Windows.Forms.Panel();
+            this.journalCheckBox = new System.Windows.Forms.CheckBox();
+            this.authorCheckBox = new System.Windows.Forms.CheckBox();
             this.progressPanel = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
@@ -75,9 +77,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.searchField = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.authorRadioButton = new System.Windows.Forms.RadioButton();
             this.siteComboBox = new System.Windows.Forms.ComboBox();
-            this.journalsRadioButton = new System.Windows.Forms.RadioButton();
             this.searchSiteLabel = new System.Windows.Forms.Label();
             this.optionsMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.viewCitationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -104,6 +104,8 @@
             // SearchPanel
             // 
             this.SearchPanel.BackColor = System.Drawing.SystemColors.Window;
+            this.SearchPanel.Controls.Add(this.journalCheckBox);
+            this.SearchPanel.Controls.Add(this.authorCheckBox);
             this.SearchPanel.Controls.Add(this.progressPanel);
             this.SearchPanel.Controls.Add(this.progressBar);
             this.SearchPanel.Controls.Add(this.addToFavourite);
@@ -116,15 +118,47 @@
             this.SearchPanel.Controls.Add(this.label2);
             this.SearchPanel.Controls.Add(this.searchField);
             this.SearchPanel.Controls.Add(this.label1);
-            this.SearchPanel.Controls.Add(this.authorRadioButton);
             this.SearchPanel.Controls.Add(this.siteComboBox);
-            this.SearchPanel.Controls.Add(this.journalsRadioButton);
             this.SearchPanel.Controls.Add(this.searchSiteLabel);
             this.SearchPanel.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SearchPanel.Location = new System.Drawing.Point(0, 3);
+            this.SearchPanel.Location = new System.Drawing.Point(10, 3);
             this.SearchPanel.Name = "SearchPanel";
             this.SearchPanel.Size = new System.Drawing.Size(979, 595);
             this.SearchPanel.TabIndex = 2;
+            // 
+            // journalCheckBox
+            // 
+            this.journalCheckBox.Appearance = System.Windows.Forms.Appearance.Button;
+            this.journalCheckBox.AutoSize = true;
+            this.journalCheckBox.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.journalCheckBox.FlatAppearance.BorderSize = 0;
+            this.journalCheckBox.FlatAppearance.CheckedBackColor = System.Drawing.Color.Chocolate;
+            this.journalCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.journalCheckBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.journalCheckBox.Location = new System.Drawing.Point(67, 2);
+            this.journalCheckBox.Name = "journalCheckBox";
+            this.journalCheckBox.Size = new System.Drawing.Size(55, 23);
+            this.journalCheckBox.TabIndex = 24;
+            this.journalCheckBox.Text = "Journal";
+            this.journalCheckBox.UseVisualStyleBackColor = false;
+            // 
+            // authorCheckBox
+            // 
+            this.authorCheckBox.Appearance = System.Windows.Forms.Appearance.Button;
+            this.authorCheckBox.AutoSize = true;
+            this.authorCheckBox.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.authorCheckBox.Checked = true;
+            this.authorCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.authorCheckBox.FlatAppearance.BorderSize = 0;
+            this.authorCheckBox.FlatAppearance.CheckedBackColor = System.Drawing.Color.Chocolate;
+            this.authorCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.authorCheckBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.authorCheckBox.Location = new System.Drawing.Point(15, 2);
+            this.authorCheckBox.Name = "authorCheckBox";
+            this.authorCheckBox.Size = new System.Drawing.Size(53, 23);
+            this.authorCheckBox.TabIndex = 23;
+            this.authorCheckBox.Text = "Author";
+            this.authorCheckBox.UseVisualStyleBackColor = false;
             // 
             // progressPanel
             // 
@@ -146,9 +180,9 @@
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(15, 3);
+            this.progressBar.Location = new System.Drawing.Point(128, 3);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(884, 22);
+            this.progressBar.Size = new System.Drawing.Size(771, 22);
             this.progressBar.TabIndex = 0;
             // 
             // addToFavourite
@@ -480,7 +514,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(555, 35);
+            this.label2.Location = new System.Drawing.Point(386, 36);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(22, 13);
             this.label2.TabIndex = 10;
@@ -490,32 +524,19 @@
             // 
             this.searchField.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.searchField.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.searchField.Location = new System.Drawing.Point(15, 3);
+            this.searchField.Location = new System.Drawing.Point(128, 3);
             this.searchField.Name = "searchField";
-            this.searchField.Size = new System.Drawing.Size(884, 22);
+            this.searchField.Size = new System.Drawing.Size(771, 22);
             this.searchField.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(399, 35);
+            this.label1.Location = new System.Drawing.Point(230, 36);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(102, 13);
             this.label1.TabIndex = 7;
             this.label1.Text = "Year Range   From:";
-            // 
-            // authorRadioButton
-            // 
-            this.authorRadioButton.AutoSize = true;
-            this.authorRadioButton.Checked = true;
-            this.authorRadioButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.authorRadioButton.Location = new System.Drawing.Point(15, 32);
-            this.authorRadioButton.Name = "authorRadioButton";
-            this.authorRadioButton.Size = new System.Drawing.Size(65, 17);
-            this.authorRadioButton.TabIndex = 4;
-            this.authorRadioButton.TabStop = true;
-            this.authorRadioButton.Text = "Authors";
-            this.authorRadioButton.UseVisualStyleBackColor = true;
             // 
             // siteComboBox
             // 
@@ -524,26 +545,15 @@
             "Google Scholar",
             "Citeseer",
             "Microsoft Academic Search"});
-            this.siteComboBox.Location = new System.Drawing.Point(260, 31);
+            this.siteComboBox.Location = new System.Drawing.Point(91, 32);
             this.siteComboBox.Name = "siteComboBox";
             this.siteComboBox.Size = new System.Drawing.Size(120, 21);
             this.siteComboBox.TabIndex = 6;
             this.siteComboBox.Text = "Citeseer";
             // 
-            // journalsRadioButton
-            // 
-            this.journalsRadioButton.AutoSize = true;
-            this.journalsRadioButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.journalsRadioButton.Location = new System.Drawing.Point(81, 32);
-            this.journalsRadioButton.Name = "journalsRadioButton";
-            this.journalsRadioButton.Size = new System.Drawing.Size(67, 17);
-            this.journalsRadioButton.TabIndex = 5;
-            this.journalsRadioButton.Text = "Journals";
-            this.journalsRadioButton.UseVisualStyleBackColor = true;
-            // 
             // searchSiteLabel
             // 
-            this.searchSiteLabel.Location = new System.Drawing.Point(185, 34);
+            this.searchSiteLabel.Location = new System.Drawing.Point(16, 35);
             this.searchSiteLabel.Name = "searchSiteLabel";
             this.searchSiteLabel.Size = new System.Drawing.Size(69, 21);
             this.searchSiteLabel.TabIndex = 3;
@@ -598,7 +608,7 @@
             // EndYear
             // 
             this.EndYear.AllowSpace = false;
-            this.EndYear.Location = new System.Drawing.Point(584, 31);
+            this.EndYear.Location = new System.Drawing.Point(415, 32);
             this.EndYear.Name = "EndYear";
             this.EndYear.Size = new System.Drawing.Size(44, 22);
             this.EndYear.TabIndex = 0;
@@ -607,7 +617,7 @@
             // StartYear
             // 
             this.StartYear.AllowSpace = false;
-            this.StartYear.Location = new System.Drawing.Point(501, 31);
+            this.StartYear.Location = new System.Drawing.Point(332, 32);
             this.StartYear.Name = "StartYear";
             this.StartYear.Size = new System.Drawing.Size(45, 22);
             this.StartYear.TabIndex = 0;
@@ -652,8 +662,6 @@
         private System.Windows.Forms.Label authorLabel;
         private System.Windows.Forms.Panel favouritesPanel;
         private System.Windows.Forms.ComboBox siteComboBox;
-        private System.Windows.Forms.RadioButton journalsRadioButton;
-        private System.Windows.Forms.RadioButton authorRadioButton;
         private System.Windows.Forms.Label searchSiteLabel;
         private System.Windows.Forms.TextBox searchField;
         private System.Windows.Forms.Label label1;
@@ -694,5 +702,7 @@
         private System.Windows.Forms.Panel progressPanel;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.CheckBox authorCheckBox;
+        private System.Windows.Forms.CheckBox journalCheckBox;
     }
 }
