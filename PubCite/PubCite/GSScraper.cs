@@ -116,17 +116,34 @@ namespace PubCite
 
 
         // SEARCH PAGE RESULTS
-        public SG.Author getAuthors(string authName)
+        public SG.Author getAuthors(string authName,string affiliation,string keywords)
         {
 
             // CONNECTIONS
-
+           
             SG.Author result = new SG.Author(authName);
-            authName.Trim();
-            authName = Regex.Replace(authName, @"\s+", "+author:");
-            authName = authName.Insert(0,"author:");
-            Console.WriteLine(authName);
-            string url = "http://scholar.google.com/scholar?q=" + authName + "&btnG=&hl=en&as_sdt=0,5";
+            if (authName == null) authName = "";
+            else
+            {
+                authName.Trim();
+                authName = Regex.Replace(authName, @"\s+", "+");
+                //authName = authName.Insert(0, "author:");
+                //Console.WriteLine(authName);
+            }
+            if (affiliation == null) affiliation = "";
+            else {
+                affiliation = affiliation.Trim();
+                affiliation = Regex.Replace(affiliation, @"\s+", "+");
+            }
+            if (keywords == null) keywords = "";
+            else {
+                keywords = keywords.Trim();
+                keywords = Regex.Replace(keywords, @"\s+", "+");
+            }
+            
+
+
+            string url = "http://scholar.google.com/scholar?q=" + keywords + "&as_epq=&as_oq=" + affiliation + "&as_eq=&as_occt=any&as_sauthors=" + authName + "&as_publication=&as_ylo=&as_yhi=&btnG=&hl=en&as_sdt=0%2C5";
             Console.WriteLine(url);
             HtmlWeb web = new HtmlWeb();
             doc = web.Load(url);
@@ -247,16 +264,19 @@ namespace PubCite
 
 
         //  JOURNAL SEARCH RESULTS
-        public SG.Journal getJournals(string journalName)
+        public SG.Journal getJournals(string journalName,string ISSN,string keywords)
         {
 
             // CONNECTIONS
-            journalName.Trim();
-            SG.Journal result = new SG.Journal(journalName);
-            
+            if (journalName == null) journalName = null;
+            else
+            {
+                journalName.Trim();
+                SG.Journal result = new SG.Journal(journalName);
+            }    
 
             string name = Regex.Replace(journalName, @"\s+", "+");
-            string url = "http://scholar.google.co.in/scholar?as_q=&as_epq=&as_oq=&as_eq=&as_occt=any&as_sauthors=&as_publication=" + name  + "&as_ylo=&as_yhi=&btnG=&hl=en&as_sdt=0%2C5";
+            string url = "http://scholar.google.co.in/scholar?as_q=" + ISSN + "+" + keywords + "&as_epq=&as_oq=&as_eq=&as_occt=any&as_sauthors=&as_publication=" + name  + "&as_ylo=&as_yhi=&btnG=&hl=en&as_sdt=0%2C5";
            
             //Console.WriteLine("loaded !!!");
             HtmlWeb web = new HtmlWeb();
