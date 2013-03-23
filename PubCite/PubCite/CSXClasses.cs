@@ -626,7 +626,10 @@ namespace PubCite
             //Parsed number disregarded because of occasional inconsistencies in the website, list length used instead
 
             HtmlNode hindex = doc.DocumentNode.SelectSingleNode("//*[@id=\"authInfo\"]/tr[4]/td[2]");
-            hIndex = Convert.ToInt32(hindex.InnerText);
+            if (hindex != null)
+                hIndex = Convert.ToInt32(hindex.InnerText);
+            else
+                hIndex = i10Index;
 
             HtmlNodeCollection rows = doc.DocumentNode.SelectNodes("//*[@id=\"viewContent-inner\"]/table/tr");
             String[] list;
