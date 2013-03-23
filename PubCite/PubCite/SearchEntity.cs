@@ -14,6 +14,7 @@ namespace SG
         protected List<Paper> papers;    //list of papers of the search entity
         private int h_ind;               //h index of the search entity
         private int i10_ind;             // i10 index of the search entity
+        private int type;
 
         //constructors
         public  SearchEntity(string name, int h, int i)
@@ -22,6 +23,15 @@ namespace SG
             h_ind = h;
             i10_ind = i;
             papers = new List<Paper>();
+            type = 0;
+        }
+        public SearchEntity(string name, int h, int i, int type)
+        {
+            this.name = name;
+            h_ind = h;
+            i10_ind = i;
+            papers = new List<Paper>();
+            this.type = type;
         }
         public  SearchEntity(SerializationInfo info, StreamingContext ctxt){
             name = (string)info.GetValue("Name", typeof(string));
@@ -45,7 +55,17 @@ namespace SG
                 return name;
             }
         }
-
+        public int Type
+        {
+            get
+            {
+                return type;
+            }
+            set
+            {
+                type = value;
+            }
+        }
         //function to add paper to the paper list
         public void addPaper(Paper p)
         {
