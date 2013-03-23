@@ -1,19 +1,16 @@
 ﻿Tasks:
-1. Testing
-2. Error Handling/Show appropriate messages in message box
-3. Advanced search options for general author/journal
-4. Caching
-5. Favorite search
-6. Copy citations/export in different formats
-7. Make help file in html format to be shown in our browser
-8. View Citations for favourites
-9. Back/ Fwd in citation tab
-
-Anil:
-Caching
+1. Report & test plan : Sachin/Deepayan
+2. Error Handling/Show appropriate messages in message box : Parser team + GUI
+3. Advanced search options for general author/journal : Parser team + GUI
+4. Caching : Anil/Rohith/ + GUI
+5. Favorite search : GUI
+6. Copy citations/export in different formats: ?
+7. Make help file in html format to be shown in our browser : Sachin/Deepayan + anyone whom you can find
+8. View Citations for favourites : Sachin(need to add another field to serializable)/GUI
+9. Back/ Fwd in citation tab : Cachers/GUI
 
 Harsha:
-Close on tab
+Close on tab - today!
 
 Arpit:
 Venue not available for papers ?
