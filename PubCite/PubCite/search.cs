@@ -55,6 +55,21 @@ namespace PubCite
             searchField.KeyDown += new KeyEventHandler(searchField_KeyDown);
             progressBar.SendToBack();
             progressBar.Visible = false;
+
+            authorCheckBox.Click += new EventHandler(authorCheckBox_Click);
+            journalCheckBox.Click += new EventHandler(journalCheckBox_Click);
+
+        }
+
+        private void authorCheckBox_Click(object sender, EventArgs e)
+        {
+            journalCheckBox.Checked = !(journalCheckBox.Checked);
+        }
+
+        private void journalCheckBox_Click(object sender, EventArgs e)
+        {
+            authorCheckBox.Checked = !(authorCheckBox.Checked);
+
         }
 
         public void searchField_KeyDown(object sender, KeyEventArgs e)
@@ -188,7 +203,7 @@ namespace PubCite
         public void UpdateTree()
         {
 
-            if (authorRadioButton.Checked == true)
+            if (authorCheckBox.Checked == true)
             {
                 favouritesTreeView.Nodes[0].Nodes[0].Nodes.Clear();
                 for (int i = 0; i < FavAuthorList.Count; i++)
@@ -198,7 +213,7 @@ namespace PubCite
                     favouritesTreeView.Nodes[0].Nodes[0].Nodes[i].ContextMenuStrip = favouriteMenuStrip;
                 }
             }
-            else if (journalsRadioButton.Checked == true)
+            else if (journalCheckBox.Checked == true)
             {
                 favouritesTreeView.Nodes[0].Nodes[1].Nodes.Clear();
                 for (int i = 0; i < Form1.favorites.JournalList.Count; i++)
@@ -389,7 +404,7 @@ namespace PubCite
         private void backgroundWorker_genSearchWork(object sender, DoWorkEventArgs e)
         {
             Console.WriteLine("Background worker...");
-            if (authorRadioButton.Checked == true)
+            if (authorCheckBox.Checked == true)
             {
                 prevSelectedIndex = -1;
                 // get suggestions
@@ -552,7 +567,7 @@ namespace PubCite
             progressPanel.Visible = false;
             progressBar.SendToBack();
             progressBar.Visible = false;
-            if (authorRadioButton.Checked == true)
+            if (authorCheckBox.Checked == true)
             {
                 Console.WriteLine("Done" + suggestions);
                 if (suggestions)
@@ -627,9 +642,9 @@ namespace PubCite
 
         private void addToFavourite_Click(object sender, EventArgs e)
         {
-            if (authorRadioButton.Checked == true && authStats != null)
+            if (authorCheckBox.Checked == true && authStats != null)
                 Form1.favorites.AddAuthor(authStats);
-            else if (journalsRadioButton.Checked == true && journalStats != null)
+            else if (journalCheckBox.Checked == true && journalStats != null)
                 Form1.favorites.AddJournal(journalStats);
             UpdateTree();
         }
@@ -672,7 +687,7 @@ namespace PubCite
             Console.WriteLine(StartYear.Text);
             if (StartYear.Text.Length == 4 || StartYear.getintval() == 0)
             {
-                if (authorRadioButton.Checked == true && authStats != null)
+                if (authorCheckBox.Checked == true && authStats != null)
                     populateAuthor(authStats);
                 else if (journalStats != null)
                     populateJournal(journalStats);
@@ -684,7 +699,7 @@ namespace PubCite
 
             if (EndYear.Text.Length == 4 || EndYear.getintval() == 0)
             {
-                if (authorRadioButton.Checked == true && authStats != null)
+                if (authorCheckBox.Checked == true && authStats != null)
                     populateAuthor(authStats);
                 else if (journalStats != null)
                     populateJournal(journalStats);
@@ -719,7 +734,7 @@ namespace PubCite
             authorResultsListView.Items.Clear();
             journalResultsListView.Items.Clear();
 
-            if (authorRadioButton.Checked == true)
+            if (authorCheckBox.Checked == true)
             {
 
                 prevSelectedIndex = -1;
@@ -805,7 +820,7 @@ namespace PubCite
                 }
 
             }
-            if (journalsRadioButton.Checked == true)
+            if (journalCheckBox.Checked == true)
             {
 
                 if (siteComboBox.SelectedItem.ToString().Equals("Citeseer"))
