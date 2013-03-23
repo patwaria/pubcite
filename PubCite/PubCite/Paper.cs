@@ -20,7 +20,8 @@ namespace SG
         private int gsRank;
         private string titleURL;
         private string summary;
-        private List<Paper> citations; 
+        private List<Paper> citations;
+        private string BibTeX;
 
         //constructor
         public Paper(string title, string authors, int year, string publication, string publisher, int numOfCitations, string CiteURL, int GSRank){
@@ -74,6 +75,25 @@ namespace SG
             //It contains the rank at which the paper appeared in the google scholar search
             this.gsRank = GSRank;
             //citations = new List<Paper>();
+        }
+
+        public Paper(string title, string titleURL, string authors, string summary, int year, string publication, string publisher, int numOfCitations, string CiteURL, int GSRank, string BibTeX)
+        {
+            this.title = title;
+            this.titleURL = titleURL;
+            this.authors = authors;
+            this.year = year;
+            this.publication = publication;
+            this.publisher = publisher;
+            this.num_cites = numOfCitations;
+            this.summary = summary;
+            //contains the URL which link to the citations of the paper
+            this.CiteURL = CiteURL;
+
+            //It contains the rank at which the paper appeared in the google scholar search
+            this.gsRank = GSRank;
+            //citations = new List<Paper>();
+            this.BibTeX = BibTeX;
         }
 
         public Paper(SerializationInfo info, StreamingContext ctxt)
@@ -198,6 +218,14 @@ namespace SG
         public void addCitation(Paper p)
         {
             citations.Add(p);
+        }
+
+        public string getBibTeX
+        {
+            get
+            {
+                return BibTeX;
+            }
         }
     }
 }
