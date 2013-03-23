@@ -193,7 +193,7 @@ namespace PubCite
             return auth;
         }
 
-        public SG.Journal getJournals(string journalName, int noResults=100)
+        public SG.Journal getJournals(string journalName, string JournalName, string ISSN, int noResults=100)
         {
             Request requestJournal = new Request();
             requestJournal.AppID = "c49b4e59-08dd-4f27-a53b-53cc72f169af";
@@ -308,7 +308,7 @@ namespace PubCite
         }
 
 
-        public SG.Author getAuthors(string authName, int noResults=100)
+        public SG.Author getAuthors(string authName, string affiliation, string keywords, int noResults=100)
         {
             SG.Author auth = new SG.Author(authName);
 
