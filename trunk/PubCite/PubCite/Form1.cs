@@ -33,12 +33,34 @@ namespace PubCite
             newTabPage.ImageIndex = 0;
             maintabControl.Controls.Add(newTabPage);
             maintabControl.SelectedIndexChanged += new EventHandler(tabChangeHandler);
-            
+            maintabControl.MouseClick+=new MouseEventHandler(maintabControl_MouseClick);
                 
+        }
+
+        public void maintabControl_MouseClick(object sender, MouseEventArgs e)
+        {
+            Console.WriteLine("calledclick");
+
+            for (int i = 0; i < maintabControl.TabCount; i++)
+            {
+                if (maintabControl.GetTabRect(i).Contains(e.Location))
+                {
+                    RectangleF tabArea = maintabControl.GetTabRect(i);
+                    System.Console.WriteLine(tabArea.X + "///" + tabArea.Y);
+                    System.Console.WriteLine(e.X + "a/b/c" + e.Y);
+                    RectangleF imageArea = new RectangleF(tabArea.X + 7, tabArea.Y, 15, 15);
+                    if (imageArea.Contains(e.Location))
+                    { if(maintabControl.TabPages[maintabControl.SelectedIndex + 1] != newTabPage)
+                        maintabControl.TabPages.RemoveAt(i);
+                    }
+                }
+
+            }
         }
 
         private void tabChangeHandler(object sender, EventArgs e)
         {
+            Console.WriteLine("calledchange");
             if (maintabControl.SelectedTab == newTabPage)
             {
                 search nSearch = new search();
@@ -59,7 +81,6 @@ namespace PubCite
             search Nsearch = new search();
             MyTab.Controls.Add(Nsearch);
             Nsearch.get_sugg().Visible = false;
-           
         }
 
         private void favouritesToolStripMenuItem1_Click(object sender, EventArgs e)
