@@ -45,14 +45,14 @@ namespace PubCite
 
             return authObj;
         }
-        public Author getAuthors(string authName)
+        public Author getAuthors(string authName, string affiliation, string keyword )
         {
-            CiteSeerJournal_FinalAuthorSearch newSearch = new CiteSeerJournal_FinalAuthorSearch(authName, 0);
+            CiteSeerJournal_FinalAuthorSearch newSearch = new CiteSeerJournal_FinalAuthorSearch(authName, 0, affiliation, keyword);
             return newSearch.returnAuthor();
         }
-        public Journal getJournals(string journalName)
+        public Journal getJournals(string journalName, string ISSN, string keyword)
         {
-            CiteSeerJournal_FinalAuthorSearch newSearch = new CiteSeerJournal_FinalAuthorSearch(journalName, 1);
+            CiteSeerJournal_FinalAuthorSearch newSearch = new CiteSeerJournal_FinalAuthorSearch(journalName, 1, ISSN, keyword);
             return newSearch.returnJournal();
         }
     }
