@@ -62,6 +62,7 @@ namespace PubCite
 
             cachedListView.FullRowSelect = true;
             cachedListView.Click +=new EventHandler(cachedListView_Click);
+            cachedListView.HeaderStyle = ColumnHeaderStyle.None;
 
 
 
@@ -102,11 +103,27 @@ namespace PubCite
         public void searchField_KeyUp(object sender,KeyEventArgs e)
         {
 
-
-            if (cachedListView.Visible == false)
+            if (searchField.Text.Length > 0)
             {
-                cachedListView.Visible = true;
+                if (cachedListView.Visible == false)
+                {
+                    cachedListView.Visible = true;
+                    cachedListView.BringToFront();
 
+                }
+
+                /* update cache suggestions */
+                List<String> suggestions = new List<string>();
+                suggestions.Add("Ayush");
+                suggestions.Add("Srihair");
+                suggestions.Add("Arpit");
+                suggestions.Add("Anil");
+                updateCacheSuggestions(suggestions);
+            }
+            else
+            {
+                cachedListView.Visible = false;
+                cachedListView.SendToBack();
             }
 
 
@@ -117,6 +134,16 @@ namespace PubCite
 
             return Suggestions;
 
+        }
+
+        public void updateCacheSuggestions(List<String> suggestions)
+        {
+            cachedListView.Items.Clear();
+            for (int i = 0; i < suggestions.Count; i++)
+            {
+                item = new ListViewItem(suggestions[i]);
+                cachedListView.Items.Add(item);
+            }
         }
 
         public void populateSuggestions()
@@ -657,6 +684,7 @@ namespace PubCite
                 progressBar.Visible = false;
 
                 TabPage citationsPage = new TabPage("Citations");
+                citationsPage.ImageIndex = 1;
                 Form1.dub_tab.TabPages.Insert(Form1.dub_tab.TabPages.Count - 1, citationsPage);
                 CitationsTab NcitTab = new CitationsTab();
                 citationsPage.Controls.Add(NcitTab);
@@ -744,6 +772,7 @@ namespace PubCite
             Browser browser;
             browser = new Browser(url);
             bpage.Controls.Add(browser);
+            bpage.ImageIndex = 1;
             Form1.dub_tab.TabPages.Insert(Form1.dub_tab.TabPages.Count - 1, bpage);
             Form1.dub_tab.SelectedTab = bpage;
         }
@@ -888,10 +917,7 @@ namespace PubCite
         private void button1_Click_1(object sender, EventArgs e)
         {
             cachedListView.HeaderStyle = ColumnHeaderStyle.None;
-            cachedListView.Visible = true;
-            cachedListView.BringToFront();
-            item = new ListViewItem("authors..");
-            cachedListView.Items.Add(item);
+            
             item = new ListViewItem("Journals");
             cachedListView.Items.Add(item);
         }
