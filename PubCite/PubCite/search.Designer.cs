@@ -35,10 +35,13 @@
             treeNode1,
             treeNode2});
             this.SearchPanel = new System.Windows.Forms.Panel();
+            this.progressPanel = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.addToFavourite = new System.Windows.Forms.PictureBox();
             this.CloseButton = new System.Windows.Forms.Button();
             this.searchIcon = new System.Windows.Forms.PictureBox();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.resultsPanel = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.resultsGroupBox = new System.Windows.Forms.GroupBox();
             this.authorResultsListView = new System.Windows.Forms.ListView();
@@ -64,7 +67,7 @@
             this.citesperYearLabel = new System.Windows.Forms.Label();
             this.citationsLabel = new System.Windows.Forms.Label();
             this.authorLabel = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.favouritesPanel = new System.Windows.Forms.Panel();
             this.favouritesTreeView = new System.Windows.Forms.TreeView();
             this.Suggestions = new System.Windows.Forms.GroupBox();
             this.authorsSuggestions = new System.Windows.Forms.ListView();
@@ -84,35 +87,31 @@
             this.removeFromFavouritesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.EndYear = new PubCite.NumericTextBox();
             this.StartYear = new PubCite.NumericTextBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.progressBar = new System.Windows.Forms.ProgressBar();
-            this.label3 = new System.Windows.Forms.Label();
-            this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.SearchPanel.SuspendLayout();
+            this.progressPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.addToFavourite)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchIcon)).BeginInit();
-            this.panel3.SuspendLayout();
+            this.resultsPanel.SuspendLayout();
             this.panel4.SuspendLayout();
             this.resultsGroupBox.SuspendLayout();
             this.statisticsGroupBox.SuspendLayout();
-            this.panel2.SuspendLayout();
+            this.favouritesPanel.SuspendLayout();
             this.Suggestions.SuspendLayout();
             this.optionsMenuStrip.SuspendLayout();
             this.favouriteMenuStrip.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // SearchPanel
             // 
             this.SearchPanel.BackColor = System.Drawing.SystemColors.Window;
-            this.SearchPanel.Controls.Add(this.panel1);
+            this.SearchPanel.Controls.Add(this.progressPanel);
             this.SearchPanel.Controls.Add(this.addToFavourite);
             this.SearchPanel.Controls.Add(this.CloseButton);
             this.SearchPanel.Controls.Add(this.searchIcon);
             this.SearchPanel.Controls.Add(this.EndYear);
-            this.SearchPanel.Controls.Add(this.panel3);
+            this.SearchPanel.Controls.Add(this.resultsPanel);
             this.SearchPanel.Controls.Add(this.StartYear);
-            this.SearchPanel.Controls.Add(this.panel2);
+            this.SearchPanel.Controls.Add(this.favouritesPanel);
             this.SearchPanel.Controls.Add(this.label2);
             this.SearchPanel.Controls.Add(this.searchField);
             this.SearchPanel.Controls.Add(this.label1);
@@ -125,6 +124,32 @@
             this.SearchPanel.Name = "SearchPanel";
             this.SearchPanel.Size = new System.Drawing.Size(979, 595);
             this.SearchPanel.TabIndex = 2;
+            // 
+            // progressPanel
+            // 
+            this.progressPanel.Controls.Add(this.label3);
+            this.progressPanel.Controls.Add(this.progressBar);
+            this.progressPanel.Location = new System.Drawing.Point(12, 55);
+            this.progressPanel.Name = "progressPanel";
+            this.progressPanel.Size = new System.Drawing.Size(477, 29);
+            this.progressPanel.TabIndex = 22;
+            this.progressPanel.Visible = false;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(205, 13);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(222, 13);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "Please wait while we process your query...";
+            // 
+            // progressBar
+            // 
+            this.progressBar.Location = new System.Drawing.Point(3, 10);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(196, 16);
+            this.progressBar.TabIndex = 0;
             // 
             // addToFavourite
             // 
@@ -156,13 +181,13 @@
             this.searchIcon.TabStop = false;
             this.searchIcon.Click += new System.EventHandler(this.searchIcon_Click);
             // 
-            // panel3
+            // resultsPanel
             // 
-            this.panel3.Controls.Add(this.panel4);
-            this.panel3.Location = new System.Drawing.Point(236, 90);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(745, 502);
-            this.panel3.TabIndex = 1;
+            this.resultsPanel.Controls.Add(this.panel4);
+            this.resultsPanel.Location = new System.Drawing.Point(236, 90);
+            this.resultsPanel.Name = "resultsPanel";
+            this.resultsPanel.Size = new System.Drawing.Size(745, 502);
+            this.resultsPanel.TabIndex = 1;
             // 
             // panel4
             // 
@@ -393,14 +418,14 @@
             this.authorLabel.TabIndex = 8;
             this.authorLabel.Text = "Name:";
             // 
-            // panel2
+            // favouritesPanel
             // 
-            this.panel2.Controls.Add(this.favouritesTreeView);
-            this.panel2.Controls.Add(this.Suggestions);
-            this.panel2.Location = new System.Drawing.Point(8, 88);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(222, 504);
-            this.panel2.TabIndex = 0;
+            this.favouritesPanel.Controls.Add(this.favouritesTreeView);
+            this.favouritesPanel.Controls.Add(this.Suggestions);
+            this.favouritesPanel.Location = new System.Drawing.Point(8, 88);
+            this.favouritesPanel.Name = "favouritesPanel";
+            this.favouritesPanel.Size = new System.Drawing.Size(222, 504);
+            this.favouritesPanel.TabIndex = 0;
             // 
             // favouritesTreeView
             // 
@@ -583,31 +608,6 @@
             this.StartYear.TabIndex = 0;
             this.StartYear.TextChanged += new System.EventHandler(this.StartYear_TextChanged);
             // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.progressBar);
-            this.panel1.Location = new System.Drawing.Point(148, 55);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(459, 29);
-            this.panel1.TabIndex = 22;
-            // 
-            // progressBar
-            // 
-            this.progressBar.Location = new System.Drawing.Point(180, 10);
-            this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(196, 16);
-            this.progressBar.TabIndex = 0;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(66, 10);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(76, 13);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Please wait....";
-            // 
             // search
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -617,19 +617,19 @@
             this.Size = new System.Drawing.Size(981, 599);
             this.SearchPanel.ResumeLayout(false);
             this.SearchPanel.PerformLayout();
+            this.progressPanel.ResumeLayout(false);
+            this.progressPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.addToFavourite)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchIcon)).EndInit();
-            this.panel3.ResumeLayout(false);
+            this.resultsPanel.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.resultsGroupBox.ResumeLayout(false);
             this.statisticsGroupBox.ResumeLayout(false);
             this.statisticsGroupBox.PerformLayout();
-            this.panel2.ResumeLayout(false);
+            this.favouritesPanel.ResumeLayout(false);
             this.Suggestions.ResumeLayout(false);
             this.optionsMenuStrip.ResumeLayout(false);
             this.favouriteMenuStrip.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -637,7 +637,7 @@
         #endregion
 
         private System.Windows.Forms.Panel SearchPanel;
-        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel resultsPanel;
         private System.Windows.Forms.GroupBox statisticsGroupBox;
         private System.Windows.Forms.Label i10indexLabel;
         private System.Windows.Forms.Label hindexLabel;
@@ -645,7 +645,7 @@
         private System.Windows.Forms.Label citesperYearLabel;
         private System.Windows.Forms.Label citationsLabel;
         private System.Windows.Forms.Label authorLabel;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel favouritesPanel;
         private System.Windows.Forms.ComboBox siteComboBox;
         private System.Windows.Forms.RadioButton journalsRadioButton;
         private System.Windows.Forms.RadioButton authorRadioButton;
@@ -686,9 +686,8 @@
         private System.Windows.Forms.ContextMenuStrip favouriteMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem viewStatisticsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem removeFromFavouritesToolStripMenuItem;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel progressPanel;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ProgressBar progressBar;
-        private System.ComponentModel.BackgroundWorker backgroundWorker;
     }
 }

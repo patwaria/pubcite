@@ -14,6 +14,8 @@ namespace PubCite
     {
         List<SG.Author> FavAuthorList;
         List<SG.Journal> FavJournalList;
+        List<SG.Paper> Papers;
+        List<SG.Paper> Citations;
 
         List<string> auth_url;
         List<string> authors;
@@ -24,13 +26,16 @@ namespace PubCite
         SG.AuthSuggestion authSug = null;
         SG.Author authStats = null;
         SG.Journal journalStats;
-        List<SG.Paper> Papers;
+        
         Boolean[] a = { false, false, false };
         int prevSelectedIndex;
+        int suggestedIndex;
+        int citationIndex;
         Boolean[] prevSortedColum = { false, false, false, false };
         Boolean suggestions;
+        BackgroundWorker backgroundWorker;
 
-        
+
         public search()
         {
             InitializeComponent();
@@ -48,16 +53,13 @@ namespace PubCite
             authorsSuggestions.FullRowSelect = true;
 
             searchField.KeyDown += new KeyEventHandler(searchField_KeyDown);
-            backgroundWorker.DoWork += new DoWorkEventHandler(backgroundWorker_DoWork);
-            backgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(backgroundWorker_RunWorkerCompleted);
-            
         }
 
         public void searchField_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                searchIcon_Click(sender, e);  
+                searchIcon_Click(sender, e);
             }
         }
 
@@ -68,17 +70,141 @@ namespace PubCite
 
         }
 
-        public void Barfunc() {
-            ProgressForm NProgForm = new ProgressForm();
-            NProgForm.Visible = true;
-        
-        
+        public void populateSuggestions()
+        {
+            Console.WriteLine("Here");
+            Suggestions.Visible = true;
+            for (int i = 0; i < authors.Count; i++)
+            {
+
+                item = new ListViewItem(authors[i]);
+                authorsSuggestions.Items.Add(item);
+            }
+        }
+        private void populateJournal(SG.Journal journal)
+        {
+
+            journalResultsListView.Items.Clear();
+            authorResultsListView.Visible = false;
+            journalResultsListView.Visible = true;
+
+            if (journal != null)
+            {
+                if (StartYear.getintval() == 0 && EndYear.getintval() == 0)
+                    Papers = journal.getPapers();
+                else if (StartYear.getintval() != 0 && EndYear.getintval() == 0)
+                    Papers = journal.getPaperByYearRange(StartYear.getintval());
+                else if (StartYear.getintval() == 0 && EndYear.getintval() != 0)
+                    Papers = journal.getPaperUptoYear(EndYear.getintval());
+                else if (StartYear.getintval() != 0 && EndYear.getintval() != 0)
+                    Papers = journal.getPaperByYearRange(StartYear.getintval(), EndYear.getintval());
+
+
+                authorNameLabel.Text = journal.Name;
+                citesperPaper.Text = journal.getCitesPerPaper().ToString();
+                citesperYear.Text = journal.getCitesPerYear().ToString();
+                hindex.Text = journal.getHIndex().ToString();
+                i10index.Text = journal.getI10Index().ToString();
+                citationsNumberLabel.Text = journal.getTotalNumberofCitations().ToString();
+                for (int i = 0; i < Papers.Count; i++)
+                {
+                    item = new ListViewItem(Papers[i].Title);
+                    item.SubItems.Add(Papers[i].Authors);
+                    item.SubItems.Add(Papers[i].NumberOfCitations.ToString());
+                    if (Papers[i].Year == -1 || Papers[i].Year == -1)
+                        item.SubItems.Add("--");
+                    else
+                        item.SubItems.Add(Papers[i].Year.ToString());
+                    journalResultsListView.Items.Add(item);
+
+                }
+            }
         }
 
-        public void DoWork() {
+        private void populateAuthor(SG.Author author)
+        {
 
-            while (true) Console.WriteLine("In worker...");
-        
+            authorResultsListView.Items.Clear();
+            authorResultsListView.Visible = true;
+            journalResultsListView.Visible = false;
+
+            if (author != null)
+            {
+                if (StartYear.getintval() == 0 && EndYear.getintval() == 0)
+                    Papers = author.getPapers();
+                else if (StartYear.getintval() != 0 && EndYear.getintval() == 0)
+                    Papers = author.getPaperByYearRange(StartYear.getintval());
+                else if (StartYear.getintval() == 0 && EndYear.getintval() != 0)
+                    Papers = author.getPaperUptoYear(EndYear.getintval());
+                else if (StartYear.getintval() != 0 && EndYear.getintval() != 0)
+                    Papers = author.getPaperByYearRange(StartYear.getintval(), EndYear.getintval());
+                Console.WriteLine(Papers.Count);
+
+                /* Statistics */
+                authorNameLabel.Text = author.Name;
+                citesperPaper.Text = author.getCitesPerPaper().ToString();
+                citesperYear.Text = author.getCitesPerYear().ToString();
+                hindex.Text = author.getHIndex().ToString();
+                i10index.Text = author.getI10Index().ToString();
+                citationsNumberLabel.Text = author.getTotalNumberofCitations().ToString();
+
+                /* Papers */
+                for (int i = 0; i < Papers.Count; i++)
+                {
+                    /*populating */
+                    item = new ListViewItem(Papers[i].Title);
+                    item.SubItems.Add(Papers[i].Publication);
+                    if (Papers[i].Year == -1 || Papers[i].Year == -1)
+                        item.SubItems.Add("--");
+                    else
+                        item.SubItems.Add(Papers[i].Year.ToString());
+                    item.SubItems.Add(Papers[i].NumberOfCitations.ToString());
+                    authorResultsListView.Items.Add(item);
+                }
+            }
+        }
+
+         public void ArrangeTree()
+        {
+
+            FavAuthorList = Form1.favorites.AuthorList;
+            FavJournalList = Form1.favorites.JournalList;
+
+            for (int i = 0; i < FavAuthorList.Count; i++)
+            {
+                Console.WriteLine("URL:" + FavAuthorList[i].HomePageURL);
+                favouritesTreeView.Nodes[0].Nodes[0].Nodes.Add(new TreeNode(FavAuthorList[i].Name));
+                favouritesTreeView.Nodes[0].Nodes[0].Nodes[i].ContextMenuStrip = favouriteMenuStrip;
+            }
+            for (int i = 0; i < Form1.favorites.JournalList.Count; i++)
+            {
+                favouritesTreeView.Nodes[0].Nodes[1].Nodes.Add(new TreeNode(FavJournalList[i].Name));
+                favouritesTreeView.Nodes[0].Nodes[1].Nodes[i].ContextMenuStrip = favouriteMenuStrip;
+            }
+        }
+
+        public void UpdateTree()
+        {
+
+            if (authorRadioButton.Checked == true)
+            {
+                favouritesTreeView.Nodes[0].Nodes[0].Nodes.Clear();
+                for (int i = 0; i < FavAuthorList.Count; i++)
+                {
+                    Console.WriteLine(FavAuthorList[i].HomePageURL);
+                    favouritesTreeView.Nodes[0].Nodes[0].Nodes.Add(new TreeNode(FavAuthorList[i].Name));
+                    favouritesTreeView.Nodes[0].Nodes[0].Nodes[i].ContextMenuStrip = favouriteMenuStrip;
+                }
+            }
+            else if (journalsRadioButton.Checked == true)
+            {
+                favouritesTreeView.Nodes[0].Nodes[1].Nodes.Clear();
+                for (int i = 0; i < Form1.favorites.JournalList.Count; i++)
+                {
+                    favouritesTreeView.Nodes[0].Nodes[1].Nodes.Add(new TreeNode(FavJournalList[i].Name));
+                    favouritesTreeView.Nodes[0].Nodes[1].Nodes[i].ContextMenuStrip = favouriteMenuStrip;
+                }
+            }
         }
 
         private void journalResultsListView_ColumnClick(object sender, ColumnClickEventArgs e)
@@ -199,156 +325,13 @@ namespace PubCite
             }
         }
 
-
-        public void ArrangeTree()
-        {
-
-            FavAuthorList = Form1.favorites.AuthorList;
-            FavJournalList = Form1.favorites.JournalList;
-
-            for (int i = 0; i < FavAuthorList.Count; i++)
-            {
-                Console.WriteLine("URL:" + FavAuthorList[i].HomePageURL);
-                favouritesTreeView.Nodes[0].Nodes[0].Nodes.Add(new TreeNode(FavAuthorList[i].Name));
-                favouritesTreeView.Nodes[0].Nodes[0].Nodes[i].ContextMenuStrip = favouriteMenuStrip;
-            }
-            for (int i = 0; i < Form1.favorites.JournalList.Count; i++)
-            {
-                favouritesTreeView.Nodes[0].Nodes[1].Nodes.Add(new TreeNode(FavJournalList[i].Name));
-                favouritesTreeView.Nodes[0].Nodes[1].Nodes[i].ContextMenuStrip = favouriteMenuStrip;
-            }
-        }
-
-        public void UpdateTree()
-        {
-
-            //FavAuthorList = Form1.favorites.AuthorList;
-            //FavJournalList = Form1.favorites.JournalList;
-            
-            if (authorRadioButton.Checked == true)
-            {
-                favouritesTreeView.Nodes[0].Nodes[0].Nodes.Clear();
-                for (int i = 0; i < FavAuthorList.Count; i++)
-                {
-                    Console.WriteLine(FavAuthorList[i].HomePageURL);
-                    favouritesTreeView.Nodes[0].Nodes[0].Nodes.Add(new TreeNode(FavAuthorList[i].Name));
-                    favouritesTreeView.Nodes[0].Nodes[0].Nodes[i].ContextMenuStrip = favouriteMenuStrip;
-                }
-            }
-            else if (journalsRadioButton.Checked == true)
-            {
-                favouritesTreeView.Nodes[0].Nodes[1].Nodes.Clear();
-                for (int i = 0; i < Form1.favorites.JournalList.Count; i++)
-                {
-                    favouritesTreeView.Nodes[0].Nodes[1].Nodes.Add(new TreeNode(FavJournalList[i].Name));
-                    favouritesTreeView.Nodes[0].Nodes[1].Nodes[i].ContextMenuStrip = favouriteMenuStrip;
-                }
-            }
-        }
-
-        private void authorsSuggestions_MouseClick(object sender, EventArgs e)
-        {
-            int index = authorsSuggestions.FocusedItem.Index;
-            if (prevSelectedIndex != index)
-            {
-                if (a[0] == true)
-                    authStats = CSParser.getAuthStatistics(auth_url[index]);
-                else if (a[1] == true)
-                    authStats = GSScraper.getAuthStatistics(auth_url[index]);
-                else if (a[2] == true)
-                    authStats = MSParser.getAuthStatistics(auth_url[index]);
-                prevSelectedIndex = index;
-            }
-            populateAuthor(authStats);
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             this.Parent.GetContainerControl();
         }
 
-        private void populateJournal(SG.Journal journal)
-        {
 
-            journalResultsListView.Items.Clear();
-            authorResultsListView.Visible = false;
-            journalResultsListView.Visible = true;
-
-            if (journal != null)
-            {
-                if (StartYear.getintval() == 0 && EndYear.getintval() == 0)
-                    Papers = journal.getPapers();
-                else if (StartYear.getintval() != 0 && EndYear.getintval() == 0)
-                    Papers = journal.getPaperByYearRange(StartYear.getintval());
-                else if (StartYear.getintval() == 0 && EndYear.getintval() != 0)
-                    Papers = journal.getPaperUptoYear(EndYear.getintval());
-                else if (StartYear.getintval() != 0 && EndYear.getintval() != 0)
-                    Papers = journal.getPaperByYearRange(StartYear.getintval(), EndYear.getintval());
-
-
-                authorNameLabel.Text = journal.Name;
-                citesperPaper.Text = journal.getCitesPerPaper().ToString();
-                citesperYear.Text = journal.getCitesPerYear().ToString();
-                hindex.Text = journal.getHIndex().ToString();
-                i10index.Text = journal.getI10Index().ToString();
-                citationsNumberLabel.Text = journal.getTotalNumberofCitations().ToString();
-                for (int i = 0; i < Papers.Count; i++)
-                {
-                    item = new ListViewItem(Papers[i].Title);
-                    item.SubItems.Add(Papers[i].Authors);
-                    item.SubItems.Add(Papers[i].NumberOfCitations.ToString());
-                    if (Papers[i].Year == -1 || Papers[i].Year == -1)
-                        item.SubItems.Add("--");
-                    else
-                        item.SubItems.Add(Papers[i].Year.ToString());
-                    journalResultsListView.Items.Add(item);
-
-                }
-            }
-        }
-
-        private void populateAuthor(SG.Author author)
-        {
-            
-            authorResultsListView.Items.Clear();
-            authorResultsListView.Visible = true;
-            journalResultsListView.Visible = false;
-
-            if (author != null)
-            {
-                if (StartYear.getintval() == 0 && EndYear.getintval() == 0)
-                    Papers = author.getPapers();
-                else if (StartYear.getintval() != 0 && EndYear.getintval() == 0)
-                    Papers = author.getPaperByYearRange(StartYear.getintval());
-                else if (StartYear.getintval() == 0 && EndYear.getintval() != 0)
-                    Papers = author.getPaperUptoYear(EndYear.getintval());
-                else if (StartYear.getintval() != 0 && EndYear.getintval() != 0)
-                    Papers = author.getPaperByYearRange(StartYear.getintval(), EndYear.getintval());
-                Console.WriteLine(Papers.Count);
-
-                /* Statistics */
-                authorNameLabel.Text = author.Name;
-                citesperPaper.Text = author.getCitesPerPaper().ToString();
-                citesperYear.Text = author.getCitesPerYear().ToString();
-                hindex.Text = author.getHIndex().ToString();
-                i10index.Text = author.getI10Index().ToString();
-                citationsNumberLabel.Text = author.getTotalNumberofCitations().ToString();
-
-                /* Papers */
-                for (int i = 0; i < Papers.Count; i++)
-                {
-                    /*populating */
-                    item = new ListViewItem(Papers[i].Title);
-                    item.SubItems.Add(Papers[i].Publication);
-                    if (Papers[i].Year == -1 || Papers[i].Year == -1)
-                        item.SubItems.Add("--");
-                    else
-                        item.SubItems.Add(Papers[i].Year.ToString());
-                    item.SubItems.Add(Papers[i].NumberOfCitations.ToString());
-                    authorResultsListView.Items.Add(item);
-                }
-            }
-        }
+       
 
         private void authorResultsListView_MouseClick(object sender, MouseEventArgs e)
         {
@@ -382,19 +365,339 @@ namespace PubCite
             Form1.dub_tab.SelectedIndex = Form1.dub_tab.TabCount - 2;
         }
 
-
-        public void populateSuggestions()
+        private void disablePanels()
         {
-            Console.WriteLine("Hello");
-            Suggestions.Visible = true;
-            for (int i = 0; i < authors.Count; i++)
-            {
+            resultsPanel.Enabled = false;
+            favouritesPanel.Enabled = false;
+        }
 
-                item = new ListViewItem(authors[i]);
-                authorsSuggestions.Items.Add(item);
+        private void enablePanels()
+        {
+            resultsPanel.Enabled = true;
+            favouritesPanel.Enabled = true;
+        }
+        private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            progressBar.MarqueeAnimationSpeed = 0;
+            progressBar.Style = ProgressBarStyle.Blocks;
+            progressBar.Value = progressBar.Minimum;
+        }
+
+        private void backgroundWorker_genSearchWork(object sender, DoWorkEventArgs e)
+        {
+            Console.WriteLine("Background worker...");
+            if (authorRadioButton.Checked == true)
+            {
+                prevSelectedIndex = -1;
+                // get suggestions
+                if (a[0])
+                    authSug = CSParser.getAuthSuggestions(searchField.Text);
+                else if (a[1])
+                    authSug = GSScraper.getAuthSuggestions(searchField.Text);
+                else
+                    authSug = MSParser.getAuthSuggestions(searchField.Text);
+
+                if (authSug == null || !authSug.isSet())
+                {
+                    /* Case : No suggestions */
+                    if (a[0] == true) authStats = CSParser.getAuthors(searchField.Text);
+                    else if (a[1] == true) authStats = GSScraper.getAuthors(searchField.Text);
+                    /*Add for MAS*/
+
+                    suggestions = false;
+                }
+                else
+                {
+                    authors = authSug.getSuggestions();
+                    auth_url = authSug.getSuggestionsURL();
+
+                    if (authors.Count == 1)
+                    {
+                        int index = 0;
+                        if (prevSelectedIndex != index)
+                        {
+                            if (a[0] == true)
+                                authStats = CSParser.getAuthStatistics(auth_url[index]);
+                            else if (a[1] == true)
+                                authStats = GSScraper.getAuthStatistics(auth_url[index]);
+                            else if (a[2] == true)
+                                authStats = MSParser.getAuthStatistics(auth_url[index]);
+                            prevSelectedIndex = index;
+                        }
+                        suggestions = false;
+                    }
+                    else
+                    {
+                        suggestions = true;
+                    }
+                }
+            }
+            else // journal
+            {
+                if (a[0])
+                    journalStats = CSParser.getJournals(searchField.Text);
+                else if (a[1])
+                    journalStats = GSScraper.getJournals(searchField.Text);
+                else
+                    journalStats = MSParser.getJournals(searchField.Text);
             }
         }
 
+        private void backgroundWorker_authSearchWork(object sender, DoWorkEventArgs e)
+        {
+
+            if (prevSelectedIndex != suggestedIndex)
+            {
+                if (a[0] == true)
+                    authStats = CSParser.getAuthStatistics(auth_url[suggestedIndex]);
+                else if (a[1] == true)
+                    authStats = GSScraper.getAuthStatistics(auth_url[suggestedIndex]);
+                else if (a[2] == true)
+                    authStats = MSParser.getAuthStatistics(auth_url[suggestedIndex]);
+                prevSelectedIndex = suggestedIndex;
+            }
+        }
+
+        private void backgroundWorker_citationSearchWork(object sender, DoWorkEventArgs e)
+        {
+            if (a[0] == true)
+                Citations = CSParser.getCitations(Papers[citationIndex].CitedByURL);
+            else if (a[1] == true)
+                Citations = GSScraper.getCitations(Papers[citationIndex].CitedByURL);
+            else if (a[2] == true)
+                Citations = CSParser.getCitations(Papers[citationIndex].CitedByURL);
+        }
+
+        private void authorsSuggestions_MouseClick(object sender, EventArgs e)
+        {
+            disablePanels();
+            suggestedIndex = authorsSuggestions.FocusedItem.Index;
+            progressPanel.Visible = true;
+            progressBar.Style = ProgressBarStyle.Marquee;
+            progressBar.MarqueeAnimationSpeed = 25;
+
+            backgroundWorker = new BackgroundWorker();
+            backgroundWorker.DoWork += new DoWorkEventHandler(backgroundWorker_authSearchWork);
+            backgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(backgroundWorker_RunWorkerCompleted);
+            
+            backgroundWorker.RunWorkerAsync();
+            while (backgroundWorker.IsBusy)
+            {
+                Application.DoEvents();
+                // disable those options which will trigger another thread 
+            }
+            enablePanels();
+            progressPanel.Visible = false;
+
+            populateAuthor(authStats);
+        }
+
+
+
+        private void searchIcon_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < 4; i++) prevSortedColum[i] = false;
+            authorsSuggestions.Items.Clear();
+            authorResultsListView.Items.Clear();
+            journalResultsListView.Items.Clear();
+
+            disablePanels();
+            progressPanel.Visible = true;
+            progressBar.Style = ProgressBarStyle.Marquee;
+            progressBar.MarqueeAnimationSpeed = 25;
+
+            backgroundWorker = new BackgroundWorker();
+            backgroundWorker.DoWork += new DoWorkEventHandler(backgroundWorker_genSearchWork);
+            backgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(backgroundWorker_RunWorkerCompleted);
+
+            if (siteComboBox.SelectedItem.ToString().Equals("Citeseer"))
+            {
+                a[0] = true;
+                a[1] = false;
+                a[2] = false;
+                CSParser = new CSXParser();
+            }
+            else if (siteComboBox.SelectedItem.ToString().Equals("Google Scholar"))
+            {
+                a[0] = false;
+                a[1] = true;
+                a[2] = false;
+                GSScraper = new GSScraper();
+            }
+            else if (siteComboBox.SelectedItem.ToString().Equals("Microsoft Academic Search"))
+            {
+                a[0] = false;
+                a[1] = false;
+                a[2] = true;
+                MSParser = new MicrosoftScholarParser();
+            }
+
+            backgroundWorker.RunWorkerAsync();
+
+            while (backgroundWorker.IsBusy)
+            {
+                Application.DoEvents();
+                // disable those options which will trigger another thread 
+            }
+
+            enablePanels();
+            progressPanel.Visible = false;
+            if (authorRadioButton.Checked == true)
+            {
+                Console.WriteLine("Done" + suggestions);
+                if (suggestions)
+                    populateSuggestions();
+                else
+                    populateAuthor(authStats);
+            }
+            else
+            {
+                populateJournal(journalStats);
+            }
+        }
+
+        private void viewURLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            if (authorResultsListView.Visible == true)
+                openBrowserForUrl(Papers[authorResultsListView.FocusedItem.Index].TitleURL);
+            else
+                openBrowserForUrl(Papers[journalResultsListView.FocusedItem.Index].TitleURL);
+        }
+
+        private void viewCitationsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+            if (authorResultsListView.Visible == true)
+                citationIndex = authorResultsListView.FocusedItem.Index;
+            else
+                citationIndex = journalResultsListView.FocusedItem.Index;
+
+            if (Papers[citationIndex].NumberOfCitations != 0)
+            {
+                disablePanels();
+                progressPanel.Visible = true;
+                progressBar.Style = ProgressBarStyle.Marquee;
+                progressBar.MarqueeAnimationSpeed = 25;
+
+                backgroundWorker = new BackgroundWorker();
+                backgroundWorker.DoWork += new DoWorkEventHandler(backgroundWorker_citationSearchWork);
+                backgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(backgroundWorker_RunWorkerCompleted);
+
+                backgroundWorker.RunWorkerAsync();
+
+                while (backgroundWorker.IsBusy)
+                {
+                    Application.DoEvents();
+                    // disable those options which will trigger another thread 
+                }
+
+                enablePanels();
+                progressPanel.Visible = false;
+
+                TabPage citationsPage = new TabPage("Citations");
+                Form1.dub_tab.TabPages.Insert(Form1.dub_tab.TabPages.Count - 1, citationsPage);
+                CitationsTab NcitTab = new CitationsTab();
+                citationsPage.Controls.Add(NcitTab);
+
+                if (a[0] == true)
+                    NcitTab.populateCitations(Papers[citationIndex], Citations, 0);
+                else if (a[1] == true)
+                    NcitTab.populateCitations(Papers[citationIndex], Citations, 1);
+                else if (a[2] == true)
+                    NcitTab.populateCitations(Papers[citationIndex], Citations, 2);
+                
+                Form1.dub_tab.SelectedTab = citationsPage;
+            }
+        }
+
+        private void addToFavourite_Click(object sender, EventArgs e)
+        {
+            if (authorRadioButton.Checked == true && authStats != null)
+                Form1.favorites.AddAuthor(authStats);
+            else if (journalsRadioButton.Checked == true && journalStats != null)
+                Form1.favorites.AddJournal(journalStats);
+            UpdateTree();
+        }
+
+        private void viewStatisticsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // author selected 
+            if (favouritesTreeView.SelectedNode.Parent.Index == 0)
+            {
+                authStats = FavAuthorList[favouritesTreeView.SelectedNode.Index];
+                populateAuthor(authStats);
+            }
+            else if (favouritesTreeView.SelectedNode.Parent.Index == 1)
+            {// Journal selected
+                journalStats = FavJournalList[favouritesTreeView.SelectedNode.Index];
+                populateJournal(journalStats);
+            }
+            Console.WriteLine(favouritesTreeView.SelectedNode.Level);
+        }
+
+        private void removeFromFavouritesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (favouritesTreeView.SelectedNode != null)
+            {
+                if (favouritesTreeView.SelectedNode.Parent.Index == 0)
+                {
+                    Form1.favorites.removeAuthor(favouritesTreeView.SelectedNode.Index);
+                    favouritesTreeView.SelectedNode.Remove();
+                }
+                else if (favouritesTreeView.SelectedNode.Parent.Index == 1)
+                {
+                    Form1.favorites.removeJournal(favouritesTreeView.SelectedNode.Index);
+                    favouritesTreeView.SelectedNode.Remove();
+                }
+            }
+        }
+
+        private void StartYear_TextChanged(object sender, EventArgs e)
+        {
+            Console.WriteLine(StartYear.Text);
+            if (StartYear.Text.Length == 4 || StartYear.getintval() == 0)
+            {
+                if (authorRadioButton.Checked == true && authStats != null)
+                    populateAuthor(authStats);
+                else if (journalStats != null)
+                    populateJournal(journalStats);
+            }
+        }
+
+        private void EndYear_TextChanged(object sender, EventArgs e)
+        {
+
+            if (EndYear.Text.Length == 4 || EndYear.getintval() == 0)
+            {
+                if (authorRadioButton.Checked == true && authStats != null)
+                    populateAuthor(authStats);
+                else if (journalStats != null)
+                    populateJournal(journalStats);
+            }
+        }
+
+        private void openBrowserForUrl(string url)
+        {
+            TabPage bpage = new TabPage("Browser");
+            Browser browser;
+            browser = new Browser(url);
+            bpage.Controls.Add(browser);
+            Form1.dub_tab.TabPages.Insert(Form1.dub_tab.TabPages.Count - 1, bpage);
+            Form1.dub_tab.SelectedTab = bpage;
+        }
+
+        private void authorNameLabel_Click(object sender, EventArgs e)
+        {
+            if (authorResultsListView.Visible == true && authStats != null)
+            {
+                Console.WriteLine(authStats.HomePageURL);
+                openBrowserForUrl(authStats.HomePageURL);
+            }
+        }
+
+
+        /* not required */
         public void searchWorker()
         {
             for (int i = 0; i < 4; i++) prevSortedColum[i] = false;
@@ -476,7 +779,7 @@ namespace PubCite
                     }
                     else
                     {
-                        
+
                         Suggestions.Visible = true;
                         for (int i = 0; i < authors.Count; i++)
                         {
@@ -520,211 +823,8 @@ namespace PubCite
                 populateJournal(journalStats);
             }
         }
-
-        private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            progressBar.MarqueeAnimationSpeed = 0;
-            progressBar.Style = ProgressBarStyle.Blocks;
-            progressBar.Value = progressBar.Minimum;
-
-        }
-
-        private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            Console.WriteLine(this.authorNameLabel.Text);
-            
-            //Thread.Sleep(10000);
-
-            if (authorRadioButton.Checked == true)
-            {
-                // get suggestions
-                if (a[0])
-                    authSug = CSParser.getAuthSuggestions(searchField.Text);
-                else if(a[1])
-                    authSug = GSScraper.getAuthSuggestions(searchField.Text);
-                else
-                    authSug = MSParser.getAuthSuggestions(searchField.Text);
-
-                if (authStats != null && authSug.isSet())
-                    suggestions = true;
-                
-            }
-            else // journal
-            {
-
-            }
-        }
-       
-
-        private void searchIcon_Click(object sender, EventArgs e)
-        {
-
-            progressBar.Style = ProgressBarStyle.Marquee;
-            progressBar.MarqueeAnimationSpeed = 25;
-
-            if (siteComboBox.SelectedItem.ToString().Equals("Citeseer"))
-            {
-                a[0] = true;
-                a[1] = false;
-                a[2] = false;
-                CSParser = new CSXParser();
-            }
-            else if (siteComboBox.SelectedItem.ToString().Equals("Google Scholar"))
-            {
-                a[0] = false;
-                a[1] = true;
-                a[2] = false;
-                GSScraper = new GSScraper();
-            }
-            else if (siteComboBox.SelectedItem.ToString().Equals("Microsoft Academic Search"))
-            {
-                a[0] = false;
-                a[1] = false;
-                a[2] = true;
-                MSParser = new MicrosoftScholarParser();
-            }
-
-            backgroundWorker.RunWorkerAsync();
-            if (authorRadioButton.Checked == true)
-            {
-                if (suggestions)
-                    populateSuggestions();
-                else
-                    populateAuthor(authStats);
-            }
-            
-        }
-
-        private void viewURLToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            
-            if (authorResultsListView.Visible == true)
-                openBrowserForUrl(Papers[authorResultsListView.FocusedItem.Index].TitleURL);
-            else
-                openBrowserForUrl(Papers[journalResultsListView.FocusedItem.Index].TitleURL);
-        }
-
-        private void viewCitationsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            int index;
-            if (authorResultsListView.Visible == true)
-                index = authorResultsListView.FocusedItem.Index;
-            else
-                index = journalResultsListView.FocusedItem.Index;
-
-            if (Papers[index].NumberOfCitations != 0)
-            {
-                TabPage citationsPage = new TabPage("Citations");
-                Form1.dub_tab.TabPages.Insert(Form1.dub_tab.TabPages.Count - 1, citationsPage);
-                CitationsTab NcitTab = new CitationsTab();
-                citationsPage.Controls.Add(NcitTab);
-
-                if (a[0] == true)
-                {
-                    Console.WriteLine("URL:" + Papers[index].CitedByURL);
-                    NcitTab.populateCitations(Papers[index], CSParser.getCitations(Papers[index].CitedByURL), 0);
-
-                }
-                else if (a[1] == true)
-                {
-                    // Console.WriteLine("URL:" + Papers[authorResultsListView.FocusedItem.Index].CitedByURL + "Paper Name:" + Papers[authorResultsListView.FocusedItem.Index].Title);
-                    NcitTab.populateCitations(Papers[index], GSScraper.getCitations(Papers[index].CitedByURL), 1);
-
-                }
-                else if (a[2] == true)
-                {
-
-                    NcitTab.populateCitations(Papers[index], MSParser.getCitations(Papers[index].CitedByURL), 2);
-                }
-
-                Form1.dub_tab.SelectedTab = citationsPage;
-            }
-        }
-
-        private void addToFavourite_Click(object sender, EventArgs e)
-        {
-            Console.WriteLine(authStats.HomePageURL);
-            if (authorRadioButton.Checked == true)
-                Form1.favorites.AddAuthor(authStats);
-            else if (journalsRadioButton.Checked == true)
-                Form1.favorites.AddJournal(journalStats);
-            UpdateTree();
-        }
-
-        private void viewStatisticsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            // author selected 
-            if (favouritesTreeView.SelectedNode.Parent.Index == 0)
-            {
-                authStats = FavAuthorList[favouritesTreeView.SelectedNode.Index];
-                populateAuthor(authStats);
-            }
-            else if (favouritesTreeView.SelectedNode.Parent.Index == 1)
-            {// Journal selected
-                journalStats = FavJournalList[favouritesTreeView.SelectedNode.Index];
-                populateJournal(journalStats);
-            }
-            Console.WriteLine(favouritesTreeView.SelectedNode.Level);
-        }
-
-        private void removeFromFavouritesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (favouritesTreeView.SelectedNode != null)
-            {
-                if (favouritesTreeView.SelectedNode.Parent.Index == 0)
-                {
-                    Form1.favorites.removeAuthor(favouritesTreeView.SelectedNode.Index);
-                    favouritesTreeView.SelectedNode.Remove();
-                }
-                else if (favouritesTreeView.SelectedNode.Parent.Index == 1)
-                {
-                    Form1.favorites.removeJournal(favouritesTreeView.SelectedNode.Index);
-                    favouritesTreeView.SelectedNode.Remove();
-                }
-            }
-        }
-
-        private void StartYear_TextChanged(object sender, EventArgs e)
-        {
-            Console.WriteLine(StartYear.Text);
-            if (StartYear.Text.Length == 4 || StartYear.getintval() == 0)
-            {
-                if (authorRadioButton.Checked == true && authStats != null)
-                    populateAuthor(authStats);
-                else if (journalStats != null)
-                    populateJournal(journalStats);
-            }
-        }
-
-        private void EndYear_TextChanged(object sender, EventArgs e)
-        {
-
-            if (EndYear.Text.Length == 4 || EndYear.getintval() == 0)
-            {
-                if (authorRadioButton.Checked == true && authStats != null)
-                    populateAuthor(authStats);
-                else if (journalStats != null)
-                    populateJournal(journalStats);
-            }
-        }
-
-        private void openBrowserForUrl(string url)
-        {
-            TabPage bpage = new TabPage("Browser");
-            Browser browser;
-            browser = new Browser(url);
-            bpage.Controls.Add(browser);
-            Form1.dub_tab.TabPages.Insert(Form1.dub_tab.TabPages.Count - 1, bpage);
-            Form1.dub_tab.SelectedTab = bpage;
-        }
-
-        private void authorNameLabel_Click(object sender, EventArgs e)
-        {
-            if (authorResultsListView.Visible == true && authStats != null)
-            {
-                Console.WriteLine(authStats.HomePageURL);
-                openBrowserForUrl(authStats.HomePageURL);
-            }
-        }
     }
 }
+
+
+

@@ -1,20 +1,15 @@
-﻿Priority:
+﻿Tasks:
 1. Testing
-2. Error Handling
-2. Advanced search options for general author/journal
+2. Error Handling/Show appropriate messages in message box
+3. Advanced search options for general author/journal
+4. Caching
+5. Favorite search
+6. Copy citations/export in different formats
+7. Make help file in html format to be shown in our browser
+8. View Citations for favourites
 
-Errors:
-1.Home page url not updated to file
-2.out of bound exceptions when removing an author just after adding.
-
-
-Parser Teams:
-Error Handling
-Advanced search
-
-Ayush/Anil:
+Anil:
 Caching
-
 
 Harsha:
 Close on tab
