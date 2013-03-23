@@ -74,14 +74,16 @@ namespace PubCite
                 ISSN = ISSN.Trim();
                 ISSN = ISSN.Replace(" ", "");
 
+                Console.WriteLine(searchElement + ",  " + keyword + ",  " + ISSN);
+
                 if (ISSN == "" && keyword == "")
-                    initialURL = "http://citeseerx.ist.psu.edu/search?q=author%3A%28" + searchElement + "%29&submit=Search&ic=1&sort=cite&t=doc";
+                    initialURL = "http://citeseerx.ist.psu.edu/search?q=venue%3A%28" + searchElement + "%29&submit=Search&ic=1&sort=cite&t=doc";
                 else if (ISSN == "")
-                    initialURL = "http://citeseerx.ist.psu.edu/search?q=author%3A%28" + searchElement + "%29+AND+keyword%3A%28" + keyword + "29&sort=cite&ic=1&t=doc";
+                    initialURL = "http://citeseerx.ist.psu.edu/search?q=venue%3A%28" + searchElement + "%29+AND+keyword%3A%28" + keyword + "%29&submit=Search&sort=cite&t=doc";
                 else if (keyword == "")
-                    initialURL = "http://citeseerx.ist.psu.edu/search?q=text%3A" + ISSN + "+AND+author%3A%28" + searchElement + "%29&sort=cite&ic=1&t=doc";
+                    initialURL = "http://citeseerx.ist.psu.edu/search?q=text%3A" + ISSN + "+AND+venue%3A%28" + searchElement + "%29&sort=cite&ic=1&t=doc";
                 else
-                    initialURL = "http://citeseerx.ist.psu.edu/search?q=text%3A" + ISSN + "+AND+author%3A%28" + searchElement + "%29+AND+keyword%3A%28" + keyword + "%29&sort=cite&ic=1&t=doc";
+                    initialURL = "http://citeseerx.ist.psu.edu/search?q=text%3A" + ISSN + "+AND+venue%3A%28" + searchElement + "%29+AND+keyword%3A%28" + keyword + "%29&sort=cite&ic=1&t=doc";
                 
             }
             else
@@ -114,6 +116,9 @@ namespace PubCite
             
             if (noResult > 100)
                 noResult = 100;
+
+
+            Console.WriteLine(noResult + "   " + noResult);
         }
 
         private int LoadNextPage()
