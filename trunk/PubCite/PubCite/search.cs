@@ -101,10 +101,13 @@ namespace PubCite
 
         public void searchField_KeyUp(object sender,KeyEventArgs e)
         {
-            
 
 
+            if (cachedListView.Visible == false)
+            {
+                cachedListView.Visible = true;
 
+            }
 
 
         }
