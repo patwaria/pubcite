@@ -117,7 +117,10 @@ namespace PubCite
                     }
                     numOfCitations = Convert.ToInt32(response2.Publication.Result[i].CitationCount);
                     year = Convert.ToInt32(response2.Publication.Result[i].Year);
-                    //publication = response2.Publication.Result[i].Journal.;
+
+                    publication = "";
+                    if(response2.Publication.Result[i].Journal!=null)
+                        publication = response2.Publication.Result[i].Journal.FullName;
 
                     String url = "";
                     if (response2.Publication.Result[i].FullVersionURL.Length != 0)
@@ -129,7 +132,7 @@ namespace PubCite
                     if (pap_abstract == null)
                         pap_abstract = "";
 
-                    paper = new Paper(title,url, authors,pap_abstract, year, "", "", numOfCitations, id, i+k*100);
+                    paper = new Paper(title,url, authors,pap_abstract, year,publication, "", numOfCitations, id, i+k*100);
 
                     auth.addPaper(paper);
 
@@ -159,7 +162,11 @@ namespace PubCite
                 }
                 numOfCitations = Convert.ToInt32(response2.Publication.Result[i].CitationCount);
                 year = Convert.ToInt32(response2.Publication.Result[i].Year);
-                //publication = response2.Publication.Result[i].Journal.;
+
+                publication = "";
+                if (response2.Publication.Result[i].Journal != null)
+                    publication = response2.Publication.Result[i].Journal.FullName;
+
 
 
                 String url = "";
@@ -172,7 +179,7 @@ namespace PubCite
                 if (pap_abstract == null)
                     pap_abstract = "";
 
-                paper = new Paper(title, url, authors,pap_abstract, year, "", "", numOfCitations, id, Convert.ToInt32(i+(range/100)*100));
+                paper = new Paper(title, url, authors,pap_abstract, year,publication, "", numOfCitations, id, Convert.ToInt32(i+(range/100)*100));
 
                 auth.addPaper(paper);
 
@@ -220,7 +227,12 @@ namespace PubCite
                     }
                     numOfCitations = Convert.ToInt32(response.Publication.Result[i].CitationCount);
                     year = Convert.ToInt32(response.Publication.Result[i].Year);
-                    //publication = response.Publication.Result[i].Journal.ShortName;
+
+                    publication = "";
+                    if (response.Publication.Result[i].Journal != null)
+                        publication = response.Publication.Result[i].Journal.FullName;
+
+
                     String url = "";
                     if (response.Publication.Result[i].FullVersionURL.Length != 0)
                         url = response.Publication.Result[i].FullVersionURL[0];
@@ -231,7 +243,7 @@ namespace PubCite
                     if (pap_abstract == null)
                         pap_abstract = "";
 
-                    paper = new Paper(title, url, authors,pap_abstract, year, "", "", numOfCitations, id, k*100+i);
+                    paper = new Paper(title, url, authors,pap_abstract, year, publication, "", numOfCitations, id, k*100+i);
 
                     journ.addPaper(paper);
 
@@ -262,7 +274,11 @@ namespace PubCite
                 }
                 numOfCitations = Convert.ToInt32(response.Publication.Result[i].CitationCount);
                 year = Convert.ToInt32(response.Publication.Result[i].Year);
-                //publication = response.Publication.Result[i].Journal.ShortName;
+
+                publication = "";
+                if (response.Publication.Result[i].Journal != null)
+                    publication = response.Publication.Result[i].Journal.FullName;
+
 
 
                 String url = "";
@@ -275,7 +291,7 @@ namespace PubCite
                 if (pap_abstract == null)
                     pap_abstract = "";
 
-                paper = new Paper(title, url, authors,pap_abstract, year, "", "", numOfCitations, id, Convert.ToInt32(i + (range / 100) * 100));
+                paper = new Paper(title, url, authors,pap_abstract, year, publication, "", numOfCitations, id, Convert.ToInt32(i + (range / 100) * 100));
 
                 journ.addPaper(paper);
 
@@ -326,7 +342,11 @@ namespace PubCite
                     }
                     numOfCitations = Convert.ToInt32(response2.Publication.Result[i].CitationCount);
                     year = Convert.ToInt32(response2.Publication.Result[i].Year);
-                    //publication = response2.Publication.Result[i].Journal.;
+
+                    publication = "";
+                    if (response2.Publication.Result[i].Journal != null)
+                        publication = response2.Publication.Result[i].Journal.FullName;
+
 
                     String url = "";
                     if (response2.Publication.Result[i].FullVersionURL.Length != 0)
@@ -338,7 +358,7 @@ namespace PubCite
                     if (pap_abstract == null)
                         pap_abstract = "";
 
-                    paper = new Paper(title, url, authors,pap_abstract, year, "", "", numOfCitations, id, i+k*100);
+                    paper = new Paper(title, url, authors,pap_abstract, year, publication, "", numOfCitations, id, i+k*100);
 
                     auth.addPaper(paper);
 
@@ -368,7 +388,11 @@ namespace PubCite
                 }
                 numOfCitations = Convert.ToInt32(response2.Publication.Result[i].CitationCount);
                 year = Convert.ToInt32(response2.Publication.Result[i].Year);
-                //publication = response2.Publication.Result[i].Journal.;
+
+                publication = "";
+                if (response2.Publication.Result[i].Journal != null)
+                    publication = response2.Publication.Result[i].Journal.FullName;
+
 
 
                 String url = "";
@@ -381,7 +405,7 @@ namespace PubCite
                 if (pap_abstract == null)
                     pap_abstract = "";
 
-                paper = new Paper(title, url, authors,pap_abstract, year, "", "", numOfCitations, id, Convert.ToInt32(i + (range / 100) * 100));
+                paper = new Paper(title, url, authors,pap_abstract, year, publication, "", numOfCitations, id, Convert.ToInt32(i + (range / 100) * 100));
 
                 auth.addPaper(paper);
 
@@ -444,7 +468,11 @@ namespace PubCite
                     }
                     numOfCitations = Convert.ToInt32(response.Publication.Result[i].CitationCount);
                     year = Convert.ToInt32(response.Publication.Result[i].Year);
-                    //publication = response2.Publication.Result[i].Journal.;
+
+                    publication = "";
+                    if (response.Publication.Result[i].Journal != null)
+                        publication = response.Publication.Result[i].Journal.FullName;
+
 
                     String url = "";
                     if (response.Publication.Result[i].FullVersionURL.Length != 0)
@@ -456,7 +484,7 @@ namespace PubCite
                     if (pap_abstract == null)
                         pap_abstract = "";
 
-                    paper = new Paper(title, url, authors,pap_abstract, year, "", "", numOfCitations, id_, i + k * 100);
+                    paper = new Paper(title, url, authors,pap_abstract, year, publication, "", numOfCitations, id_, i + k * 100);
 
                     cited.Add(paper);
 
@@ -486,7 +514,11 @@ namespace PubCite
                 }
                 numOfCitations = Convert.ToInt32(response.Publication.Result[i].CitationCount);
                 year = Convert.ToInt32(response.Publication.Result[i].Year);
-                //publication = response2.Publication.Result[i].Journal.;
+
+                publication = "";
+                if (response.Publication.Result[i].Journal != null)
+                    publication = response.Publication.Result[i].Journal.FullName;
+
 
 
                 String url = "";
@@ -499,7 +531,7 @@ namespace PubCite
                 if (pap_abstract == null)
                     pap_abstract = "";
 
-                paper = new Paper(title, url, authors,pap_abstract, year, "", "", numOfCitations, id_, Convert.ToInt32(i + (range / 100) * 100));
+                paper = new Paper(title, url, authors,pap_abstract, year, publication, "", numOfCitations, id_, Convert.ToInt32(i + (range / 100) * 100));
 
                 cited.Add(paper);
 
@@ -514,12 +546,5 @@ namespace PubCite
             return cited;
         }
 
-        /*static void Main(string[] args)
-        {
-            MicrosoftScholarParser p = new MicrosoftScholarParser();
-            p.getAuthSuggestions("Anderson");
-            p.getAuthStatistics("47469200");
-            //p.getJournals("Computer Communication Review");  //sigcomm is not showing any results on microsoft scholar
-        }*/
     }
 }
