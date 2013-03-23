@@ -41,7 +41,6 @@
             this.addToFavourite = new System.Windows.Forms.PictureBox();
             this.CloseButton = new System.Windows.Forms.Button();
             this.searchIcon = new System.Windows.Forms.PictureBox();
-            this.EndYear = new PubCite.NumericTextBox();
             this.resultsPanel = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.resultsGroupBox = new System.Windows.Forms.GroupBox();
@@ -68,7 +67,6 @@
             this.citesperYearLabel = new System.Windows.Forms.Label();
             this.citationsLabel = new System.Windows.Forms.Label();
             this.authorLabel = new System.Windows.Forms.Label();
-            this.StartYear = new PubCite.NumericTextBox();
             this.favouritesPanel = new System.Windows.Forms.Panel();
             this.favouritesTreeView = new System.Windows.Forms.TreeView();
             this.Suggestions = new System.Windows.Forms.GroupBox();
@@ -87,6 +85,8 @@
             this.favouriteMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.viewStatisticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeFromFavouritesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.EndYear = new PubCite.NumericTextBox();
+            this.StartYear = new PubCite.NumericTextBox();
             this.SearchPanel.SuspendLayout();
             this.progressPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.addToFavourite)).BeginInit();
@@ -105,6 +105,7 @@
             // 
             this.SearchPanel.BackColor = System.Drawing.SystemColors.Window;
             this.SearchPanel.Controls.Add(this.progressPanel);
+            this.SearchPanel.Controls.Add(this.progressBar);
             this.SearchPanel.Controls.Add(this.addToFavourite);
             this.SearchPanel.Controls.Add(this.CloseButton);
             this.SearchPanel.Controls.Add(this.searchIcon);
@@ -128,17 +129,16 @@
             // progressPanel
             // 
             this.progressPanel.Controls.Add(this.label3);
-            this.progressPanel.Controls.Add(this.progressBar);
-            this.progressPanel.Location = new System.Drawing.Point(12, 55);
+            this.progressPanel.Location = new System.Drawing.Point(15, 55);
             this.progressPanel.Name = "progressPanel";
-            this.progressPanel.Size = new System.Drawing.Size(477, 29);
+            this.progressPanel.Size = new System.Drawing.Size(295, 29);
             this.progressPanel.TabIndex = 22;
             this.progressPanel.Visible = false;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(205, 13);
+            this.label3.Location = new System.Drawing.Point(0, 14);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(222, 13);
             this.label3.TabIndex = 1;
@@ -146,9 +146,9 @@
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(3, 10);
+            this.progressBar.Location = new System.Drawing.Point(15, 3);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(196, 16);
+            this.progressBar.Size = new System.Drawing.Size(884, 22);
             this.progressBar.TabIndex = 0;
             // 
             // addToFavourite
@@ -180,15 +180,6 @@
             this.searchIcon.TabIndex = 11;
             this.searchIcon.TabStop = false;
             this.searchIcon.Click += new System.EventHandler(this.searchIcon_Click);
-            // 
-            // EndYear
-            // 
-            this.EndYear.AllowSpace = false;
-            this.EndYear.Location = new System.Drawing.Point(581, 31);
-            this.EndYear.Name = "EndYear";
-            this.EndYear.Size = new System.Drawing.Size(44, 22);
-            this.EndYear.TabIndex = 0;
-            this.EndYear.TextChanged += new System.EventHandler(this.EndYear_TextChanged);
             // 
             // resultsPanel
             // 
@@ -429,15 +420,6 @@
             this.authorLabel.TabIndex = 8;
             this.authorLabel.Text = "Name:";
             // 
-            // StartYear
-            // 
-            this.StartYear.AllowSpace = false;
-            this.StartYear.Location = new System.Drawing.Point(498, 32);
-            this.StartYear.Name = "StartYear";
-            this.StartYear.Size = new System.Drawing.Size(45, 22);
-            this.StartYear.TabIndex = 0;
-            this.StartYear.TextChanged += new System.EventHandler(this.StartYear_TextChanged);
-            // 
             // favouritesPanel
             // 
             this.favouritesPanel.BackColor = System.Drawing.SystemColors.Window;
@@ -498,7 +480,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(552, 35);
+            this.label2.Location = new System.Drawing.Point(555, 35);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(22, 13);
             this.label2.TabIndex = 10;
@@ -508,7 +490,7 @@
             // 
             this.searchField.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.searchField.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.searchField.Location = new System.Drawing.Point(8, 3);
+            this.searchField.Location = new System.Drawing.Point(15, 3);
             this.searchField.Name = "searchField";
             this.searchField.Size = new System.Drawing.Size(884, 22);
             this.searchField.TabIndex = 1;
@@ -516,7 +498,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(396, 35);
+            this.label1.Location = new System.Drawing.Point(399, 35);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(102, 13);
             this.label1.TabIndex = 7;
@@ -527,7 +509,7 @@
             this.authorRadioButton.AutoSize = true;
             this.authorRadioButton.Checked = true;
             this.authorRadioButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.authorRadioButton.Location = new System.Drawing.Point(12, 32);
+            this.authorRadioButton.Location = new System.Drawing.Point(15, 32);
             this.authorRadioButton.Name = "authorRadioButton";
             this.authorRadioButton.Size = new System.Drawing.Size(65, 17);
             this.authorRadioButton.TabIndex = 4;
@@ -542,7 +524,7 @@
             "Google Scholar",
             "Citeseer",
             "Microsoft Academic Search"});
-            this.siteComboBox.Location = new System.Drawing.Point(257, 31);
+            this.siteComboBox.Location = new System.Drawing.Point(260, 31);
             this.siteComboBox.Name = "siteComboBox";
             this.siteComboBox.Size = new System.Drawing.Size(120, 21);
             this.siteComboBox.TabIndex = 6;
@@ -552,7 +534,7 @@
             // 
             this.journalsRadioButton.AutoSize = true;
             this.journalsRadioButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.journalsRadioButton.Location = new System.Drawing.Point(78, 32);
+            this.journalsRadioButton.Location = new System.Drawing.Point(81, 32);
             this.journalsRadioButton.Name = "journalsRadioButton";
             this.journalsRadioButton.Size = new System.Drawing.Size(67, 17);
             this.journalsRadioButton.TabIndex = 5;
@@ -561,7 +543,7 @@
             // 
             // searchSiteLabel
             // 
-            this.searchSiteLabel.Location = new System.Drawing.Point(182, 34);
+            this.searchSiteLabel.Location = new System.Drawing.Point(185, 34);
             this.searchSiteLabel.Name = "searchSiteLabel";
             this.searchSiteLabel.Size = new System.Drawing.Size(69, 21);
             this.searchSiteLabel.TabIndex = 3;
@@ -612,6 +594,24 @@
             this.removeFromFavouritesToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.removeFromFavouritesToolStripMenuItem.Text = "Remove from Favourites";
             this.removeFromFavouritesToolStripMenuItem.Click += new System.EventHandler(this.removeFromFavouritesToolStripMenuItem_Click);
+            // 
+            // EndYear
+            // 
+            this.EndYear.AllowSpace = false;
+            this.EndYear.Location = new System.Drawing.Point(584, 31);
+            this.EndYear.Name = "EndYear";
+            this.EndYear.Size = new System.Drawing.Size(44, 22);
+            this.EndYear.TabIndex = 0;
+            this.EndYear.TextChanged += new System.EventHandler(this.EndYear_TextChanged);
+            // 
+            // StartYear
+            // 
+            this.StartYear.AllowSpace = false;
+            this.StartYear.Location = new System.Drawing.Point(501, 31);
+            this.StartYear.Name = "StartYear";
+            this.StartYear.Size = new System.Drawing.Size(45, 22);
+            this.StartYear.TabIndex = 0;
+            this.StartYear.TextChanged += new System.EventHandler(this.StartYear_TextChanged);
             // 
             // search
             // 
