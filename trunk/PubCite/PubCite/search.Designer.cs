@@ -41,6 +41,7 @@
             this.addToFavourite = new System.Windows.Forms.PictureBox();
             this.CloseButton = new System.Windows.Forms.Button();
             this.searchIcon = new System.Windows.Forms.PictureBox();
+            this.EndYear = new PubCite.NumericTextBox();
             this.resultsPanel = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.resultsGroupBox = new System.Windows.Forms.GroupBox();
@@ -67,6 +68,7 @@
             this.citesperYearLabel = new System.Windows.Forms.Label();
             this.citationsLabel = new System.Windows.Forms.Label();
             this.authorLabel = new System.Windows.Forms.Label();
+            this.StartYear = new PubCite.NumericTextBox();
             this.favouritesPanel = new System.Windows.Forms.Panel();
             this.favouritesTreeView = new System.Windows.Forms.TreeView();
             this.Suggestions = new System.Windows.Forms.GroupBox();
@@ -85,8 +87,6 @@
             this.favouriteMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.viewStatisticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeFromFavouritesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.EndYear = new PubCite.NumericTextBox();
-            this.StartYear = new PubCite.NumericTextBox();
             this.SearchPanel.SuspendLayout();
             this.progressPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.addToFavourite)).BeginInit();
@@ -181,16 +181,27 @@
             this.searchIcon.TabStop = false;
             this.searchIcon.Click += new System.EventHandler(this.searchIcon_Click);
             // 
+            // EndYear
+            // 
+            this.EndYear.AllowSpace = false;
+            this.EndYear.Location = new System.Drawing.Point(581, 31);
+            this.EndYear.Name = "EndYear";
+            this.EndYear.Size = new System.Drawing.Size(44, 22);
+            this.EndYear.TabIndex = 0;
+            this.EndYear.TextChanged += new System.EventHandler(this.EndYear_TextChanged);
+            // 
             // resultsPanel
             // 
+            this.resultsPanel.BackColor = System.Drawing.SystemColors.Window;
             this.resultsPanel.Controls.Add(this.panel4);
-            this.resultsPanel.Location = new System.Drawing.Point(236, 90);
+            this.resultsPanel.Location = new System.Drawing.Point(236, 88);
             this.resultsPanel.Name = "resultsPanel";
-            this.resultsPanel.Size = new System.Drawing.Size(745, 502);
+            this.resultsPanel.Size = new System.Drawing.Size(745, 504);
             this.resultsPanel.TabIndex = 1;
             // 
             // panel4
             // 
+            this.panel4.BackColor = System.Drawing.SystemColors.Window;
             this.panel4.Controls.Add(this.resultsGroupBox);
             this.panel4.Controls.Add(this.statisticsGroupBox);
             this.panel4.Location = new System.Drawing.Point(4, 3);
@@ -418,19 +429,31 @@
             this.authorLabel.TabIndex = 8;
             this.authorLabel.Text = "Name:";
             // 
+            // StartYear
+            // 
+            this.StartYear.AllowSpace = false;
+            this.StartYear.Location = new System.Drawing.Point(498, 32);
+            this.StartYear.Name = "StartYear";
+            this.StartYear.Size = new System.Drawing.Size(45, 22);
+            this.StartYear.TabIndex = 0;
+            this.StartYear.TextChanged += new System.EventHandler(this.StartYear_TextChanged);
+            // 
             // favouritesPanel
             // 
+            this.favouritesPanel.BackColor = System.Drawing.SystemColors.Window;
             this.favouritesPanel.Controls.Add(this.favouritesTreeView);
             this.favouritesPanel.Controls.Add(this.Suggestions);
+            this.favouritesPanel.ForeColor = System.Drawing.SystemColors.ControlText;
             this.favouritesPanel.Location = new System.Drawing.Point(8, 88);
             this.favouritesPanel.Name = "favouritesPanel";
-            this.favouritesPanel.Size = new System.Drawing.Size(222, 504);
+            this.favouritesPanel.Size = new System.Drawing.Size(228, 504);
             this.favouritesPanel.TabIndex = 0;
             // 
             // favouritesTreeView
             // 
             this.favouritesTreeView.BackColor = System.Drawing.SystemColors.Window;
-            this.favouritesTreeView.Location = new System.Drawing.Point(3, 3);
+            this.favouritesTreeView.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.favouritesTreeView.Location = new System.Drawing.Point(7, 6);
             this.favouritesTreeView.Name = "favouritesTreeView";
             treeNode1.Name = "authorsRootNode";
             treeNode1.Text = "Authors";
@@ -440,15 +463,15 @@
             treeNode3.Text = "Favourites";
             this.favouritesTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode3});
-            this.favouritesTreeView.Size = new System.Drawing.Size(213, 224);
+            this.favouritesTreeView.Size = new System.Drawing.Size(209, 224);
             this.favouritesTreeView.TabIndex = 9;
             // 
             // Suggestions
             // 
             this.Suggestions.Controls.Add(this.authorsSuggestions);
-            this.Suggestions.Location = new System.Drawing.Point(4, 233);
+            this.Suggestions.Location = new System.Drawing.Point(4, 241);
             this.Suggestions.Name = "Suggestions";
-            this.Suggestions.Size = new System.Drawing.Size(215, 265);
+            this.Suggestions.Size = new System.Drawing.Size(215, 255);
             this.Suggestions.TabIndex = 8;
             this.Suggestions.TabStop = false;
             this.Suggestions.Text = "Suggestions";
@@ -462,7 +485,7 @@
             this.authorsSuggestions.GridLines = true;
             this.authorsSuggestions.Location = new System.Drawing.Point(3, 18);
             this.authorsSuggestions.Name = "authorsSuggestions";
-            this.authorsSuggestions.Size = new System.Drawing.Size(209, 244);
+            this.authorsSuggestions.Size = new System.Drawing.Size(209, 234);
             this.authorsSuggestions.TabIndex = 0;
             this.authorsSuggestions.UseCompatibleStateImageBehavior = false;
             this.authorsSuggestions.View = System.Windows.Forms.View.Details;
@@ -589,24 +612,6 @@
             this.removeFromFavouritesToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.removeFromFavouritesToolStripMenuItem.Text = "Remove from Favourites";
             this.removeFromFavouritesToolStripMenuItem.Click += new System.EventHandler(this.removeFromFavouritesToolStripMenuItem_Click);
-            // 
-            // EndYear
-            // 
-            this.EndYear.AllowSpace = false;
-            this.EndYear.Location = new System.Drawing.Point(581, 31);
-            this.EndYear.Name = "EndYear";
-            this.EndYear.Size = new System.Drawing.Size(44, 22);
-            this.EndYear.TabIndex = 0;
-            this.EndYear.TextChanged += new System.EventHandler(this.EndYear_TextChanged);
-            // 
-            // StartYear
-            // 
-            this.StartYear.AllowSpace = false;
-            this.StartYear.Location = new System.Drawing.Point(498, 32);
-            this.StartYear.Name = "StartYear";
-            this.StartYear.Size = new System.Drawing.Size(45, 22);
-            this.StartYear.TabIndex = 0;
-            this.StartYear.TextChanged += new System.EventHandler(this.StartYear_TextChanged);
             // 
             // search
             // 
