@@ -144,7 +144,7 @@ namespace PubCite
 
 
             string url = "http://scholar.google.com/scholar?q=" + keywords + "&as_epq=&as_oq=" + affiliation + "&as_eq=&as_occt=any&as_sauthors=" + authName + "&as_publication=&as_ylo=&as_yhi=&btnG=&hl=en&as_sdt=0%2C5";
-            Console.WriteLine(url);
+            //Console.WriteLine(url);
             HtmlWeb web = new HtmlWeb();
             doc = web.Load(url);
 
@@ -267,14 +267,32 @@ namespace PubCite
         public SG.Journal getJournals(string journalName,string ISSN,string keywords)
         {
 
+            Console.WriteLine("anil kumar");
             // CONNECTIONS
             if (journalName == null) journalName = null;
             else  journalName.Trim();
             SG.Journal result = new SG.Journal(journalName);
 
+
+            if (ISSN == null) ISSN = "";
+            else
+            {
+                ISSN = ISSN.Trim();
+                ISSN = Regex.Replace(ISSN, @"\s+", "+");
+            }
+            if (keywords == null) keywords = "";
+            else
+            {
+                keywords = keywords.Trim();
+                keywords = Regex.Replace(keywords, @"\s+", "+");
+            }
+            string temp = (ISSN.Equals("") || keywords.Equals("")) ? keywords + ISSN : keywords + "+" + ISSN;
+
+
             string name = Regex.Replace(journalName, @"\s+", "+");
-            string url = "http://scholar.google.co.in/scholar?as_q=" + ISSN + "+" + keywords + "&as_epq=&as_oq=&as_eq=&as_occt=any&as_sauthors=&as_publication=" + name  + "&as_ylo=&as_yhi=&btnG=&hl=en&as_sdt=0%2C5";
-           
+            string url = "http://scholar.google.co.in/scholar?as_q=" + temp + "&as_publication=" + name  ;
+            Console.WriteLine(url);
+
             //Console.WriteLine("loaded !!!");
             HtmlWeb web = new HtmlWeb();
             doc = web.Load(url);
