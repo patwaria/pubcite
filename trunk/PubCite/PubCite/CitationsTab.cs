@@ -144,7 +144,7 @@ namespace PubCite
             else
                 browser = new Browser(MainPapers[journalsResultsListView.FocusedItem.Index].TitleURL);
             bpage.Controls.Add(browser);
-
+            bpage.ImageIndex = 1;
             Form1.dub_tab.TabPages.Insert(Form1.dub_tab.TabPages.Count - 1, bpage);
             Form1.dub_tab.SelectedTab = bpage;
         }
