@@ -149,13 +149,13 @@ namespace PubCite
                 //nextURL = "http://citeseerx.ist.psu.edu/search?q=venue%3A" + searchElement +"&ic=1&t=doc&sort=cite&start=" + Convert.ToString(PageNo) + "0";
 
                 if (ISSN == "" && keyword == "")
-                    nextURL = "http://citeseerx.ist.psu.edu/search?q=author%3A%28" + searchElement + "%29&ic=1&t=doc&sort=cite&start=" + PageNo + "0";
+                    nextURL = "http://citeseerx.ist.psu.edu/search?q=venue%3A%28" + searchElement + "%29&ic=1&t=doc&sort=cite&start=" + PageNo + "0";
                 else if (ISSN == "")
-                    nextURL = "http://citeseerx.ist.psu.edu/search?q=author%3A%28" + searchElement + "%29+AND+keyword%3A%28" + keyword + "%29&ic=1&t=doc&sort=cite&start=" + PageNo + "0";
+                    nextURL = "http://citeseerx.ist.psu.edu/search?q=venue%3A%28" + searchElement + "%29+AND+keyword%3A%28" + keyword + "%29&ic=1&t=doc&sort=cite&start=" + PageNo + "0";
                 else if (keyword == "")
-                    nextURL = "http://citeseerx.ist.psu.edu/search?q=text%3A" + ISSN + "+AND+author%3A%28" + searchElement + "%29&ic=1&t=doc&sort=cite&start=" + PageNo + "0";
+                    nextURL = "http://citeseerx.ist.psu.edu/search?q=text%3A" + ISSN + "+AND+venue%3A%28" + searchElement + "%29&ic=1&t=doc&sort=cite&start=" + PageNo + "0";
                 else
-                    nextURL = "http://citeseerx.ist.psu.edu/search?q=text%3A" + ISSN + "+AND+author%3A%28" + searchElement + "%29+AND+keyword%3A%28" + keyword + "%29&ic=1&t=doc&sort=cite&start=" + PageNo + "0";
+                    nextURL = "http://citeseerx.ist.psu.edu/search?q=text%3A" + ISSN + "+AND+venue%3A%28" + searchElement + "%29+AND+keyword%3A%28" + keyword + "%29&ic=1&t=doc&sort=cite&start=" + PageNo + "0";
 
 
 
