@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using HtmlAgilityPack;
 using SG;
 
 namespace PubCite
@@ -10,6 +11,36 @@ namespace PubCite
     {
 
         public CSXParser() { }
+
+        public string getBibTex(string url)
+        {
+            string res = "", temp = "";
+
+            HtmlWeb web;
+            HtmlDocument doc;
+            HtmlNode n;
+
+            if (url.Contains("viewdoc"))//e.g. http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.31.3487
+            {
+                web = new HtmlWeb();
+                doc = web.Load(url);
+
+                if (doc != null)
+                    Console.WriteLine("Document Loaded!");
+                else
+                    Console.WriteLine("Load Error!");
+
+                if ((n = doc.DocumentNode.SelectSingleNode("//*[@id=\"bibtex\"]/p")) != null)
+                {
+                    temp = n.InnerText;
+                    temp = temp.Replace(",", ",\n").Replace("&nbsp;", " ");
+                }
+                res = temp;
+                return res;
+            }
+            else//e.g. http://citeseer.ist.psu.edu/showciting?cid=2131272
+                return res;
+        }
 
         public List<Paper> getCitations(string url)//url pointing to web page of a paper
         {
