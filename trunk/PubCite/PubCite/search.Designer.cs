@@ -35,6 +35,10 @@
             treeNode1,
             treeNode2});
             this.SearchPanel = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.affiliation = new System.Windows.Forms.Label();
+            this.KeywordsTextBox = new System.Windows.Forms.TextBox();
+            this.affilationTextBox = new System.Windows.Forms.TextBox();
             this.journalCheckBox = new System.Windows.Forms.CheckBox();
             this.authorCheckBox = new System.Windows.Forms.CheckBox();
             this.progressPanel = new System.Windows.Forms.Panel();
@@ -104,7 +108,12 @@
             // SearchPanel
             // 
             this.SearchPanel.BackColor = System.Drawing.SystemColors.Window;
+            this.SearchPanel.Controls.Add(this.label4);
+            this.SearchPanel.Controls.Add(this.affiliation);
+            this.SearchPanel.Controls.Add(this.KeywordsTextBox);
+            this.SearchPanel.Controls.Add(this.affilationTextBox);
             this.SearchPanel.Controls.Add(this.journalCheckBox);
+            this.SearchPanel.Controls.Add(this.searchField);
             this.SearchPanel.Controls.Add(this.authorCheckBox);
             this.SearchPanel.Controls.Add(this.progressPanel);
             this.SearchPanel.Controls.Add(this.progressBar);
@@ -116,7 +125,6 @@
             this.SearchPanel.Controls.Add(this.StartYear);
             this.SearchPanel.Controls.Add(this.favouritesPanel);
             this.SearchPanel.Controls.Add(this.label2);
-            this.SearchPanel.Controls.Add(this.searchField);
             this.SearchPanel.Controls.Add(this.label1);
             this.SearchPanel.Controls.Add(this.siteComboBox);
             this.SearchPanel.Controls.Add(this.searchSiteLabel);
@@ -125,6 +133,38 @@
             this.SearchPanel.Name = "SearchPanel";
             this.SearchPanel.Size = new System.Drawing.Size(979, 595);
             this.SearchPanel.TabIndex = 2;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(703, 38);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(59, 13);
+            this.label4.TabIndex = 28;
+            this.label4.Text = "Keywords:";
+            // 
+            // affiliation
+            // 
+            this.affiliation.AutoSize = true;
+            this.affiliation.Location = new System.Drawing.Point(493, 36);
+            this.affiliation.Name = "affiliation";
+            this.affiliation.Size = new System.Drawing.Size(61, 13);
+            this.affiliation.TabIndex = 27;
+            this.affiliation.Text = "Affiliation:";
+            // 
+            // KeywordsTextBox
+            // 
+            this.KeywordsTextBox.Location = new System.Drawing.Point(768, 35);
+            this.KeywordsTextBox.Name = "KeywordsTextBox";
+            this.KeywordsTextBox.Size = new System.Drawing.Size(105, 22);
+            this.KeywordsTextBox.TabIndex = 26;
+            // 
+            // affilationTextBox
+            // 
+            this.affilationTextBox.Location = new System.Drawing.Point(572, 32);
+            this.affilationTextBox.Name = "affilationTextBox";
+            this.affilationTextBox.Size = new System.Drawing.Size(105, 22);
+            this.affilationTextBox.TabIndex = 25;
             // 
             // journalCheckBox
             // 
@@ -704,5 +744,9 @@
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.CheckBox authorCheckBox;
         private System.Windows.Forms.CheckBox journalCheckBox;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label affiliation;
+        private System.Windows.Forms.TextBox KeywordsTextBox;
+        private System.Windows.Forms.TextBox affilationTextBox;
     }
 }

@@ -728,7 +728,7 @@ namespace PubCite
 
         /* not required */
         public void searchWorker()
-        {
+        {  
             for (int i = 0; i < 4; i++) prevSortedColum[i] = false;
             authorsSuggestions.Items.Clear();
             authorResultsListView.Items.Clear();
@@ -852,6 +852,8 @@ namespace PubCite
                 populateJournal(journalStats);
             }
         }
+
+        
     }
 }
 
