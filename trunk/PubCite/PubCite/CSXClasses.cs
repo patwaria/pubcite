@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using HtmlAgilityPack;
 using SG;
+using System.Text.RegularExpressions;
 
 //to use the class CSXAuth (also CSXAuthSug, CSXPubli), copy the code and call the constructor with the authURL as an argument.
 //CSXAuth p = new CSXAuth(authURL);
@@ -27,31 +28,66 @@ namespace PubCite
         private int searchType;
         private Author auth1;
         private Journal journ1;
+        private string affiliation;
+        private string keyword;
+        private string ISSN;
 
-        public CiteSeerJournal_FinalAuthorSearch(string searchEle, int searchTy)  //searchType 0 for authorSearch, 1 for journalSearch
+        public CiteSeerJournal_FinalAuthorSearch(string searchEle, int searchTy, string affISSN, string key)  //searchType 0 for authorSearch, 1 for journalSearch
         {
 
             searchElement = searchEle;
             searchType = searchTy;
+            keyword = key;
+            affiliation = "";
+            ISSN = "";
 
             auth1 = new Author(searchEle);
             journ1 = new Journal(searchEle);
 
-            char[] searchElementTemp = searchElement.ToCharArray();
-            for (int i = 0; i < searchElement.Length; i++)
-            {
-                if (searchElementTemp[i] == ' ')
-                    searchElementTemp[i] = '+';
-            }
+            keyword = keyword.Trim();
+            keyword = Regex.Replace(keyword, @"\s+", " ");
+            keyword = keyword.Replace(" ", "+");
 
-            searchElement = new string(searchElementTemp);
+            searchElement = searchElement.Trim();
+            searchElement = Regex.Replace(searchElement, @"\s+", " ");
+            searchElement = searchElement.Replace(" ", "+");
+
             if (searchType == 0)
-                initialURL = "http://citeseerx.ist.psu.edu/search?q=author%3A%28" + searchElement + "%29&submit=Search&ic=1&sort=cite&t=doc";
-            else if (searchType == 1)
-                initialURL = "http://citeseerx.ist.psu.edu/search?q=venue%3A" + searchElement + "&sort=cite&ic=1&t=doc";
-            else
-                initialURL = "";
+            {
+                //initialURL = "http://citeseerx.ist.psu.edu/search?q=author%3A%28" + searchElement + "%29&submit=Search&ic=1&sort=cite&t=doc";
+                affiliation = affISSN;
+                affiliation = affiliation.Trim();
+                affiliation = Regex.Replace(affiliation, @"\s+", " ");
+                affiliation = affiliation.Replace(" ", "+");
 
+                if(affiliation=="" && keyword=="")
+                    initialURL = "http://citeseerx.ist.psu.edu/search?q=author%3A%28" + searchElement + "%29&submit=Search&ic=1&sort=cite&t=doc";
+                else if(affiliation=="")
+                    initialURL = "http://citeseerx.ist.psu.edu/search?q=author%3A%28" + searchElement + "%29+AND+keyword%3A%28" + keyword + "29&sort=cite&ic=1&t=doc";
+                else if(keyword=="")
+                    initialURL = "http://citeseerx.ist.psu.edu/search?q=author%3A%28" + searchElement + "%29+AND+affil%3A%28" + affiliation + "%29&sort=cite&ic=1&t=doc";
+                else
+                    initialURL = "http://citeseerx.ist.psu.edu/search?q=author%3A%28" + searchElement + "%29+AND+affil%3A%28" + affiliation + "%29+AND+keyword%3A%28" + keyword + "%29&sort=cite&ic=1&t=doc";
+            }
+            else if (searchType == 1)
+            {
+                ISSN = ISSN.Trim();
+                ISSN = ISSN.Replace(" ", "");
+
+                if (ISSN == "" && keyword == "")
+                    initialURL = "http://citeseerx.ist.psu.edu/search?q=author%3A%28" + searchElement + "%29&submit=Search&ic=1&sort=cite&t=doc";
+                else if (ISSN == "")
+                    initialURL = "http://citeseerx.ist.psu.edu/search?q=author%3A%28" + searchElement + "%29+AND+keyword%3A%28" + keyword + "29&sort=cite&ic=1&t=doc";
+                else if (keyword == "")
+                    initialURL = "http://citeseerx.ist.psu.edu/search?q=text%3A" + ISSN + "+AND+author%3A%28" + searchElement + "%29&sort=cite&ic=1&t=doc";
+                else
+                    initialURL = "http://citeseerx.ist.psu.edu/search?q=text%3A" + ISSN + "+AND+author%3A%28" + searchElement + "%29+AND+keyword%3A%28" + keyword + "%29&sort=cite&ic=1&t=doc";
+                
+            }
+            else
+            {
+                initialURL = "";
+            }
             CitePage = new HtmlWeb();
             CiteDoc = CitePage.Load(initialURL);
             PageNo = 1;
@@ -86,7 +122,18 @@ namespace PubCite
                 return 0;
             if (searchType == 0)
             {
-                nextURL = "http://citeseerx.ist.psu.edu/search?q=author%3A%28" + searchElement + "%29&ic=1&t=doc&sort=cite&start=" + PageNo + "0";
+                //nextURL = "http://citeseerx.ist.psu.edu/search?q=author%3A%28" + searchElement + "%29&ic=1&t=doc&sort=cite&start=" + PageNo + "0";
+
+                if (affiliation == "" && keyword == "")
+                    nextURL = "http://citeseerx.ist.psu.edu/search?q=author%3A%28" + searchElement + "%29&ic=1&t=doc&sort=cite&start=" + PageNo + "0";
+                else if (affiliation == "")
+                    nextURL = "http://citeseerx.ist.psu.edu/search?q=author%3A%28" + searchElement + "%29+AND+keyword%3A%28" + keyword + "%29&ic=1&t=doc&sort=cite&start=" + PageNo + "0";
+                else if (keyword == "")
+                    nextURL = "http://citeseerx.ist.psu.edu/search?q=author%3A%28" + searchElement + "%29+AND+affil%3A%28" + affiliation + "%29&ic=1&t=doc&sort=cite&start=" + PageNo + "0";
+                else
+                    nextURL = "http://citeseerx.ist.psu.edu/search?q=author%3A%28" + searchElement + "%29+AND+affil%3A%28" + affiliation + "%29+AND+keyword%3A%28" + keyword + "%29&ic=1&t=doc&sort=cite&start=" + PageNo + "0";
+
+
                 PageNo++;
 
                 CiteDoc = CitePage.Load(nextURL);
@@ -94,7 +141,18 @@ namespace PubCite
             }
             if (searchType == 1)
             {
-                nextURL = "http://citeseerx.ist.psu.edu/search?q=venue%3A" + searchElement +"&ic=1&t=doc&sort=cite&start=" + Convert.ToString(PageNo) + "0";
+                //nextURL = "http://citeseerx.ist.psu.edu/search?q=venue%3A" + searchElement +"&ic=1&t=doc&sort=cite&start=" + Convert.ToString(PageNo) + "0";
+
+                if (ISSN == "" && keyword == "")
+                    initialURL = "http://citeseerx.ist.psu.edu/search?q=author%3A%28" + searchElement + "%29&ic=1&t=doc&sort=cite&start=" + PageNo + "0";
+                else if (ISSN == "")
+                    initialURL = "http://citeseerx.ist.psu.edu/search?q=author%3A%28" + searchElement + "%29+AND+keyword%3A%28" + keyword + "%29&ic=1&t=doc&sort=cite&start=" + PageNo + "0";
+                else if (keyword == "")
+                    initialURL = "http://citeseerx.ist.psu.edu/search?q=text%3A" + ISSN + "+AND+author%3A%28" + searchElement + "%29&ic=1&t=doc&sort=cite&start=" + PageNo + "0";
+                else
+                    initialURL = "http://citeseerx.ist.psu.edu/search?q=text%3A" + ISSN + "+AND+author%3A%28" + searchElement + "%29+AND+keyword%3A%28" + keyword + "%29&ic=1&t=doc&sort=cite&start=" + PageNo + "0";
+
+
 
                 PageNo++;
 
