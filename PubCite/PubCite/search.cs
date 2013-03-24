@@ -33,6 +33,7 @@ namespace PubCite
         int prevSelectedIndex;
         int suggestedIndex;
         int citationIndex;
+        int citationType;
         Boolean[] prevSortedColum = { false, false, false, false };
         Boolean suggestions;
         BackgroundWorker backgroundWorker;
@@ -41,7 +42,9 @@ namespace PubCite
         public search()
         {
             InitializeComponent();
-
+            CSParser = new CSXParser();
+            GSScraper = new GSScraper();
+            MSParser = new MicrosoftScholarParser();
             ArrangeTree();
 
             authorResultsListView.FullRowSelect = true;
@@ -215,12 +218,6 @@ namespace PubCite
 
                 }
 
-                /* set type */
-                if (a[0]) journalStats.Type = 0;
-                else if (a[1]) journalStats.Type = 1;
-                else journalStats.Type = 2;
-
-
                 /* add journal to cache */
                 cacheObject.Add(journalStats.Name, journalStats, false);
                 
@@ -233,7 +230,7 @@ namespace PubCite
         private void populateAuthor()
         {
 
-
+            Console.WriteLine("called");
             if (authStats != null)
             {
 
@@ -263,6 +260,7 @@ namespace PubCite
                 for (int i = 0; i < Papers.Count; i++)
                 {
                     /*populating */
+                    Console.WriteLine("populate: url: " + Papers[i].CitedByURL);
                     item = new ListViewItem(Papers[i].Title);
                     item.SubItems.Add(Papers[i].Publication);
                     if (Papers[i].Year == -1 || Papers[i].Year == -1)
@@ -273,10 +271,6 @@ namespace PubCite
                     authorResultsListView.Items.Add(item);
                 }
 
-                /* Set Type */
-                if (a[0]) authStats.Type = 0;
-                else if (a[1]) authStats.Type = 1;
-                else authStats.Type = 2;
 
                 /* Add to cache */
                 cacheObject.Add(authStats.Name, authStats, true);
@@ -300,7 +294,7 @@ namespace PubCite
 
             for (int i = 0; i < FavAuthorList.Count; i++)
             {
-                Console.WriteLine("URL:" + FavAuthorList[i].HomePageURL);
+                Console.WriteLine("URL:" + FavAuthorList[i].getPapers()[i].CitedByURL);
                 favouritesTreeView.Nodes[0].Nodes[0].Nodes.Add(new TreeNode(FavAuthorList[i].Name));
                 favouritesTreeView.Nodes[0].Nodes[0].Nodes[i].ContextMenuStrip = favouriteMenuStrip;
             }
@@ -529,10 +523,21 @@ namespace PubCite
                 if (authSug == null || !authSug.isSet())
                 {
                     /* Case : No suggestions */
-                    if (a[0] == true) authStats = CSParser.getAuthors(searchField.Text,affilationTextBox.Text,KeywordsTextBox.Text);
-                    else if (a[1] == true) authStats = GSScraper.getAuthors(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text);
-                    /*Add for MAS*/
-
+                    if (a[0] == true)
+                    {
+                        authStats = CSParser.getAuthors(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text);
+                        authStats.Type = 0;
+                    }
+                    else if (a[1] == true)
+                    {
+                        authStats = GSScraper.getAuthors(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text);
+                        authStats.Type = 0;
+                    }
+                    else
+                    {
+                        authStats = MSParser.getAuthors(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text);
+                        authStats.Type = 0;
+                    }
                     suggestions = false;
                 }
                 else
@@ -546,11 +551,20 @@ namespace PubCite
                         if (prevSelectedIndex != index)
                         {
                             if (a[0] == true)
+                            {
                                 authStats = CSParser.getAuthStatistics(auth_url[index]);
+                                authStats.Type = 0;
+                            }
                             else if (a[1] == true)
+                            {
                                 authStats = GSScraper.getAuthStatistics(auth_url[index]);
+                                authStats.Type = 1;
+                            }
                             else if (a[2] == true)
+                            {
                                 authStats = MSParser.getAuthStatistics(auth_url[index]);
+                                authStats.Type = 2;
+                            } 
                             prevSelectedIndex = index;
                         }
                         suggestions = false;
@@ -564,11 +578,20 @@ namespace PubCite
             else // journal
             {
                 if (a[0])
+                {
                     journalStats = CSParser.getJournals(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text);
+                    journalStats.Type = 0;
+                }
                 else if (a[1])
+                {
                     journalStats = GSScraper.getJournals(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text);
+                    journalStats.Type = 1;
+                }
                 else
+                {
                     journalStats = MSParser.getJournals(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text);
+                    journalStats.Type = 2;
+                }
             }
         }
 
@@ -578,23 +601,44 @@ namespace PubCite
             if (prevSelectedIndex != suggestedIndex)
             {
                 if (a[0] == true)
+                {
                     authStats = CSParser.getAuthStatistics(auth_url[suggestedIndex]);
+                    authStats.Type = 0;
+                }
                 else if (a[1] == true)
+                {
                     authStats = GSScraper.getAuthStatistics(auth_url[suggestedIndex]);
+                    authStats.Type = 1;
+                }
                 else if (a[2] == true)
+                {
                     authStats = MSParser.getAuthStatistics(auth_url[suggestedIndex]);
+                    authStats.Type = 2;
+                } 
                 prevSelectedIndex = suggestedIndex;
             }
         }
 
         private void backgroundWorker_citationSearchWork(object sender, DoWorkEventArgs e)
         {
-            if (a[0] == true)
+            if (citationType == 0)
+            {
+                Console.WriteLine("url:" + Papers[citationIndex].CitedByURL);
                 Citations = CSParser.getCitations(Papers[citationIndex].CitedByURL);
-            else if (a[1] == true)
+                
+            }
+            else if (citationType == 1)
+            {
+                Console.WriteLine("url:" + Papers[citationIndex].CitedByURL);
                 Citations = GSScraper.getCitations(Papers[citationIndex].CitedByURL);
-            else if (a[2] == true)
+              
+            }
+            else if (citationType == 2)
+            {
+                Console.WriteLine("url:" + Papers[citationIndex].CitedByURL);
                 Citations = MSParser.getCitations(Papers[citationIndex].CitedByURL);
+               
+            }
         }
 
         private void authorsSuggestions_MouseClick(object sender, EventArgs e)
@@ -651,21 +695,20 @@ namespace PubCite
                 a[0] = true;
                 a[1] = false;
                 a[2] = false;
-                CSParser = new CSXParser();
+                
             }
             else if (siteComboBox.SelectedItem.ToString().Equals("Google Scholar"))
             {
                 a[0] = false;
                 a[1] = true;
                 a[2] = false;
-                GSScraper = new GSScraper();
+
             }
             else if (siteComboBox.SelectedItem.ToString().Equals("Microsoft Academic Search"))
             {
                 a[0] = false;
                 a[1] = false;
                 a[2] = true;
-                MSParser = new MicrosoftScholarParser();
             }
 
             backgroundWorker.RunWorkerAsync();
@@ -715,14 +758,16 @@ namespace PubCite
 
         private void viewCitationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int type;
             if (authorResultsListView.Visible == true) {
                 citationIndex = authorResultsListView.FocusedItem.Index;
-                type = authStats.Type;
+                citationType = authStats.Type;
+                Papers = authStats.getPapers();
+                
             }
             else {
                 citationIndex = journalResultsListView.FocusedItem.Index;
-                type = journalStats.Type;
+                citationType = journalStats.Type;
+                Papers = journalStats.getPapers();
             }
 
             if (Papers[citationIndex].NumberOfCitations != 0)
@@ -745,7 +790,7 @@ namespace PubCite
                     Application.DoEvents();
                     // disable those options which will trigger another thread 
                 }
-
+                 
                 enablePanels();
                 progressPanel.Visible = false;
                 progressBar.SendToBack();
@@ -757,7 +802,8 @@ namespace PubCite
                 CitationsTab NcitTab = new CitationsTab();
                 citationsPage.Controls.Add(NcitTab);
 
-                NcitTab.populateCitations(Papers[citationIndex], Citations, type);
+                Console.WriteLine("type : " + citationType + "num : " + Citations.Count);
+                NcitTab.populateCitations(Papers[citationIndex], Citations, citationType);
                 
                 Form1.dub_tab.SelectedTab = citationsPage;
             }
@@ -767,7 +813,7 @@ namespace PubCite
         {
             if (authorCheckBox.Checked == true && authStats != null)
             {
-                
+                Console.WriteLine(authStats.getPapers()[0].CitedByURL);
                 Form1.favorites.AddAuthor(authStats);
 
             }
@@ -882,7 +928,6 @@ namespace PubCite
                     a[1] = false;
                     a[2] = false;
                     Console.WriteLine("in CS: " + searchField.Text);
-                    CSParser = new CSXParser();
                     authSug = CSParser.getAuthSuggestions(searchField.Text);
 
                 }
@@ -891,7 +936,6 @@ namespace PubCite
                     a[0] = false;
                     a[1] = true;
                     a[2] = false;
-                    GSScraper = new GSScraper();
                     Console.WriteLine("in gs" + searchField.Text);
 
                     authSug = GSScraper.getAuthSuggestions(searchField.Text);
@@ -902,7 +946,6 @@ namespace PubCite
                     a[0] = false;
                     a[1] = false;
                     a[2] = true;
-                    MSParser = new MicrosoftScholarParser();
                     Console.WriteLine("in MS : " + searchField.Text);
 
                     authSug = MSParser.getAuthSuggestions(searchField.Text);
@@ -913,9 +956,21 @@ namespace PubCite
                 if (authSug == null || !authSug.isSet())
                 {
                     /* Case : No suggestions */
-                    if (a[0] == true) authStats = CSParser.getAuthors(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text);
-                    else if (a[1] == true) authStats = GSScraper.getAuthors(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text);
-                    else authStats = CSParser.getAuthors(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text);
+                    if (a[0] == true)
+                    {
+                        authStats = CSParser.getAuthors(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text);
+                        authStats.Type = 0;
+                    }
+                    else if (a[1] == true)
+                    {
+                        authStats = GSScraper.getAuthors(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text);
+                        authStats.Type = 0;
+                    }
+                    else
+                    {
+                        authStats = MSParser.getAuthors(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text);
+                        authStats.Type = 0;
+                    }
                     populateAuthor();
 
                 }
@@ -932,11 +987,20 @@ namespace PubCite
                         if (prevSelectedIndex != index)
                         {
                             if (a[0] == true)
+                            {
                                 authStats = CSParser.getAuthStatistics(auth_url[index]);
+                                authStats.Type = 0;
+                            }
                             else if (a[1] == true)
+                            {
                                 authStats = GSScraper.getAuthStatistics(auth_url[index]);
+                                authStats.Type = 1;
+                            }
                             else if (a[2] == true)
+                            {
                                 authStats = MSParser.getAuthStatistics(auth_url[index]);
+                                authStats.Type = 2;
+                            } 
                             prevSelectedIndex = index;
                         }
                         
@@ -964,8 +1028,8 @@ namespace PubCite
                     a[0] = true;
                     a[1] = false;
                     a[2] = false;
-                    CSParser = new CSXParser();
                     journalStats = CSParser.getJournals(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text);
+                    journalStats.Type = 0;
 
                 }
                 else if (siteComboBox.SelectedItem.ToString().Equals("Google Scholar"))
@@ -973,17 +1037,16 @@ namespace PubCite
                     a[0] = false;
                     a[1] = true;
                     a[2] = false;
-                    GSScraper = new GSScraper();
                     journalStats = GSScraper.getJournals(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text);
-
+                    journalStats.Type = 1;
                 }
                 else if (siteComboBox.SelectedItem.ToString().Equals("Microsoft Academic Search"))
                 {
                     a[0] = false;
                     a[1] = false;
                     a[2] = true;
-                    MSParser = new MicrosoftScholarParser();
                     journalStats = MSParser.getJournals(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text);
+                    journalStats.Type = 2;
                 }
                 populateJournal();
             }
