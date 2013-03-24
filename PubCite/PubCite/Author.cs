@@ -14,9 +14,15 @@ namespace SG
         private string homepageURL="";
 
         //constructor
-        public Author(string Name, int h=-1, int i=-1)
+        public Author(string name, int h) : base(name, h, -1) {
+            this.affiliation = "";
+            this.homepageURL = "";        
+        }
+        public Author(string Name, int h, int i)
             : base(Name, h, i)
         {
+            this.affiliation = "";
+            this.homepageURL = "";
         }
         public Author(string Name, string affiliation, string homePageURL, int h, int i)
             : base(Name, h, i)
@@ -39,6 +45,13 @@ namespace SG
             base.GetObjectData(info, ctxt);
             info.AddValue("Affiliation", affiliation);
             info.AddValue("HomePageURL", homepageURL);
+        }
+
+        public void setData(string affiliation, string homePageURL, int h, int i){
+            this.affiliation = affiliation;
+            this.homepageURL = homePageURL;
+            setHIndex(h);
+            setI10Index(i);
         }
         public string HomePageURL
         {
