@@ -48,7 +48,6 @@ namespace SG
             else
             {
                 Directory.CreateDirectory(@"Favorites");
-                Console.WriteLine("Created directory");
             }
         }
         public List<Author> AuthorList
