@@ -17,7 +17,7 @@ namespace PubCite
         public static Object Get(string key, bool isAuthor)
         {
             key = key.ToLower();
-            key.Trim();
+            key=key.Trim();
             key = isAuthor ? key : key + " ";
             try
             {
@@ -32,17 +32,20 @@ namespace PubCite
         // add a key-value pair
         public static void Add(string key, Object objectToCache, bool isAuthor)
         {
+            if (objectToCache == null) { Console.WriteLine("object is null"); return; }
             key = key.ToLower();
-            key.Trim();
+            key=key.Trim();
             key = isAuthor ? key : key + " ";
             cache.Add(key, objectToCache, DateTime.Now.AddHours(2));
+            Console.WriteLine("Object added to cache");
+            Console.WriteLine(objectToCache.ToString());
         }
 
         //remove key-value pair
         public static void Clear(string key, bool isAuthor)
         {
             key = key.ToLower();
-            key.Trim();
+            key=key.Trim();
             key = isAuthor ? key : key + " ";
             cache.Remove(key);
         }
@@ -51,7 +54,7 @@ namespace PubCite
         public static bool Exists(string key, bool isAuthor)
         {
             key = key.ToLower();
-            key.Trim();
+            key=key.Trim();
             key = isAuthor ? key : key + " ";
             return cache.Get(key) != null;
         }
@@ -66,7 +69,7 @@ namespace PubCite
         public static List<string> GetMatchingkeys(string key, bool isAuthor)
         {
             key = key.ToLower();
-            key.Trim();
+            key=key.Trim();
 
             List<string> keys = new List<string>();
             if ((isAuthor) && (key.Contains(LastAuthorkey))) keys = LastAuthor;
