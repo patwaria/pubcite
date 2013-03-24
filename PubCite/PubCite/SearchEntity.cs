@@ -68,6 +68,14 @@ namespace SG
                 type = value;
             }
         }
+        public void setHIndex(int h)
+        {
+            h_ind = h;
+        }
+        public void setI10Index(int i)
+        {
+            i10_ind = i;
+        }
         //function to add paper to the paper list
         public void addPaper(Paper p)
         {
