@@ -180,8 +180,6 @@ namespace PubCite
             if (noResult == 0)
                 return;
 
-            do
-            {
                 mainTable = CiteDoc.DocumentNode.SelectSingleNode("//*[@id=\"result_list\"]");
                 for (int i = 1; i <= 10; i++)
                 {
@@ -276,7 +274,7 @@ namespace PubCite
                         journ1.addPaper(paper1);
                     //Return the reference of the next empty 
                 }
-            } while (LoadNextPage() == 1);
+            
         }
 
 
