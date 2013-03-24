@@ -35,6 +35,8 @@
             treeNode1,
             treeNode2});
             this.SearchPanel = new System.Windows.Forms.Panel();
+            this.cachedListView = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label4 = new System.Windows.Forms.Label();
             this.affiliation = new System.Windows.Forms.Label();
             this.KeywordsTextBox = new System.Windows.Forms.TextBox();
@@ -44,14 +46,10 @@
             this.authorCheckBox = new System.Windows.Forms.CheckBox();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.addToFavourite = new System.Windows.Forms.PictureBox();
-            this.CloseButton = new System.Windows.Forms.Button();
             this.searchIcon = new System.Windows.Forms.PictureBox();
-            this.EndYear = new PubCite.NumericTextBox();
             this.resultsPanel = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.resultsGroupBox = new System.Windows.Forms.GroupBox();
-            this.cachedListView = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.authorResultsListView = new System.Windows.Forms.ListView();
             this.PaperHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.venueHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -83,7 +81,6 @@
             this.citesperYearLabel = new System.Windows.Forms.Label();
             this.citationsLabel = new System.Windows.Forms.Label();
             this.authorLabel = new System.Windows.Forms.Label();
-            this.StartYear = new PubCite.NumericTextBox();
             this.favouritesPanel = new System.Windows.Forms.Panel();
             this.favouritesTreeView = new System.Windows.Forms.TreeView();
             this.Suggestions = new System.Windows.Forms.GroupBox();
@@ -99,6 +96,9 @@
             this.favouriteMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.viewStatisticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeFromFavouritesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.EndYear = new PubCite.NumericTextBox();
+            this.StartYear = new PubCite.NumericTextBox();
             this.SearchPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.addToFavourite)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchIcon)).BeginInit();
@@ -116,7 +116,6 @@
             // SearchPanel
             // 
             this.SearchPanel.BackColor = System.Drawing.SystemColors.Window;
-            this.SearchPanel.Controls.Add(this.cachedListView);
             this.SearchPanel.Controls.Add(this.label4);
             this.SearchPanel.Controls.Add(this.affiliation);
             this.SearchPanel.Controls.Add(this.KeywordsTextBox);
@@ -126,7 +125,6 @@
             this.SearchPanel.Controls.Add(this.authorCheckBox);
             this.SearchPanel.Controls.Add(this.progressBar);
             this.SearchPanel.Controls.Add(this.addToFavourite);
-            this.SearchPanel.Controls.Add(this.CloseButton);
             this.SearchPanel.Controls.Add(this.searchIcon);
             this.SearchPanel.Controls.Add(this.EndYear);
             this.SearchPanel.Controls.Add(this.resultsPanel);
@@ -141,6 +139,23 @@
             this.SearchPanel.Name = "SearchPanel";
             this.SearchPanel.Size = new System.Drawing.Size(979, 595);
             this.SearchPanel.TabIndex = 2;
+            // 
+            // cachedListView
+            // 
+            this.cachedListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1});
+            this.cachedListView.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.cachedListView.Location = new System.Drawing.Point(-123, 42);
+            this.cachedListView.Name = "cachedListView";
+            this.cachedListView.Size = new System.Drawing.Size(771, 97);
+            this.cachedListView.TabIndex = 29;
+            this.cachedListView.UseCompatibleStateImageBehavior = false;
+            this.cachedListView.View = System.Windows.Forms.View.Details;
+            this.cachedListView.Visible = false;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Width = 461;
             // 
             // label4
             // 
@@ -166,6 +181,7 @@
             this.KeywordsTextBox.Name = "KeywordsTextBox";
             this.KeywordsTextBox.Size = new System.Drawing.Size(105, 22);
             this.KeywordsTextBox.TabIndex = 26;
+            this.toolTip.SetToolTip(this.KeywordsTextBox, "Add space separated keywords to add to your search");
             // 
             // affilationTextBox
             // 
@@ -173,6 +189,7 @@
             this.affilationTextBox.Name = "affilationTextBox";
             this.affilationTextBox.Size = new System.Drawing.Size(105, 22);
             this.affilationTextBox.TabIndex = 25;
+            this.toolTip.SetToolTip(this.affilationTextBox, "Affiliation/ISSN Number");
             // 
             // journalCheckBox
             // 
@@ -232,17 +249,8 @@
             this.addToFavourite.Size = new System.Drawing.Size(25, 28);
             this.addToFavourite.TabIndex = 21;
             this.addToFavourite.TabStop = false;
+            this.toolTip.SetToolTip(this.addToFavourite, "Add to Favourite");
             this.addToFavourite.Click += new System.EventHandler(this.addToFavourite_Click);
-            // 
-            // CloseButton
-            // 
-            this.CloseButton.Location = new System.Drawing.Point(918, 49);
-            this.CloseButton.Name = "CloseButton";
-            this.CloseButton.Size = new System.Drawing.Size(46, 23);
-            this.CloseButton.TabIndex = 8;
-            this.CloseButton.Text = "Close";
-            this.CloseButton.UseVisualStyleBackColor = true;
-            this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click_2);
             // 
             // searchIcon
             // 
@@ -252,16 +260,8 @@
             this.searchIcon.Size = new System.Drawing.Size(24, 28);
             this.searchIcon.TabIndex = 11;
             this.searchIcon.TabStop = false;
+            this.toolTip.SetToolTip(this.searchIcon, "Search..");
             this.searchIcon.Click += new System.EventHandler(this.searchIcon_Click);
-            // 
-            // EndYear
-            // 
-            this.EndYear.AllowSpace = false;
-            this.EndYear.Location = new System.Drawing.Point(415, 32);
-            this.EndYear.Name = "EndYear";
-            this.EndYear.Size = new System.Drawing.Size(44, 22);
-            this.EndYear.TabIndex = 0;
-            this.EndYear.TextChanged += new System.EventHandler(this.EndYear_TextChanged);
             // 
             // resultsPanel
             // 
@@ -284,6 +284,7 @@
             // 
             // resultsGroupBox
             // 
+            this.resultsGroupBox.Controls.Add(this.cachedListView);
             this.resultsGroupBox.Controls.Add(this.authorResultsListView);
             this.resultsGroupBox.Controls.Add(this.journalResultsListView);
             this.resultsGroupBox.Location = new System.Drawing.Point(2, 88);
@@ -292,23 +293,6 @@
             this.resultsGroupBox.TabIndex = 0;
             this.resultsGroupBox.TabStop = false;
             this.resultsGroupBox.Text = "Results ";
-            // 
-            // cachedListView
-            // 
-            this.cachedListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1});
-            this.cachedListView.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.cachedListView.Location = new System.Drawing.Point(128, 26);
-            this.cachedListView.Name = "cachedListView";
-            this.cachedListView.Size = new System.Drawing.Size(771, 97);
-            this.cachedListView.TabIndex = 29;
-            this.cachedListView.UseCompatibleStateImageBehavior = false;
-            this.cachedListView.View = System.Windows.Forms.View.Details;
-            this.cachedListView.Visible = false;
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Width = 461;
             // 
             // authorResultsListView
             // 
@@ -488,7 +472,7 @@
             // progressPanel
             // 
             this.progressPanel.Controls.Add(this.label3);
-            this.progressPanel.Location = new System.Drawing.Point(374, 37);
+            this.progressPanel.Location = new System.Drawing.Point(421, 50);
             this.progressPanel.Name = "progressPanel";
             this.progressPanel.Size = new System.Drawing.Size(295, 29);
             this.progressPanel.TabIndex = 22;
@@ -497,7 +481,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(0, 14);
+            this.label3.Location = new System.Drawing.Point(73, 2);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(222, 13);
             this.label3.TabIndex = 1;
@@ -542,12 +526,13 @@
             // authorNameLabel
             // 
             this.authorNameLabel.AutoSize = true;
-            this.authorNameLabel.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.authorNameLabel.ForeColor = System.Drawing.SystemColors.Highlight;
             this.authorNameLabel.Location = new System.Drawing.Point(64, 16);
             this.authorNameLabel.Name = "authorNameLabel";
             this.authorNameLabel.Size = new System.Drawing.Size(36, 13);
             this.authorNameLabel.TabIndex = 15;
             this.authorNameLabel.Text = "Name";
+            this.toolTip.SetToolTip(this.authorNameLabel, "Click to View Home Page");
             this.authorNameLabel.Click += new System.EventHandler(this.authorNameLabel_Click);
             // 
             // i10indexLabel
@@ -610,15 +595,6 @@
             this.authorLabel.TabIndex = 8;
             this.authorLabel.Text = "Name";
             // 
-            // StartYear
-            // 
-            this.StartYear.AllowSpace = false;
-            this.StartYear.Location = new System.Drawing.Point(332, 32);
-            this.StartYear.Name = "StartYear";
-            this.StartYear.Size = new System.Drawing.Size(45, 22);
-            this.StartYear.TabIndex = 0;
-            this.StartYear.TextChanged += new System.EventHandler(this.StartYear_TextChanged);
-            // 
             // favouritesPanel
             // 
             this.favouritesPanel.BackColor = System.Drawing.SystemColors.Window;
@@ -679,7 +655,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(386, 36);
+            this.label2.Location = new System.Drawing.Point(387, 35);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(22, 13);
             this.label2.TabIndex = 10;
@@ -688,11 +664,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(230, 36);
+            this.label1.Location = new System.Drawing.Point(290, 36);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(102, 13);
+            this.label1.Size = new System.Drawing.Size(36, 13);
             this.label1.TabIndex = 7;
-            this.label1.Text = "Year Range   From:";
+            this.label1.Text = "From:";
             // 
             // siteComboBox
             // 
@@ -762,6 +738,26 @@
             this.removeFromFavouritesToolStripMenuItem.Text = "Remove from Favourites";
             this.removeFromFavouritesToolStripMenuItem.Click += new System.EventHandler(this.removeFromFavouritesToolStripMenuItem_Click);
             // 
+            // EndYear
+            // 
+            this.EndYear.AllowSpace = false;
+            this.EndYear.Location = new System.Drawing.Point(415, 32);
+            this.EndYear.Name = "EndYear";
+            this.EndYear.Size = new System.Drawing.Size(44, 22);
+            this.EndYear.TabIndex = 0;
+            this.toolTip.SetToolTip(this.EndYear, "End Year");
+            this.EndYear.TextChanged += new System.EventHandler(this.EndYear_TextChanged);
+            // 
+            // StartYear
+            // 
+            this.StartYear.AllowSpace = false;
+            this.StartYear.Location = new System.Drawing.Point(332, 32);
+            this.StartYear.Name = "StartYear";
+            this.StartYear.Size = new System.Drawing.Size(45, 22);
+            this.StartYear.TabIndex = 0;
+            this.toolTip.SetToolTip(this.StartYear, "Start Year");
+            this.StartYear.TextChanged += new System.EventHandler(this.StartYear_TextChanged);
+            // 
             // search
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -814,7 +810,6 @@
         private System.Windows.Forms.Label citesperYear;
         private System.Windows.Forms.Label citationsNumberLabel;
         private System.Windows.Forms.Label authorNameLabel;
-        private System.Windows.Forms.Button CloseButton;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.GroupBox resultsGroupBox;
         private System.Windows.Forms.ListView journalResultsListView;
@@ -855,5 +850,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }

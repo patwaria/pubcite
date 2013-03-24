@@ -31,6 +31,9 @@
             this.components = new System.ComponentModel.Container();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.progressPanel = new System.Windows.Forms.Panel();
+            this.label7 = new System.Windows.Forms.Label();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.publicationsDetailsGroupBox = new System.Windows.Forms.GroupBox();
             this.publisher = new System.Windows.Forms.Label();
             this.numCitations = new System.Windows.Forms.Label();
@@ -40,7 +43,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.abstractBox = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.CloseButton = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -59,15 +61,12 @@
             this.optionMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.viewCitationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewUrlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.progressPanel = new System.Windows.Forms.Panel();
-            this.label7 = new System.Windows.Forms.Label();
-            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.progressPanel.SuspendLayout();
             this.publicationsDetailsGroupBox.SuspendLayout();
             this.resultsGroupBox.SuspendLayout();
             this.optionMenuStrip.SuspendLayout();
-            this.progressPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel3
@@ -89,6 +88,32 @@
             this.panel4.Size = new System.Drawing.Size(977, 606);
             this.panel4.TabIndex = 3;
             // 
+            // progressPanel
+            // 
+            this.progressPanel.Controls.Add(this.label7);
+            this.progressPanel.Controls.Add(this.progressBar);
+            this.progressPanel.Location = new System.Drawing.Point(6, 152);
+            this.progressPanel.Name = "progressPanel";
+            this.progressPanel.Size = new System.Drawing.Size(477, 29);
+            this.progressPanel.TabIndex = 23;
+            this.progressPanel.Visible = false;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(205, 13);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(222, 13);
+            this.label7.TabIndex = 1;
+            this.label7.Text = "Please wait while we process your query...";
+            // 
+            // progressBar
+            // 
+            this.progressBar.Location = new System.Drawing.Point(3, 10);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(196, 16);
+            this.progressBar.TabIndex = 0;
+            // 
             // publicationsDetailsGroupBox
             // 
             this.publicationsDetailsGroupBox.Controls.Add(this.publisher);
@@ -99,7 +124,6 @@
             this.publicationsDetailsGroupBox.Controls.Add(this.label2);
             this.publicationsDetailsGroupBox.Controls.Add(this.abstractBox);
             this.publicationsDetailsGroupBox.Controls.Add(this.label1);
-            this.publicationsDetailsGroupBox.Controls.Add(this.CloseButton);
             this.publicationsDetailsGroupBox.Controls.Add(this.label6);
             this.publicationsDetailsGroupBox.Controls.Add(this.label5);
             this.publicationsDetailsGroupBox.Controls.Add(this.label4);
@@ -182,16 +206,6 @@
             this.label1.Size = new System.Drawing.Size(61, 13);
             this.label1.TabIndex = 10;
             this.label1.Text = "Publisher :";
-            // 
-            // CloseButton
-            // 
-            this.CloseButton.Location = new System.Drawing.Point(904, 65);
-            this.CloseButton.Name = "CloseButton";
-            this.CloseButton.Size = new System.Drawing.Size(54, 23);
-            this.CloseButton.TabIndex = 8;
-            this.CloseButton.Text = "Close";
-            this.CloseButton.UseVisualStyleBackColor = true;
-            this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
             // 
             // label6
             // 
@@ -337,32 +351,6 @@
             this.viewUrlToolStripMenuItem.Text = "View Url";
             this.viewUrlToolStripMenuItem.Click += new System.EventHandler(this.viewUrlToolStripMenuItem_Click);
             // 
-            // progressPanel
-            // 
-            this.progressPanel.Controls.Add(this.label7);
-            this.progressPanel.Controls.Add(this.progressBar);
-            this.progressPanel.Location = new System.Drawing.Point(6, 152);
-            this.progressPanel.Name = "progressPanel";
-            this.progressPanel.Size = new System.Drawing.Size(477, 29);
-            this.progressPanel.TabIndex = 23;
-            this.progressPanel.Visible = false;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(205, 13);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(222, 13);
-            this.label7.TabIndex = 1;
-            this.label7.Text = "Please wait while we process your query...";
-            // 
-            // progressBar
-            // 
-            this.progressBar.Location = new System.Drawing.Point(3, 10);
-            this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(196, 16);
-            this.progressBar.TabIndex = 0;
-            // 
             // CitationsTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -373,12 +361,12 @@
             this.Size = new System.Drawing.Size(1015, 618);
             this.panel3.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
+            this.progressPanel.ResumeLayout(false);
+            this.progressPanel.PerformLayout();
             this.publicationsDetailsGroupBox.ResumeLayout(false);
             this.publicationsDetailsGroupBox.PerformLayout();
             this.resultsGroupBox.ResumeLayout(false);
             this.optionMenuStrip.ResumeLayout(false);
-            this.progressPanel.ResumeLayout(false);
-            this.progressPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -386,7 +374,6 @@
         #endregion
 
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Button CloseButton;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.GroupBox resultsGroupBox;
         private System.Windows.Forms.ListView authorResultsListView;
