@@ -103,12 +103,14 @@ namespace PubCite
         private void authorCheckBox_Click(object sender, EventArgs e)
         {
             journalCheckBox.Checked = !(journalCheckBox.Checked);
+            updateCacheSuggestions();
+            
         }
 
         private void journalCheckBox_Click(object sender, EventArgs e)
         {
             authorCheckBox.Checked = !(authorCheckBox.Checked);
-
+            updateCacheSuggestions();
         }
 
         public void searchField_KeyUp(object sender,KeyEventArgs e)
@@ -118,26 +120,7 @@ namespace PubCite
                 searchIcon_Click(sender, e);
             }
 
-            if (searchField.Text.Length > 0)
-            {
-                if (cachedListView.Visible == false)
-                {
-                    cachedListView.Visible = true;
-                    cachedListView.BringToFront();
-
-                }
-
-                /* update cache suggestions */
-                
-                updateCacheSuggestions(cacheObject.GetMatchingkeys(searchField.Text, authorCheckBox.Checked));
-            }
-            else
-            {
-                cachedListView.Visible = false;
-                cachedListView.SendToBack();
-            }
-
-
+            updateCacheSuggestions();
         }
 
         public GroupBox get_sugg()
@@ -147,16 +130,35 @@ namespace PubCite
 
         }
 
-        public void updateCacheSuggestions(List<String> suggestions)
+        public void updateCacheSuggestions()
         {
-            
             cachedListView.Items.Clear();
-            Console.WriteLine(suggestions.Count);
-            for (int i = 0; i < suggestions.Count; i++)
+            if (searchField.Text.Length > 0)
             {
-                item = new ListViewItem(suggestions[i]);
-                cachedListView.Items.Add(item);
+                List<String> cachedList = cacheObject.GetMatchingkeys(searchField.Text, authorCheckBox.Checked);
+                if (cachedList.Count > 0)
+                {
+                    cachedListView.Visible = true;
+                    cachedListView.BringToFront();
+                    //Console.WriteLine(suggestions.Count);
+                    for (int i = 0; i < cachedList.Count; i++)
+                    {
+                        item = new ListViewItem(cachedList[i]);
+                        cachedListView.Items.Add(item);
+                    }
+                }
+                else
+                {
+                    cachedListView.Visible = false;
+                    cachedListView.SendToBack();
+                }
             }
+            else
+            {
+                cachedListView.Visible = false;
+                cachedListView.SendToBack();
+            }
+            
         }
 
         public void populateSuggestions()
@@ -680,11 +682,15 @@ namespace PubCite
 
         private void viewCitationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (authorResultsListView.Visible == true)
+            int type;
+            if (authorResultsListView.Visible == true) {
                 citationIndex = authorResultsListView.FocusedItem.Index;
-            else
+                type = authStats.Type;
+            }
+            else {
                 citationIndex = journalResultsListView.FocusedItem.Index;
-
+                type = journalStats.Type;
+            }
             if (Papers[citationIndex].NumberOfCitations != 0)
             {
                 disablePanels();
@@ -717,12 +723,7 @@ namespace PubCite
                 CitationsTab NcitTab = new CitationsTab();
                 citationsPage.Controls.Add(NcitTab);
 
-                if (a[0] == true)
-                    NcitTab.populateCitations(Papers[citationIndex], Citations, 0);
-                else if (a[1] == true)
-                    NcitTab.populateCitations(Papers[citationIndex], Citations, 1);
-                else if (a[2] == true)
-                    NcitTab.populateCitations(Papers[citationIndex], Citations, 2);
+                NcitTab.populateCitations(Papers[citationIndex], Citations, type);
                 
                 Form1.dub_tab.SelectedTab = citationsPage;
             }
@@ -731,9 +732,19 @@ namespace PubCite
         private void addToFavourite_Click(object sender, EventArgs e)
         {
             if (authorCheckBox.Checked == true && authStats != null)
+            {
+                if (a[0]) authStats.Type = 0;
+                else if(a[1]) authStats.Type = 1;
+                else authStats.Type = 2;
                 Form1.favorites.AddAuthor(authStats);
-            else if (journalCheckBox.Checked == true && journalStats != null)
+
+            }
+            else if (journalCheckBox.Checked == true && journalStats != null) {
+                if (a[0]) journalStats.Type = 0;
+                else if(a[1]) journalStats.Type = 1;
+                else journalStats.Type = 2;
                 Form1.favorites.AddJournal(journalStats);
+            }
             UpdateTree();
         }
 
@@ -822,7 +833,7 @@ namespace PubCite
 
         /* not required */
         public void searchWorker()
-        {  
+        {
             for (int i = 0; i < 4; i++) prevSortedColum[i] = false;
             authorsSuggestions.Items.Clear();
             authorResultsListView.Items.Clear();
@@ -945,6 +956,12 @@ namespace PubCite
                 }
                 populateJournal(journalStats);
             }
+        }
+
+        private void settingsIcon_Click(object sender, EventArgs e)
+        {
+            SettingsForm settingsForm = new SettingsForm();
+            settingsForm.ShowDialog(this);
         }
     }
 }

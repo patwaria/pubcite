@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Authors");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Journals");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Favourites", new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2});
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Authors");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Journals");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Favourites", new System.Windows.Forms.TreeNode[] {
+            treeNode4,
+            treeNode5});
             this.SearchPanel = new System.Windows.Forms.Panel();
             this.cachedListView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -45,8 +45,6 @@
             this.searchField = new System.Windows.Forms.TextBox();
             this.authorCheckBox = new System.Windows.Forms.CheckBox();
             this.progressBar = new System.Windows.Forms.ProgressBar();
-            this.addToFavourite = new System.Windows.Forms.PictureBox();
-            this.searchIcon = new System.Windows.Forms.PictureBox();
             this.resultsPanel = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.resultsGroupBox = new System.Windows.Forms.GroupBox();
@@ -97,11 +95,12 @@
             this.viewStatisticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeFromFavouritesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.settingsIcon = new System.Windows.Forms.PictureBox();
+            this.addToFavourite = new System.Windows.Forms.PictureBox();
+            this.searchIcon = new System.Windows.Forms.PictureBox();
             this.EndYear = new PubCite.NumericTextBox();
             this.StartYear = new PubCite.NumericTextBox();
             this.SearchPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.addToFavourite)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchIcon)).BeginInit();
             this.resultsPanel.SuspendLayout();
             this.panel4.SuspendLayout();
             this.resultsGroupBox.SuspendLayout();
@@ -111,11 +110,16 @@
             this.Suggestions.SuspendLayout();
             this.optionsMenuStrip.SuspendLayout();
             this.favouriteMenuStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.settingsIcon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.addToFavourite)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchIcon)).BeginInit();
             this.SuspendLayout();
             // 
             // SearchPanel
             // 
             this.SearchPanel.BackColor = System.Drawing.SystemColors.Window;
+            this.SearchPanel.Controls.Add(this.settingsIcon);
+            this.SearchPanel.Controls.Add(this.cachedListView);
             this.SearchPanel.Controls.Add(this.label4);
             this.SearchPanel.Controls.Add(this.affiliation);
             this.SearchPanel.Controls.Add(this.KeywordsTextBox);
@@ -145,9 +149,9 @@
             this.cachedListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1});
             this.cachedListView.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.cachedListView.Location = new System.Drawing.Point(-123, 42);
+            this.cachedListView.Location = new System.Drawing.Point(128, 26);
             this.cachedListView.Name = "cachedListView";
-            this.cachedListView.Size = new System.Drawing.Size(771, 97);
+            this.cachedListView.Size = new System.Drawing.Size(745, 97);
             this.cachedListView.TabIndex = 29;
             this.cachedListView.UseCompatibleStateImageBehavior = false;
             this.cachedListView.View = System.Windows.Forms.View.Details;
@@ -213,7 +217,7 @@
             this.searchField.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.searchField.Location = new System.Drawing.Point(128, 3);
             this.searchField.Name = "searchField";
-            this.searchField.Size = new System.Drawing.Size(771, 22);
+            this.searchField.Size = new System.Drawing.Size(745, 22);
             this.searchField.TabIndex = 1;
             // 
             // authorCheckBox
@@ -238,30 +242,8 @@
             // 
             this.progressBar.Location = new System.Drawing.Point(128, 3);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(771, 22);
+            this.progressBar.Size = new System.Drawing.Size(745, 22);
             this.progressBar.TabIndex = 0;
-            // 
-            // addToFavourite
-            // 
-            this.addToFavourite.Image = global::PubCite.Properties.Resources.star;
-            this.addToFavourite.Location = new System.Drawing.Point(939, 0);
-            this.addToFavourite.Name = "addToFavourite";
-            this.addToFavourite.Size = new System.Drawing.Size(25, 28);
-            this.addToFavourite.TabIndex = 21;
-            this.addToFavourite.TabStop = false;
-            this.toolTip.SetToolTip(this.addToFavourite, "Add to Favourite");
-            this.addToFavourite.Click += new System.EventHandler(this.addToFavourite_Click);
-            // 
-            // searchIcon
-            // 
-            this.searchIcon.Image = global::PubCite.Properties.Resources.search_button2;
-            this.searchIcon.Location = new System.Drawing.Point(909, 0);
-            this.searchIcon.Name = "searchIcon";
-            this.searchIcon.Size = new System.Drawing.Size(24, 28);
-            this.searchIcon.TabIndex = 11;
-            this.searchIcon.TabStop = false;
-            this.toolTip.SetToolTip(this.searchIcon, "Search..");
-            this.searchIcon.Click += new System.EventHandler(this.searchIcon_Click);
             // 
             // resultsPanel
             // 
@@ -284,7 +266,6 @@
             // 
             // resultsGroupBox
             // 
-            this.resultsGroupBox.Controls.Add(this.cachedListView);
             this.resultsGroupBox.Controls.Add(this.authorResultsListView);
             this.resultsGroupBox.Controls.Add(this.journalResultsListView);
             this.resultsGroupBox.Location = new System.Drawing.Point(2, 88);
@@ -612,14 +593,14 @@
             this.favouritesTreeView.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.favouritesTreeView.Location = new System.Drawing.Point(7, 6);
             this.favouritesTreeView.Name = "favouritesTreeView";
-            treeNode1.Name = "authorsRootNode";
-            treeNode1.Text = "Authors";
-            treeNode2.Name = "journalsRootNode";
-            treeNode2.Text = "Journals";
-            treeNode3.Name = "Favourites";
-            treeNode3.Text = "Favourites";
+            treeNode4.Name = "authorsRootNode";
+            treeNode4.Text = "Authors";
+            treeNode5.Name = "journalsRootNode";
+            treeNode5.Text = "Journals";
+            treeNode6.Name = "Favourites";
+            treeNode6.Text = "Favourites";
             this.favouritesTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode3});
+            treeNode6});
             this.favouritesTreeView.Size = new System.Drawing.Size(209, 224);
             this.favouritesTreeView.TabIndex = 9;
             // 
@@ -738,6 +719,35 @@
             this.removeFromFavouritesToolStripMenuItem.Text = "Remove from Favourites";
             this.removeFromFavouritesToolStripMenuItem.Click += new System.EventHandler(this.removeFromFavouritesToolStripMenuItem_Click);
             // 
+            // settingsIcon
+            // 
+            this.settingsIcon.Location = new System.Drawing.Point(890, 38);
+            this.settingsIcon.Name = "settingsIcon";
+            this.settingsIcon.Size = new System.Drawing.Size(46, 34);
+            this.settingsIcon.TabIndex = 30;
+            this.settingsIcon.TabStop = false;
+            this.settingsIcon.Click += new System.EventHandler(this.settingsIcon_Click);
+            // 
+            // addToFavourite
+            // 
+            this.addToFavourite.Location = new System.Drawing.Point(911, 0);
+            this.addToFavourite.Name = "addToFavourite";
+            this.addToFavourite.Size = new System.Drawing.Size(25, 28);
+            this.addToFavourite.TabIndex = 21;
+            this.addToFavourite.TabStop = false;
+            this.toolTip.SetToolTip(this.addToFavourite, "Add to Favourite");
+            this.addToFavourite.Click += new System.EventHandler(this.addToFavourite_Click);
+            // 
+            // searchIcon
+            // 
+            this.searchIcon.Location = new System.Drawing.Point(881, 0);
+            this.searchIcon.Name = "searchIcon";
+            this.searchIcon.Size = new System.Drawing.Size(24, 28);
+            this.searchIcon.TabIndex = 11;
+            this.searchIcon.TabStop = false;
+            this.toolTip.SetToolTip(this.searchIcon, "Search..");
+            this.searchIcon.Click += new System.EventHandler(this.searchIcon_Click);
+            // 
             // EndYear
             // 
             this.EndYear.AllowSpace = false;
@@ -767,8 +777,6 @@
             this.Size = new System.Drawing.Size(981, 599);
             this.SearchPanel.ResumeLayout(false);
             this.SearchPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.addToFavourite)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchIcon)).EndInit();
             this.resultsPanel.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.resultsGroupBox.ResumeLayout(false);
@@ -780,6 +788,9 @@
             this.Suggestions.ResumeLayout(false);
             this.optionsMenuStrip.ResumeLayout(false);
             this.favouriteMenuStrip.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.settingsIcon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.addToFavourite)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchIcon)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -851,5 +862,6 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ToolTip toolTip;
+        private System.Windows.Forms.PictureBox settingsIcon;
     }
 }
