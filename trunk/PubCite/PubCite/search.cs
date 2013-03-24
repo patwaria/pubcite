@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Net;
 using System.Threading;
-
+using Transitions;
 namespace PubCite
 {
     public partial class search : UserControl
@@ -967,7 +967,16 @@ namespace PubCite
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            
+            Transition t = new Transition(new TransitionType_EaseInEaseOut(500));
+            t.add(recentSearchPanel, "Left", -300);
+            t.run();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Transition t = new Transition(new TransitionType_EaseInEaseOut(500));
+            t.add(recentSearchPanel, "Left", 0);
+            t.run();
         }
     }
 }

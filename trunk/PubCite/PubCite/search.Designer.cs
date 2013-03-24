@@ -35,6 +35,7 @@
             treeNode1,
             treeNode2});
             this.SearchPanel = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.settingsIcon = new System.Windows.Forms.PictureBox();
             this.cachedListView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -98,10 +99,11 @@
             this.viewStatisticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeFromFavouritesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.recentSearchPanel = new System.Windows.Forms.Panel();
+            this.label11 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             this.EndYear = new PubCite.NumericTextBox();
             this.StartYear = new PubCite.NumericTextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label11 = new System.Windows.Forms.Label();
             this.SearchPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.settingsIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.addToFavourite)).BeginInit();
@@ -115,11 +117,13 @@
             this.Suggestions.SuspendLayout();
             this.optionsMenuStrip.SuspendLayout();
             this.favouriteMenuStrip.SuspendLayout();
+            this.recentSearchPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // SearchPanel
             // 
             this.SearchPanel.BackColor = System.Drawing.SystemColors.Window;
+            this.SearchPanel.Controls.Add(this.button2);
             this.SearchPanel.Controls.Add(this.button1);
             this.SearchPanel.Controls.Add(this.settingsIcon);
             this.SearchPanel.Controls.Add(this.cachedListView);
@@ -142,10 +146,20 @@
             this.SearchPanel.Controls.Add(this.siteComboBox);
             this.SearchPanel.Controls.Add(this.searchSiteLabel);
             this.SearchPanel.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SearchPanel.Location = new System.Drawing.Point(10, 3);
+            this.SearchPanel.Location = new System.Drawing.Point(0, 0);
             this.SearchPanel.Name = "SearchPanel";
-            this.SearchPanel.Size = new System.Drawing.Size(979, 595);
+            this.SearchPanel.Size = new System.Drawing.Size(1015, 619);
             this.SearchPanel.TabIndex = 2;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(881, 47);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(55, 23);
+            this.button1.TabIndex = 31;
+            this.button1.Text = "left";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // settingsIcon
             // 
@@ -286,7 +300,7 @@
             this.resultsPanel.Controls.Add(this.panel4);
             this.resultsPanel.Location = new System.Drawing.Point(236, 88);
             this.resultsPanel.Name = "resultsPanel";
-            this.resultsPanel.Size = new System.Drawing.Size(745, 504);
+            this.resultsPanel.Size = new System.Drawing.Size(773, 525);
             this.resultsPanel.TabIndex = 1;
             // 
             // panel4
@@ -296,17 +310,16 @@
             this.panel4.Controls.Add(this.statisticsGroupBox);
             this.panel4.Location = new System.Drawing.Point(4, 3);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(736, 496);
+            this.panel4.Size = new System.Drawing.Size(766, 522);
             this.panel4.TabIndex = 3;
             // 
             // resultsGroupBox
             // 
-            this.resultsGroupBox.Controls.Add(this.label11);
             this.resultsGroupBox.Controls.Add(this.authorResultsListView);
             this.resultsGroupBox.Controls.Add(this.journalResultsListView);
             this.resultsGroupBox.Location = new System.Drawing.Point(2, 88);
             this.resultsGroupBox.Name = "resultsGroupBox";
-            this.resultsGroupBox.Size = new System.Drawing.Size(731, 408);
+            this.resultsGroupBox.Size = new System.Drawing.Size(761, 434);
             this.resultsGroupBox.TabIndex = 0;
             this.resultsGroupBox.TabStop = false;
             this.resultsGroupBox.Text = "Results ";
@@ -324,7 +337,7 @@
             this.authorResultsListView.Location = new System.Drawing.Point(3, 18);
             this.authorResultsListView.MultiSelect = false;
             this.authorResultsListView.Name = "authorResultsListView";
-            this.authorResultsListView.Size = new System.Drawing.Size(725, 387);
+            this.authorResultsListView.Size = new System.Drawing.Size(755, 413);
             this.authorResultsListView.TabIndex = 1;
             this.authorResultsListView.UseCompatibleStateImageBehavior = false;
             this.authorResultsListView.View = System.Windows.Forms.View.Details;
@@ -361,7 +374,7 @@
             this.journalResultsListView.Location = new System.Drawing.Point(3, 18);
             this.journalResultsListView.MultiSelect = false;
             this.journalResultsListView.Name = "journalResultsListView";
-            this.journalResultsListView.Size = new System.Drawing.Size(725, 387);
+            this.journalResultsListView.Size = new System.Drawing.Size(755, 413);
             this.journalResultsListView.TabIndex = 0;
             this.journalResultsListView.UseCompatibleStateImageBehavior = false;
             this.journalResultsListView.View = System.Windows.Forms.View.Details;
@@ -412,7 +425,7 @@
             this.statisticsGroupBox.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statisticsGroupBox.Location = new System.Drawing.Point(8, 3);
             this.statisticsGroupBox.Name = "statisticsGroupBox";
-            this.statisticsGroupBox.Size = new System.Drawing.Size(722, 79);
+            this.statisticsGroupBox.Size = new System.Drawing.Size(755, 79);
             this.statisticsGroupBox.TabIndex = 2;
             this.statisticsGroupBox.TabStop = false;
             this.statisticsGroupBox.Text = "Statistics";
@@ -615,12 +628,13 @@
             // favouritesPanel
             // 
             this.favouritesPanel.BackColor = System.Drawing.SystemColors.Window;
+            this.favouritesPanel.Controls.Add(this.recentSearchPanel);
             this.favouritesPanel.Controls.Add(this.favouritesTreeView);
             this.favouritesPanel.Controls.Add(this.Suggestions);
             this.favouritesPanel.ForeColor = System.Drawing.SystemColors.ControlText;
             this.favouritesPanel.Location = new System.Drawing.Point(8, 88);
             this.favouritesPanel.Name = "favouritesPanel";
-            this.favouritesPanel.Size = new System.Drawing.Size(228, 504);
+            this.favouritesPanel.Size = new System.Drawing.Size(228, 525);
             this.favouritesPanel.TabIndex = 0;
             // 
             // favouritesTreeView
@@ -645,7 +659,7 @@
             this.Suggestions.Controls.Add(this.authorsSuggestions);
             this.Suggestions.Location = new System.Drawing.Point(4, 241);
             this.Suggestions.Name = "Suggestions";
-            this.Suggestions.Size = new System.Drawing.Size(215, 255);
+            this.Suggestions.Size = new System.Drawing.Size(215, 281);
             this.Suggestions.TabIndex = 8;
             this.Suggestions.TabStop = false;
             this.Suggestions.Text = "Suggestions";
@@ -659,7 +673,7 @@
             this.authorsSuggestions.GridLines = true;
             this.authorsSuggestions.Location = new System.Drawing.Point(3, 18);
             this.authorsSuggestions.Name = "authorsSuggestions";
-            this.authorsSuggestions.Size = new System.Drawing.Size(209, 234);
+            this.authorsSuggestions.Size = new System.Drawing.Size(209, 260);
             this.authorsSuggestions.TabIndex = 0;
             this.authorsSuggestions.UseCompatibleStateImageBehavior = false;
             this.authorsSuggestions.View = System.Windows.Forms.View.Details;
@@ -755,6 +769,34 @@
             this.removeFromFavouritesToolStripMenuItem.Text = "Remove from Favourites";
             this.removeFromFavouritesToolStripMenuItem.Click += new System.EventHandler(this.removeFromFavouritesToolStripMenuItem_Click);
             // 
+            // recentSearchPanel
+            // 
+            this.recentSearchPanel.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.recentSearchPanel.Controls.Add(this.label11);
+            this.recentSearchPanel.Location = new System.Drawing.Point(-248, 6);
+            this.recentSearchPanel.Name = "recentSearchPanel";
+            this.recentSearchPanel.Size = new System.Drawing.Size(220, 516);
+            this.recentSearchPanel.TabIndex = 1;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(112, 115);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(44, 13);
+            this.label11.TabIndex = 0;
+            this.label11.Text = "label11";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(942, 47);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(58, 23);
+            this.button2.TabIndex = 32;
+            this.button2.Text = "Right";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // EndYear
             // 
             this.EndYear.AllowSpace = false;
@@ -775,32 +817,13 @@
             this.toolTip.SetToolTip(this.StartYear, "Start Year");
             this.StartYear.TextChanged += new System.EventHandler(this.StartYear_TextChanged);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(881, 47);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 31;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(148, 136);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(44, 13);
-            this.label11.TabIndex = 2;
-            this.label11.Text = "label11";
-            // 
             // search
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.SearchPanel);
             this.Name = "search";
-            this.Size = new System.Drawing.Size(981, 599);
+            this.Size = new System.Drawing.Size(1015, 622);
             this.SearchPanel.ResumeLayout(false);
             this.SearchPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.settingsIcon)).EndInit();
@@ -809,7 +832,6 @@
             this.resultsPanel.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.resultsGroupBox.ResumeLayout(false);
-            this.resultsGroupBox.PerformLayout();
             this.statisticsGroupBox.ResumeLayout(false);
             this.statisticsGroupBox.PerformLayout();
             this.progressPanel.ResumeLayout(false);
@@ -818,6 +840,8 @@
             this.Suggestions.ResumeLayout(false);
             this.optionsMenuStrip.ResumeLayout(false);
             this.favouriteMenuStrip.ResumeLayout(false);
+            this.recentSearchPanel.ResumeLayout(false);
+            this.recentSearchPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -891,6 +915,8 @@
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.PictureBox settingsIcon;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Panel recentSearchPanel;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button button2;
     }
 }
