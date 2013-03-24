@@ -32,7 +32,7 @@ namespace PubCite
             newTabPage = new TabPage();
             newTabPage.ImageIndex = 0;
             maintabControl.Controls.Add(newTabPage);
-            maintabControl.SelectedIndexChanged += new EventHandler(tabChangeHandler);
+           
             maintabControl.MouseClick+=new MouseEventHandler(maintabControl_MouseClick);
                 
         }
@@ -45,20 +45,28 @@ namespace PubCite
             {
                 if (maintabControl.GetTabRect(i).Contains(e.Location))
                 {
-                    RectangleF tabArea = maintabControl.GetTabRect(i);
-                    System.Console.WriteLine(tabArea.X + "///" + tabArea.Y);
-                    System.Console.WriteLine(e.X + "a/b/c" + e.Y);
-                    RectangleF imageArea = new RectangleF(tabArea.X + 7, tabArea.Y, 15, 15);
-                    if (imageArea.Contains(e.Location))
-                    { if(maintabControl.TabPages[maintabControl.SelectedIndex + 1] != newTabPage)
-                        maintabControl.TabPages.RemoveAt(i);
+                    if (i == maintabControl.TabCount - 1){
+                        search nSearch = new search();
+                        createdTabPage = new TabPage("Search");
+                        createdTabPage.ImageIndex = 1;
+                        createdTabPage.Controls.Add(nSearch);
+                        maintabControl.TabPages.Insert(maintabControl.TabPages.Count - 1, createdTabPage);
+                        maintabControl.SelectedTab = createdTabPage;
+                    }
+                    else{
+                        RectangleF tabArea = maintabControl.GetTabRect(i);
+                        System.Console.WriteLine(tabArea.X + "///" + tabArea.Y);
+                        System.Console.WriteLine(e.X + "a/b/c" + e.Y);
+                        RectangleF imageArea = new RectangleF(tabArea.X + 7, tabArea.Y, 15, 15);
+                        if (imageArea.Contains(e.Location))
+                            maintabControl.TabPages.RemoveAt(i);
                     }
                 }
 
             }
         }
 
-        private void tabChangeHandler(object sender, EventArgs e)
+        /*private void tabChangeHandler(object sender, EventArgs e)
         {
             Console.WriteLine("calledchange");
             if (maintabControl.SelectedTab == newTabPage)
@@ -72,7 +80,7 @@ namespace PubCite
                 maintabControl.TabPages.Insert(maintabControl.TabPages.Count - 1, createdTabPage);
                 maintabControl.SelectedTab = createdTabPage;
             }
-        }
+        }*/
         private void searchToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             string s = "Search";
