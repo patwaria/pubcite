@@ -203,7 +203,7 @@ namespace PubCite
                     journalResultsListView.Items.Add(item);
 
                 }
-                cacheObject.Add(journal.Name, journal, true);
+                cacheObject.Add(journal.Name, journal, false);
             }
         }
 
