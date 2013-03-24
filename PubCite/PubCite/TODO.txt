@@ -6,4 +6,4 @@
 9. Back/ Fwd in citation tab : Cachers/GUI ?
 6. Copy citations/export in different formats: ?
 
-@parsers : Urlformatexception, numberformatexception
+@parsers : Urlformatexception, numberformatexception, No error handling for arbit searches
