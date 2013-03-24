@@ -9,6 +9,7 @@ namespace PubCite
 {
     public class CSXParser
     {
+        CiteSeerJournal_FinalAuthorSearch newAuthorSearch, newJournalSearch;
 
         public CSXParser() { }
 
@@ -76,11 +77,19 @@ namespace PubCite
 
             return authObj;
         }
-        public Author getAuthors(string authName, string affiliation, string keywords )
+
+
+        public Author getAuthors(string authName, string affiliation, string keywords)
         {
-            CiteSeerJournal_FinalAuthorSearch newSearch = new CiteSeerJournal_FinalAuthorSearch(authName, 0, affiliation, keywords);
-            return newSearch.returnAuthor();
+            newAuthorSearch = new CiteSeerJournal_FinalAuthorSearch(authName, 0, affiliation, keywords);
+            return newAuthorSearch.returnAuthor();
         }
+
+        public bool getAuthorsNext(string authName, string affiliation, string keywords, ref Author auth)
+        {
+            return false;
+        }
+
         public Journal getJournals(string journalName, string ISSN, string keywords)
         {
             CiteSeerJournal_FinalAuthorSearch newSearch = new CiteSeerJournal_FinalAuthorSearch(journalName, 1, ISSN, keywords);
