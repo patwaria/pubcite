@@ -191,6 +191,7 @@
             // abstractBox
             // 
             this.abstractBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.abstractBox.Enabled = false;
             this.abstractBox.Font = new System.Drawing.Font("Georgia", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.abstractBox.Location = new System.Drawing.Point(377, 36);
             this.abstractBox.Name = "abstractBox";

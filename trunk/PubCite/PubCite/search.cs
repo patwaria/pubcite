@@ -96,10 +96,14 @@ namespace PubCite
             cachedListView.Visible = false;
             /* Display cached object */
             if (authorCheckBox.Checked)
-                populateAuthor((SG.Author)cacheObject.Get(searchField.Text, authorCheckBox.Checked));
-            else
-                populateJournal((SG.Journal)cacheObject.Get(searchField.Text, authorCheckBox.Checked));
-        
+            {
+                authStats = (SG.Author)cacheObject.Get(searchField.Text, authorCheckBox.Checked);
+                populateAuthor();
+            }
+            else {
+                journalStats = (SG.Journal)cacheObject.Get(searchField.Text, authorCheckBox.Checked);
+                populateJournal();
+            }
         }
 
         private void authorCheckBox_Click(object sender, EventArgs e)
@@ -174,31 +178,30 @@ namespace PubCite
                 authorsSuggestions.Items.Add(item);
             }
         }
-        private void populateJournal(SG.Journal journal)
+        private void populateJournal()
         {
 
-            journalResultsListView.Items.Clear();
-            authorResultsListView.Visible = false;
-            journalResultsListView.Visible = true;
-
-            if (journal != null)
+            if (journalStats != null)
             {
+                journalResultsListView.Items.Clear();
+                authorResultsListView.Visible = false;
+                journalResultsListView.Visible = true;
                 if (StartYear.getintval() == 0 && EndYear.getintval() == 0)
-                    Papers = journal.getPapers();
+                    Papers = journalStats.getPapers();
                 else if (StartYear.getintval() != 0 && EndYear.getintval() == 0)
-                    Papers = journal.getPaperByYearRange(StartYear.getintval());
+                    Papers = journalStats.getPaperByYearRange(StartYear.getintval());
                 else if (StartYear.getintval() == 0 && EndYear.getintval() != 0)
-                    Papers = journal.getPaperUptoYear(EndYear.getintval());
+                    Papers = journalStats.getPaperUptoYear(EndYear.getintval());
                 else if (StartYear.getintval() != 0 && EndYear.getintval() != 0)
-                    Papers = journal.getPaperByYearRange(StartYear.getintval(), EndYear.getintval());
+                    Papers = journalStats.getPaperByYearRange(StartYear.getintval(), EndYear.getintval());
 
 
-                authorNameLabel.Text = journal.Name;
-                citesperPaper.Text = journal.getCitesPerPaper().ToString();
-                citesperYear.Text = journal.getCitesPerYear().ToString();
-                hindex.Text = journal.getHIndex().ToString();
-                i10index.Text = journal.getI10Index().ToString();
-                citationsNumberLabel.Text = journal.getTotalNumberofCitations().ToString();
+                authorNameLabel.Text = journalStats.Name;
+                citesperPaper.Text = journalStats.getCitesPerPaper().ToString();
+                citesperYear.Text = journalStats.getCitesPerYear().ToString();
+                hindex.Text = journalStats.getHIndex().ToString();
+                i10index.Text = journalStats.getI10Index().ToString();
+                citationsNumberLabel.Text = journalStats.getTotalNumberofCitations().ToString();
                 for (int i = 0; i < Papers.Count; i++)
                 {
                     item = new ListViewItem(Papers[i].Title);
@@ -211,41 +214,50 @@ namespace PubCite
                     journalResultsListView.Items.Add(item);
 
                 }
+
+                /* set type */
+                if (a[0]) journalStats.Type = 0;
+                else if (a[1]) journalStats.Type = 1;
+                else journalStats.Type = 2;
+
+
                 /* add journal to cache */
-                cacheObject.Add(journal.Name, journal, false);
+                cacheObject.Add(journalStats.Name, journalStats, false);
                 
                 /* add journal to recent */
-                RecentSearchKeys.Add(journal.Name);
-                updateHistory(journal.Name);
+                RecentSearchKeys.Add(journalStats.Name);
+                updateHistory(journalStats.Name);
             }
         }
 
-        private void populateAuthor(SG.Author author)
+        private void populateAuthor()
         {
 
-            authorResultsListView.Items.Clear();
-            authorResultsListView.Visible = true;
-            journalResultsListView.Visible = false;
 
-            if (author != null)
+            if (authStats != null)
             {
+
+                authorResultsListView.Items.Clear();
+                authorResultsListView.Visible = true;
+                journalResultsListView.Visible = false;
+
                 if (StartYear.getintval() == 0 && EndYear.getintval() == 0)
-                    Papers = author.getPapers();
+                    Papers = authStats.getPapers();
                 else if (StartYear.getintval() != 0 && EndYear.getintval() == 0)
-                    Papers = author.getPaperByYearRange(StartYear.getintval());
+                    Papers = authStats.getPaperByYearRange(StartYear.getintval());
                 else if (StartYear.getintval() == 0 && EndYear.getintval() != 0)
-                    Papers = author.getPaperUptoYear(EndYear.getintval());
+                    Papers = authStats.getPaperUptoYear(EndYear.getintval());
                 else if (StartYear.getintval() != 0 && EndYear.getintval() != 0)
-                    Papers = author.getPaperByYearRange(StartYear.getintval(), EndYear.getintval());
+                    Papers = authStats.getPaperByYearRange(StartYear.getintval(), EndYear.getintval());
                 Console.WriteLine(Papers.Count);
 
                 /* Statistics */
-                authorNameLabel.Text = author.Name;
-                citesperPaper.Text = author.getCitesPerPaper().ToString();
-                citesperYear.Text = author.getCitesPerYear().ToString();
-                hindex.Text = author.getHIndex().ToString();
-                i10index.Text = author.getI10Index().ToString();
-                citationsNumberLabel.Text = author.getTotalNumberofCitations().ToString();
+                authorNameLabel.Text = authStats.Name;
+                citesperPaper.Text = authStats.getCitesPerPaper().ToString();
+                citesperYear.Text = authStats.getCitesPerYear().ToString();
+                hindex.Text = authStats.getHIndex().ToString();
+                i10index.Text = authStats.getI10Index().ToString();
+                citationsNumberLabel.Text = authStats.getTotalNumberofCitations().ToString();
 
                 /* Papers */
                 for (int i = 0; i < Papers.Count; i++)
@@ -261,11 +273,16 @@ namespace PubCite
                     authorResultsListView.Items.Add(item);
                 }
 
+                /* Set Type */
+                if (a[0]) authStats.Type = 0;
+                else if (a[1]) authStats.Type = 1;
+                else authStats.Type = 2;
+
                 /* Add to cache */
-                cacheObject.Add(author.Name, author, true);
+                cacheObject.Add(authStats.Name, authStats, true);
                 /* Add to recent History */
-                RecentSearchKeys.Add(author.Name);
-                updateHistory(author.Name);
+                RecentSearchKeys.Add(authStats.Name);
+                updateHistory(authStats.Name);
             }
         }
 
@@ -365,7 +382,7 @@ namespace PubCite
                         prevSortedColum[2] = false;
                     }
                 }
-                populateJournal(journalStats);
+                populateJournal();
             }
 
 
@@ -432,7 +449,7 @@ namespace PubCite
                         prevSortedColum[3] = false;
                     }
                 }
-                populateAuthor(authStats);
+                populateAuthor();
             }
         }
 
@@ -604,7 +621,7 @@ namespace PubCite
             progressPanel.Visible = false;
             progressBar.SendToBack();
             progressBar.Visible = false;
-            populateAuthor(authStats);
+            populateAuthor();
         }
 
 
@@ -669,11 +686,11 @@ namespace PubCite
                 if (suggestions)
                     populateSuggestions();
                 else
-                    populateAuthor(authStats);
+                    populateAuthor();
             }
             else
             {
-                populateJournal(journalStats);
+                populateJournal();
             }
         }
 
@@ -750,16 +767,12 @@ namespace PubCite
         {
             if (authorCheckBox.Checked == true && authStats != null)
             {
-                if (a[0]) authStats.Type = 0;
-                else if(a[1]) authStats.Type = 1;
-                else authStats.Type = 2;
+                
                 Form1.favorites.AddAuthor(authStats);
 
             }
             else if (journalCheckBox.Checked == true && journalStats != null) {
-                if (a[0]) journalStats.Type = 0;
-                else if(a[1]) journalStats.Type = 1;
-                else journalStats.Type = 2;
+                
                 Form1.favorites.AddJournal(journalStats);
             }
             UpdateTree();
@@ -777,12 +790,12 @@ namespace PubCite
                 if (favouritesTreeView.SelectedNode.Parent.Index == 0)
                 {
                     authStats = FavAuthorList[favouritesTreeView.SelectedNode.Index];
-                    populateAuthor(authStats);
+                    populateAuthor();
                 }
                 else if (favouritesTreeView.SelectedNode.Parent.Index == 1)
                 {// Journal selected
                     journalStats = FavJournalList[favouritesTreeView.SelectedNode.Index];
-                    populateJournal(journalStats);
+                    populateJournal();
                 }
             }
             Console.WriteLine(favouritesTreeView.SelectedNode.Level);
@@ -811,9 +824,9 @@ namespace PubCite
             if (StartYear.Text.Length == 4 || StartYear.getintval() == 0)
             {
                 if (authorCheckBox.Checked == true && authStats != null)
-                    populateAuthor(authStats);
+                    populateAuthor();
                 else if (journalStats != null)
-                    populateJournal(journalStats);
+                    populateJournal();
             }
         }
 
@@ -823,9 +836,9 @@ namespace PubCite
             if (EndYear.Text.Length == 4 || EndYear.getintval() == 0)
             {
                 if (authorCheckBox.Checked == true && authStats != null)
-                    populateAuthor(authStats);
+                    populateAuthor();
                 else if (journalStats != null)
-                    populateJournal(journalStats);
+                    populateJournal();
             }
         }
 
@@ -902,9 +915,8 @@ namespace PubCite
                     /* Case : No suggestions */
                     if (a[0] == true) authStats = CSParser.getAuthors(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text);
                     else if (a[1] == true) authStats = GSScraper.getAuthors(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text);
-                    /*Add for MAS*/
-                    //ProgThread.Abort();
-                    populateAuthor(authStats);
+                    else authStats = CSParser.getAuthors(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text);
+                    populateAuthor();
 
                 }
                 else
@@ -927,8 +939,8 @@ namespace PubCite
                                 authStats = MSParser.getAuthStatistics(auth_url[index]);
                             prevSelectedIndex = index;
                         }
-                        // ProgThread.Abort();
-                        populateAuthor(authStats);
+                        
+                        populateAuthor();
                     }
                     else
                     {
@@ -973,7 +985,7 @@ namespace PubCite
                     MSParser = new MicrosoftScholarParser();
                     journalStats = MSParser.getJournals(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text);
                 }
-                populateJournal(journalStats);
+                populateJournal();
             }
         }
 
