@@ -29,25 +29,25 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.CacheOptions = new System.Windows.Forms.GroupBox();
-            this.CacheOptionslabel = new System.Windows.Forms.Label();
-            this.cacheNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.cancelButton = new System.Windows.Forms.Button();
+            this.Okbutton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.citeseerNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.label1 = new System.Windows.Forms.Label();
+            this.microsoftNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.label3 = new System.Windows.Forms.Label();
             this.googleNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.microsoftNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.Okbutton = new System.Windows.Forms.Button();
-            this.cancelButton = new System.Windows.Forms.Button();
+            this.citeseerNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
+            this.CacheOptions = new System.Windows.Forms.GroupBox();
+            this.cacheNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.CacheOptionslabel = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.microsoftNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.googleNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.citeseerNumericUpDown)).BeginInit();
             this.CacheOptions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cacheNumericUpDown)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.citeseerNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.googleNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.microsoftNumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -62,42 +62,24 @@
             this.panel1.Size = new System.Drawing.Size(482, 361);
             this.panel1.TabIndex = 0;
             // 
-            // CacheOptions
+            // cancelButton
             // 
-            this.CacheOptions.Controls.Add(this.cacheNumericUpDown);
-            this.CacheOptions.Controls.Add(this.CacheOptionslabel);
-            this.CacheOptions.Location = new System.Drawing.Point(3, 24);
-            this.CacheOptions.Name = "CacheOptions";
-            this.CacheOptions.Size = new System.Drawing.Size(476, 63);
-            this.CacheOptions.TabIndex = 0;
-            this.CacheOptions.TabStop = false;
-            this.CacheOptions.Text = "Results Caching";
+            this.cancelButton.Location = new System.Drawing.Point(259, 291);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(75, 23);
+            this.cancelButton.TabIndex = 3;
+            this.cancelButton.Text = "Cancel";
+            this.cancelButton.UseVisualStyleBackColor = true;
             // 
-            // CacheOptionslabel
+            // Okbutton
             // 
-            this.CacheOptionslabel.AutoSize = true;
-            this.CacheOptionslabel.Location = new System.Drawing.Point(92, 28);
-            this.CacheOptionslabel.Name = "CacheOptionslabel";
-            this.CacheOptionslabel.Size = new System.Drawing.Size(158, 13);
-            this.CacheOptionslabel.TabIndex = 0;
-            this.CacheOptionslabel.Text = "Keep Cache These Many Days:";
-            // 
-            // cacheNumericUpDown
-            // 
-            this.cacheNumericUpDown.Location = new System.Drawing.Point(271, 26);
-            this.cacheNumericUpDown.Maximum = new decimal(new int[] {
-            15,
-            0,
-            0,
-            0});
-            this.cacheNumericUpDown.Name = "cacheNumericUpDown";
-            this.cacheNumericUpDown.Size = new System.Drawing.Size(35, 20);
-            this.cacheNumericUpDown.TabIndex = 1;
-            this.cacheNumericUpDown.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            this.Okbutton.Location = new System.Drawing.Point(127, 291);
+            this.Okbutton.Name = "Okbutton";
+            this.Okbutton.Size = new System.Drawing.Size(75, 23);
+            this.Okbutton.TabIndex = 2;
+            this.Okbutton.Text = "Ok";
+            this.Okbutton.UseVisualStyleBackColor = true;
+            this.Okbutton.Click += new System.EventHandler(this.Okbutton_Click);
             // 
             // groupBox1
             // 
@@ -114,31 +96,31 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Query Options";
             // 
-            // citeseerNumericUpDown
+            // microsoftNumericUpDown
             // 
-            this.citeseerNumericUpDown.Location = new System.Drawing.Point(271, 28);
-            this.citeseerNumericUpDown.Maximum = new decimal(new int[] {
+            this.microsoftNumericUpDown.Location = new System.Drawing.Point(271, 109);
+            this.microsoftNumericUpDown.Maximum = new decimal(new int[] {
             500,
             0,
             0,
             0});
-            this.citeseerNumericUpDown.Name = "citeseerNumericUpDown";
-            this.citeseerNumericUpDown.Size = new System.Drawing.Size(44, 20);
-            this.citeseerNumericUpDown.TabIndex = 1;
-            this.citeseerNumericUpDown.Value = new decimal(new int[] {
+            this.microsoftNumericUpDown.Name = "microsoftNumericUpDown";
+            this.microsoftNumericUpDown.Size = new System.Drawing.Size(44, 20);
+            this.microsoftNumericUpDown.TabIndex = 5;
+            this.microsoftNumericUpDown.Value = new decimal(new int[] {
             100,
             0,
             0,
             0});
             // 
-            // label1
+            // label3
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(92, 28);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(122, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Limit Citeseer Results to:";
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(18, 113);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(214, 13);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Limit Microsoft Academic Search Results to:";
             // 
             // googleNumericUpDown
             // 
@@ -160,56 +142,74 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(92, 70);
+            this.label2.Location = new System.Drawing.Point(75, 72);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(121, 13);
+            this.label2.Size = new System.Drawing.Size(157, 13);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Limit Google  Results to:";
+            this.label2.Text = "Limit Google Scholar Results to:";
             // 
-            // label3
+            // citeseerNumericUpDown
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(93, 111);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(130, 13);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Limit Microsoft  Results to:";
-            // 
-            // microsoftNumericUpDown
-            // 
-            this.microsoftNumericUpDown.Location = new System.Drawing.Point(271, 109);
-            this.microsoftNumericUpDown.Maximum = new decimal(new int[] {
+            this.citeseerNumericUpDown.Location = new System.Drawing.Point(271, 28);
+            this.citeseerNumericUpDown.Maximum = new decimal(new int[] {
             500,
             0,
             0,
             0});
-            this.microsoftNumericUpDown.Name = "microsoftNumericUpDown";
-            this.microsoftNumericUpDown.Size = new System.Drawing.Size(44, 20);
-            this.microsoftNumericUpDown.TabIndex = 5;
-            this.microsoftNumericUpDown.Value = new decimal(new int[] {
+            this.citeseerNumericUpDown.Name = "citeseerNumericUpDown";
+            this.citeseerNumericUpDown.Size = new System.Drawing.Size(44, 20);
+            this.citeseerNumericUpDown.TabIndex = 1;
+            this.citeseerNumericUpDown.Value = new decimal(new int[] {
             100,
             0,
             0,
             0});
             // 
-            // Okbutton
+            // label1
             // 
-            this.Okbutton.Location = new System.Drawing.Point(127, 291);
-            this.Okbutton.Name = "Okbutton";
-            this.Okbutton.Size = new System.Drawing.Size(75, 23);
-            this.Okbutton.TabIndex = 2;
-            this.Okbutton.Text = "Ok";
-            this.Okbutton.UseVisualStyleBackColor = true;
-            this.Okbutton.Click += new System.EventHandler(this.Okbutton_Click);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(110, 30);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(122, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Limit Citeseer Results to:";
             // 
-            // cancelButton
+            // CacheOptions
             // 
-            this.cancelButton.Location = new System.Drawing.Point(259, 291);
-            this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(75, 23);
-            this.cancelButton.TabIndex = 3;
-            this.cancelButton.Text = "Cancel";
-            this.cancelButton.UseVisualStyleBackColor = true;
+            this.CacheOptions.Controls.Add(this.cacheNumericUpDown);
+            this.CacheOptions.Controls.Add(this.CacheOptionslabel);
+            this.CacheOptions.Location = new System.Drawing.Point(3, 24);
+            this.CacheOptions.Name = "CacheOptions";
+            this.CacheOptions.Size = new System.Drawing.Size(476, 63);
+            this.CacheOptions.TabIndex = 0;
+            this.CacheOptions.TabStop = false;
+            this.CacheOptions.Text = "Results Caching";
+            // 
+            // cacheNumericUpDown
+            // 
+            this.cacheNumericUpDown.Location = new System.Drawing.Point(271, 26);
+            this.cacheNumericUpDown.Maximum = new decimal(new int[] {
+            15,
+            0,
+            0,
+            0});
+            this.cacheNumericUpDown.Name = "cacheNumericUpDown";
+            this.cacheNumericUpDown.Size = new System.Drawing.Size(35, 20);
+            this.cacheNumericUpDown.TabIndex = 1;
+            this.cacheNumericUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // CacheOptionslabel
+            // 
+            this.CacheOptionslabel.AutoSize = true;
+            this.CacheOptionslabel.Location = new System.Drawing.Point(92, 28);
+            this.CacheOptionslabel.Name = "CacheOptionslabel";
+            this.CacheOptionslabel.Size = new System.Drawing.Size(158, 13);
+            this.CacheOptionslabel.TabIndex = 0;
+            this.CacheOptionslabel.Text = "Keep Cache These Many Days:";
             // 
             // SettingsForm
             // 
@@ -220,14 +220,14 @@
             this.Name = "SettingsForm";
             this.Text = "SettingsForm";
             this.panel1.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.microsoftNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.googleNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.citeseerNumericUpDown)).EndInit();
             this.CacheOptions.ResumeLayout(false);
             this.CacheOptions.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cacheNumericUpDown)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.citeseerNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.googleNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.microsoftNumericUpDown)).EndInit();
             this.ResumeLayout(false);
 
         }
