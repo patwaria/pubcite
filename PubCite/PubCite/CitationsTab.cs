@@ -30,7 +30,8 @@ namespace PubCite
             InitializeComponent();
             authorResultsListView.ColumnClick += new ColumnClickEventHandler(authorResultsListView_ColumnClick);
             authorResultsListView.FullRowSelect = true;
-            authorResultsListView.MouseClick += new MouseEventHandler(authorResultsListView_MouseClick); 
+            authorResultsListView.MouseClick += new MouseEventHandler(authorResultsListView_MouseClick);
+            authorResultsListView.MouseDoubleClick += new MouseEventHandler(authorResultsListView_MouseDoubleClick);
         }
 
 
@@ -98,6 +99,11 @@ namespace PubCite
                 Citations = GSScraper.getCitations(MainPapers[citationIndex].CitedByURL);
             else if (type == 2)
                 Citations = MSParser.getCitations(MainPapers[citationIndex].CitedByURL);
+        }
+
+        private void authorResultsListView_MouseDoubleClick(object sender, EventArgs e)
+        {
+            viewCitationsToolStripMenuItem_Click(sender, e);
         }
 
         private void viewCitationsToolStripMenuItem_Click(object sender, EventArgs e)
