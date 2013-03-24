@@ -45,13 +45,17 @@ namespace PubCite
             authorResultsListView.FullRowSelect = true;
             authorResultsListView.MouseClick += new MouseEventHandler(authorResultsListView_MouseClick);
             authorResultsListView.ColumnClick += new ColumnClickEventHandler(authorResultsListView_ColumnClick);
+            authorResultsListView.MouseDoubleClick += new MouseEventHandler(authorResultsListView_MouseDoubleClick);
 
             journalResultsListView.FullRowSelect = true;
             journalResultsListView.MouseClick += new MouseEventHandler(journalResultsListView_MouseClick);
             journalResultsListView.ColumnClick += new ColumnClickEventHandler(journalResultsListView_ColumnClick);
+            journalResultsListView.MouseDoubleClick += new MouseEventHandler(journalResultsListView_MouseDoubleClick);
+
             authorsSuggestions.MouseDoubleClick += new MouseEventHandler(authorsSuggestions_MouseClick);
             authorsSuggestions.FullRowSelect = true;
 
+            favouritesTreeView.MouseDoubleClick += new MouseEventHandler(favouritesTreeView_MouseDoubleClick);
             searchField.GotFocus += new EventHandler(searchField_GotFocus);
             searchField.LostFocus += new EventHandler(searchField_LostFocus);
             searchField.KeyUp+=new KeyEventHandler(searchField_KeyUp);
@@ -664,9 +668,18 @@ namespace PubCite
                 openBrowserForUrl(Papers[journalResultsListView.FocusedItem.Index].TitleURL);
         }
 
+        private void authorResultsListView_MouseDoubleClick(object sender, EventArgs e)
+        {
+            viewCitationsToolStripMenuItem_Click(sender,e);
+        }
+
+        private void journalResultsListView_MouseDoubleClick(object sender, EventArgs e)
+        {
+            viewCitationsToolStripMenuItem_Click(sender, e);
+        }
+
         private void viewCitationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
             if (authorResultsListView.Visible == true)
                 citationIndex = authorResultsListView.FocusedItem.Index;
             else
@@ -722,6 +735,11 @@ namespace PubCite
             else if (journalCheckBox.Checked == true && journalStats != null)
                 Form1.favorites.AddJournal(journalStats);
             UpdateTree();
+        }
+
+        private void favouritesTreeView_MouseDoubleClick(object sender, EventArgs e) {
+
+            viewStatisticsToolStripMenuItem_Click(sender, e);
         }
 
         private void viewStatisticsToolStripMenuItem_Click(object sender, EventArgs e)
