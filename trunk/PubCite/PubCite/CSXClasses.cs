@@ -74,7 +74,7 @@ namespace PubCite
                 ISSN = ISSN.Trim();
                 ISSN = ISSN.Replace(" ", "");
 
-                Console.WriteLine(searchElement + ",  " + keyword + ",  " + ISSN);
+                //Console.WriteLine(searchElement + ",  " + keyword + ",  " + ISSN);
 
                 if (ISSN == "" && keyword == "")
                     initialURL = "http://citeseerx.ist.psu.edu/search?q=venue%3A%28" + searchElement + "%29&submit=Search&ic=1&sort=cite&t=doc";
@@ -94,7 +94,7 @@ namespace PubCite
             CiteDoc = CitePage.Load(initialURL);
             PageNo = 1;
 
-            Console.WriteLine("Document opened");
+            //Console.WriteLine("Document opened");
 
             getNoResult();
         }
@@ -107,7 +107,7 @@ namespace PubCite
                 noResult = 0;
                 return;
             }
-            Console.WriteLine(noResultNode.InnerText);
+            //Console.WriteLine(noResultNode.InnerText);
 
             String noResults = noResultNode.InnerText;
             noResults = noResults.Replace(",", "");
@@ -118,7 +118,7 @@ namespace PubCite
                 noResult = 100;
 
 
-            Console.WriteLine(noResult + "   " + noResult);
+           // Console.WriteLine(noResult + "   " + noResult);
         }
 
         private int LoadNextPage()
@@ -164,7 +164,7 @@ namespace PubCite
                 
                 CiteDoc = CitePage.Load(nextURL);
 
-                Console.WriteLine(CiteDoc.ToString());
+                //Console.WriteLine(CiteDoc.ToString());
                 return 1;
             }
             return 0;
@@ -206,7 +206,7 @@ namespace PubCite
                             paperURL = "http://citeseer.ist.psu.edu" + paperNode.Attributes["href"].Value;
                     }
 
-                    Console.WriteLine(paperName);
+                    //Console.WriteLine(paperName);
                     //Now remove unwanted preceding character and spaces from paperName
 
                     authorNode = entryNoNode.SelectSingleNode("div[1]/span[1]");
@@ -243,7 +243,7 @@ namespace PubCite
                         citationNode = entryNoNode.SelectSingleNode("div[3]/a[2]");
                     noCitations = citationNode.InnerText;   //remove unnecessary details from the number of citations
                     noCitations = noCitations.Substring(9);
-                    Console.WriteLine(noCitations);
+                   // Console.WriteLine(noCitations);
                     if (citationNode.Attributes["href"] == null)
                         citationLink = "";
                     else
@@ -317,10 +317,10 @@ namespace PubCite
             web = new HtmlWeb();
             doc = web.Load(searchURL);
 
-            if (doc != null)
+           /* if (doc != null)
                 Console.WriteLine("Document Loaded!");
             else
-                Console.WriteLine("Load Error!");
+                Console.WriteLine("Load Error!");*/
 
             extractData();
         }
@@ -339,7 +339,7 @@ namespace PubCite
 
             found = true;
 
-            Console.WriteLine(rows.Count);
+            //Console.WriteLine(rows.Count);
 
             for (int i = 0; i < rows.Count; i++)
             {
@@ -383,10 +383,10 @@ namespace PubCite
             web = new HtmlWeb();
             doc = web.Load(publiURL);
 
-            if (doc != null)
+            /*if (doc != null)
                 Console.WriteLine("Document Loaded!");
             else
-                Console.WriteLine("Load Error!");
+                Console.WriteLine("Load Error!");*/
 
             if (publiURL.Contains("viewdoc"))//e.g. http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.31.3487
                 extractData();
@@ -449,10 +449,10 @@ namespace PubCite
             String publiURL = "http://citeseer.ist.psu.edu" + citUrl.GetAttributeValue("href", "");
             doc = web.Load(publiURL);
 
-            if (doc != null)
+         /*   if (doc != null)
                 Console.WriteLine("extractData2()'s Document Loaded!");
             else
-                Console.WriteLine("extractData2()'s Load Error!");
+                Console.WriteLine("extractData2()'s Load Error!");*/
 
             extractData2();
 
