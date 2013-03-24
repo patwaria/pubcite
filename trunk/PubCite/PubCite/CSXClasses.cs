@@ -60,11 +60,11 @@ namespace PubCite
                 affiliation = Regex.Replace(affiliation, @"\s+", " ");
                 affiliation = affiliation.Replace(" ", "+");
 
-                if(affiliation=="" && keyword=="")
+                if (affiliation == "" && keyword == "")
                     initialURL = "http://citeseerx.ist.psu.edu/search?q=author%3A%28" + searchElement + "%29&submit=Search&ic=1&sort=cite&t=doc";
-                else if(affiliation=="")
+                else if (affiliation == "")
                     initialURL = "http://citeseerx.ist.psu.edu/search?q=author%3A%28" + searchElement + "%29+AND+keyword%3A%28" + keyword + "29&sort=cite&ic=1&t=doc";
-                else if(keyword=="")
+                else if (keyword == "")
                     initialURL = "http://citeseerx.ist.psu.edu/search?q=author%3A%28" + searchElement + "%29+AND+affil%3A%28" + affiliation + "%29&sort=cite&ic=1&t=doc";
                 else
                     initialURL = "http://citeseerx.ist.psu.edu/search?q=author%3A%28" + searchElement + "%29+AND+affil%3A%28" + affiliation + "%29+AND+keyword%3A%28" + keyword + "%29&sort=cite&ic=1&t=doc";
@@ -84,7 +84,7 @@ namespace PubCite
                     initialURL = "http://citeseerx.ist.psu.edu/search?q=text%3A" + ISSN + "+AND+venue%3A%28" + searchElement + "%29&sort=cite&ic=1&t=doc";
                 else
                     initialURL = "http://citeseerx.ist.psu.edu/search?q=text%3A" + ISSN + "+AND+venue%3A%28" + searchElement + "%29+AND+keyword%3A%28" + keyword + "%29&sort=cite&ic=1&t=doc";
-                
+
             }
             else
             {
@@ -113,12 +113,12 @@ namespace PubCite
             noResults = noResults.Replace(",", "");
 
             noResult = Convert.ToInt32(noResults);
-            
+
             if (noResult > 100)
                 noResult = 100;
 
 
-           // Console.WriteLine(noResult + "   " + noResult);
+            // Console.WriteLine(noResult + "   " + noResult);
         }
 
         private int LoadNextPage()
@@ -161,7 +161,7 @@ namespace PubCite
 
                 PageNo++;
 
-                
+
                 CiteDoc = CitePage.Load(nextURL);
 
                 //Console.WriteLine(CiteDoc.ToString());
@@ -180,101 +180,102 @@ namespace PubCite
             if (noResult == 0)
                 return;
 
-                mainTable = CiteDoc.DocumentNode.SelectSingleNode("//*[@id=\"result_list\"]");
-                for (int i = 1; i <= 10; i++)
+            mainTable = CiteDoc.DocumentNode.SelectSingleNode("//*[@id=\"result_list\"]");
+            for (int i = 1; i <= 10; i++)
+            {
+
+                entryNoNode = mainTable.SelectSingleNode("div[" + i + "]");
+                if (entryNoNode == null)
+                    break;
+
+                paperURL = "";
+                paperNode = entryNoNode.SelectSingleNode("h3/a");
+                if (paperNode == null)
                 {
+                    paperNode = entryNoNode.SelectSingleNode("h3/span");
+                    paperName = paperNode.InnerText;
+                    paperName = paperName.Substring(37);
+                }
+                else
+                {
+                    paperName = paperNode.InnerText.Substring(19);
 
-                    entryNoNode = mainTable.SelectSingleNode("div[" + i + "]");
-                    if (entryNoNode == null)
-                        break;
+                    if (paperNode.Attributes["href"] != null)
+                        paperURL = "http://citeseer.ist.psu.edu" + paperNode.Attributes["href"].Value;
+                }
 
-                    paperURL = "";
-                    paperNode = entryNoNode.SelectSingleNode("h3/a");
-                    if (paperNode == null)
-                    {
-                        paperNode = entryNoNode.SelectSingleNode("h3/span");
-                        paperName = paperNode.InnerText;
-                        paperName = paperName.Substring(37);
-                    }
+                //Console.WriteLine(paperName);
+                //Now remove unwanted preceding character and spaces from paperName
+
+                authorNode = entryNoNode.SelectSingleNode("div[1]/span[1]");
+                authorName = authorNode.InnerText;
+                authorName = authorName.Substring(22);
+                //Now remove unwanted preceding character and spaces from authorName
+
+                if (entryNoNode.SelectSingleNode("div[1]/span[3]") == null)
+                {
+                    journalName = "";
+                    yearNode = entryNoNode.SelectSingleNode("div[1]/span[2]");
+                    if (yearNode == null)
+                        publishYear = "0";
                     else
                     {
-                        paperName = paperNode.InnerText.Substring(19);
-
-                        if (paperNode.Attributes["href"] != null)
-                            paperURL = "http://citeseer.ist.psu.edu" + paperNode.Attributes["href"].Value;
-                    }
-
-                    //Console.WriteLine(paperName);
-                    //Now remove unwanted preceding character and spaces from paperName
-
-                    authorNode = entryNoNode.SelectSingleNode("div[1]/span[1]");
-                    authorName = authorNode.InnerText;
-                    authorName = authorName.Substring(22);
-                    //Now remove unwanted preceding character and spaces from authorName
-
-                    if (entryNoNode.SelectSingleNode("div[1]/span[3]") == null)
-                    {
-                        journalName = "";
-                        yearNode = entryNoNode.SelectSingleNode("div[1]/span[2]");
-                        if (yearNode == null)
-                            publishYear = "0";
-                        else
-                        {
-                            publishYear = yearNode.InnerText;
-                            publishYear = publishYear.Substring(2);
-                        }
-                    }
-                    else
-                    {
-                        journalNode = entryNoNode.SelectSingleNode("div[1]/span[2]");
-                        journalName = journalNode.InnerText;
-                        journalName = journalName.Substring(2);
-
-                        yearNode = entryNoNode.SelectSingleNode("div[1]/span[3]");
                         publishYear = yearNode.InnerText;
                         publishYear = publishYear.Substring(2);
                     }
-                    //Process publishYear and journalNode to get important data
+                }
+                else
+                {
+                    journalNode = entryNoNode.SelectSingleNode("div[1]/span[2]");
+                    journalName = journalNode.InnerText;
+                    journalName = journalName.Substring(2);
 
-                    citationNode = entryNoNode.SelectSingleNode("div[3]/a");
-                    if (citationNode.InnerText == "Abstract")
-                        citationNode = entryNoNode.SelectSingleNode("div[3]/a[2]");
-                    noCitations = citationNode.InnerText;   //remove unnecessary details from the number of citations
-                    noCitations = noCitations.Substring(9);
-                   // Console.WriteLine(noCitations);
-                    if (citationNode.Attributes["href"] == null)
-                        citationLink = "";
-                    else
-                        citationLink = "http://citeseer.ist.psu.edu" + citationNode.Attributes["href"].Value;
+                    yearNode = entryNoNode.SelectSingleNode("div[1]/span[3]");
+                    publishYear = yearNode.InnerText;
+                    publishYear = publishYear.Substring(2);
+                }
+                //Process publishYear and journalNode to get important data
+
+                citationNode = entryNoNode.SelectSingleNode("div[3]/a");
+                if (citationNode.InnerText == "Abstract")
+                    citationNode = entryNoNode.SelectSingleNode("div[3]/a[2]");
+                noCitations = citationNode.InnerText;   //remove unnecessary details from the number of citations
+                noCitations = noCitations.Substring(9);
+                // Console.WriteLine(noCitations);
+                if (citationNode.Attributes["href"] == null)
+                    citationLink = "";
+                else
+                    citationLink = "http://citeseer.ist.psu.edu" + citationNode.Attributes["href"].Value;
 
 
-                    citno = 0;
-                    if(noCitations[0]!='t')
+                citno = 0;
+                if (noCitations[0] != 't')
                     for (int j = 0; noCitations[j] != ' '; j++)
                     {
                         citno = citno * 10 + Convert.ToInt32(noCitations[j]) - 48;
                     }
 
-                    //Now the processed strings are to be entered on the type of author
-                    int year;
+                //Now the processed strings are to be entered on the type of author
+                int year;
 
-                    try
-                    {
-                        year = Convert.ToInt32(publishYear);
-                    }
-                    catch(Exception e)
-                    {
-                        year=0;
-                    }
-
-                    Paper paper1 = new Paper(paperName, paperURL, authorName, year, journalName, "", citno, citationLink, (PageNo - 1) * 10 + i);
-                    if (searchType == 0)
-                        auth1.addPaper(paper1);
-                    else
-                        journ1.addPaper(paper1);
-                    //Return the reference of the next empty 
+                try
+                {
+                    year = Convert.ToInt32(publishYear);
                 }
-            
+                catch (Exception e)
+                {
+                    year = 0;
+                }
+
+                Paper paper1 = new Paper(paperName, paperURL, authorName, year, journalName, "", citno, citationLink, (PageNo - 1) * 10 + i);
+                if (searchType == 0)
+                    auth1.addPaper(paper1);
+                else
+                    journ1.addPaper(paper1);
+                //Return the reference of the next empty 
+            }
+            LoadNextPage();
+
         }
 
 
@@ -289,8 +290,231 @@ namespace PubCite
             extractDataAllPage();
             return journ1;
         }
-    }
 
+        public bool returnAuthorNext(ref Author auth)
+        {
+            HtmlNode mainTable = CiteDoc.DocumentNode.SelectSingleNode("//*[@id=\"result_list\"]");
+            HtmlNode entryNoNode, paperNode, authorNode, journalNode, yearNode, citationNode;
+            string paperName, authorName, journalName, publishYear, noCitations, citationLink, paperURL;
+            int citno;
+
+            if (noResult == 0)
+                return false;
+            if (CiteDoc.DocumentNode.SelectSingleNode("//*[@id=\"result_list\"]") == null)
+                return false;
+
+            mainTable = CiteDoc.DocumentNode.SelectSingleNode("//*[@id=\"result_list\"]");
+            for (int i = 1; i <= 10; i++)
+            {
+                entryNoNode = mainTable.SelectSingleNode("div[" + i + "]");
+                if (entryNoNode == null)
+                    break;
+
+                paperURL = "";
+                paperNode = entryNoNode.SelectSingleNode("h3/a");
+                if (paperNode == null)
+                {
+                    paperNode = entryNoNode.SelectSingleNode("h3/span");
+                    paperName = paperNode.InnerText;
+
+                    paperName = paperName.Substring(37);
+                }
+                else
+                {
+                    paperName = paperNode.InnerText.Substring(19);
+
+                    if (paperNode.Attributes["href"] != null)
+                        paperURL = "http://citeseer.ist.psu.edu" + paperNode.Attributes["href"].Value;
+                }
+
+                //Console.WriteLine(paperName);
+                //Now remove unwanted preceding character and spaces from paperName
+
+
+                authorNode = entryNoNode.SelectSingleNode("div[1]/span[1]");
+                authorName = authorNode.InnerText;
+                authorName = authorName.Substring(22);
+                //Now remove unwanted preceding character and spaces from authorName
+
+                if (entryNoNode.SelectSingleNode("div[1]/span[3]") == null)
+                {
+                    journalName = "";
+                    yearNode = entryNoNode.SelectSingleNode("div[1]/span[2]");
+                    if (yearNode == null)
+                        publishYear = "0";
+                    else
+                    {
+                        publishYear = yearNode.InnerText;
+                        publishYear = publishYear.Substring(2);
+                    }
+                }
+                else
+                {
+                    journalNode = entryNoNode.SelectSingleNode("div[1]/span[2]");
+                    journalName = journalNode.InnerText;
+                    journalName = journalName.Substring(2);
+
+                    yearNode = entryNoNode.SelectSingleNode("div[1]/span[3]");
+                    publishYear = yearNode.InnerText;
+                    publishYear = publishYear.Substring(2);
+                }
+                //Process publishYear and journalNode to get important data
+
+                citationNode = entryNoNode.SelectSingleNode("div[3]/a");
+                if (citationNode.InnerText == "Abstract")
+                    citationNode = entryNoNode.SelectSingleNode("div[3]/a[2]");
+                noCitations = citationNode.InnerText;   //remove unnecessary details from the number of citations
+                noCitations = noCitations.Substring(9);
+                // Console.WriteLine(noCitations);
+                if (citationNode.Attributes["href"] == null)
+                    citationLink = "";
+                else
+                    citationLink = "http://citeseer.ist.psu.edu" + citationNode.Attributes["href"].Value;
+
+
+                citno = 0;
+                if (noCitations[0] != 't')
+                    for (int j = 0; noCitations[j] != ' '; j++)
+                    {
+                        citno = citno * 10 + Convert.ToInt32(noCitations[j]) - 48;
+                    }
+
+                //Now the processed strings are to be entered on the type of author
+                int year;
+
+                try
+                {
+                    year = Convert.ToInt32(publishYear);
+                }
+                catch (Exception e)
+                {
+                    year = 0;
+                }
+
+                Paper paper1 = new Paper(paperName, paperURL, authorName, year, journalName, "", citno, citationLink, (PageNo - 1) * 10 + i);
+                auth.addPaper(paper1);
+            }
+
+            int check = LoadNextPage();
+
+            if (check == 1)
+                return true;
+            else
+                return false;
+        }
+
+        public bool returnJournalNext(ref Journal journ)
+        {
+            HtmlNode mainTable = CiteDoc.DocumentNode.SelectSingleNode("//*[@id=\"result_list\"]");
+            HtmlNode entryNoNode, paperNode, authorNode, journalNode, yearNode, citationNode;
+            string paperName, authorName, journalName, publishYear, noCitations, citationLink, paperURL;
+            int citno;
+
+            if (noResult == 0)
+                return false;
+            if (CiteDoc.DocumentNode.SelectSingleNode("//*[@id=\"result_list\"]") == null)
+                return false;
+
+            mainTable = CiteDoc.DocumentNode.SelectSingleNode("//*[@id=\"result_list\"]");
+            for (int i = 1; i <= 10; i++)
+            {
+                entryNoNode = mainTable.SelectSingleNode("div[" + i + "]");
+                if (entryNoNode == null)
+                    break;
+
+                paperURL = "";
+                paperNode = entryNoNode.SelectSingleNode("h3/a");
+                if (paperNode == null)
+                {
+                    paperNode = entryNoNode.SelectSingleNode("h3/span");
+                    paperName = paperNode.InnerText;
+
+                    paperName = paperName.Substring(37);
+                }
+                else
+                {
+                    paperName = paperNode.InnerText.Substring(19);
+
+                    if (paperNode.Attributes["href"] != null)
+                        paperURL = "http://citeseer.ist.psu.edu" + paperNode.Attributes["href"].Value;
+                }
+
+                //Console.WriteLine(paperName);
+                //Now remove unwanted preceding character and spaces from paperName
+
+
+                authorNode = entryNoNode.SelectSingleNode("div[1]/span[1]");
+                authorName = authorNode.InnerText;
+                authorName = authorName.Substring(22);
+                //Now remove unwanted preceding character and spaces from authorName
+
+                if (entryNoNode.SelectSingleNode("div[1]/span[3]") == null)
+                {
+                    journalName = "";
+                    yearNode = entryNoNode.SelectSingleNode("div[1]/span[2]");
+                    if (yearNode == null)
+                        publishYear = "0";
+                    else
+                    {
+                        publishYear = yearNode.InnerText;
+                        publishYear = publishYear.Substring(2);
+                    }
+                }
+                else
+                {
+                    journalNode = entryNoNode.SelectSingleNode("div[1]/span[2]");
+                    journalName = journalNode.InnerText;
+                    journalName = journalName.Substring(2);
+
+                    yearNode = entryNoNode.SelectSingleNode("div[1]/span[3]");
+                    publishYear = yearNode.InnerText;
+                    publishYear = publishYear.Substring(2);
+                }
+                //Process publishYear and journalNode to get important data
+
+                citationNode = entryNoNode.SelectSingleNode("div[3]/a");
+                if (citationNode.InnerText == "Abstract")
+                    citationNode = entryNoNode.SelectSingleNode("div[3]/a[2]");
+                noCitations = citationNode.InnerText;   //remove unnecessary details from the number of citations
+                noCitations = noCitations.Substring(9);
+                // Console.WriteLine(noCitations);
+                if (citationNode.Attributes["href"] == null)
+                    citationLink = "";
+                else
+                    citationLink = "http://citeseer.ist.psu.edu" + citationNode.Attributes["href"].Value;
+
+
+                citno = 0;
+                if (noCitations[0] != 't')
+                    for (int j = 0; noCitations[j] != ' '; j++)
+                    {
+                        citno = citno * 10 + Convert.ToInt32(noCitations[j]) - 48;
+                    }
+
+                //Now the processed strings are to be entered on the type of author
+                int year;
+
+                try
+                {
+                    year = Convert.ToInt32(publishYear);
+                }
+                catch (Exception e)
+                {
+                    year = 0;
+                }
+
+                Paper paper1 = new Paper(paperName, paperURL, authorName, year, journalName, "", citno, citationLink, (PageNo - 1) * 10 + i);
+                journ.addPaper(paper1);
+            }
+
+            int check = LoadNextPage();
+
+            if (check == 1)
+                return true;
+            else
+                return false;
+        }
+    };
     public class CSXAuthSug
     {
         public List<string> sugList, urlList;
