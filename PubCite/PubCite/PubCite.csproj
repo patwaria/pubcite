@@ -113,12 +113,14 @@
     <Compile Include="ProgressForm.Designer.cs">
       <DependentUpon>ProgressForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Settings.cs" />
     <Compile Include="SettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="SettingsForm.Designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="SettingsRecord.cs" />
     <Compile Include="Web References\com.microsoft.research.academic\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
