@@ -43,7 +43,7 @@ namespace PubCite
         public void GetObjectData(SerializationInfo info, StreamingContext ctxt)
         {
             info.AddValue("daysCache", daysCache);
-            info.AddValue(("cszMR",csxMaxResults);
+            info.AddValue("cszMR",csxMaxResults);
             info.AddValue("gsMR",gsMaxResults);
             info.AddValue("masMR",masMaxResults);
         }
