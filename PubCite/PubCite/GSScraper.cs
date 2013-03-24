@@ -88,28 +88,39 @@ namespace PubCite
         }
 
 
-
-
+        
         // RESULTS FROM AUTHOR PROFILE PAGE
         public SG.Author getAuthStatistics(string authUrl)
         {
-
-            GSAuthScraper authScraper = new GSAuthScraper(authUrl);
+            if (authUrl == null) return null;
+            authUrl += "&pagesize=100";
+            GSAuthScraper authScraper = new GSAuthScraper(authUrl,0);
+            authScraper.getCitationStats();
             SG.Author author = new SG.Author(authScraper.getName(), authScraper.getAffiliation(),authScraper.getHomePage(), authScraper.getHIndex(), authScraper.getIIndex());
-
             //Console.WriteLine(author.Name + "," + author.getHIndex() + "," + author.getI10Index());
-            int count = 1;
             List<SG.Paper> papers = authScraper.getPapersOfCurrentPage();
             foreach (SG.Paper paper in papers) author.addPaper(paper);
-            while(papers[papers.Count-1].NumberOfCitations > 1){
-                papers.Clear();
-                if (!authScraper.nextPage(count)) break;
-                papers = authScraper.getPapersOfCurrentPage();
-                foreach (SG.Paper paper in papers) author.addPaper(paper);
-                count++;
-            }
             return author;
         }
+
+        public bool getAuthStatisticsNextPage(string authUrl, ref SG.Author author)
+        {
+            int num = author.getNumberOfPapers();
+            if (num < 0) return false;
+            if (num % 100 != 0) return false;
+            authUrl += ("&pagesize=100&cstart=" + num);
+            GSAuthScraper authScraper = new GSAuthScraper(authUrl,num);
+            List<SG.Paper> papers = authScraper.getPapersOfCurrentPage();
+            foreach (SG.Paper paper in papers)
+            {
+                author.addPaper(paper);
+            }
+            return true;
+        }
+
+
+
+
 
 
 
@@ -140,13 +151,16 @@ namespace PubCite
                 keywords = keywords.Trim();
                 keywords = Regex.Replace(keywords, @"\s+", "+");
             }
+
+
+
+            string url = "http://scholar.google.com/scholar?q=" + authName  + "&btnG=&hl=en&as_sdt=1.";//keywords + "&as_epq=&as_oq=" //affiliation + "&as_eq=&as_occt=any&as_sauthors=" + authName;// + "&as_publication=&as_ylo=&as_yhi=&btnG=&hl=en&as_sdt=0%2C5";
+            //string url = "http://scholar.google.com/scholar?as_q=&as_epq=&as_oq=&as_eq=&as_occt=any&as_sauthors="  + authName + "&as_publication=&as_ylo=&as_yhi=&btnG=&hl=en&as_sdt=0,5";
             
-
-
-            string url = "http://scholar.google.com/scholar?q=" + keywords + "&as_epq=&as_oq=" + affiliation + "&as_eq=&as_occt=any&as_sauthors=" + authName + "&as_publication=&as_ylo=&as_yhi=&btnG=&hl=en&as_sdt=0%2C5";
-            //Console.WriteLine(url);
+            Console.WriteLine(url);
             HtmlWeb web = new HtmlWeb();
             doc = web.Load(url);
+            Console.WriteLine(doc.DocumentNode.InnerHtml);
 
 
             string xpath = "//div[@class=\"gs_ri\"]";
@@ -156,7 +170,7 @@ namespace PubCite
             if (searchResults == null) return null;
             else
             {
-
+                Console.WriteLine(url);
                 foreach (HtmlNode n in searchResults)
                 {
 
@@ -267,13 +281,14 @@ namespace PubCite
         public SG.Journal getJournals(string journalName,string ISSN,string keywords)
         {
 
-            Console.WriteLine("anil kumar");
+            
             // CONNECTIONS
+            
             if (journalName == null) journalName = null;
             else  journalName.Trim();
             SG.Journal result = new SG.Journal(journalName);
 
-
+            // FORMATTIONG STRINGS
             if (ISSN == null) ISSN = "";
             else
             {
@@ -290,12 +305,19 @@ namespace PubCite
 
 
             string name = Regex.Replace(journalName, @"\s+", "+");
-            string url = "http://scholar.google.co.in/scholar?as_q=" + temp + "&as_publication=" + name  ;
+            string url = "http://scholar.google.com/scholar?as_q=&as_epq=&as_oq=&as_eq=&as_occt=any&as_sauthors=&as_publication=" + journalName + "&as_ylo=&as_yhi=&btnG=&hl=en&as_sdt=0,5";
+            //string url = "http://scholar.google.co.in/scholar?hl=en&q=anil+kumar&btnG=&as_sdt=1,5&as_sdtp=";
             Console.WriteLine(url);
 
             //Console.WriteLine("loaded !!!");
+
+
+            System.Net.WebClient client = new System.Net.WebClient();
             HtmlWeb web = new HtmlWeb();
             doc = web.Load(url);
+            Console.WriteLine(doc.DocumentNode.InnerHtml);
+            //string html = client.DownloadString(url);
+            //doc.LoadHtml(html);
 
             
             string xpath = "//div[@class=\"gs_ri\"]";
