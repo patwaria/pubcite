@@ -8,7 +8,6 @@ using System.Text;
 using System.Windows.Forms;
 using System.Net;
 using System.Threading;
-using Transitions;
 
 namespace PubCite
 {
@@ -968,9 +967,7 @@ namespace PubCite
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            Transition t = new Transition(new TransitionType_EaseInEaseOut(2000));
-            t.add(label11, "Left", 0);
-            t.run();
+            
         }
     }
 }
