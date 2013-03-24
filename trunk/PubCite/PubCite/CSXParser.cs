@@ -87,13 +87,20 @@ namespace PubCite
 
         public bool getAuthorsNext(string authName, string affiliation, string keywords, ref Author auth)
         {
-            return false;
+            return newAuthorSearch.returnAuthorNext(ref auth);
         }
 
         public Journal getJournals(string journalName, string ISSN, string keywords)
         {
-            CiteSeerJournal_FinalAuthorSearch newSearch = new CiteSeerJournal_FinalAuthorSearch(journalName, 1, ISSN, keywords);
-            return newSearch.returnJournal();
+            newJournalSearch = new CiteSeerJournal_FinalAuthorSearch(journalName, 1, ISSN, keywords);
+            return newJournalSearch.returnJournal();
+
         }
+
+        public bool getJournalsNext(string journalName, string ISSN, string keywords, ref Journal journ)
+        {
+            return newJournalSearch.returnJournalNext(ref journ);
+        }
+
     }
 }
