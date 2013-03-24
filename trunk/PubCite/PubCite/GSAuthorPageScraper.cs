@@ -16,38 +16,21 @@ namespace PubCite
         private List<SG.Paper> papers;
         int index;
 
-        public GSAuthScraper(String inital_URL)
+        public GSAuthScraper(String inital_URL,int i)
         {
             web = new HtmlWeb();
-            inital_URL += "&pagesize=100";
             doc = web.Load(inital_URL);
             tables = doc.DocumentNode.SelectNodes("//table");
             h_index = i_index = -1;
             name = doc.DocumentNode.SelectSingleNode(".//*[@id=\"cit-name-display\"]").InnerText;
             getCitationStats();
-            index = 1;
+            index = i+1;
             papers = new List<SG.Paper>();
-
-            // home page and affiliation
-            homepageLink = "";
-            HtmlNode homePage = doc.DocumentNode.SelectSingleNode(".//*[@id=\"cit-homepage-read\"]");
-            if (homePage != null)
-            {
-                HtmlNode urlhome = homePage.SelectSingleNode(".//a");
-                if (urlhome != null) homepageLink = urlhome.GetAttributeValue("href", "");
-            }
-
-            affiliation = "";
-            HtmlNode affPage = doc.DocumentNode.SelectSingleNode(".//*[@id=\"cit-affiliation-form\"]");
-            if (affPage != null)
-            {
-                affiliation = affPage.InnerText;
-            }
 
 
         }
 
-        private void getCitationStats()
+        public void getCitationStats()
         {
             HtmlNodeCollection rows, cols;
 
@@ -67,6 +50,22 @@ namespace PubCite
             //cols[1].InnerText for all i10-Index cols[2].InnerText for since 2008
             try { i_index = Convert.ToInt32(cols[1].InnerText); }
             catch (Exception e) { }
+
+            // home page and affiliation
+            homepageLink = "";
+            HtmlNode homePage = doc.DocumentNode.SelectSingleNode(".//*[@id=\"cit-homepage-read\"]");
+            if (homePage != null)
+            {
+                HtmlNode urlhome = homePage.SelectSingleNode(".//a");
+                if (urlhome != null) homepageLink = urlhome.GetAttributeValue("href", "");
+            }
+
+            affiliation = "";
+            HtmlNode affPage = doc.DocumentNode.SelectSingleNode(".//*[@id=\"cit-affiliation-form\"]");
+            if (affPage != null)
+            {
+                affiliation = affPage.InnerText;
+            }
         }
 
         public bool nextPage(int callFirstTime)   //callFirstTime must be 1 if this is called first time
