@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Authors");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Journals");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Favourites", new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2});
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Authors");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Journals");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Favourites", new System.Windows.Forms.TreeNode[] {
+            treeNode4,
+            treeNode5});
             this.SearchPanel = new System.Windows.Forms.Panel();
             this.cachedListView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -593,14 +593,14 @@
             this.favouritesTreeView.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.favouritesTreeView.Location = new System.Drawing.Point(7, 6);
             this.favouritesTreeView.Name = "favouritesTreeView";
-            treeNode1.Name = "authorsRootNode";
-            treeNode1.Text = "Authors";
-            treeNode2.Name = "journalsRootNode";
-            treeNode2.Text = "Journals";
-            treeNode3.Name = "Favourites";
-            treeNode3.Text = "Favourites";
+            treeNode4.Name = "authorsRootNode";
+            treeNode4.Text = "Authors";
+            treeNode5.Name = "journalsRootNode";
+            treeNode5.Text = "Journals";
+            treeNode6.Name = "Favourites";
+            treeNode6.Text = "Favourites";
             this.favouritesTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode3});
+            treeNode6});
             this.favouritesTreeView.Size = new System.Drawing.Size(209, 224);
             this.favouritesTreeView.TabIndex = 9;
             // 
@@ -742,7 +742,7 @@
             // settingsIcon
             // 
             this.settingsIcon.Image = global::PubCite.Properties.Resources.settings;
-            this.settingsIcon.Location = new System.Drawing.Point(890, 38);
+            this.settingsIcon.Location = new System.Drawing.Point(941, 3);
             this.settingsIcon.Name = "settingsIcon";
             this.settingsIcon.Size = new System.Drawing.Size(27, 28);
             this.settingsIcon.TabIndex = 30;
