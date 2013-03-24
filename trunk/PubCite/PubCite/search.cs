@@ -756,16 +756,18 @@ namespace PubCite
 
         private void viewStatisticsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // author selected 
-            if (favouritesTreeView.SelectedNode.Parent.Index == 0)
+            if (favouritesTreeView.SelectedNode.Level == 2)
             {
-                authStats = FavAuthorList[favouritesTreeView.SelectedNode.Index];
-                populateAuthor(authStats);
-            }
-            else if (favouritesTreeView.SelectedNode.Parent.Index == 1)
-            {// Journal selected
-                journalStats = FavJournalList[favouritesTreeView.SelectedNode.Index];
-                populateJournal(journalStats);
+                if (favouritesTreeView.SelectedNode.Parent.Index == 0)
+                {
+                    authStats = FavAuthorList[favouritesTreeView.SelectedNode.Index];
+                    populateAuthor(authStats);
+                }
+                else if (favouritesTreeView.SelectedNode.Parent.Index == 1)
+                {// Journal selected
+                    journalStats = FavJournalList[favouritesTreeView.SelectedNode.Index];
+                    populateJournal(journalStats);
+                }
             }
             Console.WriteLine(favouritesTreeView.SelectedNode.Level);
         }
@@ -976,6 +978,22 @@ namespace PubCite
         {
             Transition t = new Transition(new TransitionType_EaseInEaseOut(500));
             t.add(recentSearchPanel, "Left", 0);
+            t.run();
+        }
+
+        private void favouriteButton_Click(object sender, EventArgs e)
+        {
+            Transition t = new Transition(new TransitionType_EaseInEaseOut(500));
+            t.add(favouritesTreeView, "Left", 40);
+            t.add(recentSearchPanel, "Left", -240);
+            t.run();
+        }
+
+        private void recentButton_Click(object sender, EventArgs e)
+        {
+            Transition t = new Transition(new TransitionType_EaseInEaseOut(500));
+            t.add(favouritesTreeView, "Left", -240);
+            t.add(recentSearchPanel, "Left", 40);
             t.run();
         }
     }
