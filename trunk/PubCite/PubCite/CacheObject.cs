@@ -72,8 +72,8 @@ namespace PubCite
             key=key.Trim();
 
             List<string> keys = new List<string>();
-            if ((isAuthor) && (key.Contains(LastAuthorkey))) keys = LastAuthor;
-            else if (!isAuthor && key.Contains(LastJournalkey)) keys = LastJournal;
+            if ((isAuthor) && (key.StartsWith(LastAuthorkey))) keys = LastAuthor;
+            else if (!isAuthor && key.StartsWith(LastJournalkey)) keys = LastJournal;
             else
             {
                 keys = GetAll();
@@ -82,7 +82,7 @@ namespace PubCite
             }
 
             List<string> results = new List<string>();
-            foreach (string s in keys) if (s.StartsWith(key))
+            foreach (string s in keys) if (s.Contains(key))
                 {
                     if (isAuthor)
                     {
