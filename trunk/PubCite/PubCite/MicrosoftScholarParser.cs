@@ -54,9 +54,6 @@ namespace PubCite
                 authNM.Add(name);
                 authID.Add(Convert.ToString(id));
 
-                //Console.WriteLine(name);
-                //Console.WriteLine(id);
-               // Console.ReadLine();
             }
 
             authSuggest = new SG.AuthSuggestion(authNM, authID, true);
@@ -80,7 +77,7 @@ namespace PubCite
             requestAuth.EndIdx = 1;
             response1 = client.Search(requestAuth);
 
-            Console.WriteLine(response1.Author.TotalItem);
+         
 
             name = generateName(response1.Author.Result[0].FirstName, response1.Author.Result[0].MiddleName, response1.Author.Result[0].LastName);
             Hindex = Convert.ToInt32(response1.Author.Result[0].HIndex);
@@ -423,7 +420,7 @@ namespace PubCite
 
         public List<Paper> getCitations(String id, int noResults=100)
         {
-            Console.WriteLine("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+            //Console.WriteLine("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 
             List<Paper> cited = new List<Paper>();
             UInt32 paperID;
@@ -546,5 +543,64 @@ namespace PubCite
             return cited;
         }
 
+
+
+        
+    //--------------------------------------------------------------------------------------------------------//
+        public List<Paper> generatePaper(Request request)
+        {
+            List<Paper> papers = new List<Paper>();
+            Response response = client.Search(request);
+
+            for (int i = 0; i < 100; i++)
+            {
+                if(response.Publication.Result[i]==null)
+                {
+                    break;
+                }
+
+                Paper paper;
+                String title, authors, publication, pap_abstract, url, id_;
+                int numOfCitations, year;
+
+                authors = "";
+                title = response.Publication.Result[i].Title;
+                for (int j = 0; j < response.Publication.Result[i].Author.Length; j++)
+                {
+                    authors = authors + generateName(response.Publication.Result[i].Author[j].FirstName, response.Publication.Result[i].Author[j].MiddleName, response.Publication.Result[i].Author[j].LastName) + ", ";
+                }
+
+                numOfCitations = Convert.ToInt32(response.Publication.Result[i].CitationCount);
+                year = Convert.ToInt32(response.Publication.Result[i].Year);
+
+                publication = "";
+                if (response.Publication.Result[i].Journal != null)
+                    publication = response.Publication.Result[i].Journal.FullName;
+
+
+                url = "";
+                if (response.Publication.Result[i].FullVersionURL.Length != 0)
+                    url = response.Publication.Result[i].FullVersionURL[0];
+
+                id_ = Convert.ToString(response.Publication.Result[i].ID);
+
+                pap_abstract = response.Publication.Result[i].Abstract;
+                if (pap_abstract == null)
+                    pap_abstract = "";
+
+                paper = new Paper(title, url, authors, pap_abstract, year, publication, "", numOfCitations, id_, 0);
+
+                papers.Add(paper);
+            }
+
+            return papers;
+        }
+
+       /* public SG.Author getAuthStatistics()
+        {
+
+        }*/
+
     }
+
 }
