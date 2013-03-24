@@ -172,7 +172,7 @@ namespace PubCite
 
         public void populateSuggestions()
         {
-            Console.WriteLine("Here");
+            
             Suggestions.Visible = true;
             for (int i = 0; i < authors.Count; i++)
             {
@@ -230,7 +230,6 @@ namespace PubCite
         private void populateAuthor()
         {
 
-            Console.WriteLine("called");
             if (authStats != null)
             {
 
@@ -260,7 +259,7 @@ namespace PubCite
                 for (int i = 0; i < Papers.Count; i++)
                 {
                     /*populating */
-                    Console.WriteLine("populate: url: " + Papers[i].CitedByURL);
+                    
                     item = new ListViewItem(Papers[i].Title);
                     item.SubItems.Add(Papers[i].Publication);
                     if (Papers[i].Year == -1 || Papers[i].Year == -1)
@@ -294,7 +293,7 @@ namespace PubCite
 
             for (int i = 0; i < FavAuthorList.Count; i++)
             {
-                Console.WriteLine("URL:" + FavAuthorList[i].getPapers()[i].CitedByURL);
+                
                 favouritesTreeView.Nodes[0].Nodes[0].Nodes.Add(new TreeNode(FavAuthorList[i].Name));
                 favouritesTreeView.Nodes[0].Nodes[0].Nodes[i].ContextMenuStrip = favouriteMenuStrip;
             }
@@ -313,7 +312,7 @@ namespace PubCite
                 favouritesTreeView.Nodes[0].Nodes[0].Nodes.Clear();
                 for (int i = 0; i < FavAuthorList.Count; i++)
                 {
-                    Console.WriteLine(FavAuthorList[i].HomePageURL);
+                    
                     favouritesTreeView.Nodes[0].Nodes[0].Nodes.Add(new TreeNode(FavAuthorList[i].Name));
                     favouritesTreeView.Nodes[0].Nodes[0].Nodes[i].ContextMenuStrip = favouriteMenuStrip;
                 }
@@ -802,7 +801,7 @@ namespace PubCite
                 CitationsTab NcitTab = new CitationsTab();
                 citationsPage.Controls.Add(NcitTab);
 
-                Console.WriteLine("type : " + citationType + "num : " + Citations.Count);
+               
                 NcitTab.populateCitations(Papers[citationIndex], Citations, citationType);
                 
                 Form1.dub_tab.SelectedTab = citationsPage;
@@ -813,7 +812,7 @@ namespace PubCite
         {
             if (authorCheckBox.Checked == true && authStats != null)
             {
-                Console.WriteLine(authStats.getPapers()[0].CitedByURL);
+                
                 Form1.favorites.AddAuthor(authStats);
 
             }

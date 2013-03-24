@@ -2,7 +2,7 @@
 1. Report & test plan : Sachin/Deepayan
 2. Error Handling/Show appropriate messages in message box : Parser team + GUI
 3. Improve response time: threading
-4. View Citations for favourites : Sachin(need to add another field to serializable)/Srihari
+4. View Citations for favourites : thoda load
 5. Back/ Fwd in citation tab : Cachers/GUI ?
 6. Copy citations/export in different formats: ?
 7. co-author graph

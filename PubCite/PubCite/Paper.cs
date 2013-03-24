@@ -105,6 +105,8 @@ namespace SG
            publisher = (string)info.GetValue("publisher", typeof(string));
            num_cites = (int)info.GetValue("Num_Cites", typeof(int));
            gsRank = (int)info.GetValue("gsRank", typeof(int));
+           CiteURL = (string)info.GetValue("citeUrl", typeof(string));
+           titleURL = (string)info.GetValue("titleUrl", typeof(string));
            //citations = (List<Paper>)info.GetValue("ListOfCitations", typeof(string));
 
         }
@@ -117,6 +119,8 @@ namespace SG
             info.AddValue("publisher", publisher);
             info.AddValue("Num_Cites", num_cites);
             info.AddValue("gsRank", gsRank);
+            info.AddValue("citeUrl", typeof(string));
+            info.AddValue("titleUrl", typeof(string));
             //info.AddValue("ListOfCitations", citations);
         }
         //property - "Title" of the paper - read only
