@@ -216,7 +216,7 @@ namespace PubCite
                 
                 /* add journal to recent */
                 RecentSearchKeys.Add(journal.Name);
-                updateHistory();
+                updateHistory(journal.Name);
             }
         }
 
@@ -265,18 +265,14 @@ namespace PubCite
                 cacheObject.Add(author.Name, author, true);
                 /* Add to recent History */
                 RecentSearchKeys.Add(author.Name);
-                updateHistory();
+                updateHistory(author.Name);
             }
         }
 
-        private void updateHistory()
+        private void updateHistory(string name)
         {
-            for (int i = 0; i < RecentSearchKeys.Count; i++)
-            {
-                /*populating */
-                item = new ListViewItem(RecentSearchKeys[i]);
-                recentListView.Items.Add(item);
-            }
+            item = new ListViewItem(name);
+            recentListView.Items.Add(item);
         }
 
         public void ArrangeTree()
@@ -711,6 +707,7 @@ namespace PubCite
                 citationIndex = journalResultsListView.FocusedItem.Index;
                 type = journalStats.Type;
             }
+
             if (Papers[citationIndex].NumberOfCitations != 0)
             {
                 disablePanels();
