@@ -603,17 +603,24 @@ namespace PubCite
         public CSXPubli(String publiURL)
         {
             web = new HtmlWeb();
-            doc = web.Load(publiURL);
+            try
+            {
+                doc = web.Load(publiURL);
 
-            /*if (doc != null)
-                Console.WriteLine("Document Loaded!");
-            else
-                Console.WriteLine("Load Error!");*/
 
-            if (publiURL.Contains("viewdoc"))//e.g. http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.31.3487
-                extractData();
-            else//e.g. http://citeseer.ist.psu.edu/showciting?cid=2131272
-                extractData2();
+                /*if (doc != null)
+                    Console.WriteLine("Document Loaded!");
+                else
+                    Console.WriteLine("Load Error!");*/
+
+                if (publiURL.Contains("viewdoc"))//e.g. http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.31.3487
+                    extractData();
+                else//e.g. http://citeseer.ist.psu.edu/showciting?cid=2131272
+                    extractData2();
+            }
+            catch (Exception e)
+            {
+            }
         }
 
         String[] Split(String s)//Gets a string containing publication information and divides it into title, journal and year strings
