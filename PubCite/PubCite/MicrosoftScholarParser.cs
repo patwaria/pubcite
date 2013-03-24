@@ -61,7 +61,7 @@ namespace PubCite
             return authSuggest;
         }
 
-        public SG.Author getAuthStatistics(string authid, int noResults=100)
+        public SG.Author getAuthStatistics(string authid, int noResults=20)
         {
             SG.Author auth;
             string name;
@@ -86,17 +86,26 @@ namespace PubCite
 
             Request requestPaper = new Request();
             requestPaper.AppID = "c49b4e59-08dd-4f27-a53b-53cc72f169af";
-            Response response2;
 
             requestPaper.ResultObjects = ObjectType.Publication;
             requestPaper.AuthorID = Convert.ToUInt32(authid);
             requestPaper.StartIdx = 1;
-            requestPaper.EndIdx = 100;
-            response2 = client.Search(requestPaper);
+            requestPaper.EndIdx = 20;
+
+            List<SG.Paper> papers = generatePaper(requestPaper, 20);
+
+            for (int i = 0; i < papers.Count; i++)
+            {
+                auth.addPaper(papers[i]);
+            }
+
+            return auth;
+
+            /*response2 = client.Search(requestPaper);
 
             uint range = response2.Publication.TotalItem;
             range = range > noResults ? Convert.ToUInt32(noResults) : range;
-
+            
             //Console.WriteLine(response2.Publication.TotalItem + " " + response2.Publication.TotalItem);
             for(int k = 0; k < range/100; k++)
             {
@@ -133,11 +142,6 @@ namespace PubCite
 
                     auth.addPaper(paper);
 
-                    /*Console.WriteLine(title);
-                    Console.WriteLine(authors);
-                    Console.WriteLine(year);
-                    Console.WriteLine(numOfCitations);
-                    Console.ReadLine();*/
                 }
                 requestPaper.StartIdx = Convert.ToUInt32(101 + k * 100);
                 requestPaper.EndIdx = Convert.ToUInt32(200 + k * 100);
@@ -180,31 +184,65 @@ namespace PubCite
 
                 auth.addPaper(paper);
 
-                /*Console.WriteLine(title);
-                Console.WriteLine(authors);
-                Console.WriteLine(year);
-                Console.WriteLine(numOfCitations);
-                Console.ReadLine();*/
             }
-            auth.getI10Index();
-            return auth;
+            auth.getI10Index();*/
+            //return auth;
         }
 
-        public SG.Journal getJournals(string journalName, string JournalName, string ISSN, int noResults=100)
+        public bool getAuthStatisticsNext(string authid, ref SG.Author auth)
+        {
+            Request requestPaper = new Request();
+            requestPaper.AppID = "c49b4e59-08dd-4f27-a53b-53cc72f169af";
+            int stIndex, EndIndex;
+
+            stIndex = auth.getNumberOfPapers() + 1;
+            EndIndex = auth.getNumberOfPapers() + 100;
+ 
+            requestPaper.ResultObjects = ObjectType.Publication;
+            requestPaper.AuthorID = Convert.ToUInt32(authid);
+            requestPaper.StartIdx = Convert.ToUInt32(stIndex);
+            requestPaper.EndIdx = Convert.ToUInt32(EndIndex);
+
+            List<SG.Paper> papers = generatePaper(requestPaper, 100);
+
+            for (int i = 0; i < papers.Count; i++)
+            {
+                auth.addPaper(papers[i]);
+            }
+
+            if (papers.Count < 100)
+                return false;
+            else
+                return true;
+        }
+
+
+        public SG.Journal getJournals(string journalName, string ISSN, string keywords, int noResults = 20)
         {
             Request requestJournal = new Request();
             requestJournal.AppID = "c49b4e59-08dd-4f27-a53b-53cc72f169af";
-            Response response;
+            //Response response;
 
             SG.Journal journ = new SG.Journal(journalName);
 
             requestJournal.ResultObjects = ObjectType.Publication;
             requestJournal.JournalQuery = journalName;
+            requestJournal.FulltextQuery = keywords;
             requestJournal.StartIdx = 1;
-            requestJournal.EndIdx = 100;
-            response = client.Search(requestJournal);
+            requestJournal.EndIdx = 20;
 
-            uint range = response.Publication.TotalItem;
+            List<SG.Paper> papers = generatePaper(requestJournal, 20);
+
+            for (int i = 0; i < papers.Count; i++)
+            {
+                journ.addPaper(papers[i]);
+            }
+
+            return journ;
+
+            //response = client.Search(requestJournal);
+
+            /*uint range = response.Publication.TotalItem;
             range = range > noResults ? Convert.ToUInt32(noResults) : range;
             //Console.WriteLine(range+" "+range);
 
@@ -249,7 +287,7 @@ namespace PubCite
                     Console.WriteLine(authors);
                     Console.WriteLine(year);
                     Console.WriteLine(numOfCitations);
-                    Console.ReadLine();*/
+                    Console.ReadLine();
                 }
 
                 requestJournal.StartIdx = Convert.ToUInt32(101 + k * 100);
@@ -297,29 +335,70 @@ namespace PubCite
                  Console.WriteLine(authors);
                  Console.WriteLine(year);
                  Console.WriteLine(numOfCitations);
-                 Console.ReadLine();*/
+                 Console.ReadLine();
+            }*/
+
+
+            //return journ;
+        }
+
+        public bool getJournalsNext(string journalName, string ISSN, string keywords, ref SG.Journal journ)
+        {
+            Request requestJournal = new Request();
+            requestJournal.AppID = "c49b4e59-08dd-4f27-a53b-53cc72f169af";
+            //Response response;
+            int stIndex, EndIndex;
+            stIndex = journ.getNumberOfPapers() + 1;
+            EndIndex = journ.getNumberOfPapers() + 100;
+
+            requestJournal.ResultObjects = ObjectType.Publication;
+            requestJournal.JournalQuery = journalName;
+            requestJournal.FulltextQuery = keywords;
+            requestJournal.StartIdx = Convert.ToUInt32(stIndex);
+            requestJournal.EndIdx = Convert.ToUInt32(EndIndex);
+
+            List<SG.Paper> papers = generatePaper(requestJournal, 100);
+
+            for (int i = 0; i < papers.Count; i++)
+            {
+                journ.addPaper(papers[i]);
             }
 
-
-            return journ;
+            if (papers.Count < 100)
+                return false;
+            else
+                return true;
         }
 
 
-        public SG.Author getAuthors(string authName, string affiliation, string keywords, int noResults=100)
+
+        public SG.Author getAuthors(string authName, string affiliation, string keywords, int noResults=20)
         {
             SG.Author auth = new SG.Author(authName);
 
             Request requestPaper = new Request();
             requestPaper.AppID = "c49b4e59-08dd-4f27-a53b-53cc72f169af";
-            Response response2;
+           // Response response2;
 
             requestPaper.ResultObjects = ObjectType.Publication;
             requestPaper.AuthorQuery = authName;
+            requestPaper.FulltextQuery = keywords;
             requestPaper.StartIdx = 1;
-            requestPaper.EndIdx = 100;
-            response2 = client.Search(requestPaper);
+            requestPaper.EndIdx = 20;
 
-            uint range = response2.Publication.TotalItem;
+            List<SG.Paper> papers = generatePaper(requestPaper, 20);
+
+            for (int i = 0; i < papers.Count; i++)
+            {
+                auth.addPaper(papers[i]);
+            }
+
+            return auth;
+
+
+            //response2 = client.Search(requestPaper);
+
+           /* uint range = response2.Publication.TotalItem;
             range = range > noResults ? Convert.ToUInt32(noResults) : range;
 
             //Console.WriteLine(response2.Publication.TotalItem + " " + response2.Publication.TotalItem);
@@ -359,11 +438,6 @@ namespace PubCite
 
                     auth.addPaper(paper);
 
-                    /*Console.WriteLine(title);
-                    Console.WriteLine(authors);
-                    Console.WriteLine(year);
-                    Console.WriteLine(numOfCitations);
-                    Console.ReadLine();*/
                 }
                 requestPaper.StartIdx = Convert.ToUInt32(101 + k * 100);
                 requestPaper.EndIdx = Convert.ToUInt32(200 + k * 100);
@@ -406,15 +480,39 @@ namespace PubCite
 
                 auth.addPaper(paper);
 
-                /*Console.WriteLine(title);
-                Console.WriteLine(authors);
-                Console.WriteLine(year);
-                Console.WriteLine(numOfCitations);
-                Console.ReadLine();*/
             }
             auth.getI10Index();
 
-            return auth;
+            return auth;*/
+        }
+
+        public bool getAuthorsNext(string authName, string affiliation, string keywords, ref SG.Author auth)
+        {
+            Request requestPaper = new Request();
+            requestPaper.AppID = "c49b4e59-08dd-4f27-a53b-53cc72f169af";
+
+            int stIndex, EndIndex;
+
+            stIndex = auth.getNumberOfPapers() + 1;
+            EndIndex = auth.getNumberOfPapers() + 100;
+
+            requestPaper.ResultObjects = ObjectType.Publication;
+            requestPaper.AuthorQuery = authName;
+            requestPaper.FulltextQuery = keywords;
+            requestPaper.StartIdx = Convert.ToUInt32(stIndex);
+            requestPaper.EndIdx = Convert.ToUInt32(EndIndex);
+
+            List<SG.Paper> papers = generatePaper(requestPaper, 100);
+
+            for (int i = 0; i < papers.Count; i++)
+            {
+                auth.addPaper(papers[i]);
+            }
+
+            if (papers.Count < 100)
+                return false;
+            else
+                return true;
         }
 
 
@@ -547,18 +645,21 @@ namespace PubCite
 
         
     //--------------------------------------------------------------------------------------------------------//
-        public List<Paper> generatePaper(Request request)
+        public List<Paper> generatePaper(Request request, int numberofResult)
         {
             List<Paper> papers = new List<Paper>();
-            Response response = client.Search(request);
-
-            for (int i = 0; i < 100; i++)
+            Response response;
+            try
             {
-                if(response.Publication.Result[i]==null)
-                {
-                    break;
-                }
+                response = client.Search(request);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
 
+            for (int i = 0; i <response.Publication.Result.Length; i++)
+            {
                 Paper paper;
                 String title, authors, publication, pap_abstract, url, id_;
                 int numOfCitations, year;
@@ -592,14 +693,12 @@ namespace PubCite
 
                 papers.Add(paper);
             }
+            
 
             return papers;
         }
 
-       /* public SG.Author getAuthStatistics()
-        {
-
-        }*/
+      
 
     }
 
