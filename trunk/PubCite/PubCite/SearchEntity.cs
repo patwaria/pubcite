@@ -38,6 +38,7 @@ namespace SG
             papers = (List<Paper>)info.GetValue("PaperList", typeof(List<Paper>));
             h_ind = (int)info.GetValue("HInd", typeof(int));
             i10_ind = (int)info.GetValue("IInd", typeof(int));
+            type = (int)info.GetValue("Type", typeof(int));
         }
         public virtual void GetObjectData(SerializationInfo info, StreamingContext ctxt)
         {
@@ -45,6 +46,7 @@ namespace SG
             info.AddValue("PaperList", papers);
             info.AddValue("HInd", h_ind);
             info.AddValue("IInd", i10_ind);
+            info.AddValue("Type",type);
         }
 
         //property - "Name" of the search entity
