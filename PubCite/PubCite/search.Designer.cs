@@ -35,7 +35,6 @@
             treeNode1,
             treeNode2});
             this.SearchPanel = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
             this.settingsIcon = new System.Windows.Forms.PictureBox();
             this.cachedListView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -125,7 +124,6 @@
             // SearchPanel
             // 
             this.SearchPanel.BackColor = System.Drawing.SystemColors.Window;
-            this.SearchPanel.Controls.Add(this.button2);
             this.SearchPanel.Controls.Add(this.settingsIcon);
             this.SearchPanel.Controls.Add(this.label4);
             this.SearchPanel.Controls.Add(this.cachedListView);
@@ -151,16 +149,6 @@
             this.SearchPanel.Name = "SearchPanel";
             this.SearchPanel.Size = new System.Drawing.Size(1015, 631);
             this.SearchPanel.TabIndex = 2;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(942, 47);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(58, 23);
-            this.button2.TabIndex = 32;
-            this.button2.Text = "Right";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // settingsIcon
             // 
@@ -329,6 +317,7 @@
             // authorResultsListView
             // 
             this.authorResultsListView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.authorResultsListView.CheckBoxes = true;
             this.authorResultsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.PaperHeader,
             this.venueHeader,
@@ -644,16 +633,16 @@
             // recentSearchPanel
             // 
             this.recentSearchPanel.Controls.Add(this.recentListView);
-            this.recentSearchPanel.Location = new System.Drawing.Point(-240, 6);
+            this.recentSearchPanel.Location = new System.Drawing.Point(-200, 6);
             this.recentSearchPanel.Name = "recentSearchPanel";
-            this.recentSearchPanel.Size = new System.Drawing.Size(176, 246);
+            this.recentSearchPanel.Size = new System.Drawing.Size(187, 246);
             this.recentSearchPanel.TabIndex = 1;
             // 
             // favouritesTreeView
             // 
             this.favouritesTreeView.BackColor = System.Drawing.SystemColors.Window;
             this.favouritesTreeView.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.favouritesTreeView.Location = new System.Drawing.Point(39, 6);
+            this.favouritesTreeView.Location = new System.Drawing.Point(29, 6);
             this.favouritesTreeView.Name = "favouritesTreeView";
             treeNode1.Name = "authorsRootNode";
             treeNode1.Text = "Authors";
@@ -663,7 +652,7 @@
             treeNode3.Text = "Favourites";
             this.favouritesTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode3});
-            this.favouritesTreeView.Size = new System.Drawing.Size(177, 246);
+            this.favouritesTreeView.Size = new System.Drawing.Size(187, 246);
             this.favouritesTreeView.TabIndex = 9;
             // 
             // Suggestions
@@ -784,7 +773,7 @@
             // favouriteButton
             // 
             this.favouriteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.favouriteButton.Location = new System.Drawing.Point(11, 6);
+            this.favouriteButton.Location = new System.Drawing.Point(1, 6);
             this.favouriteButton.Name = "favouriteButton";
             this.favouriteButton.Size = new System.Drawing.Size(22, 107);
             this.favouriteButton.TabIndex = 10;
@@ -795,7 +784,7 @@
             // recentButton
             // 
             this.recentButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.recentButton.Location = new System.Drawing.Point(11, 121);
+            this.recentButton.Location = new System.Drawing.Point(1, 121);
             this.recentButton.Name = "recentButton";
             this.recentButton.Size = new System.Drawing.Size(22, 108);
             this.recentButton.TabIndex = 11;
@@ -809,7 +798,7 @@
             this.recentHeader});
             this.recentListView.Location = new System.Drawing.Point(0, 0);
             this.recentListView.Name = "recentListView";
-            this.recentListView.Size = new System.Drawing.Size(176, 246);
+            this.recentListView.Size = new System.Drawing.Size(187, 246);
             this.recentListView.TabIndex = 0;
             this.recentListView.UseCompatibleStateImageBehavior = false;
             this.recentListView.View = System.Windows.Forms.View.Details;
@@ -817,7 +806,7 @@
             // recentHeader
             // 
             this.recentHeader.Text = "Recent History";
-            this.recentHeader.Width = 174;
+            this.recentHeader.Width = 183;
             // 
             // EndYear
             // 
@@ -936,7 +925,6 @@
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.PictureBox settingsIcon;
         private System.Windows.Forms.Panel recentSearchPanel;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button recentButton;
         private System.Windows.Forms.Button favouriteButton;
         private System.Windows.Forms.ListView recentListView;

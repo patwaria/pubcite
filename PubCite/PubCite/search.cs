@@ -17,6 +17,7 @@ namespace PubCite
         List<SG.Journal> FavJournalList;
         List<SG.Paper> Papers;
         List<SG.Paper> Citations;
+        List<String> RecentSearchKeys = new List<string>();
 
         List<string> auth_url;
         List<string> authors;
@@ -210,7 +211,12 @@ namespace PubCite
                     journalResultsListView.Items.Add(item);
 
                 }
+                /* add journal to cache */
                 cacheObject.Add(journal.Name, journal, false);
+                
+                /* add journal to recent */
+                RecentSearchKeys.Add(journal.Name);
+                updateHistory();
             }
         }
 
@@ -257,10 +263,23 @@ namespace PubCite
 
                 /* Add to cache */
                 cacheObject.Add(author.Name, author, true);
+                /* Add to recent History */
+                RecentSearchKeys.Add(author.Name);
+                updateHistory();
             }
         }
 
-         public void ArrangeTree()
+        private void updateHistory()
+        {
+            for (int i = 0; i < RecentSearchKeys.Count; i++)
+            {
+                /*populating */
+                item = new ListViewItem(RecentSearchKeys[i]);
+                recentListView.Items.Add(item);
+            }
+        }
+
+        public void ArrangeTree()
         {
 
             FavAuthorList = Form1.favorites.AuthorList;
@@ -984,16 +1003,16 @@ namespace PubCite
         private void favouriteButton_Click(object sender, EventArgs e)
         {
             Transition t = new Transition(new TransitionType_EaseInEaseOut(500));
-            t.add(favouritesTreeView, "Left", 40);
-            t.add(recentSearchPanel, "Left", -240);
+            t.add(favouritesTreeView, "Left", 29);
+            t.add(recentSearchPanel, "Left", -200);
             t.run();
         }
 
         private void recentButton_Click(object sender, EventArgs e)
         {
             Transition t = new Transition(new TransitionType_EaseInEaseOut(500));
-            t.add(favouritesTreeView, "Left", -240);
-            t.add(recentSearchPanel, "Left", 40);
+            t.add(favouritesTreeView, "Left", -200);
+            t.add(recentSearchPanel, "Left", 29);
             t.run();
         }
     }
