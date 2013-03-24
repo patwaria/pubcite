@@ -99,28 +99,31 @@ namespace SG
         public Paper(SerializationInfo info, StreamingContext ctxt)
         {
            title = (string)info.GetValue("title",typeof(string));
+           titleURL = (string)info.GetValue("titleUrl", typeof(string));
            authors = (string)info.GetValue("authors",typeof(string));
            year = (int)info.GetValue("year",typeof(int));
            publication = (string)info.GetValue("publication", typeof(string));
            publisher = (string)info.GetValue("publisher", typeof(string));
            num_cites = (int)info.GetValue("Num_Cites", typeof(int));
-           gsRank = (int)info.GetValue("gsRank", typeof(int));
            CiteURL = (string)info.GetValue("citeUrl", typeof(string));
-           titleURL = (string)info.GetValue("titleUrl", typeof(string));
+           gsRank = (int)info.GetValue("gsRank", typeof(int));
+           
+           
            //citations = (List<Paper>)info.GetValue("ListOfCitations", typeof(string));
 
         }
         public void GetObjectData(SerializationInfo info, StreamingContext ctxt)
         {
             info.AddValue("title",title);
+            info.AddValue("titleUrl", typeof(string));
             info.AddValue("authors", authors);
             info.AddValue("year", year);
             info.AddValue("publication", publication);
             info.AddValue("publisher", publisher);
             info.AddValue("Num_Cites", num_cites);
-            info.AddValue("gsRank", gsRank);
             info.AddValue("citeUrl", typeof(string));
-            info.AddValue("titleUrl", typeof(string));
+            info.AddValue("gsRank", gsRank);
+            
             //info.AddValue("ListOfCitations", citations);
         }
         //property - "Title" of the paper - read only
