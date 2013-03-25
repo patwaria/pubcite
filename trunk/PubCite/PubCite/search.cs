@@ -1060,6 +1060,13 @@ namespace PubCite
 
         private void settingsIcon_Click(object sender, EventArgs e)
         {
+            Settings settings = (new SettingsRecord()).ReadSettings();
+
+            cacheNumericUpDown.Value = settings.DaysCache;
+            googleNumericUpDown.Value = settings.GSMaxResults;
+            microsoftNumericUpDown.Value = settings.MASMaxResults;
+            citeseerNumericUpDown.Value = settings.CiteSeerMaxResults;
+
             Transition t = new Transition(new TransitionType_EaseInEaseOut(500));
             t.add(settingsPanel, "Top", 9);
             t.run();
@@ -1115,6 +1122,10 @@ namespace PubCite
             Transition t = new Transition(new TransitionType_EaseInEaseOut(500));
             t.add(settingsPanel, "Top", -800);
             t.run();
+            
+            Settings Nsettings = new Settings((int)cacheNumericUpDown.Value, (int)citeseerNumericUpDown.Value,
+                (int)googleNumericUpDown.Value, (int)microsoftNumericUpDown.Value);
+            (new SettingsRecord()).SaveSettings(Nsettings);
         }
     }
 }

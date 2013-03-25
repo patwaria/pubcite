@@ -8,7 +8,7 @@ using System.Runtime.Serialization;
 namespace PubCite
 {
     [Serializable()]
-    class Settings : ISerializable
+    public class Settings : ISerializable
     {
         private int daysCache;
         private int csxMaxResults;
@@ -28,7 +28,7 @@ namespace PubCite
         {
         }
         public Settings()
-            : this(7)
+            : this(7, 100, 100, 100)
         {
 
         }
@@ -43,7 +43,7 @@ namespace PubCite
         public void GetObjectData(SerializationInfo info, StreamingContext ctxt)
         {
             info.AddValue("daysCache", daysCache);
-            info.AddValue("cszMR",csxMaxResults);
+            info.AddValue("csxMR",csxMaxResults);
             info.AddValue("gsMR",gsMaxResults);
             info.AddValue("masMR",masMaxResults);
         }

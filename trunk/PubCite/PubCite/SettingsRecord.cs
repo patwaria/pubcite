@@ -7,7 +7,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace PubCite
 {
-    class SettingsRecord
+    public class SettingsRecord
     {
         private Settings set;
         public SettingsRecord()
