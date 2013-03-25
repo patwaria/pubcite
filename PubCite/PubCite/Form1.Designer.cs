@@ -60,6 +60,7 @@
             // 
             this.maintabControl.Controls.Add(this.searchTab1);
             this.maintabControl.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.maintabControl.ItemSize = new System.Drawing.Size(48, 18);
             this.maintabControl.Location = new System.Drawing.Point(-1, -1);
             this.maintabControl.Name = "maintabControl";
             this.maintabControl.SelectedIndex = 0;
