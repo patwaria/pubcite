@@ -44,7 +44,11 @@ namespace PubCite
             request.StartIdx = 1;
             request.EndIdx = 10;
             response = client.Search(request);
-
+            if (response.Author == null)
+            {
+                authSuggest=new AuthSuggestion(authNM,authID,false);
+                return authSuggest;
+            }
             uint range = response.Author.TotalItem < 10 ? response.Author.TotalItem : 10;
             for (int i = 0; i < range; i++)
             {
@@ -56,7 +60,10 @@ namespace PubCite
 
             }
 
-            authSuggest = new SG.AuthSuggestion(authNM, authID, true);
+            if (authNM.Count == 0)
+                authSuggest = new SG.AuthSuggestion(authNM, authID, false);
+            else
+                authSuggest = new SG.AuthSuggestion(authNM, authID, true);
 
             return authSuggest;
         }
@@ -657,6 +664,9 @@ namespace PubCite
             {
                 throw e;
             }
+
+            if (response.Publication == null)
+                return papers;
 
             for (int i = 0; i <response.Publication.Result.Length; i++)
             {
