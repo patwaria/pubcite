@@ -19,7 +19,15 @@ namespace PubCite
         public GSAuthScraper(String inital_URL,int i)
         {
             web = new HtmlWeb();
-            doc = web.Load(inital_URL);
+
+            try
+            {
+                doc = web.Load(inital_URL);
+            }
+            catch (Exception e) { Console.WriteLine("=====Exception occurred(web load) in GSAuthScraperNextPAge()"); }
+
+
+
             tables = doc.DocumentNode.SelectNodes("//table");
             h_index = i_index = -1;
             name = doc.DocumentNode.SelectSingleNode(".//*[@id=\"cit-name-display\"]").InnerText;
@@ -83,7 +91,13 @@ namespace PubCite
                     next_URL = next.Attributes["href"].Value;
                     next_URL = "http://scholar.google.com" + next_URL;
                     next_URL = next_URL.Replace("amp;", "");
-                    doc = web.Load(next_URL);
+                    
+                    try
+                    {
+                        doc = web.Load(next_URL);
+                    }
+                    catch (Exception e) { Console.WriteLine("=====Exception occurred(web load) in GSAuthScraperNextPAge()");}
+
                     tables = doc.DocumentNode.SelectNodes("//table");
                     pageStatus = true;
                     return pageStatus;
@@ -98,7 +112,14 @@ namespace PubCite
                     next_URL = next.Attributes["href"].Value;
                     next_URL = "http://scholar.google.com" + next_URL;
                     next_URL = next_URL.Replace("amp;", "");
-                    doc = web.Load(next_URL);
+
+                    try
+                    {
+                        doc = web.Load(next_URL);
+                    }
+                    catch (Exception e) { Console.WriteLine("=====Exception occurred(web load) in GSAuthScraperNextPAge()"); }
+
+
 
                     tables = doc.DocumentNode.SelectNodes("//table");
                     // Console.WriteLine(tables.ToString());
@@ -114,7 +135,8 @@ namespace PubCite
             HtmlNodeCollection rows = doc.DocumentNode.SelectNodes(".//tr[@class=\"cit-table item\"]");
             string title,titleLink, authors, publication, publisher, cited_by_url;
             int year, no_of_citations;
-
+            if (rows == null) return -1;
+            papers.Clear();
 
             foreach (HtmlNode row in rows)
             {
@@ -138,7 +160,7 @@ namespace PubCite
                 HtmlNode nameNode = titleNode.SelectSingleNode(".//a");
                 title = nameNode.InnerText;
 
-                
+                // TITLE-LINK
                 //titleLink = nameNode.Attributes["href"].Value;
                 //set the paper link to url_link.Inner_Text. First check if link begins with "http://...". If not add "http://scholar.google.co.in/"
                 //titleLink=url_link;
@@ -155,6 +177,7 @@ namespace PubCite
                 //set the author name string to nameNode.InnerText
                 //Console.WriteLine("AUTHOR NAME : " + nameNode.InnerText);
 
+                // PUBLICATION
                 authors = "Not Found";
                 publication = "Not Found";
                 publisher = "Not Found";
@@ -164,6 +187,9 @@ namespace PubCite
                     if (nodes.Count > 1) publication = nodes[1].InnerText;
                 }
 
+
+
+                // CITATION STUFF
                 nameNode = row.SelectSingleNode(".//*[@id=\"col-citedby\"]");
                 //set the number of citations to nameNode.InnerText
                 //Console.WriteLine("NO OF CITATIONS : " + nameNode.InnerText);
@@ -187,7 +213,7 @@ namespace PubCite
                 index++;
             }
 
-            return index;
+            return 1;
         }
 
 
@@ -198,7 +224,7 @@ namespace PubCite
         public string getAffiliation() { return affiliation;     }
         public List<SG.Paper> getPapersOfCurrentPage()
         {
-            getCitationData();
+            if(getCitationData()==-1) return null;
             //foreach (SG.Paper pap in papers) { Console.WriteLine(pap.Title); }
             return papers;
         }
