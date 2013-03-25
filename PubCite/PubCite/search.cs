@@ -184,7 +184,7 @@ namespace PubCite
         private void populateJournal()
         {
 
-            if (journalStats != null)
+            if (journalStats != null && journalStats.getNumberOfPapers() != 0)
             {
                 journalResultsListView.Items.Clear();
                 authorResultsListView.Visible = false;
@@ -217,20 +217,17 @@ namespace PubCite
                     journalResultsListView.Items.Add(item);
 
                 }
-
-                /* add journal to cache */
-                cacheObject.Add(journalStats.Name, journalStats, false);
-                
-                /* add journal to recent */
-                RecentSearchKeys.Add(journalStats.Name);
-                updateHistory(journalStats.Name);
+            }
+            else
+            {
+                MessageBox.Show("Journal results not found!");
             }
         }
 
         private void populateAuthor()
         {
 
-            if (authStats != null)
+            if (authStats != null && authStats.getNumberOfPapers() != 0)
             {
 
                 authorResultsListView.Items.Clear();
@@ -259,7 +256,7 @@ namespace PubCite
                 for (int i = 0; i < Papers.Count; i++)
                 {
                     /*populating */
-                    
+
                     item = new ListViewItem(Papers[i].Title);
                     item.SubItems.Add(Papers[i].Publication);
                     if (Papers[i].Year == -1 || Papers[i].Year == -1)
@@ -269,13 +266,10 @@ namespace PubCite
                     item.SubItems.Add(Papers[i].NumberOfCitations.ToString());
                     authorResultsListView.Items.Add(item);
                 }
-
-
-                /* Add to cache */
-                cacheObject.Add(authStats.Name, authStats, true);
-                /* Add to recent History */
-                RecentSearchKeys.Add(authStats.Name);
-                updateHistory(authStats.Name);
+            }
+            else
+            {
+                MessageBox.Show("Author results not found!");
             }
         }
 
@@ -664,6 +658,12 @@ namespace PubCite
             progressPanel.Visible = false;
             progressBar.SendToBack();
             progressBar.Visible = false;
+
+            /* Add to cache */
+            cacheObject.Add(authStats.Name, authStats, true);
+            /* Add to recent History */
+            RecentSearchKeys.Add(authStats.Name);
+            updateHistory(authStats.Name);
             populateAuthor();
         }
 
@@ -728,10 +728,23 @@ namespace PubCite
                 if (suggestions)
                     populateSuggestions();
                 else
+                {
+                    /* Add to cache */
+                    cacheObject.Add(authStats.Name, authStats, true);
+                    /* Add to recent History */
+                    RecentSearchKeys.Add(authStats.Name);
+                    updateHistory(authStats.Name);
                     populateAuthor();
+                }
             }
             else
             {
+                /* add journal to cache */
+                cacheObject.Add(journalStats.Name, journalStats, false);
+
+                /* add journal to recent */
+                RecentSearchKeys.Add(journalStats.Name);
+                updateHistory(journalStats.Name);
                 populateJournal();
             }
         }
@@ -904,150 +917,6 @@ namespace PubCite
             {
                 Console.WriteLine(authStats.HomePageURL);
                 openBrowserForUrl(authStats.HomePageURL);
-            }
-        }
-
-
-        /* not required */
-        public void searchWorker()
-        {
-            for (int i = 0; i < 4; i++) prevSortedColum[i] = false;
-            authorsSuggestions.Items.Clear();
-            authorResultsListView.Items.Clear();
-            journalResultsListView.Items.Clear();
-
-            if (authorCheckBox.Checked == true)
-            {
-
-                prevSelectedIndex = -1;
-
-                if (siteComboBox.SelectedItem.ToString().Equals("Citeseer"))
-                {
-                    a[0] = true;
-                    a[1] = false;
-                    a[2] = false;
-                    Console.WriteLine("in CS: " + searchField.Text);
-                    authSug = CSParser.getAuthSuggestions(searchField.Text);
-
-                }
-                else if (siteComboBox.SelectedItem.ToString().Equals("Google Scholar"))
-                {
-                    a[0] = false;
-                    a[1] = true;
-                    a[2] = false;
-                    Console.WriteLine("in gs" + searchField.Text);
-
-                    authSug = GSScraper.getAuthSuggestions(searchField.Text);
-
-                }
-                else if (siteComboBox.SelectedItem.ToString().Equals("Microsoft Academic Search"))
-                {
-                    a[0] = false;
-                    a[1] = false;
-                    a[2] = true;
-                    Console.WriteLine("in MS : " + searchField.Text);
-
-                    authSug = MSParser.getAuthSuggestions(searchField.Text);
-                }
-
-
-                Console.WriteLine(authSug.isSet());
-                if (authSug == null || !authSug.isSet())
-                {
-                    /* Case : No suggestions */
-                    if (a[0] == true)
-                    {
-                        authStats = CSParser.getAuthors(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text);
-                        authStats.Type = 0;
-                    }
-                    else if (a[1] == true)
-                    {
-                        authStats = GSScraper.getAuthors(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text);
-                        authStats.Type = 0;
-                    }
-                    else
-                    {
-                        authStats = MSParser.getAuthors(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text);
-                        authStats.Type = 0;
-                    }
-                    populateAuthor();
-
-                }
-                else
-                {
-                    //System.Console.WriteLine(authSug.isSet());
-                    authors = authSug.getSuggestions();
-                    auth_url = authSug.getSuggestionsURL();
-
-                    // System.Console.WriteLine(authors[0]);
-                    if (authors.Count == 1)
-                    {
-                        int index = 0;
-                        if (prevSelectedIndex != index)
-                        {
-                            if (a[0] == true)
-                            {
-                                authStats = CSParser.getAuthStatistics(auth_url[index]);
-                                authStats.Type = 0;
-                            }
-                            else if (a[1] == true)
-                            {
-                                authStats = GSScraper.getAuthStatistics(auth_url[index]);
-                                authStats.Type = 1;
-                            }
-                            else if (a[2] == true)
-                            {
-                                authStats = MSParser.getAuthStatistics(auth_url[index]);
-                                authStats.Type = 2;
-                            } 
-                            prevSelectedIndex = index;
-                        }
-                        
-                        populateAuthor();
-                    }
-                    else
-                    {
-
-                        Suggestions.Visible = true;
-                        for (int i = 0; i < authors.Count; i++)
-                        {
-
-                            item = new ListViewItem(authors[i]);
-                            authorsSuggestions.Items.Add(item);
-                        }
-                    }
-                }
-
-            }
-            if (journalCheckBox.Checked == true)
-            {
-
-                if (siteComboBox.SelectedItem.ToString().Equals("Citeseer"))
-                {
-                    a[0] = true;
-                    a[1] = false;
-                    a[2] = false;
-                    journalStats = CSParser.getJournals(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text);
-                    journalStats.Type = 0;
-
-                }
-                else if (siteComboBox.SelectedItem.ToString().Equals("Google Scholar"))
-                {
-                    a[0] = false;
-                    a[1] = true;
-                    a[2] = false;
-                    journalStats = GSScraper.getJournals(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text);
-                    journalStats.Type = 1;
-                }
-                else if (siteComboBox.SelectedItem.ToString().Equals("Microsoft Academic Search"))
-                {
-                    a[0] = false;
-                    a[1] = false;
-                    a[2] = true;
-                    journalStats = MSParser.getJournals(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text);
-                    journalStats.Type = 2;
-                }
-                populateJournal();
             }
         }
 
