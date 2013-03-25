@@ -731,7 +731,7 @@ namespace PubCite
 
             citeList = new List<publiListEle2>();
 
-            int resultLim = 30;
+            int resultLim = 10;
             int resultCount;
 
             for(resultCount=0;resultCount<resultLim && doc!=null;)
