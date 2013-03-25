@@ -78,6 +78,7 @@ namespace PubCite
             cachedListView.SendToBack();
 
             showSearch();
+            STOP = false;
         }
         private void searchField_GotFocus(object sender, EventArgs e)
         {
@@ -492,7 +493,6 @@ namespace PubCite
 
         private void startProgressUI()
         {
-            showStop();
             disablePanels();
             progressPanel.Visible = true;
             progressBar.BringToFront();
@@ -503,7 +503,6 @@ namespace PubCite
 
         private void endProgressUI() {
 
-            showSearch();
             /* Stop the progress bar */
             progressBar.MarqueeAnimationSpeed = 0;
             progressBar.Style = ProgressBarStyle.Blocks;
@@ -685,7 +684,7 @@ namespace PubCite
             if (authStats.getNumberOfPapers() >= 20 && authStats.Type == 2)
             {
                 nextData = true;
-                while (nextData == true)
+                while (nextData == true && STOP == false)
                 {
                     BackgroundWorker backgroundWorker1 = new BackgroundWorker();
                     if(hasProfile)
@@ -701,6 +700,7 @@ namespace PubCite
 
                     populateAuthor();
                 }
+                STOP = false;
             }
         }
 
@@ -713,7 +713,7 @@ namespace PubCite
             if (journalStats.getNumberOfPapers() >= 20 && journalStats.Type == 2)
             {
                 nextData = true;
-                while (nextData == true)
+                while (nextData == true && STOP == false)
                 {
                     Console.WriteLine("Journal");
                     BackgroundWorker backgroundWorker1 = new BackgroundWorker();
@@ -727,11 +727,13 @@ namespace PubCite
 
                     populateJournal();
                 }
+                STOP = false;
             }
         }
 
         private void authorsSuggestions_MouseClick(object sender, EventArgs e)
         {
+            showStop();
             suggestedIndex = authorsSuggestions.FocusedItem.Index;
             startProgressUI();
             BackgroundWorker backgroundWorker = new BackgroundWorker();
@@ -754,12 +756,12 @@ namespace PubCite
             endProgressUI();
 
             getNextAuthStats(true);
-
+            showSearch();
         }
 
         private void searchIcon_Click(object sender, EventArgs e)
         {
-
+            showStop();
             for (int i = 0; i < 4; i++) prevSortedColum[i] = false;
             
             authorsSuggestions.Items.Clear();
@@ -837,6 +839,8 @@ namespace PubCite
 
                 getNextJournal();
             }
+
+            showSearch();
         }
 
         private void viewURLToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1016,20 +1020,6 @@ namespace PubCite
             settingsForm.ShowDialog(this);
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            Transition t = new Transition(new TransitionType_EaseInEaseOut(500));
-            t.add(recentSearchPanel, "Left", -300);
-            t.run();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            Transition t = new Transition(new TransitionType_EaseInEaseOut(500));
-            t.add(recentSearchPanel, "Left", 0);
-            t.run();
-        }
-
         private void favouriteButton_Click(object sender, EventArgs e)
         {
             Transition t = new Transition(new TransitionType_EaseInEaseOut(500));
@@ -1049,8 +1039,7 @@ namespace PubCite
         private void stopButton_Click(object sender, EventArgs e)
         {
             Console.WriteLine("say cheese");
-            
-            
+            STOP = true;
         }
 
         private void showSearch()
