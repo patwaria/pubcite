@@ -123,10 +123,8 @@
             this.viewStatisticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeFromFavouritesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.EndYear = new PubCite.NumericTextBox();
-            this.StartYear = new PubCite.NumericTextBox();
-            this.panel21 = new System.Windows.Forms.Panel();
-            this.Okbutton = new System.Windows.Forms.Button();
+            this.settingsPanel = new System.Windows.Forms.Panel();
+            this.settingsOk = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.microsoftNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.label11 = new System.Windows.Forms.Label();
@@ -137,6 +135,10 @@
             this.CacheOptions = new System.Windows.Forms.GroupBox();
             this.cacheNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.CacheOptionslabel = new System.Windows.Forms.Label();
+            this.settingsCloseIcon = new System.Windows.Forms.PictureBox();
+            this.arbitPanel = new System.Windows.Forms.Panel();
+            this.EndYear = new PubCite.NumericTextBox();
+            this.StartYear = new PubCite.NumericTextBox();
             this.SearchPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.settingsIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.addToFavourite)).BeginInit();
@@ -154,13 +156,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.stopButton)).BeginInit();
             this.optionsMenuStrip.SuspendLayout();
             this.favouriteMenuStrip.SuspendLayout();
-            this.panel21.SuspendLayout();
+            this.settingsPanel.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.microsoftNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.googleNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.citeseerNumericUpDown)).BeginInit();
             this.CacheOptions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cacheNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.settingsCloseIcon)).BeginInit();
             this.SuspendLayout();
             // 
             // SearchPanel
@@ -422,7 +425,8 @@
             // resultsGroupBox
             // 
             this.resultsGroupBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.resultsGroupBox.Controls.Add(this.panel21);
+            this.resultsGroupBox.Controls.Add(this.arbitPanel);
+            this.resultsGroupBox.Controls.Add(this.settingsPanel);
             this.resultsGroupBox.Controls.Add(this.panel5);
             this.resultsGroupBox.Controls.Add(this.panel19);
             this.resultsGroupBox.Controls.Add(this.panel9);
@@ -1086,54 +1090,28 @@
             this.removeFromFavouritesToolStripMenuItem.Text = "Remove from Favourites";
             this.removeFromFavouritesToolStripMenuItem.Click += new System.EventHandler(this.removeFromFavouritesToolStripMenuItem_Click);
             // 
-            // EndYear
+            // settingsPanel
             // 
-            this.EndYear.AllowSpace = false;
-            this.EndYear.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.EndYear.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.EndYear.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EndYear.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.EndYear.Location = new System.Drawing.Point(342, 38);
-            this.EndYear.Name = "EndYear";
-            this.EndYear.Size = new System.Drawing.Size(44, 22);
-            this.EndYear.TabIndex = 0;
-            this.toolTip.SetToolTip(this.EndYear, "End Year");
-            this.EndYear.TextChanged += new System.EventHandler(this.EndYear_TextChanged);
+            this.settingsPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(84)))), ((int)(((byte)(84)))));
+            this.settingsPanel.Controls.Add(this.settingsCloseIcon);
+            this.settingsPanel.Controls.Add(this.settingsOk);
+            this.settingsPanel.Controls.Add(this.groupBox1);
+            this.settingsPanel.Controls.Add(this.CacheOptions);
+            this.settingsPanel.Location = new System.Drawing.Point(100, -800);
+            this.settingsPanel.Name = "settingsPanel";
+            this.settingsPanel.Size = new System.Drawing.Size(499, 319);
+            this.settingsPanel.TabIndex = 41;
             // 
-            // StartYear
+            // settingsOk
             // 
-            this.StartYear.AllowSpace = false;
-            this.StartYear.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.StartYear.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.StartYear.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.StartYear.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.StartYear.Location = new System.Drawing.Point(259, 38);
-            this.StartYear.Name = "StartYear";
-            this.StartYear.Size = new System.Drawing.Size(44, 22);
-            this.StartYear.TabIndex = 0;
-            this.toolTip.SetToolTip(this.StartYear, "Start Year");
-            this.StartYear.TextChanged += new System.EventHandler(this.StartYear_TextChanged);
-            // 
-            // panel21
-            // 
-            this.panel21.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel21.Controls.Add(this.Okbutton);
-            this.panel21.Controls.Add(this.groupBox1);
-            this.panel21.Controls.Add(this.CacheOptions);
-            this.panel21.Location = new System.Drawing.Point(135, 9);
-            this.panel21.Name = "panel21";
-            this.panel21.Size = new System.Drawing.Size(482, 361);
-            this.panel21.TabIndex = 41;
-            // 
-            // Okbutton
-            // 
-            this.Okbutton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Okbutton.Location = new System.Drawing.Point(202, 290);
-            this.Okbutton.Name = "Okbutton";
-            this.Okbutton.Size = new System.Drawing.Size(75, 23);
-            this.Okbutton.TabIndex = 2;
-            this.Okbutton.Text = "OK";
-            this.Okbutton.UseVisualStyleBackColor = true;
+            this.settingsOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.settingsOk.Location = new System.Drawing.Point(202, 281);
+            this.settingsOk.Name = "settingsOk";
+            this.settingsOk.Size = new System.Drawing.Size(75, 23);
+            this.settingsOk.TabIndex = 2;
+            this.settingsOk.Text = "OK";
+            this.settingsOk.UseVisualStyleBackColor = true;
+            this.settingsOk.Click += new System.EventHandler(this.settingsOk_Click);
             // 
             // groupBox1
             // 
@@ -1143,7 +1121,7 @@
             this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Controls.Add(this.citeseerNumericUpDown);
             this.groupBox1.Controls.Add(this.label13);
-            this.groupBox1.Location = new System.Drawing.Point(3, 108);
+            this.groupBox1.Location = new System.Drawing.Point(11, 97);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(476, 167);
             this.groupBox1.TabIndex = 1;
@@ -1235,7 +1213,7 @@
             // 
             this.CacheOptions.Controls.Add(this.cacheNumericUpDown);
             this.CacheOptions.Controls.Add(this.CacheOptionslabel);
-            this.CacheOptions.Location = new System.Drawing.Point(3, 24);
+            this.CacheOptions.Location = new System.Drawing.Point(11, 28);
             this.CacheOptions.Name = "CacheOptions";
             this.CacheOptions.Size = new System.Drawing.Size(476, 63);
             this.CacheOptions.TabIndex = 0;
@@ -1269,6 +1247,51 @@
             this.CacheOptionslabel.TabIndex = 0;
             this.CacheOptionslabel.Text = "Keep Cache These Many Days:";
             // 
+            // settingsCloseIcon
+            // 
+            this.settingsCloseIcon.Image = global::PubCite.Properties.Resources.close;
+            this.settingsCloseIcon.Location = new System.Drawing.Point(472, 4);
+            this.settingsCloseIcon.Name = "settingsCloseIcon";
+            this.settingsCloseIcon.Size = new System.Drawing.Size(16, 15);
+            this.settingsCloseIcon.TabIndex = 3;
+            this.settingsCloseIcon.TabStop = false;
+            this.settingsCloseIcon.Click += new System.EventHandler(this.settingsCloseIcon_Click);
+            // 
+            // arbitPanel
+            // 
+            this.arbitPanel.Location = new System.Drawing.Point(100, -3);
+            this.arbitPanel.Name = "arbitPanel";
+            this.arbitPanel.Size = new System.Drawing.Size(499, 10);
+            this.arbitPanel.TabIndex = 42;
+            // 
+            // EndYear
+            // 
+            this.EndYear.AllowSpace = false;
+            this.EndYear.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.EndYear.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.EndYear.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EndYear.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.EndYear.Location = new System.Drawing.Point(342, 38);
+            this.EndYear.Name = "EndYear";
+            this.EndYear.Size = new System.Drawing.Size(44, 22);
+            this.EndYear.TabIndex = 0;
+            this.toolTip.SetToolTip(this.EndYear, "End Year");
+            this.EndYear.TextChanged += new System.EventHandler(this.EndYear_TextChanged);
+            // 
+            // StartYear
+            // 
+            this.StartYear.AllowSpace = false;
+            this.StartYear.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.StartYear.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.StartYear.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StartYear.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.StartYear.Location = new System.Drawing.Point(259, 38);
+            this.StartYear.Name = "StartYear";
+            this.StartYear.Size = new System.Drawing.Size(44, 22);
+            this.StartYear.TabIndex = 0;
+            this.toolTip.SetToolTip(this.StartYear, "Start Year");
+            this.StartYear.TextChanged += new System.EventHandler(this.StartYear_TextChanged);
+            // 
             // search
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1296,7 +1319,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.stopButton)).EndInit();
             this.optionsMenuStrip.ResumeLayout(false);
             this.favouriteMenuStrip.ResumeLayout(false);
-            this.panel21.ResumeLayout(false);
+            this.settingsPanel.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.microsoftNumericUpDown)).EndInit();
@@ -1305,6 +1328,7 @@
             this.CacheOptions.ResumeLayout(false);
             this.CacheOptions.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cacheNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.settingsCloseIcon)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1402,8 +1426,8 @@
         private System.Windows.Forms.Panel panel19;
         private System.Windows.Forms.Panel panel16;
         private System.Windows.Forms.Panel panel15;
-        private System.Windows.Forms.Panel panel21;
-        private System.Windows.Forms.Button Okbutton;
+        private System.Windows.Forms.Panel settingsPanel;
+        private System.Windows.Forms.Button settingsOk;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.NumericUpDown microsoftNumericUpDown;
         private System.Windows.Forms.Label label11;
@@ -1414,5 +1438,7 @@
         private System.Windows.Forms.GroupBox CacheOptions;
         private System.Windows.Forms.NumericUpDown cacheNumericUpDown;
         private System.Windows.Forms.Label CacheOptionslabel;
+        private System.Windows.Forms.PictureBox settingsCloseIcon;
+        private System.Windows.Forms.Panel arbitPanel;
     }
 }
