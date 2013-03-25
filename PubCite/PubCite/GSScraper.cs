@@ -149,8 +149,8 @@ namespace PubCite
 
 
 
-            string url = "http://scholar.google.com/scholar?q=" + authName + "&btnG=&hl=en&as_sdt=1.";//keywords + "&as_epq=&as_oq=" //affiliation + "&as_eq=&as_occt=any&as_sauthors=" + authName;// + "&as_publication=&as_ylo=&as_yhi=&btnG=&hl=en&as_sdt=0%2C5";
-            //string url = "http://scholar.google.com/scholar?as_q=&as_epq=&as_oq=&as_eq=&as_occt=any&as_sauthors="  + authName + "&as_publication=&as_ylo=&as_yhi=&btnG=&hl=en&as_sdt=0,5";
+            //string url = "http://scholar.google.com/scholar?q=" + authName + "&btnG=&hl=en&as_sdt=1.";//keywords + "&as_epq=&as_oq=" //affiliation + "&as_eq=&as_occt=any&as_sauthors=" + authName;// + "&as_publication=&as_ylo=&as_yhi=&btnG=&hl=en&as_sdt=0%2C5";
+            string url = "http://scholar.google.com/scholar?as_q=&as_epq=&as_oq=&as_eq=&as_occt=any&as_sauthors="  + authName + "&as_publication=&as_ylo=&as_yhi=&btnG=&hl=en&as_sdt=0,5&num=20";
 
             Console.WriteLine(url);
             HtmlWeb web = new HtmlWeb();
@@ -477,7 +477,7 @@ namespace PubCite
 
 
             string name = Regex.Replace(journalName, @"\s+", "+");
-            string url = "http://scholar.google.com/scholar?as_q=&as_epq=&as_oq=&as_eq=&as_occt=any&as_sauthors=&as_publication=" + journalName + "&as_ylo=&as_yhi=&btnG=&hl=en&as_sdt=0,5";
+            string url = "http://scholar.google.com/scholar?as_q=&as_epq=&as_oq=&as_eq=&as_occt=any&as_sauthors=&as_publication=" + journalName + "&as_ylo=&as_yhi=&btnG=&hl=en&as_sdt=0,5&num=20";
             //string url = "http://scholar.google.co.in/scholar?hl=en&q=anil+kumar&btnG=&as_sdt=1,5&as_sdtp=";
             Console.WriteLine(url);
 
@@ -791,8 +791,9 @@ namespace PubCite
 
             // CONNECTIONS
             HtmlWeb web = new HtmlWeb();
-
-
+            if (url == null) return null;
+            url += "&num=20";
+                 
             try
             {
                 doc = web.Load(url);
