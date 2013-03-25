@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Browser));
             this.UrlBox = new System.Windows.Forms.TextBox();
             this.UrlLabel = new System.Windows.Forms.Label();
             this.searchButton = new System.Windows.Forms.PictureBox();
@@ -37,24 +38,32 @@
             // 
             // UrlBox
             // 
+            this.UrlBox.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.UrlBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.UrlBox.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UrlBox.Location = new System.Drawing.Point(64, 3);
             this.UrlBox.Name = "UrlBox";
-            this.UrlBox.Size = new System.Drawing.Size(777, 20);
+            this.UrlBox.Size = new System.Drawing.Size(893, 22);
             this.UrlBox.TabIndex = 0;
             // 
             // UrlLabel
             // 
             this.UrlLabel.AutoSize = true;
-            this.UrlLabel.Location = new System.Drawing.Point(23, 6);
+            this.UrlLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.UrlLabel.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UrlLabel.ForeColor = System.Drawing.SystemColors.Menu;
+            this.UrlLabel.Location = new System.Drawing.Point(23, 5);
+            this.UrlLabel.Margin = new System.Windows.Forms.Padding(3);
             this.UrlLabel.Name = "UrlLabel";
-            this.UrlLabel.Size = new System.Drawing.Size(35, 13);
+            this.UrlLabel.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
+            this.UrlLabel.Size = new System.Drawing.Size(34, 19);
             this.UrlLabel.TabIndex = 1;
             this.UrlLabel.Text = "URL :";
             // 
             // searchButton
             // 
-            this.searchButton.Image = global::PubCite.Properties.Resources.search_button2;
-            this.searchButton.Location = new System.Drawing.Point(857, 3);
+            this.searchButton.Image = ((System.Drawing.Image)(resources.GetObject("searchButton.Image")));
+            this.searchButton.Location = new System.Drawing.Point(963, 1);
             this.searchButton.Name = "searchButton";
             this.searchButton.Size = new System.Drawing.Size(23, 23);
             this.searchButton.TabIndex = 2;
@@ -73,6 +82,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.Controls.Add(this.webBrowser);
             this.Controls.Add(this.searchButton);
             this.Controls.Add(this.UrlLabel);
