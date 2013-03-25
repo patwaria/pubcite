@@ -336,7 +336,7 @@
             this.YearHeader,
             this.NumOfCitesHeader});
             this.authorResultsListView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.authorResultsListView.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.authorResultsListView.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.authorResultsListView.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.authorResultsListView.Location = new System.Drawing.Point(3, 18);
             this.authorResultsListView.MultiSelect = false;
@@ -759,7 +759,7 @@
             this.authorsSuggestions.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Authors});
             this.authorsSuggestions.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.authorsSuggestions.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.authorsSuggestions.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.authorsSuggestions.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.authorsSuggestions.Location = new System.Drawing.Point(3, 18);
             this.authorsSuggestions.Name = "authorsSuggestions";
