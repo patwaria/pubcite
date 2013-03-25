@@ -269,7 +269,7 @@
             this.authorCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.authorCheckBox.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.authorCheckBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.authorCheckBox.Location = new System.Drawing.Point(15, 8);
+            this.authorCheckBox.Location = new System.Drawing.Point(11, 8);
             this.authorCheckBox.Name = "authorCheckBox";
             this.authorCheckBox.Size = new System.Drawing.Size(51, 23);
             this.authorCheckBox.TabIndex = 23;
@@ -745,7 +745,7 @@
             this.Suggestions.Controls.Add(this.authorsSuggestions);
             this.Suggestions.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Suggestions.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.Suggestions.Location = new System.Drawing.Point(4, 258);
+            this.Suggestions.Location = new System.Drawing.Point(11, 258);
             this.Suggestions.Name = "Suggestions";
             this.Suggestions.Size = new System.Drawing.Size(199, 273);
             this.Suggestions.TabIndex = 8;
