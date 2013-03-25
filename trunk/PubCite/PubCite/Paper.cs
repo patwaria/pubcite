@@ -115,13 +115,13 @@ namespace SG
         public void GetObjectData(SerializationInfo info, StreamingContext ctxt)
         {
             info.AddValue("title",title);
-            info.AddValue("titleUrl", typeof(string));
+            info.AddValue("titleUrl", titleURL);
             info.AddValue("authors", authors);
             info.AddValue("year", year);
             info.AddValue("publication", publication);
             info.AddValue("publisher", publisher);
             info.AddValue("Num_Cites", num_cites);
-            info.AddValue("citeUrl", typeof(string));
+            info.AddValue("citeUrl", CiteURL);
             info.AddValue("gsRank", gsRank);
             
             //info.AddValue("ListOfCitations", citations);
