@@ -572,12 +572,12 @@ namespace PubCite
                     else if (a[1] == true)
                     {
                         authStats = GSScraper.getAuthors(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text, ref gs_nextUrl);
-                        authStats.Type = 0;
+                        authStats.Type = 1;
                     }
                     else
                     {
                         authStats = MSParser.getAuthors(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text);
-                        authStats.Type = 0;
+                        authStats.Type = 2;
                     }
                     suggestions = false;
                 }
@@ -693,6 +693,7 @@ namespace PubCite
 
         private void backgroundWorker_authorsNextDataWork(object sender, DoWorkEventArgs e)
         {
+            Console.WriteLine("type : " + authStats.Type);
             if (authStats.Type == 1)
                 nextData = GSScraper.getAuthorsNextPage(gs_nextUrl, ref authStats, ref gs_nextUrl);
             else if (authStats.Type == 2)
