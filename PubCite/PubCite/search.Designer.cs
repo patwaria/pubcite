@@ -126,7 +126,6 @@
             this.SearchPanel.BackColor = System.Drawing.SystemColors.Window;
             this.SearchPanel.Controls.Add(this.settingsIcon);
             this.SearchPanel.Controls.Add(this.label4);
-            this.SearchPanel.Controls.Add(this.cachedListView);
             this.SearchPanel.Controls.Add(this.affiliation);
             this.SearchPanel.Controls.Add(this.KeywordsTextBox);
             this.SearchPanel.Controls.Add(this.affilationTextBox);
@@ -175,7 +174,7 @@
             this.columnHeader1});
             this.cachedListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.cachedListView.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.cachedListView.Location = new System.Drawing.Point(128, 26);
+            this.cachedListView.Location = new System.Drawing.Point(73, 64);
             this.cachedListView.Name = "cachedListView";
             this.cachedListView.Size = new System.Drawing.Size(745, 97);
             this.cachedListView.TabIndex = 29;
@@ -317,6 +316,7 @@
             // 
             this.resultsGroupBox.Controls.Add(this.authorResultsListView);
             this.resultsGroupBox.Controls.Add(this.journalResultsListView);
+            this.resultsGroupBox.Controls.Add(this.cachedListView);
             this.resultsGroupBox.Location = new System.Drawing.Point(2, 88);
             this.resultsGroupBox.Name = "resultsGroupBox";
             this.resultsGroupBox.Size = new System.Drawing.Size(761, 446);
@@ -652,9 +652,9 @@
             // recentButton
             // 
             this.recentButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.recentButton.Location = new System.Drawing.Point(1, 121);
+            this.recentButton.Location = new System.Drawing.Point(77, 6);
             this.recentButton.Name = "recentButton";
-            this.recentButton.Size = new System.Drawing.Size(22, 108);
+            this.recentButton.Size = new System.Drawing.Size(83, 29);
             this.recentButton.TabIndex = 11;
             this.recentButton.Text = "Recent";
             this.recentButton.UseVisualStyleBackColor = true;
@@ -663,9 +663,9 @@
             // favouriteButton
             // 
             this.favouriteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.favouriteButton.Location = new System.Drawing.Point(1, 6);
+            this.favouriteButton.Location = new System.Drawing.Point(7, 6);
             this.favouriteButton.Name = "favouriteButton";
-            this.favouriteButton.Size = new System.Drawing.Size(22, 107);
+            this.favouriteButton.Size = new System.Drawing.Size(70, 29);
             this.favouriteButton.TabIndex = 10;
             this.favouriteButton.Text = "Favourite";
             this.favouriteButton.UseVisualStyleBackColor = true;
@@ -674,9 +674,9 @@
             // recentSearchPanel
             // 
             this.recentSearchPanel.Controls.Add(this.recentListView);
-            this.recentSearchPanel.Location = new System.Drawing.Point(-200, 6);
+            this.recentSearchPanel.Location = new System.Drawing.Point(-250, 43);
             this.recentSearchPanel.Name = "recentSearchPanel";
-            this.recentSearchPanel.Size = new System.Drawing.Size(187, 246);
+            this.recentSearchPanel.Size = new System.Drawing.Size(209, 209);
             this.recentSearchPanel.TabIndex = 1;
             // 
             // recentListView
@@ -685,7 +685,7 @@
             this.recentHeader});
             this.recentListView.Location = new System.Drawing.Point(0, 0);
             this.recentListView.Name = "recentListView";
-            this.recentListView.Size = new System.Drawing.Size(187, 246);
+            this.recentListView.Size = new System.Drawing.Size(209, 209);
             this.recentListView.TabIndex = 0;
             this.recentListView.UseCompatibleStateImageBehavior = false;
             this.recentListView.View = System.Windows.Forms.View.Details;
@@ -699,7 +699,7 @@
             // 
             this.favouritesTreeView.BackColor = System.Drawing.SystemColors.Window;
             this.favouritesTreeView.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.favouritesTreeView.Location = new System.Drawing.Point(29, 6);
+            this.favouritesTreeView.Location = new System.Drawing.Point(7, 43);
             this.favouritesTreeView.Name = "favouritesTreeView";
             treeNode1.Name = "authorsRootNode";
             treeNode1.Text = "Authors";
@@ -709,7 +709,7 @@
             treeNode3.Text = "Favourites";
             this.favouritesTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode3});
-            this.favouritesTreeView.Size = new System.Drawing.Size(187, 246);
+            this.favouritesTreeView.Size = new System.Drawing.Size(209, 209);
             this.favouritesTreeView.TabIndex = 9;
             // 
             // Suggestions

@@ -29,14 +29,15 @@ namespace PubCite
         SG.Author authStats = null;
         SG.Journal journalStats;
         
-        Boolean[] a = { false, false, false };
+        
         int prevSelectedIndex;
         int suggestedIndex;
         int citationIndex;
         int citationType;
         Boolean[] prevSortedColum = { false, false, false, false };
+        Boolean[] a = { false, false, false };
         Boolean suggestions;
-        BackgroundWorker backgroundWorker;
+        Boolean nextData;
 
 
         public search()
@@ -492,6 +493,30 @@ namespace PubCite
             resultsPanel.Enabled = true;
             favouritesPanel.Enabled = true;
         }
+
+        private void startProgressUI()
+        {
+            disablePanels();
+            progressPanel.Visible = true;
+            progressBar.BringToFront();
+            progressBar.Visible = true;
+            progressBar.Style = ProgressBarStyle.Marquee;
+            progressBar.MarqueeAnimationSpeed = 15;
+        }
+
+        private void endProgressUI() {
+            /* Stop the progress bar */
+            progressBar.MarqueeAnimationSpeed = 0;
+            progressBar.Style = ProgressBarStyle.Blocks;
+            progressBar.Value = progressBar.Minimum;
+
+            /* enable panels */
+            enablePanels();
+            progressPanel.Visible = false;
+            progressBar.SendToBack();
+            progressBar.Visible = false;
+        }
+
         private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             progressBar.MarqueeAnimationSpeed = 0;
@@ -540,25 +565,25 @@ namespace PubCite
 
                     if (authors.Count == 1)
                     {
-                        int index = 0;
-                        if (prevSelectedIndex != index)
+                        suggestedIndex = 0;
+                        if (prevSelectedIndex != suggestedIndex)
                         {
                             if (a[0] == true)
                             {
-                                authStats = CSParser.getAuthStatistics(auth_url[index]);
+                                authStats = CSParser.getAuthStatistics(auth_url[suggestedIndex]);
                                 authStats.Type = 0;
                             }
                             else if (a[1] == true)
                             {
-                                authStats = GSScraper.getAuthStatistics(auth_url[index]);
+                                authStats = GSScraper.getAuthStatistics(auth_url[suggestedIndex]);
                                 authStats.Type = 1;
                             }
                             else if (a[2] == true)
                             {
-                                authStats = MSParser.getAuthStatistics(auth_url[index]);
+                                authStats = MSParser.getAuthStatistics(auth_url[suggestedIndex]);
                                 authStats.Type = 2;
-                            } 
-                            prevSelectedIndex = index;
+                            }
+                            prevSelectedIndex = suggestedIndex;
                         }
                         suggestions = false;
                     }
@@ -634,19 +659,85 @@ namespace PubCite
             }
         }
 
+        private void backgroundWorker_authstatsNextDataWork(object sender, DoWorkEventArgs e)
+        {
+            nextData = MSParser.getAuthStatisticsNext(auth_url[suggestedIndex], ref authStats);
+
+        }
+
+        private void backgroundWorker_authorsNextDataWork(object sender, DoWorkEventArgs e)
+        {
+            nextData = MSParser.getAuthorsNext(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text, ref authStats);
+
+        }
+
+        private void backgroundWorker_journalsNextDataWork(object sender, DoWorkEventArgs e)
+        {
+            nextData = MSParser.getJournalsNext(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text, ref journalStats);
+
+        }
+
+        private void getNextAuthStats(bool hasProfile)
+        {
+            /* Get author data in the background 
+             * Note : only for MSParser now
+             * 
+             */
+            if (authStats.getNumberOfPapers() >= 20 && authStats.Type == 2)
+            {
+                nextData = true;
+                while (nextData == true)
+                {
+                    BackgroundWorker backgroundWorker1 = new BackgroundWorker();
+                    if(hasProfile)
+                        backgroundWorker1.DoWork += new DoWorkEventHandler(backgroundWorker_authstatsNextDataWork);
+                    else
+                        backgroundWorker1.DoWork += new DoWorkEventHandler(backgroundWorker_authorsNextDataWork);
+                    backgroundWorker1.RunWorkerAsync();
+                    while (backgroundWorker1.IsBusy)
+                    {
+                        Application.DoEvents();
+                        // disable those options which will trigger another thread 
+                    }
+
+                    populateAuthor();
+                }
+            }
+        }
+
+        private void getNextJournal()
+        {
+            /* Get next journal data in the background 
+             * Note : only for MSParser now
+             * 
+             */
+            if (journalStats.getNumberOfPapers() >= 20 && journalStats.Type == 2)
+            {
+                nextData = true;
+                while (nextData == true)
+                {
+                    Console.WriteLine("Journal");
+                    BackgroundWorker backgroundWorker1 = new BackgroundWorker();
+                    backgroundWorker1.DoWork += new DoWorkEventHandler(backgroundWorker_journalsNextDataWork);
+                    backgroundWorker1.RunWorkerAsync();
+                    while (backgroundWorker1.IsBusy)
+                    {
+                        Application.DoEvents();
+                        // disable those options which will trigger another thread 
+                    }
+
+                    populateJournal();
+                }
+            }
+        }
+
         private void authorsSuggestions_MouseClick(object sender, EventArgs e)
         {
-            disablePanels();
             suggestedIndex = authorsSuggestions.FocusedItem.Index;
-            progressPanel.Visible = true;
-            progressBar.BringToFront();
-            progressBar.Visible = true;
-            progressBar.Style = ProgressBarStyle.Marquee;
-            progressBar.MarqueeAnimationSpeed = 15;
-
-            backgroundWorker = new BackgroundWorker();
+            startProgressUI();
+            BackgroundWorker backgroundWorker = new BackgroundWorker();
             backgroundWorker.DoWork += new DoWorkEventHandler(backgroundWorker_authSearchWork);
-            backgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(backgroundWorker_RunWorkerCompleted);
+            //backgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(backgroundWorker_RunWorkerCompleted);
             
             backgroundWorker.RunWorkerAsync();
             while (backgroundWorker.IsBusy)
@@ -654,10 +745,6 @@ namespace PubCite
                 Application.DoEvents();
                 // disable those options which will trigger another thread 
             }
-            enablePanels();
-            progressPanel.Visible = false;
-            progressBar.SendToBack();
-            progressBar.Visible = false;
 
             /* Add to cache */
             cacheObject.Add(authStats.Name, authStats, true);
@@ -665,9 +752,11 @@ namespace PubCite
             RecentSearchKeys.Add(authStats.Name);
             updateHistory(authStats.Name);
             populateAuthor();
+            endProgressUI();
+
+            getNextAuthStats(true);
+
         }
-
-
 
         private void searchIcon_Click(object sender, EventArgs e)
         {
@@ -678,14 +767,10 @@ namespace PubCite
 
             cachedListView.Visible = false;
             cachedListView.SendToBack();
-            disablePanels();
-            progressPanel.Visible = true;
-            progressBar.BringToFront();
-            progressBar.Visible = true;
-            progressBar.Style = ProgressBarStyle.Marquee;
-            progressBar.MarqueeAnimationSpeed = 15;
 
-            backgroundWorker = new BackgroundWorker();
+            startProgressUI();
+
+            BackgroundWorker backgroundWorker = new BackgroundWorker();
             backgroundWorker.DoWork += new DoWorkEventHandler(backgroundWorker_genSearchWork);
             backgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(backgroundWorker_RunWorkerCompleted);
 
@@ -718,10 +803,7 @@ namespace PubCite
                 // disable those options which will trigger another thread 
             }
 
-            enablePanels();
-            progressPanel.Visible = false;
-            progressBar.SendToBack();
-            progressBar.Visible = false;
+            endProgressUI();
             if (authorCheckBox.Checked == true)
             {
                 Console.WriteLine("Done" + suggestions);
@@ -735,6 +817,11 @@ namespace PubCite
                     RecentSearchKeys.Add(authStats.Name);
                     updateHistory(authStats.Name);
                     populateAuthor();
+
+                    /* Add threading */
+                    /* Only for MSParser now */
+
+                    getNextAuthStats(false);
                 }
             }
             else
@@ -746,6 +833,8 @@ namespace PubCite
                 RecentSearchKeys.Add(journalStats.Name);
                 updateHistory(journalStats.Name);
                 populateJournal();
+
+                getNextJournal();
             }
         }
 
@@ -791,7 +880,7 @@ namespace PubCite
                 progressBar.BringToFront();
                 progressBar.Visible = true;
 
-                backgroundWorker = new BackgroundWorker();
+                BackgroundWorker backgroundWorker = new BackgroundWorker();
                 backgroundWorker.DoWork += new DoWorkEventHandler(backgroundWorker_citationSearchWork);
                 backgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(backgroundWorker_RunWorkerCompleted);
 
@@ -943,16 +1032,16 @@ namespace PubCite
         private void favouriteButton_Click(object sender, EventArgs e)
         {
             Transition t = new Transition(new TransitionType_EaseInEaseOut(500));
-            t.add(favouritesTreeView, "Left", 29);
-            t.add(recentSearchPanel, "Left", -200);
+            t.add(favouritesTreeView, "Left", 7);
+            t.add(recentSearchPanel, "Left", -250);
             t.run();
         }
 
         private void recentButton_Click(object sender, EventArgs e)
         {
             Transition t = new Transition(new TransitionType_EaseInEaseOut(500));
-            t.add(favouritesTreeView, "Left", -200);
-            t.add(recentSearchPanel, "Left", 29);
+            t.add(favouritesTreeView, "Left", -250);
+            t.add(recentSearchPanel, "Left", 7);
             t.run();
         }
     }
