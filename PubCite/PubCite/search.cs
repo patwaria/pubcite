@@ -28,8 +28,8 @@ namespace PubCite
         SG.AuthSuggestion authSug = null;
         SG.Author authStats = null;
         SG.Journal journalStats;
-        
-        
+
+
         int prevSelectedIndex;
         int suggestedIndex;
         int citationIndex;
@@ -53,6 +53,8 @@ namespace PubCite
             authorResultsListView.MouseClick += new MouseEventHandler(authorResultsListView_MouseClick);
             authorResultsListView.ColumnClick += new ColumnClickEventHandler(authorResultsListView_ColumnClick);
             authorResultsListView.MouseDoubleClick += new MouseEventHandler(authorResultsListView_MouseDoubleClick);
+            authorResultsListView.DrawItem += ListView_DrawItem;
+            authorResultsListView.DrawColumnHeader += ListView_DrawColumnHeader;
 
             journalResultsListView.FullRowSelect = true;
             journalResultsListView.MouseClick += new MouseEventHandler(journalResultsListView_MouseClick);
@@ -61,11 +63,16 @@ namespace PubCite
 
             authorsSuggestions.MouseDoubleClick += new MouseEventHandler(authorsSuggestions_MouseClick);
             authorsSuggestions.FullRowSelect = true;
+            authorsSuggestions.DrawItem += ListView_DrawItem;
+            authorsSuggestions.DrawColumnHeader += ListView_DrawColumnHeader;
+
+            recentListView.DrawItem += ListView_DrawItem;
+            recentListView.DrawColumnHeader += ListView_DrawColumnHeader;
 
             favouritesTreeView.MouseDoubleClick += new MouseEventHandler(favouritesTreeView_MouseDoubleClick);
             searchField.GotFocus += new EventHandler(searchField_GotFocus);
             searchField.LostFocus += new EventHandler(searchField_LostFocus);
-            searchField.KeyUp+=new KeyEventHandler(searchField_KeyUp);
+            searchField.KeyUp += new KeyEventHandler(searchField_KeyUp);
             progressBar.SendToBack();
             progressBar.Visible = false;
 
@@ -73,13 +80,25 @@ namespace PubCite
             journalCheckBox.Click += new EventHandler(journalCheckBox_Click);
 
             cachedListView.FullRowSelect = true;
-            cachedListView.Click +=new EventHandler(cachedListView_Click);
+            cachedListView.Click += new EventHandler(cachedListView_Click);
             cachedListView.HeaderStyle = ColumnHeaderStyle.None;
             cachedListView.SendToBack();
 
             showSearch();
             STOP = false;
         }
+
+        void ListView_DrawItem(object sender, DrawListViewItemEventArgs e)
+        {
+            e.DrawDefault = true;
+        }
+
+        void ListView_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
+        {
+            e.Graphics.FillRectangle(Brushes.DarkGray, e.Bounds);
+            e.DrawText();
+        }
+
         private void searchField_GotFocus(object sender, EventArgs e)
         {
             if (searchField.Text.Length > 0)
@@ -93,11 +112,12 @@ namespace PubCite
             cachedListView.Visible = false;
             cachedListView.SendToBack();
         }
-        
 
-        public void cachedListView_Click(object sender, EventArgs e) {
 
-            
+        public void cachedListView_Click(object sender, EventArgs e)
+        {
+
+
             Console.WriteLine(cachedListView.FocusedItem.Text);
             searchField.Text = cachedListView.FocusedItem.Text;
             cachedListView.Visible = false;
@@ -107,7 +127,8 @@ namespace PubCite
                 authStats = (SG.Author)cacheObject.Get(searchField.Text, authorCheckBox.Checked);
                 populateAuthor();
             }
-            else {
+            else
+            {
                 journalStats = (SG.Journal)cacheObject.Get(searchField.Text, authorCheckBox.Checked);
                 populateJournal();
             }
@@ -117,7 +138,7 @@ namespace PubCite
         {
             journalCheckBox.Checked = !(journalCheckBox.Checked);
             updateCacheSuggestions();
-            
+
         }
 
         private void journalCheckBox_Click(object sender, EventArgs e)
@@ -126,7 +147,7 @@ namespace PubCite
             updateCacheSuggestions();
         }
 
-        public void searchField_KeyUp(object sender,KeyEventArgs e)
+        public void searchField_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
@@ -171,12 +192,12 @@ namespace PubCite
                 cachedListView.Visible = false;
                 cachedListView.SendToBack();
             }
-            
+
         }
 
         public void populateSuggestions()
         {
-            
+
             Suggestions.Visible = true;
             for (int i = 0; i < authors.Count; i++)
             {
@@ -291,7 +312,7 @@ namespace PubCite
 
             for (int i = 0; i < FavAuthorList.Count; i++)
             {
-                
+
                 favouritesTreeView.Nodes[0].Nodes[0].Nodes.Add(new TreeNode(FavAuthorList[i].Name));
                 favouritesTreeView.Nodes[0].Nodes[0].Nodes[i].ContextMenuStrip = favouriteMenuStrip;
             }
@@ -310,7 +331,7 @@ namespace PubCite
                 favouritesTreeView.Nodes[0].Nodes[0].Nodes.Clear();
                 for (int i = 0; i < FavAuthorList.Count; i++)
                 {
-                    
+
                     favouritesTreeView.Nodes[0].Nodes[0].Nodes.Add(new TreeNode(FavAuthorList[i].Name));
                     favouritesTreeView.Nodes[0].Nodes[0].Nodes[i].ContextMenuStrip = favouriteMenuStrip;
                 }
@@ -450,7 +471,7 @@ namespace PubCite
         }
 
 
-       
+
 
         private void authorResultsListView_MouseClick(object sender, MouseEventArgs e)
         {
@@ -480,7 +501,7 @@ namespace PubCite
 
         private void disablePanels()
         {
-            
+
             resultsPanel.Enabled = false;
             favouritesPanel.Enabled = false;
         }
@@ -501,7 +522,8 @@ namespace PubCite
             progressBar.MarqueeAnimationSpeed = 15;
         }
 
-        private void endProgressUI() {
+        private void endProgressUI()
+        {
 
             /* Stop the progress bar */
             progressBar.MarqueeAnimationSpeed = 0;
@@ -630,7 +652,7 @@ namespace PubCite
                 {
                     authStats = MSParser.getAuthStatistics(auth_url[suggestedIndex]);
                     authStats.Type = 2;
-                } 
+                }
                 prevSelectedIndex = suggestedIndex;
             }
         }
@@ -641,19 +663,19 @@ namespace PubCite
             {
                 Console.WriteLine("url:" + Papers[citationIndex].CitedByURL);
                 Citations = CSParser.getCitations(Papers[citationIndex].CitedByURL);
-                
+
             }
             else if (citationType == 1)
             {
                 Console.WriteLine("url:" + Papers[citationIndex].CitedByURL);
                 Citations = GSScraper.getCitations(Papers[citationIndex].CitedByURL);
-              
+
             }
             else if (citationType == 2)
             {
                 Console.WriteLine("url:" + Papers[citationIndex].CitedByURL);
                 Citations = MSParser.getCitations(Papers[citationIndex].CitedByURL);
-               
+
             }
         }
 
@@ -687,7 +709,7 @@ namespace PubCite
                 while (nextData == true && STOP == false)
                 {
                     BackgroundWorker backgroundWorker1 = new BackgroundWorker();
-                    if(hasProfile)
+                    if (hasProfile)
                         backgroundWorker1.DoWork += new DoWorkEventHandler(backgroundWorker_authstatsNextDataWork);
                     else
                         backgroundWorker1.DoWork += new DoWorkEventHandler(backgroundWorker_authorsNextDataWork);
@@ -739,7 +761,7 @@ namespace PubCite
             BackgroundWorker backgroundWorker = new BackgroundWorker();
             backgroundWorker.DoWork += new DoWorkEventHandler(backgroundWorker_authSearchWork);
             //backgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(backgroundWorker_RunWorkerCompleted);
-            
+
             backgroundWorker.RunWorkerAsync();
             while (backgroundWorker.IsBusy)
             {
@@ -763,7 +785,7 @@ namespace PubCite
         {
             showStop();
             for (int i = 0; i < 4; i++) prevSortedColum[i] = false;
-            
+
             authorsSuggestions.Items.Clear();
             authorResultsListView.Items.Clear();
             journalResultsListView.Items.Clear();
@@ -782,7 +804,7 @@ namespace PubCite
                 a[0] = true;
                 a[1] = false;
                 a[2] = false;
-                
+
             }
             else if (siteComboBox.SelectedItem.ToString().Equals("Google Scholar"))
             {
@@ -854,7 +876,7 @@ namespace PubCite
 
         private void authorResultsListView_MouseDoubleClick(object sender, EventArgs e)
         {
-            viewCitationsToolStripMenuItem_Click(sender,e);
+            viewCitationsToolStripMenuItem_Click(sender, e);
         }
 
         private void journalResultsListView_MouseDoubleClick(object sender, EventArgs e)
@@ -864,13 +886,15 @@ namespace PubCite
 
         private void viewCitationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (authorResultsListView.Visible == true) {
+            if (authorResultsListView.Visible == true)
+            {
                 citationIndex = authorResultsListView.FocusedItem.Index;
                 citationType = authStats.Type;
                 Papers = authStats.getPapers();
-                
+
             }
-            else {
+            else
+            {
                 citationIndex = journalResultsListView.FocusedItem.Index;
                 citationType = journalStats.Type;
                 Papers = journalStats.getPapers();
@@ -896,7 +920,7 @@ namespace PubCite
                     Application.DoEvents();
                     // disable those options which will trigger another thread 
                 }
-                 
+
                 enablePanels();
                 progressPanel.Visible = false;
                 progressBar.SendToBack();
@@ -908,9 +932,9 @@ namespace PubCite
                 CitationsTab NcitTab = new CitationsTab();
                 citationsPage.Controls.Add(NcitTab);
 
-               
+
                 NcitTab.populateCitations(Papers[citationIndex], Citations, citationType);
-                
+
                 Form1.dub_tab.SelectedTab = citationsPage;
             }
         }
@@ -919,18 +943,20 @@ namespace PubCite
         {
             if (authorCheckBox.Checked == true && authStats != null)
             {
-                
+
                 Form1.favorites.AddAuthor(authStats);
 
             }
-            else if (journalCheckBox.Checked == true && journalStats != null) {
-                
+            else if (journalCheckBox.Checked == true && journalStats != null)
+            {
+
                 Form1.favorites.AddJournal(journalStats);
             }
             UpdateTree();
         }
 
-        private void favouritesTreeView_MouseDoubleClick(object sender, EventArgs e) {
+        private void favouritesTreeView_MouseDoubleClick(object sender, EventArgs e)
+        {
 
             viewStatisticsToolStripMenuItem_Click(sender, e);
         }
