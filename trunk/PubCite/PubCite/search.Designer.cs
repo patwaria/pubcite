@@ -408,7 +408,6 @@
             // statisticsGroupBox
             // 
             this.statisticsGroupBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.statisticsGroupBox.Controls.Add(this.cachedListView);
             this.statisticsGroupBox.Controls.Add(this.label5);
             this.statisticsGroupBox.Controls.Add(this.label6);
             this.statisticsGroupBox.Controls.Add(this.label7);
@@ -430,24 +429,25 @@
             this.statisticsGroupBox.Controls.Add(this.authorLabel);
             this.statisticsGroupBox.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statisticsGroupBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.statisticsGroupBox.Location = new System.Drawing.Point(8, 3);
+            this.statisticsGroupBox.Location = new System.Drawing.Point(2, 3);
             this.statisticsGroupBox.Name = "statisticsGroupBox";
-            this.statisticsGroupBox.Size = new System.Drawing.Size(746, 79);
+            this.statisticsGroupBox.Size = new System.Drawing.Size(752, 79);
             this.statisticsGroupBox.TabIndex = 2;
             this.statisticsGroupBox.TabStop = false;
             this.statisticsGroupBox.Text = "Statistics";
             // 
             // cachedListView
             // 
-            this.cachedListView.BackColor = System.Drawing.SystemColors.Control;
+            this.cachedListView.BackColor = System.Drawing.SystemColors.ControlDark;
             this.cachedListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1});
-            this.cachedListView.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cachedListView.ForeColor = System.Drawing.SystemColors.Info;
+            this.cachedListView.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.cachedListView.ForeColor = System.Drawing.SystemColors.Menu;
+            this.cachedListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.cachedListView.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.cachedListView.Location = new System.Drawing.Point(-120, -62);
+            this.cachedListView.Location = new System.Drawing.Point(128, 37);
             this.cachedListView.Name = "cachedListView";
-            this.cachedListView.Size = new System.Drawing.Size(745, 97);
+            this.cachedListView.Size = new System.Drawing.Size(760, 97);
             this.cachedListView.TabIndex = 29;
             this.cachedListView.UseCompatibleStateImageBehavior = false;
             this.cachedListView.View = System.Windows.Forms.View.Details;
@@ -704,7 +704,7 @@
             // 
             // recentListView
             // 
-            this.recentListView.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.recentListView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.recentListView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.recentListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.recentHeader});
@@ -922,6 +922,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.cachedListView);
             this.Controls.Add(this.SearchPanel);
             this.Name = "search";
             this.Size = new System.Drawing.Size(1015, 631);
