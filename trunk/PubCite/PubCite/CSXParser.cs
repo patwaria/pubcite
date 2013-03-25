@@ -84,7 +84,7 @@ namespace PubCite
                 Console.WriteLine("Document Loaded!");
             else
             {
-                Console.WriteLine("Load Error! Next page doesn't exist! Returned.");
+                Console.WriteLine("Load Error!");
                 return false;
             }
 
@@ -92,6 +92,11 @@ namespace PubCite
             Paper tempPaperObj;
 
             rows = doc.DocumentNode.SelectNodes("//*[@id=\"result_list\"]/div");
+            if(rows==null)
+            {
+                Console.WriteLine("Load Error! Next page doesn't exist! Returned.");
+                return false;
+            }
 
             for (int i = 0; i < rows.Count; i++)
             {
