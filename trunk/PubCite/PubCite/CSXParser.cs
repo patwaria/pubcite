@@ -95,7 +95,7 @@ namespace PubCite
 
             for (int i = 0; i < rows.Count; i++)
             {
-                int numCit, year;
+                int numCit=0, year=0;
                 string title, authNames, abs, pUrl;
                 if (rows[i].SelectSingleNode("div[3]/a[@title=\"number of citations\"]") != null)
                 {
