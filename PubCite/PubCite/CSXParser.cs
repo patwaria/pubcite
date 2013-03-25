@@ -59,6 +59,81 @@ namespace PubCite
             return p;
         }
 
+        public bool getCitationsNext(string url,ref List<Paper> p)
+        {
+            HtmlWeb web; web = new HtmlWeb();
+            HtmlDocument doc;
+            HtmlNode n;
+
+            if (url.Contains("viewdoc"))//e.g. http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.31.3487
+            {
+                doc = web.Load(url);
+                HtmlNode citUrl = doc.DocumentNode.SelectSingleNode("//*[@id=\"docCites\"]/td[2]/a");
+                url = "http://citeseer.ist.psu.edu" + citUrl.GetAttributeValue("href", "");
+            }
+
+            if (p.Count % 10 != 0)
+                return false;
+
+            int pagen = p.Count;
+            url = url + "&sort=cite&start=" + p.Count;
+
+            doc = web.Load(url);
+
+            if (doc != null)
+                Console.WriteLine("Document Loaded!");
+            else
+            {
+                Console.WriteLine("Load Error!");
+                return false;
+            }
+
+            HtmlNodeCollection rows;
+            Paper tempPaperObj;
+
+            rows = doc.DocumentNode.SelectNodes("//*[@id=\"result_list\"]/div");
+
+            for (int i = 0; i < rows.Count; i++)
+            {
+                int numCit, year;
+                string title, authNames, abs, pUrl;
+                if (rows[i].SelectSingleNode("div[3]/a[@title=\"number of citations\"]") != null)
+                {
+                    int comI = rows[i].SelectSingleNode("div[3]/a[@title=\"number of citations\"]").InnerText.Substring(9).IndexOf(' ');
+                    if (rows[i].SelectSingleNode("div[3]/a[@title=\"number of citations\"]").InnerText.Substring(9).Remove(comI) != null)
+                        numCit = Convert.ToInt32((rows[i].SelectSingleNode("div[3]/a[@title=\"number of citations\"]").InnerText.Substring(9).Remove(comI)));
+                }
+                else
+                    numCit = 0;
+
+                title = rows[i].SelectSingleNode("h3/a").InnerText.Trim();
+                authNames = rows[i].SelectSingleNode("div[1]/span[1]").InnerText.Substring(3).Trim();
+
+                String tempYear;
+                if (rows[i].SelectSingleNode("div[1]/span[@class=\"pubyear\"]") != null)
+                {
+                    tempYear = rows[i].SelectSingleNode("div[1]/span[@class=\"pubyear\"]").InnerText;
+                    if (tempYear != null)
+                        year = Convert.ToInt32(tempYear.Substring(2));
+                }
+                else year = 0;
+
+                if (rows[i].SelectSingleNode("div[2]") != null)
+                    abs = rows[i].SelectSingleNode("div[2]").InnerText;
+                else
+                    abs = "";
+
+                pUrl = "http://citeseer.ist.psu.edu" + rows[i].SelectSingleNode("h3/a").GetAttributeValue("href", "");
+
+                tempPaperObj = new Paper(title, pUrl, authNames, abs, year, "", "", numCit, pUrl, 0);
+
+                if (tempPaperObj.NumberOfCitations > 0)
+                    p.Add(tempPaperObj);
+            }                
+
+            return true;
+        }
+
         public AuthSuggestion getAuthSuggestions(string authName)
         {
             CSXAuthSug s = new CSXAuthSug(authName);
