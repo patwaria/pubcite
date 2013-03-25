@@ -523,7 +523,7 @@ namespace PubCite
         }
 
 
-        public List<Paper> getCitations(String id, int noResults=100)
+        public List<Paper> getCitations(String id, int noResults=20)
         {
             //Console.WriteLine("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 
@@ -546,7 +546,7 @@ namespace PubCite
             requestCitedPaper.ReferenceType = ReferenceRelationship.Citation;
             requestCitedPaper.PublicationID = paperID;
             requestCitedPaper.StartIdx = 1;
-            requestCitedPaper.EndIdx = 100;
+            requestCitedPaper.EndIdx = Convert.ToUInt32(noResults);
 
             response = client.Search(requestCitedPaper);
 
@@ -554,55 +554,7 @@ namespace PubCite
             range = range > noResults ? Convert.ToUInt32(noResults) : range;
 
 
-            for (int k = 0; k < range / 100; k++)
-            {
-                for (int i = 0; i < 100; i++)
-                {
-                    Paper paper;
-                    String title, authors, publication, pap_abstract;
-                    int numOfCitations, year;
-
-                    authors = "";
-                    title = response.Publication.Result[i].Title;
-                    for (int j = 0; j < response.Publication.Result[i].Author.Length; j++)
-                    {
-                        authors = authors + generateName(response.Publication.Result[i].Author[j].FirstName, response.Publication.Result[i].Author[j].MiddleName, response.Publication.Result[i].Author[j].LastName) + ", ";
-                    }
-                    numOfCitations = Convert.ToInt32(response.Publication.Result[i].CitationCount);
-                    year = Convert.ToInt32(response.Publication.Result[i].Year);
-
-                    publication = "";
-                    if (response.Publication.Result[i].Journal != null)
-                        publication = response.Publication.Result[i].Journal.FullName;
-
-
-                    String url = "";
-                    if (response.Publication.Result[i].FullVersionURL.Length != 0)
-                        url = response.Publication.Result[i].FullVersionURL[0];
-
-                    String id_ = Convert.ToString(response.Publication.Result[i].ID);
-
-                    pap_abstract = response.Publication.Result[i].Abstract;
-                    if (pap_abstract == null)
-                        pap_abstract = "";
-
-                    paper = new Paper(title, url, authors,pap_abstract, year, publication, "", numOfCitations, id_, i + k * 100);
-
-                    cited.Add(paper);
-
-                    /*Console.WriteLine(title);
-                    Console.WriteLine(authors);
-                    Console.WriteLine(year);
-                    Console.WriteLine(numOfCitations);
-                    Console.ReadLine();*/
-                }
-                requestCitedPaper.StartIdx = Convert.ToUInt32(101 + k * 100);
-                requestCitedPaper.EndIdx = Convert.ToUInt32(200 + k * 100);
-                response = client.Search(requestCitedPaper);
-            }
-
-
-            for (int i = 0; i < range % 100; i++)
+            for (int i = 0; i < range; i++)
             {
                 Paper paper;
                 String title, authors, publication, pap_abstract;
@@ -648,6 +600,78 @@ namespace PubCite
             return cited;
         }
 
+        public bool getCitationsNext(String id, ref List<Paper> cited)
+        {
+            UInt32 paperID;
+            try
+            {
+                paperID = Convert.ToUInt32(id);
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
+
+            int stIndex, endIndex;
+            Request requestCitedPaper = new Request();
+            requestCitedPaper.AppID = "c49b4e59-08dd-4f27-a53b-53cc72f169af";
+            Response response;
+
+            stIndex = cited.Count + 1;
+            endIndex = cited.Count + 100;
+
+            requestCitedPaper.ResultObjects = ObjectType.Publication;
+            requestCitedPaper.ReferenceType = ReferenceRelationship.Citation;
+            requestCitedPaper.PublicationID = paperID;
+            requestCitedPaper.StartIdx = Convert.ToUInt32(stIndex);
+            requestCitedPaper.EndIdx = Convert.ToUInt32(endIndex);
+
+            response = client.Search(requestCitedPaper);
+
+
+
+            for (int i = 0; i < response.Publication.Result.Length; i++)
+            {
+                Paper paper;
+                String title, authors, publication, pap_abstract;
+                int numOfCitations, year;
+
+                authors = "";
+                title = response.Publication.Result[i].Title;
+                for (int j = 0; j < response.Publication.Result[i].Author.Length; j++)
+                {
+                    authors = authors + generateName(response.Publication.Result[i].Author[j].FirstName, response.Publication.Result[i].Author[j].MiddleName, response.Publication.Result[i].Author[j].LastName) + ", ";
+                }
+                numOfCitations = Convert.ToInt32(response.Publication.Result[i].CitationCount);
+                year = Convert.ToInt32(response.Publication.Result[i].Year);
+
+                publication = "";
+                if (response.Publication.Result[i].Journal != null)
+                    publication = response.Publication.Result[i].Journal.FullName;
+
+
+
+                String url = "";
+                if (response.Publication.Result[i].FullVersionURL.Length != 0)
+                    url = response.Publication.Result[i].FullVersionURL[0];
+
+                String id_ = Convert.ToString(response.Publication.Result[i].ID);
+
+                pap_abstract = response.Publication.Result[i].Abstract;
+                if (pap_abstract == null)
+                    pap_abstract = "";
+
+                paper = new Paper(title, url, authors, pap_abstract, year, publication, "", numOfCitations, id_, 0);
+
+                cited.Add(paper);
+            }
+
+            if (response.Publication.Result.Length < 100)
+                return false;
+            else
+                return true;
+        }
 
 
         
