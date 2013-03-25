@@ -132,8 +132,7 @@ namespace SG
         //method to get h index of the search entity
         public int getHIndex()
         {
-            if (h_ind == -1)
-            {
+            
                 int h = (int)Math.Sqrt((double)getTotalNumberofCitations());
                 int x;
                 while (h >= 0)
@@ -157,9 +156,7 @@ namespace SG
                 }
 
                 h_ind = h;
-            }
-            if (h_ind == -1)
-                return 0;
+            
             return h_ind;
         }
 
