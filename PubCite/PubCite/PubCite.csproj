@@ -171,6 +171,9 @@
     <None Include="Resources\close.gif" />
     <None Include="Resources\settings1.png" />
     <None Include="Resources\stop_button.jpg" />
+    <None Include="Resources\border1.PNG" />
+    <Content Include="Resources\borderv.png" />
+    <None Include="Resources\borderv1.png" />
     <Content Include="TODO.txt" />
     <None Include="Resources\bookmark.png" />
     <None Include="Resources\search-button1.png" />
