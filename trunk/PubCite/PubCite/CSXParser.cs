@@ -30,12 +30,15 @@ namespace PubCite
                     Console.WriteLine("Document Loaded!");
                 else
                     Console.WriteLine("Load Error!");
-
-                if ((n = doc.DocumentNode.SelectSingleNode("//*[@id=\"bibtex\"]/p")) != null)
+                try
                 {
-                    temp = n.InnerText;
-                    temp = temp.Replace(",", ",\n").Replace("&nbsp;", " ");
+                    if ((n = doc.DocumentNode.SelectSingleNode("//*[@id=\"bibtex\"]/p")) != null)
+                    {
+                        temp = n.InnerText;
+                        temp = temp.Replace(",", ",\n").Replace("&nbsp;", " ");
+                    }
                 }
+                catch (Exception e) { }
                 res = temp;
                 return res;
             }
@@ -101,25 +104,37 @@ namespace PubCite
             for (int i = 0; i < rows.Count; i++)
             {
                 int numCit=0, year=0;
-                string title, authNames, abs, pUrl;
+                string title="", authNames="", abs, pUrl="";
                 if (rows[i].SelectSingleNode("div[3]/a[@title=\"number of citations\"]") != null)
                 {
-                    int comI = rows[i].SelectSingleNode("div[3]/a[@title=\"number of citations\"]").InnerText.Substring(9).IndexOf(' ');
-                    if (rows[i].SelectSingleNode("div[3]/a[@title=\"number of citations\"]").InnerText.Substring(9).Remove(comI) != null)
-                        numCit = Convert.ToInt32((rows[i].SelectSingleNode("div[3]/a[@title=\"number of citations\"]").InnerText.Substring(9).Remove(comI)));
+                    try
+                    {
+                        int comI = rows[i].SelectSingleNode("div[3]/a[@title=\"number of citations\"]").InnerText.Substring(9).IndexOf(' ');
+                        if (rows[i].SelectSingleNode("div[3]/a[@title=\"number of citations\"]").InnerText.Substring(9).Remove(comI) != null)
+                            numCit = Convert.ToInt32((rows[i].SelectSingleNode("div[3]/a[@title=\"number of citations\"]").InnerText.Substring(9).Remove(comI)));
+                    }
+                    catch (Exception e) { }
                 }
                 else
                     numCit = 0;
 
-                title = rows[i].SelectSingleNode("h3/a").InnerText.Trim();
-                authNames = rows[i].SelectSingleNode("div[1]/span[1]").InnerText.Substring(3).Trim();
+                try
+                {
+                    title = rows[i].SelectSingleNode("h3/a").InnerText.Trim();
+                    authNames = rows[i].SelectSingleNode("div[1]/span[1]").InnerText.Substring(3).Trim();
+                }
+                catch (Exception e) { }
 
                 String tempYear;
                 if (rows[i].SelectSingleNode("div[1]/span[@class=\"pubyear\"]") != null)
                 {
-                    tempYear = rows[i].SelectSingleNode("div[1]/span[@class=\"pubyear\"]").InnerText;
-                    if (tempYear != null)
-                        year = Convert.ToInt32(tempYear.Substring(2));
+                    try
+                    {
+                        tempYear = rows[i].SelectSingleNode("div[1]/span[@class=\"pubyear\"]").InnerText;
+                        if (tempYear != null)
+                            year = Convert.ToInt32(tempYear.Substring(2));
+                    }
+                    catch (Exception e) { }
                 }
                 else year = 0;
 
@@ -128,7 +143,11 @@ namespace PubCite
                 else
                     abs = "";
 
-                pUrl = "http://citeseer.ist.psu.edu" + rows[i].SelectSingleNode("h3/a").GetAttributeValue("href", "");
+                try
+                {
+                    pUrl = "http://citeseer.ist.psu.edu" + rows[i].SelectSingleNode("h3/a").GetAttributeValue("href", "");
+                }
+                catch (Exception e) { }
 
                 tempPaperObj = new Paper(title, pUrl, authNames, abs, year, "", "", numCit, pUrl, 0);
 

@@ -745,22 +745,36 @@ namespace PubCite
 
                     if (rows[i].SelectSingleNode("div[3]/a[@title=\"number of citations\"]") != null)
                     {
-                        int comI = rows[i].SelectSingleNode("div[3]/a[@title=\"number of citations\"]").InnerText.Substring(9).IndexOf(' ');
-                        if (rows[i].SelectSingleNode("div[3]/a[@title=\"number of citations\"]").InnerText.Substring(9).Remove(comI) != null)
-                            tempPubliObj.numCit = Convert.ToInt32((rows[i].SelectSingleNode("div[3]/a[@title=\"number of citations\"]").InnerText.Substring(9).Remove(comI)));
+                        try
+                        {
+                            int comI = rows[i].SelectSingleNode("div[3]/a[@title=\"number of citations\"]").InnerText.Substring(9).IndexOf(' ');
+                            if (rows[i].SelectSingleNode("div[3]/a[@title=\"number of citations\"]").InnerText.Substring(9).Remove(comI) != null)
+                                tempPubliObj.numCit = Convert.ToInt32((rows[i].SelectSingleNode("div[3]/a[@title=\"number of citations\"]").InnerText.Substring(9).Remove(comI)));
+                        }
+                        catch (Exception e)
+                        { }
                     }
                     else
                         tempPubliObj.numCit = 0;
 
                     tempPubliObj.title = rows[i].SelectSingleNode("h3/a").InnerText.Trim();
-                    tempPubliObj.authNames = rows[i].SelectSingleNode("div[1]/span[1]").InnerText.Substring(3).Trim();
+                    try
+                    {
+                        tempPubliObj.authNames = rows[i].SelectSingleNode("div[1]/span[1]").InnerText.Substring(3).Trim();
+                    }
+                    catch (Exception e) { }
 
                     String tempYear;
                     if (rows[i].SelectSingleNode("div[1]/span[@class=\"pubyear\"]") != null)
                     {
-                        tempYear = rows[i].SelectSingleNode("div[1]/span[@class=\"pubyear\"]").InnerText;
-                        if (tempYear != null)
-                            tempPubliObj.year = Convert.ToInt32(tempYear.Substring(2));
+                        try
+                        {
+                            tempYear = rows[i].SelectSingleNode("div[1]/span[@class=\"pubyear\"]").InnerText;
+                            if (tempYear != null)
+                                tempPubliObj.year = Convert.ToInt32(tempYear.Substring(2));
+                        }
+                        catch (Exception e)
+                        { }
                     }
                     else tempPubliObj.year = 0;
 
@@ -856,7 +870,12 @@ namespace PubCite
 
             HtmlNode hindex = doc.DocumentNode.SelectSingleNode("//*[@id=\"authInfo\"]/tr[4]/td[2]");
             if (hindex != null)
-                hIndex = Convert.ToInt32(hindex.InnerText);
+                try
+                {
+                    hIndex = Convert.ToInt32(hindex.InnerText);
+                }
+                catch (Exception e)
+                { }
             else
                 hIndex = i10Index;
 
@@ -872,12 +891,17 @@ namespace PubCite
                 tempPubliObj = new publiListEle();
 
                 if (rows[i].SelectSingleNode("td[1]").InnerText.ToString().Trim().Length > 0)
-                    tempPubliObj.numCit = Convert.ToInt32(rows[i].SelectSingleNode("td[1]").InnerText);
+                    try { tempPubliObj.numCit = Convert.ToInt32(rows[i].SelectSingleNode("td[1]").InnerText); }
+                    catch (Exception e) { }
                 else
                     tempPubliObj.numCit = 0;
 
                 if (rows[i].SelectSingleNode("td[1]").InnerText.ToString().Trim().Length > 0)
-                    if (Convert.ToInt32(rows[i].SelectSingleNode("td[1]").InnerText) >= 10) i10++;
+                    try
+                    {
+                        if (Convert.ToInt32(rows[i].SelectSingleNode("td[1]").InnerText) >= 10) i10++;
+                    }
+                    catch (Exception e) { }
 
                 list = Split(rows[i].SelectSingleNode("td[2]").InnerText);
                 tempPubliObj.title = list[0];
