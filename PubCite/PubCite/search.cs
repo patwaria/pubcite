@@ -227,7 +227,7 @@ namespace PubCite
                     Papers = journalStats.getPaperUptoYear(EndYear.getintval());
                 else if (StartYear.getintval() != 0 && EndYear.getintval() != 0)
                     Papers = journalStats.getPaperByYearRange(StartYear.getintval(), EndYear.getintval());
-
+                Console.WriteLine(Papers.Count);
 
                 authorNameLabel.Text = journalStats.Name;
                 citesperPaper.Text = journalStats.getCitesPerPaper().ToString();
@@ -686,7 +686,7 @@ namespace PubCite
         {
             if (authStats.Type == 1)
                 nextData = GSScraper.getAuthStatisticsNextPage(auth_url[suggestedIndex], ref authStats);
-            else if(authStats.Type == 2)
+            else if (authStats.Type == 2)
                 nextData = MSParser.getAuthStatisticsNext(auth_url[suggestedIndex], ref authStats);
 
         }
@@ -697,15 +697,19 @@ namespace PubCite
                 nextData = GSScraper.getAuthorsNextPage(gs_nextUrl, ref authStats, ref gs_nextUrl);
             else if (authStats.Type == 2)
                 nextData = MSParser.getAuthorsNext(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text, ref authStats);
-            
+            else
+                nextData = CSParser.getAuthorsNext(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text, ref authStats);
+
         }
 
         private void backgroundWorker_journalsNextDataWork(object sender, DoWorkEventArgs e)
         {
-            if (authStats.Type == 1)
+            if (journalStats.Type == 1)
                 nextData = GSScraper.getJournalsNextPage(gs_nextUrl, ref journalStats, ref gs_nextUrl);
-            else if (authStats.Type == 2)
+            else if (journalStats.Type == 2)
                 nextData = MSParser.getJournalsNext(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text, ref journalStats);
+            else
+                nextData = CSParser.getJournalsNext(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text, ref journalStats);
         }
 
         private void getNextAuthStats(bool hasProfile)
@@ -714,27 +718,25 @@ namespace PubCite
              * Note : only for MSParser now
              * 
              */
-            if ((authStats.Type == 2) || (authStats.Type == 1))
+            Console.WriteLine("author");
+            nextData = true;
+            while (nextData == true && STOP == false)
             {
-                nextData = true;
-                while (nextData == true && STOP == false)
+                BackgroundWorker backgroundWorker1 = new BackgroundWorker();
+                if (hasProfile && authStats.Type != 0)
+                    backgroundWorker1.DoWork += new DoWorkEventHandler(backgroundWorker_authstatsNextDataWork);
+                else
+                    backgroundWorker1.DoWork += new DoWorkEventHandler(backgroundWorker_authorsNextDataWork);
+                backgroundWorker1.RunWorkerAsync();
+                while (backgroundWorker1.IsBusy)
                 {
-                    BackgroundWorker backgroundWorker1 = new BackgroundWorker();
-                    if (hasProfile)
-                        backgroundWorker1.DoWork += new DoWorkEventHandler(backgroundWorker_authstatsNextDataWork);
-                    else
-                        backgroundWorker1.DoWork += new DoWorkEventHandler(backgroundWorker_authorsNextDataWork);
-                    backgroundWorker1.RunWorkerAsync();
-                    while (backgroundWorker1.IsBusy)
-                    {
-                        Application.DoEvents();
-                        // disable those options which will trigger another thread 
-                    }
-
-                    populateAuthor();
+                    Application.DoEvents();
+                    // disable those options which will trigger another thread 
                 }
-                STOP = false;
+
+                populateAuthor();
             }
+            STOP = false;
         }
 
         private void getNextJournal()
@@ -743,25 +745,23 @@ namespace PubCite
              * Note : only for MSParser now
              * 
              */
-            if (journalStats.Type == 1 || journalStats.Type == 2)
+            nextData = true;
+            while (nextData == true && STOP == false)
             {
-                nextData = true;
-                while (nextData == true && STOP == false)
+                Console.WriteLine("Journal");
+                BackgroundWorker backgroundWorker1 = new BackgroundWorker();
+                backgroundWorker1.DoWork += new DoWorkEventHandler(backgroundWorker_journalsNextDataWork);
+                backgroundWorker1.RunWorkerAsync();
+                while (backgroundWorker1.IsBusy)
                 {
-                    Console.WriteLine("Journal");
-                    BackgroundWorker backgroundWorker1 = new BackgroundWorker();
-                    backgroundWorker1.DoWork += new DoWorkEventHandler(backgroundWorker_journalsNextDataWork);
-                    backgroundWorker1.RunWorkerAsync();
-                    while (backgroundWorker1.IsBusy)
-                    {
-                        Application.DoEvents();
-                        // disable those options which will trigger another thread 
-                    }
-
-                    populateJournal();
+                    Application.DoEvents();
+                    // disable those options which will trigger another thread 
                 }
-                STOP = false;
+
+                populateJournal();
             }
+            STOP = false;
+
         }
 
         private void authorsSuggestions_MouseClick(object sender, EventArgs e)
@@ -788,7 +788,7 @@ namespace PubCite
             populateAuthor();
             /* enable panels */
             enablePanels();
-            
+
 
             getNextAuthStats(true);
             showSearch();

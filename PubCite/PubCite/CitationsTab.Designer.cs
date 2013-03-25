@@ -35,6 +35,11 @@
             this.label7 = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.publicationsDetailsGroupBox = new System.Windows.Forms.GroupBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             this.publisher = new System.Windows.Forms.Label();
             this.numCitations = new System.Windows.Forms.Label();
             this.yearLabel = new System.Windows.Forms.Label();
@@ -61,11 +66,6 @@
             this.optionMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.viewCitationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewUrlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.progressPanel.SuspendLayout();
@@ -99,7 +99,7 @@
             // 
             this.progressPanel.Controls.Add(this.label7);
             this.progressPanel.Controls.Add(this.progressBar);
-            this.progressPanel.Location = new System.Drawing.Point(6, 156);
+            this.progressPanel.Location = new System.Drawing.Point(6, 176);
             this.progressPanel.Name = "progressPanel";
             this.progressPanel.Size = new System.Drawing.Size(477, 29);
             this.progressPanel.TabIndex = 23;
@@ -144,10 +144,60 @@
             this.publicationsDetailsGroupBox.ForeColor = System.Drawing.SystemColors.Control;
             this.publicationsDetailsGroupBox.Location = new System.Drawing.Point(3, 6);
             this.publicationsDetailsGroupBox.Name = "publicationsDetailsGroupBox";
-            this.publicationsDetailsGroupBox.Size = new System.Drawing.Size(969, 150);
+            this.publicationsDetailsGroupBox.Size = new System.Drawing.Size(969, 174);
             this.publicationsDetailsGroupBox.TabIndex = 8;
             this.publicationsDetailsGroupBox.TabStop = false;
             this.publicationsDetailsGroupBox.Text = "Publication Details";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(555, 58);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(10, 13);
+            this.label8.TabIndex = 22;
+            this.label8.Text = ":";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(555, 38);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(10, 13);
+            this.label9.TabIndex = 21;
+            this.label9.Text = ":";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(71, 58);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(10, 13);
+            this.label10.TabIndex = 20;
+            this.label10.Text = ":";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(71, 38);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(10, 13);
+            this.label11.TabIndex = 19;
+            this.label11.Text = ":";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(71, 18);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(10, 13);
+            this.label12.TabIndex = 18;
+            this.label12.Text = ":";
             // 
             // publisher
             // 
@@ -212,7 +262,7 @@
             this.abstractBox.Location = new System.Drawing.Point(9, 94);
             this.abstractBox.Name = "abstractBox";
             this.abstractBox.ReadOnly = true;
-            this.abstractBox.Size = new System.Drawing.Size(907, 51);
+            this.abstractBox.Size = new System.Drawing.Size(954, 70);
             this.abstractBox.TabIndex = 11;
             this.abstractBox.Text = "";
             // 
@@ -242,7 +292,7 @@
             this.label5.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(6, 58);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(32, 13);
+            this.label5.Size = new System.Drawing.Size(33, 13);
             this.label5.TabIndex = 2;
             this.label5.Text = "Year ";
             // 
@@ -252,7 +302,7 @@
             this.label4.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(6, 38);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(42, 13);
+            this.label4.Size = new System.Drawing.Size(43, 13);
             this.label4.TabIndex = 1;
             this.label4.Text = "Venue ";
             // 
@@ -271,9 +321,9 @@
             this.resultsGroupBox.Controls.Add(this.authorResultsListView);
             this.resultsGroupBox.Controls.Add(this.journalsResultsListView);
             this.resultsGroupBox.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.resultsGroupBox.Location = new System.Drawing.Point(0, 183);
+            this.resultsGroupBox.Location = new System.Drawing.Point(0, 208);
             this.resultsGroupBox.Name = "resultsGroupBox";
-            this.resultsGroupBox.Size = new System.Drawing.Size(972, 423);
+            this.resultsGroupBox.Size = new System.Drawing.Size(972, 398);
             this.resultsGroupBox.TabIndex = 0;
             this.resultsGroupBox.TabStop = false;
             this.resultsGroupBox.Text = "Results ";
@@ -293,7 +343,7 @@
             this.authorResultsListView.MultiSelect = false;
             this.authorResultsListView.Name = "authorResultsListView";
             this.authorResultsListView.OwnerDraw = true;
-            this.authorResultsListView.Size = new System.Drawing.Size(966, 402);
+            this.authorResultsListView.Size = new System.Drawing.Size(966, 377);
             this.authorResultsListView.TabIndex = 1;
             this.authorResultsListView.UseCompatibleStateImageBehavior = false;
             this.authorResultsListView.View = System.Windows.Forms.View.Details;
@@ -330,7 +380,7 @@
             this.journalsResultsListView.Location = new System.Drawing.Point(3, 18);
             this.journalsResultsListView.MultiSelect = false;
             this.journalsResultsListView.Name = "journalsResultsListView";
-            this.journalsResultsListView.Size = new System.Drawing.Size(966, 402);
+            this.journalsResultsListView.Size = new System.Drawing.Size(966, 377);
             this.journalsResultsListView.TabIndex = 0;
             this.journalsResultsListView.UseCompatibleStateImageBehavior = false;
             this.journalsResultsListView.View = System.Windows.Forms.View.Details;
@@ -377,56 +427,6 @@
             this.viewUrlToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.viewUrlToolStripMenuItem.Text = "View Url";
             this.viewUrlToolStripMenuItem.Click += new System.EventHandler(this.viewUrlToolStripMenuItem_Click);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(555, 58);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(10, 13);
-            this.label8.TabIndex = 22;
-            this.label8.Text = ":";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(555, 38);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(10, 13);
-            this.label9.TabIndex = 21;
-            this.label9.Text = ":";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(71, 58);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(10, 13);
-            this.label10.TabIndex = 20;
-            this.label10.Text = ":";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(71, 38);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(10, 13);
-            this.label11.TabIndex = 19;
-            this.label11.Text = ":";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(71, 18);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(10, 13);
-            this.label12.TabIndex = 18;
-            this.label12.Text = ":";
             // 
             // CitationsTab
             // 
