@@ -80,7 +80,7 @@
             this.panel3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panel3.Location = new System.Drawing.Point(3, 3);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(984, 612);
+            this.panel3.Size = new System.Drawing.Size(1009, 637);
             this.panel3.TabIndex = 2;
             // 
             // panel4
@@ -92,7 +92,7 @@
             this.panel4.ForeColor = System.Drawing.SystemColors.Menu;
             this.panel4.Location = new System.Drawing.Point(3, 3);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(977, 606);
+            this.panel4.Size = new System.Drawing.Size(1003, 631);
             this.panel4.TabIndex = 3;
             // 
             // progressPanel
@@ -101,14 +101,14 @@
             this.progressPanel.Controls.Add(this.progressBar);
             this.progressPanel.Location = new System.Drawing.Point(6, 176);
             this.progressPanel.Name = "progressPanel";
-            this.progressPanel.Size = new System.Drawing.Size(477, 29);
+            this.progressPanel.Size = new System.Drawing.Size(546, 29);
             this.progressPanel.TabIndex = 23;
             this.progressPanel.Visible = false;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(205, 13);
+            this.label7.Location = new System.Drawing.Point(315, 13);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(222, 13);
             this.label7.TabIndex = 1;
@@ -118,7 +118,7 @@
             // 
             this.progressBar.Location = new System.Drawing.Point(3, 10);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(196, 16);
+            this.progressBar.Size = new System.Drawing.Size(296, 16);
             this.progressBar.TabIndex = 0;
             // 
             // publicationsDetailsGroupBox
@@ -323,7 +323,7 @@
             this.resultsGroupBox.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.resultsGroupBox.Location = new System.Drawing.Point(0, 208);
             this.resultsGroupBox.Name = "resultsGroupBox";
-            this.resultsGroupBox.Size = new System.Drawing.Size(972, 398);
+            this.resultsGroupBox.Size = new System.Drawing.Size(1000, 423);
             this.resultsGroupBox.TabIndex = 0;
             this.resultsGroupBox.TabStop = false;
             this.resultsGroupBox.Text = "Results ";
@@ -343,7 +343,7 @@
             this.authorResultsListView.MultiSelect = false;
             this.authorResultsListView.Name = "authorResultsListView";
             this.authorResultsListView.OwnerDraw = true;
-            this.authorResultsListView.Size = new System.Drawing.Size(966, 377);
+            this.authorResultsListView.Size = new System.Drawing.Size(994, 402);
             this.authorResultsListView.TabIndex = 1;
             this.authorResultsListView.UseCompatibleStateImageBehavior = false;
             this.authorResultsListView.View = System.Windows.Forms.View.Details;
@@ -380,7 +380,7 @@
             this.journalsResultsListView.Location = new System.Drawing.Point(3, 18);
             this.journalsResultsListView.MultiSelect = false;
             this.journalsResultsListView.Name = "journalsResultsListView";
-            this.journalsResultsListView.Size = new System.Drawing.Size(966, 377);
+            this.journalsResultsListView.Size = new System.Drawing.Size(994, 402);
             this.journalsResultsListView.TabIndex = 0;
             this.journalsResultsListView.UseCompatibleStateImageBehavior = false;
             this.journalsResultsListView.View = System.Windows.Forms.View.Details;
@@ -435,7 +435,7 @@
             this.BackColor = System.Drawing.SystemColors.Window;
             this.Controls.Add(this.panel3);
             this.Name = "CitationsTab";
-            this.Size = new System.Drawing.Size(1015, 618);
+            this.Size = new System.Drawing.Size(1015, 640);
             this.panel3.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.progressPanel.ResumeLayout(false);
