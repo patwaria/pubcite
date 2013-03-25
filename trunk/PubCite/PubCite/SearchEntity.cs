@@ -163,8 +163,6 @@ namespace SG
         //method to get i10 index of the search index
         public int getI10Index()
         {
-            if (i10_ind == -1)
-            {
                 int i = 0;
                 foreach (Paper p in papers)
                 {
@@ -172,7 +170,7 @@ namespace SG
                         i++;
                 }
                 i10_ind = i;
-            }
+            
             return i10_ind;
         }
 
