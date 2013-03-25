@@ -32,6 +32,25 @@ namespace PubCite
             authorResultsListView.FullRowSelect = true;
             authorResultsListView.MouseClick += new MouseEventHandler(authorResultsListView_MouseClick);
             authorResultsListView.MouseDoubleClick += new MouseEventHandler(authorResultsListView_MouseDoubleClick);
+            authorResultsListView.DrawItem += ListView_DrawItem;
+            authorResultsListView.DrawColumnHeader += ListView_DrawColumnHeader;
+            abstractBox.GotFocus += abstractBox_GotFocus;
+        }
+
+        void abstractBox_GotFocus(object sender, EventArgs e)
+        {
+            System.Windows.Forms.SendKeys.Send("{tab}");
+        }
+
+        void ListView_DrawItem(object sender, DrawListViewItemEventArgs e)
+        {
+            e.DrawDefault = true;
+        }
+
+        void ListView_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
+        {
+            e.Graphics.FillRectangle(Brushes.DimGray, e.Bounds);
+            e.DrawText();
         }
 
 
