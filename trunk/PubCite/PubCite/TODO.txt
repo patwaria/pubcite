@@ -3,9 +3,9 @@
 2. Error Handling/Show appropriate messages in message box : Parser team + GUI
 3. Improve response time: threading
 4. View Citations for favourites : thoda load
+   Sorting in citations tab : Srihari
 5. Back/ Fwd in citation tab : Cachers/GUI ?
 6. Copy citations/export in different formats: ?
-7. co-author graph
-8. URLFormalException in function CSXPubli() to be corrected - Akash
+7. co-author graph ?
 
 @parsers : Urlformatexception, numberformatexception, No error handling for arbit searches
