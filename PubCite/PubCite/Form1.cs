@@ -13,6 +13,7 @@ namespace PubCite
     {
         public static TabControl dub_tab;
         public static SG.Favorite favorites;
+        //public static SettingsRecord settingsRecord;
         private TabPage newTabPage;
         TabPage createdTabPage;
         
@@ -22,6 +23,7 @@ namespace PubCite
             
             dub_tab = maintabControl;
             favorites = new SG.Favorite();
+            //settingsRecord = new SettingsRecord();
             favorites.populateFavorites();
 
             search nSearch = new search();
@@ -89,16 +91,6 @@ namespace PubCite
             search Nsearch = new search();
             MyTab.Controls.Add(Nsearch);
             Nsearch.get_sugg().Visible = false;
-        }
-
-        private void favouritesToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            string s = "Favourites";
-            TabPage MyTab = new TabPage(s);
-            maintabControl.TabPages.Add(MyTab);
-            FavPanel NFav = new FavPanel();
-            MyTab.Controls.Add(NFav);
-           
         }
 
         public static TabControl get_maintab() {

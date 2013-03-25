@@ -98,7 +98,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "PubCite";
             ((System.ComponentModel.ISupportInitialize)(this.eventLog1)).EndInit();
             this.maintabControl.ResumeLayout(false);
             this.tabMenuStrip.ResumeLayout(false);

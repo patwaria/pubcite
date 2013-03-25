@@ -1232,7 +1232,7 @@
             this.cacheNumericUpDown.Size = new System.Drawing.Size(35, 22);
             this.cacheNumericUpDown.TabIndex = 1;
             this.cacheNumericUpDown.Value = new decimal(new int[] {
-            1,
+            9,
             0,
             0,
             0});
