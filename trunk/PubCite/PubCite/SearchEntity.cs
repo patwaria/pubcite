@@ -145,7 +145,7 @@ namespace SG
                             x++;
                         }
                     }
-                    if (x == h)
+                    if (x >= h)
                     {
                         break;
                     }
