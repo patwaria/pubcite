@@ -724,7 +724,9 @@ namespace PubCite
             while (nextData == true && STOP == false)
             {
                 BackgroundWorker backgroundWorker1 = new BackgroundWorker();
-                if (hasProfile && authStats.Type != 0)
+                if (hasProfile && authStats.Type == 0)
+                    break;
+                if(hasProfile)
                     backgroundWorker1.DoWork += new DoWorkEventHandler(backgroundWorker_authstatsNextDataWork);
                 else
                     backgroundWorker1.DoWork += new DoWorkEventHandler(backgroundWorker_authorsNextDataWork);
@@ -1058,8 +1060,9 @@ namespace PubCite
 
         private void settingsIcon_Click(object sender, EventArgs e)
         {
-            SettingsForm settingsForm = new SettingsForm();
-            settingsForm.ShowDialog(this);
+            Transition t = new Transition(new TransitionType_EaseInEaseOut(500));
+            t.add(settingsPanel, "Top", 9);
+            t.run();
         }
 
         private void favouriteButton_Click(object sender, EventArgs e)
@@ -1098,6 +1101,20 @@ namespace PubCite
             stopButton.Visible = true;
             searchIcon.SendToBack();
             searchIcon.Visible = false;
+        }
+
+        private void settingsCloseIcon_Click(object sender, EventArgs e)
+        {
+            Transition t = new Transition(new TransitionType_EaseInEaseOut(500));
+            t.add(settingsPanel, "Top", -800);
+            t.run();
+        }
+
+        private void settingsOk_Click(object sender, EventArgs e)
+        {
+            Transition t = new Transition(new TransitionType_EaseInEaseOut(500));
+            t.add(settingsPanel, "Top", -800);
+            t.run();
         }
     }
 }
