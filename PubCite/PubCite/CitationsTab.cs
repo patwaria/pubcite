@@ -37,8 +37,10 @@ namespace PubCite
 
         public void populateCitations(SG.Paper paper, List<SG.Paper> Papers, int t) {
 
+            
             if (Papers != null)
             {
+                
                 MainPapers = Papers;
                 type = t;
 
@@ -66,6 +68,25 @@ namespace PubCite
             }                                      
         }
 
+        public void RepopulateCitations(List<SG.Paper> Papers) {
+
+            MainPapers = Papers;
+            authorResultsListView.Items.Clear();
+            for (int i = 0; i < Papers.Count; i++)
+            {
+
+                /*populating */
+                item = new ListViewItem(Papers[i].Title);
+                item.SubItems.Add(Papers[i].Authors);
+                item.SubItems.Add(Papers[i].Year.ToString());
+                item.SubItems.Add(Papers[i].NumberOfCitations.ToString());
+                authorResultsListView.Items.Add(item);
+                //Console.WriteLine(Papers[i].Title + Papers[i].Year + Papers[i].NumberOfCitations);
+            }
+            
+        
+        
+        }
 
         private void authorResultsListView_MouseClick(object sender, MouseEventArgs e)
         {
@@ -108,6 +129,7 @@ namespace PubCite
 
         private void viewCitationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            for (int i = 0; i < 4; i++) prevSortedColum[i] = false;
             citationIndex = authorResultsListView.FocusedItem.Index;
 
             if (MainPapers[citationIndex].NumberOfCitations != 0)
@@ -158,7 +180,148 @@ namespace PubCite
         private void authorResultsListView_ColumnClick(object sender, ColumnClickEventArgs e)
         {
 
-            Console.WriteLine("Hi");
+
+            if (e.Column == 0)
+            {
+               
+                if (prevSortedColum[0] == false)
+                {
+                    sortPapersByTitle(true);
+                    prevSortedColum[0] = true;
+                }
+                else
+                {
+                    sortPapersByTitle(false);
+                    prevSortedColum[0] = false;
+                }
+            }
+            else if (e.Column == 1)
+            {
+                if (prevSortedColum[1] == false)
+                {
+                    sortPapersByAuthor(true);
+                    prevSortedColum[1] = true;
+                }
+                else
+                {
+                    sortPapersByAuthor(false);
+                    prevSortedColum[1] = false;
+
+                }
+
+            }
+            else if (e.Column == 2)
+            {
+                if (prevSortedColum[2] == false)
+                {
+                    sortPapersByYear(true);
+                    prevSortedColum[2] = true;
+                }
+                else
+                {
+                    sortPapersByYear(false);
+                    prevSortedColum[2] = false;
+
+                }
+            }
+            else if (e.Column == 3)
+            {
+                if (prevSortedColum[3] == false)
+                {
+                    sortPapersByCitations(true);
+                    prevSortedColum[3] = true;
+                }
+                else
+                {
+                    sortPapersByCitations(false);
+                    prevSortedColum[3] = false;
+                }
+            }
+            RepopulateCitations( MainPapers);
+
+            
+        }
+
+
+        public void sortPapersByAuthor(bool order) {
+            if(order)
+                 MainPapers.Sort((x, y) => x.Authors.CompareTo(y.Authors));
+            else
+                MainPapers.Sort((y,x) => x.Authors.CompareTo(y.Authors));
+
+        
+        }
+
+        public void sortPapersByCitations(bool order)
+        {
+            
+            if (order)
+            {
+                MainPapers.Sort((x, y) => x.NumberOfCitations.CompareTo(y.NumberOfCitations));
+                
+            }
+            else
+            {
+                MainPapers.Sort((y, x) => x.NumberOfCitations.CompareTo(y.NumberOfCitations));
+            }
+        }
+        public void sortPapersByYear(bool order)
+        {
+            if (order)
+            {
+                MainPapers.Sort((x, y) => x.Year.CompareTo(y.Year));
+            }
+            else
+            {
+                MainPapers.Sort((y, x) => x.Year.CompareTo(y.Year));
+            }
+        }
+        public void sortPapersByGSRank(bool order)
+        {
+            if (order)
+            {
+                MainPapers.Sort((x, y) => x.GSRank.CompareTo(y.GSRank));
+            }
+            else
+            {
+                MainPapers.Sort((y, x) => x.GSRank.CompareTo(x.GSRank));
+            }
+        }
+        public void sortPapersByTitle(bool order)
+        {
+            if (order)
+            {
+                
+                MainPapers.Sort((x, y) => x.Title.CompareTo(y.Title));
+                
+                
+            }
+            else
+            {
+                MainPapers.Sort((y, x) => x.Title.CompareTo(x.Title));
+            }
+        }
+        public void sortPapersByPublication(bool order)
+        {
+            if (order)
+            {
+                MainPapers.Sort((x, y) => x.Publication.CompareTo(y.Publication));
+            }
+            else
+            {
+                MainPapers.Sort((y, x) => x.Publication.CompareTo(x.Publication));
+            }
+        }
+        public void sortPapersByPublisher(bool order)
+        {
+            if (order)
+            {
+                MainPapers.Sort((x, y) => x.Publisher.CompareTo(y.Publisher));
+            }
+            else
+            {
+                MainPapers.Sort((y, x) => x.Publisher.CompareTo(x.Publisher));
+            }
         }
         
     }
