@@ -170,6 +170,7 @@
     <None Include="Resources\star.png" />
     <None Include="Resources\close.gif" />
     <None Include="Resources\settings1.png" />
+    <None Include="Resources\stop_button.jpg" />
     <Content Include="TODO.txt" />
     <None Include="Resources\bookmark.png" />
     <None Include="Resources\search-button1.png" />

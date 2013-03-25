@@ -38,6 +38,7 @@ namespace PubCite
         Boolean[] a = { false, false, false };
         Boolean suggestions;
         Boolean nextData;
+        Boolean STOP;
 
 
         public search()
@@ -76,6 +77,7 @@ namespace PubCite
             cachedListView.HeaderStyle = ColumnHeaderStyle.None;
             cachedListView.SendToBack();
 
+            showSearch();
         }
         private void searchField_GotFocus(object sender, EventArgs e)
         {
@@ -475,12 +477,6 @@ namespace PubCite
             Form1.favorites.AddAuthor(authStats);
         }
 
-        private void CloseButton_Click_2(object sender, EventArgs e)
-        {
-            Form1.dub_tab.TabPages.Remove(Form1.dub_tab.SelectedTab);
-            Form1.dub_tab.SelectedIndex = Form1.dub_tab.TabCount - 2;
-        }
-
         private void disablePanels()
         {
             
@@ -496,6 +492,7 @@ namespace PubCite
 
         private void startProgressUI()
         {
+            showStop();
             disablePanels();
             progressPanel.Visible = true;
             progressBar.BringToFront();
@@ -505,6 +502,8 @@ namespace PubCite
         }
 
         private void endProgressUI() {
+
+            showSearch();
             /* Stop the progress bar */
             progressBar.MarqueeAnimationSpeed = 0;
             progressBar.Style = ProgressBarStyle.Blocks;
@@ -760,7 +759,9 @@ namespace PubCite
 
         private void searchIcon_Click(object sender, EventArgs e)
         {
+
             for (int i = 0; i < 4; i++) prevSortedColum[i] = false;
+            
             authorsSuggestions.Items.Clear();
             authorResultsListView.Items.Clear();
             journalResultsListView.Items.Clear();
@@ -1043,6 +1044,29 @@ namespace PubCite
             t.add(favouritesTreeView, "Left", -250);
             t.add(recentSearchPanel, "Left", 7);
             t.run();
+        }
+
+        private void stopButton_Click(object sender, EventArgs e)
+        {
+            Console.WriteLine("say cheese");
+            
+            
+        }
+
+        private void showSearch()
+        {
+            stopButton.Visible = false;
+            stopButton.SendToBack();
+            searchIcon.BringToFront();
+            searchIcon.Visible = true;
+        }
+
+        private void showStop()
+        {
+            stopButton.BringToFront();
+            stopButton.Visible = true;
+            searchIcon.SendToBack();
+            searchIcon.Visible = false;
         }
     }
 }
