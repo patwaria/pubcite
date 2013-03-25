@@ -35,10 +35,10 @@
             treeNode1,
             treeNode2});
             this.SearchPanel = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.settingsIcon = new System.Windows.Forms.PictureBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.cachedListView = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.affiliation = new System.Windows.Forms.Label();
             this.KeywordsTextBox = new System.Windows.Forms.TextBox();
             this.affilationTextBox = new System.Windows.Forms.TextBox();
@@ -61,6 +61,8 @@
             this.Cites = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Year = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.statisticsGroupBox = new System.Windows.Forms.GroupBox();
+            this.cachedListView = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -104,8 +106,6 @@
             this.viewStatisticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeFromFavouritesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.EndYear = new PubCite.NumericTextBox();
             this.StartYear = new PubCite.NumericTextBox();
             this.SearchPanel.SuspendLayout();
@@ -127,7 +127,7 @@
             // 
             // SearchPanel
             // 
-            this.SearchPanel.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.SearchPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.SearchPanel.Controls.Add(this.panel2);
             this.SearchPanel.Controls.Add(this.panel1);
             this.SearchPanel.Controls.Add(this.settingsIcon);
@@ -157,6 +157,22 @@
             this.SearchPanel.Size = new System.Drawing.Size(1038, 647);
             this.SearchPanel.TabIndex = 2;
             // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.Chocolate;
+            this.panel2.Location = new System.Drawing.Point(-2, 622);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1017, 10);
+            this.panel2.TabIndex = 3;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.Chocolate;
+            this.panel1.Location = new System.Drawing.Point(11, 65);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(983, 2);
+            this.panel1.TabIndex = 2;
+            // 
             // settingsIcon
             // 
             this.settingsIcon.Image = global::PubCite.Properties.Resources.settings;
@@ -178,27 +194,6 @@
             this.label4.TabIndex = 28;
             this.label4.Text = "Keywords:";
             // 
-            // cachedListView
-            // 
-            this.cachedListView.BackColor = System.Drawing.SystemColors.Control;
-            this.cachedListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1});
-            this.cachedListView.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cachedListView.ForeColor = System.Drawing.SystemColors.Info;
-            this.cachedListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.cachedListView.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.cachedListView.Location = new System.Drawing.Point(-120, -66);
-            this.cachedListView.Name = "cachedListView";
-            this.cachedListView.Size = new System.Drawing.Size(745, 97);
-            this.cachedListView.TabIndex = 29;
-            this.cachedListView.UseCompatibleStateImageBehavior = false;
-            this.cachedListView.View = System.Windows.Forms.View.Details;
-            this.cachedListView.Visible = false;
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Width = 461;
-            // 
             // affiliation
             // 
             this.affiliation.AutoSize = true;
@@ -212,9 +207,10 @@
             // 
             // KeywordsTextBox
             // 
-            this.KeywordsTextBox.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.KeywordsTextBox.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.KeywordsTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.KeywordsTextBox.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.KeywordsTextBox.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.KeywordsTextBox.Location = new System.Drawing.Point(728, 38);
             this.KeywordsTextBox.Name = "KeywordsTextBox";
             this.KeywordsTextBox.Size = new System.Drawing.Size(160, 22);
@@ -223,9 +219,10 @@
             // 
             // affilationTextBox
             // 
-            this.affilationTextBox.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.affilationTextBox.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.affilationTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.affilationTextBox.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.affilationTextBox.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.affilationTextBox.Location = new System.Drawing.Point(476, 38);
             this.affilationTextBox.Name = "affilationTextBox";
             this.affilationTextBox.Size = new System.Drawing.Size(148, 22);
@@ -251,7 +248,7 @@
             // 
             // searchField
             // 
-            this.searchField.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.searchField.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.searchField.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.searchField.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.searchField.ForeColor = System.Drawing.SystemColors.ControlLightLight;
@@ -299,7 +296,7 @@
             // 
             // resultsPanel
             // 
-            this.resultsPanel.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.resultsPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.resultsPanel.Controls.Add(this.panel4);
             this.resultsPanel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.resultsPanel.Location = new System.Drawing.Point(236, 88);
@@ -309,7 +306,7 @@
             // 
             // panel4
             // 
-            this.panel4.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.panel4.Controls.Add(this.resultsGroupBox);
             this.panel4.Controls.Add(this.statisticsGroupBox);
             this.panel4.Location = new System.Drawing.Point(4, 3);
@@ -319,6 +316,7 @@
             // 
             // resultsGroupBox
             // 
+            this.resultsGroupBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.resultsGroupBox.Controls.Add(this.authorResultsListView);
             this.resultsGroupBox.Controls.Add(this.journalResultsListView);
             this.resultsGroupBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
@@ -331,7 +329,7 @@
             // 
             // authorResultsListView
             // 
-            this.authorResultsListView.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.authorResultsListView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.authorResultsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.PaperHeader,
             this.venueHeader,
@@ -409,7 +407,7 @@
             // 
             // statisticsGroupBox
             // 
-            this.statisticsGroupBox.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.statisticsGroupBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.statisticsGroupBox.Controls.Add(this.cachedListView);
             this.statisticsGroupBox.Controls.Add(this.label5);
             this.statisticsGroupBox.Controls.Add(this.label6);
@@ -438,6 +436,26 @@
             this.statisticsGroupBox.TabIndex = 2;
             this.statisticsGroupBox.TabStop = false;
             this.statisticsGroupBox.Text = "Statistics";
+            // 
+            // cachedListView
+            // 
+            this.cachedListView.BackColor = System.Drawing.SystemColors.Control;
+            this.cachedListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1});
+            this.cachedListView.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cachedListView.ForeColor = System.Drawing.SystemColors.Info;
+            this.cachedListView.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.cachedListView.Location = new System.Drawing.Point(-120, -62);
+            this.cachedListView.Name = "cachedListView";
+            this.cachedListView.Size = new System.Drawing.Size(745, 97);
+            this.cachedListView.TabIndex = 29;
+            this.cachedListView.UseCompatibleStateImageBehavior = false;
+            this.cachedListView.View = System.Windows.Forms.View.Details;
+            this.cachedListView.Visible = false;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Width = 461;
             // 
             // label5
             // 
@@ -637,7 +655,7 @@
             // 
             // favouritesPanel
             // 
-            this.favouritesPanel.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.favouritesPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.favouritesPanel.Controls.Add(this.recentButton);
             this.favouritesPanel.Controls.Add(this.favouriteButton);
             this.favouritesPanel.Controls.Add(this.recentSearchPanel);
@@ -706,7 +724,7 @@
             // 
             // favouritesTreeView
             // 
-            this.favouritesTreeView.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.favouritesTreeView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.favouritesTreeView.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.favouritesTreeView.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.favouritesTreeView.Location = new System.Drawing.Point(11, 43);
@@ -736,7 +754,7 @@
             // 
             // authorsSuggestions
             // 
-            this.authorsSuggestions.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.authorsSuggestions.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.authorsSuggestions.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.authorsSuggestions.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Authors});
@@ -780,7 +798,7 @@
             // 
             // siteComboBox
             // 
-            this.siteComboBox.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.siteComboBox.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.siteComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.siteComboBox.ForeColor = System.Drawing.SystemColors.Info;
             this.siteComboBox.FormattingEnabled = true;
@@ -872,28 +890,13 @@
             this.removeFromFavouritesToolStripMenuItem.Text = "Remove from Favourites";
             this.removeFromFavouritesToolStripMenuItem.Click += new System.EventHandler(this.removeFromFavouritesToolStripMenuItem_Click);
             // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.Chocolate;
-            this.panel1.Location = new System.Drawing.Point(11, 65);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(983, 2);
-            this.panel1.TabIndex = 2;
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.Chocolate;
-            this.panel2.Location = new System.Drawing.Point(-2, 622);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1017, 10);
-            this.panel2.TabIndex = 3;
-            // 
             // EndYear
             // 
             this.EndYear.AllowSpace = false;
-            this.EndYear.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.EndYear.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.EndYear.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.EndYear.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EndYear.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.EndYear.Location = new System.Drawing.Point(342, 38);
             this.EndYear.Name = "EndYear";
             this.EndYear.Size = new System.Drawing.Size(44, 22);
@@ -904,9 +907,10 @@
             // StartYear
             // 
             this.StartYear.AllowSpace = false;
-            this.StartYear.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.StartYear.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.StartYear.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.StartYear.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StartYear.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.StartYear.Location = new System.Drawing.Point(259, 38);
             this.StartYear.Name = "StartYear";
             this.StartYear.Size = new System.Drawing.Size(44, 22);

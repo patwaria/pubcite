@@ -95,7 +95,7 @@ namespace PubCite
 
         void ListView_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
         {
-            e.Graphics.FillRectangle(Brushes.DarkGray, e.Bounds);
+            e.Graphics.FillRectangle(Brushes.ControlDarkDark, e.Bounds);
             e.DrawText();
         }
 
