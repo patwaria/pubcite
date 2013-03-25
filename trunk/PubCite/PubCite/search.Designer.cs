@@ -61,8 +61,6 @@
             this.Cites = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Year = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.statisticsGroupBox = new System.Windows.Forms.GroupBox();
-            this.cachedListView = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -99,6 +97,8 @@
             this.searchSiteLabel = new System.Windows.Forms.Label();
             this.searchIcon = new System.Windows.Forms.PictureBox();
             this.stopButton = new System.Windows.Forms.PictureBox();
+            this.cachedListView = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.optionsMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.viewCitationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewURLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -369,16 +369,18 @@
             // 
             // journalResultsListView
             // 
+            this.journalResultsListView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.journalResultsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Paper,
             this.Author,
             this.Cites,
             this.Year});
             this.journalResultsListView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.journalResultsListView.GridLines = true;
+            this.journalResultsListView.ForeColor = System.Drawing.SystemColors.Menu;
             this.journalResultsListView.Location = new System.Drawing.Point(3, 18);
             this.journalResultsListView.MultiSelect = false;
             this.journalResultsListView.Name = "journalResultsListView";
+            this.journalResultsListView.OwnerDraw = true;
             this.journalResultsListView.Size = new System.Drawing.Size(746, 419);
             this.journalResultsListView.TabIndex = 0;
             this.journalResultsListView.UseCompatibleStateImageBehavior = false;
@@ -403,7 +405,7 @@
             // Year
             // 
             this.Year.Text = "Year";
-            this.Year.Width = 66;
+            this.Year.Width = 87;
             // 
             // statisticsGroupBox
             // 
@@ -435,27 +437,6 @@
             this.statisticsGroupBox.TabIndex = 2;
             this.statisticsGroupBox.TabStop = false;
             this.statisticsGroupBox.Text = "Statistics";
-            // 
-            // cachedListView
-            // 
-            this.cachedListView.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.cachedListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1});
-            this.cachedListView.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.cachedListView.ForeColor = System.Drawing.SystemColors.Menu;
-            this.cachedListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.cachedListView.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.cachedListView.Location = new System.Drawing.Point(128, 37);
-            this.cachedListView.Name = "cachedListView";
-            this.cachedListView.Size = new System.Drawing.Size(760, 97);
-            this.cachedListView.TabIndex = 29;
-            this.cachedListView.UseCompatibleStateImageBehavior = false;
-            this.cachedListView.View = System.Windows.Forms.View.Details;
-            this.cachedListView.Visible = false;
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Width = 461;
             // 
             // label5
             // 
@@ -541,7 +522,7 @@
             this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(18, 11);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(215, 13);
+            this.label3.Size = new System.Drawing.Size(218, 13);
             this.label3.TabIndex = 1;
             this.label3.Text = "Please wait while we process your query...";
             // 
@@ -747,7 +728,7 @@
             this.Suggestions.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.Suggestions.Location = new System.Drawing.Point(11, 258);
             this.Suggestions.Name = "Suggestions";
-            this.Suggestions.Size = new System.Drawing.Size(199, 273);
+            this.Suggestions.Size = new System.Drawing.Size(192, 273);
             this.Suggestions.TabIndex = 8;
             this.Suggestions.TabStop = false;
             this.Suggestions.Text = "Suggestions";
@@ -764,7 +745,7 @@
             this.authorsSuggestions.Location = new System.Drawing.Point(3, 18);
             this.authorsSuggestions.Name = "authorsSuggestions";
             this.authorsSuggestions.OwnerDraw = true;
-            this.authorsSuggestions.Size = new System.Drawing.Size(193, 252);
+            this.authorsSuggestions.Size = new System.Drawing.Size(186, 252);
             this.authorsSuggestions.TabIndex = 0;
             this.authorsSuggestions.UseCompatibleStateImageBehavior = false;
             this.authorsSuggestions.View = System.Windows.Forms.View.Details;
@@ -772,7 +753,7 @@
             // Authors
             // 
             this.Authors.Text = "Authors";
-            this.Authors.Width = 204;
+            this.Authors.Width = 186;
             // 
             // label2
             // 
@@ -781,7 +762,7 @@
             this.label2.ForeColor = System.Drawing.SystemColors.Menu;
             this.label2.Location = new System.Drawing.Point(314, 41);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(22, 13);
+            this.label2.Size = new System.Drawing.Size(23, 13);
             this.label2.TabIndex = 10;
             this.label2.Text = "To:";
             // 
@@ -843,6 +824,27 @@
             this.stopButton.TabStop = false;
             this.stopButton.Visible = false;
             this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
+            // 
+            // cachedListView
+            // 
+            this.cachedListView.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.cachedListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1});
+            this.cachedListView.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.cachedListView.ForeColor = System.Drawing.SystemColors.Menu;
+            this.cachedListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.cachedListView.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.cachedListView.Location = new System.Drawing.Point(128, 37);
+            this.cachedListView.Name = "cachedListView";
+            this.cachedListView.Size = new System.Drawing.Size(760, 97);
+            this.cachedListView.TabIndex = 29;
+            this.cachedListView.UseCompatibleStateImageBehavior = false;
+            this.cachedListView.View = System.Windows.Forms.View.Details;
+            this.cachedListView.Visible = false;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Width = 461;
             // 
             // optionsMenuStrip
             // 
