@@ -16,7 +16,7 @@ namespace PubCite
 
 
         // SUGGESTIONS FROM SEARCH PAGE
-        public SG.AuthSuggestion getAuthSuggestions(string authName)
+        public SG.AuthSuggestion getAuthSuggestions(string authName)//,ref string next_URL)
         {
             List<string> names = new List<string>();
             List<string> links = new List<string>();
@@ -73,11 +73,109 @@ namespace PubCite
                         }
                         links.Add(profiles_url);
                     }
+
                 }
+
+
+                //NEXT PAGE URL EXTRACTION
+                HtmlNode next = doc.DocumentNode.SelectSingleNode("//*[@class=\"g-section cit-dgb\"]//tr/td[2]/a");
+                string next_URL;
+                if (next != null)
+                {
+                    next_URL = next.Attributes["href"].Value;
+                    next_URL = "http://scholar.google.com" + next_URL;
+                    next_URL = next_URL.Replace("amp;", "");
+                }
+                else next_URL = null;
+
+
                 return new SG.AuthSuggestion(names, links, true);
             }
             else return new SG.AuthSuggestion(null, null, false);
         }
+
+
+
+        // SUGGESTIONS FROM NEXT PAGE
+        public bool getAuthSuggestionsNextPage(string this_url,ref SG.AuthSuggestion suggestions,ref string next_URL)
+        {
+
+            if (this_url == null) return false;
+
+            
+            List<string> names = new List<string>();
+            List<string> links = new List<string>();
+
+            names = suggestions.getSuggestions();
+            links = suggestions.getSuggestionsURL();
+            /*
+            if (latestSearch.Equals("default") || (!latestSearch.Equals(authName)))
+            {
+                loadHtmlDocument(authName);
+            }
+
+            
+            // DID U MEAN TAG
+            string xpath = "//*[@class=\"gs_med\"]";
+            HtmlNode dymNode = doc.DocumentNode.SelectSingleNode(xpath);
+
+            if (dymNode != null)
+            {
+                Console.WriteLine("\nDID YOU MEAN TAG ");
+                Console.WriteLine(dymNode.InnerText);
+            }
+            */
+
+            // CONNECTIONS
+            HtmlWeb web = new HtmlWeb();
+            try
+            {
+                doc = web.Load(this_url);
+            }
+            catch (Exception e) { Console.WriteLine("=====Exception occurred(web load) in GSScraper:getAuthSuggestionsNextPage()"); }
+
+
+
+            string profiles_url = null;
+            string xpath = "//*[@class=\"cit-dark-large-link\"]";
+            //string xpath = "//*[@class=\"\"]";
+            HtmlNodeCollection profileNode = doc.DocumentNode.SelectNodes(xpath);
+            if (profileNode != null)
+            {
+                foreach (HtmlNode urlNode in profileNode)
+                {
+                    //HtmlNode urlNode = node.SelectSingleNode(".//a");
+                    if (urlNode != null)
+                    {
+                        profiles_url = urlNode.GetAttributeValue("href", "Not Found");
+                        names.Add(urlNode.InnerText);
+                        if (!profiles_url.Equals("Not Found"))
+                        {
+                            profiles_url = "http://scholar.google.com" + profiles_url;
+                            profiles_url = profiles_url.Replace("amp;", "");
+                        }
+                        links.Add(profiles_url);
+                    }
+                }
+            }
+            else return false;
+
+            
+            //NEXT PAGE URL EXTRACTION
+            HtmlNode next = doc.DocumentNode.SelectSingleNode("//*[@class=\"g-section cit-dgb\"]//tr/td[2]/a[2]");
+            if (next != null)
+            {
+                next_URL = next.Attributes["href"].Value;
+                next_URL = "http://scholar.google.com" + next_URL;
+                next_URL = next_URL.Replace("amp;", "");
+            }
+            else next_URL = null;
+
+            return true;
+        }
+
+
+
 
 
 
