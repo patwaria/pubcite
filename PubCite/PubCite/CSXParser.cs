@@ -84,7 +84,7 @@ namespace PubCite
                 Console.WriteLine("Document Loaded!");
             else
             {
-                Console.WriteLine("Load Error!");
+                Console.WriteLine("Load Error! Next page doesn't exist! Returned.");
                 return false;
             }
 
