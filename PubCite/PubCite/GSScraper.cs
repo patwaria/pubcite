@@ -120,7 +120,7 @@ namespace PubCite
 
 
         // SEARCH PAGE RESULTS
-        public SG.Author getAuthors(string authName, string affiliation, string keywords, string next_url)
+        public SG.Author getAuthors(string authName, string affiliation, string keywords, ref string next_url)
         {
 
             // CONNECTIONS
@@ -162,7 +162,7 @@ namespace PubCite
             catch (Exception e) { Console.WriteLine("=====Exception occurred(web load) in GSScraper:getAuthorsNextPage()"); }
 
 
-            Console.WriteLine(doc.DocumentNode.InnerHtml);
+            //Console.WriteLine(doc.DocumentNode.InnerHtml);
 
 
             string xpath = "//div[@class=\"gs_ri\"]";
@@ -297,7 +297,7 @@ namespace PubCite
 
 
         // SEARCH PAGE RESULTS NEXT PAGE
-        public bool getAuthorsNextPage(string this_url, ref SG.Author author, string next_url)
+        public bool getAuthorsNextPage(string this_url, ref SG.Author author, ref string next_url)
         {
 
             // CONNECTIONS
@@ -493,7 +493,7 @@ namespace PubCite
             catch (Exception e) { Console.WriteLine("=====Exception occurred(web load) in GSScraper:getJournals()"); }
 
 
-            Console.WriteLine(doc.DocumentNode.InnerHtml);
+            //Console.WriteLine(doc.DocumentNode.InnerHtml);
             //string html = client.DownloadString(url);
             //doc.LoadHtml(html);
 

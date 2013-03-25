@@ -24,6 +24,7 @@ namespace PubCite
 
         int type;
         int citationIndex;
+        string gs_url;
 
         public CitationsTab()
         {
@@ -136,7 +137,7 @@ namespace PubCite
             if (type == 0)
                 Citations = CSParser.getCitations(MainPapers[citationIndex].CitedByURL);
             else if (type == 1)
-                Citations = GSScraper.getCitations(MainPapers[citationIndex].CitedByURL);
+                Citations = GSScraper.getCitations(MainPapers[citationIndex].CitedByURL, ref gs_url);
             else if (type == 2)
                 Citations = MSParser.getCitations(MainPapers[citationIndex].CitedByURL);
         }

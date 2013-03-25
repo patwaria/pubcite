@@ -34,12 +34,14 @@ namespace PubCite
         int suggestedIndex;
         int citationIndex;
         int citationType;
+        int lastCount;
         Boolean[] prevSortedColum = { false, false, false, false };
         Boolean[] a = { false, false, false };
         Boolean suggestions;
         Boolean nextData;
         Boolean STOP;
 
+        String gs_nextUrl;
 
         public search()
         {
@@ -60,6 +62,8 @@ namespace PubCite
             journalResultsListView.MouseClick += new MouseEventHandler(journalResultsListView_MouseClick);
             journalResultsListView.ColumnClick += new ColumnClickEventHandler(journalResultsListView_ColumnClick);
             journalResultsListView.MouseDoubleClick += new MouseEventHandler(journalResultsListView_MouseDoubleClick);
+            journalResultsListView.DrawItem += ListView_DrawItem;
+            journalResultsListView.DrawColumnHeader += ListView_DrawColumnHeader;
 
             authorsSuggestions.MouseDoubleClick += new MouseEventHandler(authorsSuggestions_MouseClick);
             authorsSuggestions.FullRowSelect = true;
@@ -86,6 +90,7 @@ namespace PubCite
 
             showSearch();
             STOP = false;
+            lastCount = 0;
         }
 
         void ListView_DrawItem(object sender, DrawListViewItemEventArgs e)
@@ -530,8 +535,6 @@ namespace PubCite
             progressBar.Style = ProgressBarStyle.Blocks;
             progressBar.Value = progressBar.Minimum;
 
-            /* enable panels */
-            enablePanels();
             progressPanel.Visible = false;
             progressBar.SendToBack();
             progressBar.Visible = false;
@@ -568,7 +571,7 @@ namespace PubCite
                     }
                     else if (a[1] == true)
                     {
-                        authStats = GSScraper.getAuthors(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text);
+                        authStats = GSScraper.getAuthors(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text, ref gs_nextUrl);
                         authStats.Type = 0;
                     }
                     else
@@ -622,7 +625,7 @@ namespace PubCite
                 }
                 else if (a[1])
                 {
-                    journalStats = GSScraper.getJournals(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text);
+                    journalStats = GSScraper.getJournals(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text, ref gs_nextUrl);
                     journalStats.Type = 1;
                 }
                 else
@@ -668,7 +671,7 @@ namespace PubCite
             else if (citationType == 1)
             {
                 Console.WriteLine("url:" + Papers[citationIndex].CitedByURL);
-                Citations = GSScraper.getCitations(Papers[citationIndex].CitedByURL);
+                Citations = GSScraper.getCitations(Papers[citationIndex].CitedByURL, ref gs_nextUrl);
 
             }
             else if (citationType == 2)
@@ -681,20 +684,28 @@ namespace PubCite
 
         private void backgroundWorker_authstatsNextDataWork(object sender, DoWorkEventArgs e)
         {
-            nextData = MSParser.getAuthStatisticsNext(auth_url[suggestedIndex], ref authStats);
+            if (authStats.Type == 1)
+                nextData = GSScraper.getAuthStatisticsNextPage(auth_url[suggestedIndex], ref authStats);
+            else if(authStats.Type == 2)
+                nextData = MSParser.getAuthStatisticsNext(auth_url[suggestedIndex], ref authStats);
 
         }
 
         private void backgroundWorker_authorsNextDataWork(object sender, DoWorkEventArgs e)
         {
-            nextData = MSParser.getAuthorsNext(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text, ref authStats);
-
+            if (authStats.Type == 1)
+                nextData = GSScraper.getAuthorsNextPage(gs_nextUrl, ref authStats, ref gs_nextUrl);
+            else if (authStats.Type == 2)
+                nextData = MSParser.getAuthorsNext(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text, ref authStats);
+            
         }
 
         private void backgroundWorker_journalsNextDataWork(object sender, DoWorkEventArgs e)
         {
-            nextData = MSParser.getJournalsNext(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text, ref journalStats);
-
+            if (authStats.Type == 1)
+                nextData = GSScraper.getJournalsNextPage(gs_nextUrl, ref journalStats, ref gs_nextUrl);
+            else if (authStats.Type == 2)
+                nextData = MSParser.getJournalsNext(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text, ref journalStats);
         }
 
         private void getNextAuthStats(bool hasProfile)
@@ -703,7 +714,7 @@ namespace PubCite
              * Note : only for MSParser now
              * 
              */
-            if (authStats.getNumberOfPapers() >= 20 && authStats.Type == 2)
+            if ((authStats.Type == 2) || (authStats.Type == 1))
             {
                 nextData = true;
                 while (nextData == true && STOP == false)
@@ -732,7 +743,7 @@ namespace PubCite
              * Note : only for MSParser now
              * 
              */
-            if (journalStats.getNumberOfPapers() >= 20 && journalStats.Type == 2)
+            if (journalStats.Type == 1 || journalStats.Type == 2)
             {
                 nextData = true;
                 while (nextData == true && STOP == false)
@@ -775,10 +786,13 @@ namespace PubCite
             RecentSearchKeys.Add(authStats.Name);
             updateHistory(authStats.Name);
             populateAuthor();
-            endProgressUI();
+            /* enable panels */
+            enablePanels();
+            
 
             getNextAuthStats(true);
             showSearch();
+            endProgressUI();
         }
 
         private void searchIcon_Click(object sender, EventArgs e)
@@ -828,7 +842,7 @@ namespace PubCite
                 // disable those options which will trigger another thread 
             }
 
-            endProgressUI();
+            enablePanels();
             if (authorCheckBox.Checked == true)
             {
                 Console.WriteLine("Done" + suggestions);
@@ -863,6 +877,7 @@ namespace PubCite
             }
 
             showSearch();
+            endProgressUI();
         }
 
         private void viewURLToolStripMenuItem_Click(object sender, EventArgs e)
