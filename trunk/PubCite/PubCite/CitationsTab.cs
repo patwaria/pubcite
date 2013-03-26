@@ -7,13 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Threading;
+using SG;
 
 namespace PubCite
 {
     public partial class CitationsTab : UserControl
     {
         ListViewItem item;
-        List<SG.Paper> MainPapers;
+        List<Paper> MainPapers;
+        List<Paper> Papers;
 
         GSScraper GSScraper;
         CSXParser CSParser;
@@ -28,9 +30,9 @@ namespace PubCite
         bool nextData;
         bool STOP;
 
-        SG.Paper paper; 
+        Paper paper; 
 
-        public CitationsTab(SG.Paper paper, int type)
+        public CitationsTab(Paper paper, int type)
         {
             InitializeComponent();
             authorResultsListView.ColumnClick += new ColumnClickEventHandler(authorResultsListView_ColumnClick);
@@ -92,7 +94,7 @@ namespace PubCite
             }
 
             resultsGroupBox.Enabled = true;
-
+            Papers = MainPapers;
             showCitations();
             progressPanel.Visible = false;
             progressBar.MarqueeAnimationSpeed = 0;
@@ -117,15 +119,15 @@ namespace PubCite
             if(lastCount == 0)
                 authorResultsListView.Items.Clear();
 
-            citationsShown.Text = MainPapers.Count.ToString();
-            for (int i = lastCount; i < MainPapers.Count; i++)
+            citationsShown.Text = Papers.Count.ToString();
+            for (int i = lastCount; i < Papers.Count; i++)
             {
 
                 /*populating */
-                item = new ListViewItem(MainPapers[i].Title);
-                item.SubItems.Add(MainPapers[i].Authors);
-                item.SubItems.Add(MainPapers[i].Year.ToString());
-                item.SubItems.Add(MainPapers[i].NumberOfCitations.ToString());
+                item = new ListViewItem(Papers[i].Title);
+                item.SubItems.Add(Papers[i].Authors);
+                item.SubItems.Add(Papers[i].Year.ToString());
+                item.SubItems.Add(Papers[i].NumberOfCitations.ToString());
                 authorResultsListView.Items.Add(item);
                 //Console.WriteLine(Papers[i].Title + Papers[i].Year + Papers[i].NumberOfCitations);
             }
@@ -152,10 +154,10 @@ namespace PubCite
                     Application.DoEvents();
                     // disable those options which will trigger another thread 
                 }
-
+                Papers = MainPapers;
                 showCitations();
             }
-
+            lastCount = 0;
             STOP = false;
             stop.Visible = false;
             progressPanel.Visible = false;
@@ -218,9 +220,9 @@ namespace PubCite
             for (int i = 0; i < 4; i++) prevSortedColum[i] = false;
             citationIndex = authorResultsListView.FocusedItem.Index;
 
-            if (MainPapers[citationIndex].NumberOfCitations != 0)
+            if (Papers[citationIndex].NumberOfCitations != 0)
             {
-                paper = MainPapers[citationIndex];
+                paper = Papers[citationIndex];
                 
                 showStatistics();
 
@@ -233,9 +235,9 @@ namespace PubCite
             TabPage bpage = new TabPage("Browser");
             Browser browser;
             if (authorResultsListView.Visible == true)
-                browser = new Browser(MainPapers[authorResultsListView.FocusedItem.Index].TitleURL);
+                browser = new Browser(Papers[authorResultsListView.FocusedItem.Index].TitleURL);
             else
-                browser = new Browser(MainPapers[journalsResultsListView.FocusedItem.Index].TitleURL);
+                browser = new Browser(Papers[journalsResultsListView.FocusedItem.Index].TitleURL);
             bpage.Controls.Add(browser);
             bpage.ImageIndex = 1;
             Form1.dub_tab.TabPages.Insert(Form1.dub_tab.TabPages.Count - 1, bpage);
@@ -311,8 +313,6 @@ namespace PubCite
                 MainPapers.Sort((x, y) => x.Authors.CompareTo(y.Authors));
             else
                 MainPapers.Sort((y, x) => x.Authors.CompareTo(y.Authors));
-
-
         }
 
         public void sortPapersByCitations(bool order)
@@ -387,5 +387,36 @@ namespace PubCite
             }
         }
 
+        public List<Paper> getPaperByKeywords(List<Paper> papers, string keywords)
+        {
+            if (keywords.Length == 0)
+                return papers;
+            char[] delims = { ' ', ',', ':', ';', '\"' };
+            string[] keywordsList = keywords.Split(delims);
+
+            List<Paper> newList = new List<Paper>();
+            foreach (Paper p in papers)
+            {
+                bool add = true;
+                string content = (p.Title + p.Publication + p.Summary).ToLower();
+                for (int i = 0; i < keywordsList.Length; i++)
+                {
+                    if (keywordsList[i].Length > 0 && !content.Contains(keywordsList[i].ToLower()))
+                    {
+                        add = false;
+                        break;
+                    }
+                }
+                if (add == true)
+                    newList.Add(p);
+            }
+            return newList;
+        }
+
+        private void filterTextBox_TextChanged(object sender, EventArgs e)
+        {
+            Papers = getPaperByKeywords(MainPapers, filterTextBox.Text);
+            showCitations();
+        }
     }
 }

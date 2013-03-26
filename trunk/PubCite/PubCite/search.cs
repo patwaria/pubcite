@@ -95,6 +95,8 @@ namespace PubCite
             lastCount = 0;
         }
 
+        
+
         void KeywordsTextBox_KeyUp(object sender, KeyEventArgs e)
         {
           
