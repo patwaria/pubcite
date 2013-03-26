@@ -1219,7 +1219,8 @@ namespace PubCite
         {
             Form1.favorites.clear();
             ArrangeTree();
-        }        
+        }
+        
     }
 }
 
