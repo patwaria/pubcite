@@ -38,7 +38,7 @@ namespace PubCite
         Boolean[] prevSortedColum = { false, false, false, false };
         Boolean[] a = { false, false, false };
         Boolean suggestions;
-        Boolean nextData;
+        Boolean? nextData;
         Boolean STOP;
         Boolean currentSearchEntity;
 
