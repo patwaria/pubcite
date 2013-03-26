@@ -108,7 +108,7 @@ namespace SG
             foreach (Paper p in papers)
             {
                 bool add = true;
-                string content = (p.Title + p.Publication + p.Summary).ToLower();
+                string content = (p.Title + p.Publication + p.Summary + p.Authors).ToLower();
                 for (int i = 0; i < keywordsList.Length; i++)
                 {
                     if (keywordsList[i].Length > 0 && !content.Contains(keywordsList[i].ToLower()))
