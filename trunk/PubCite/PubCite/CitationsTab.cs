@@ -27,7 +27,7 @@ namespace PubCite
         int citationIndex;
         string gs_url;
         int lastCount;
-        bool nextData;
+        bool? nextData;
         bool STOP;
 
         Paper paper; 
@@ -116,54 +116,63 @@ namespace PubCite
         }
         public void showCitations()
         {
-            if(lastCount == 0)
-                authorResultsListView.Items.Clear();
-
-            citationsShown.Text = Papers.Count.ToString();
-            for (int i = lastCount; i < Papers.Count; i++)
+            if (MainPapers != null)
             {
+                if (lastCount == 0)
+                    authorResultsListView.Items.Clear();
 
-                /*populating */
-                item = new ListViewItem(Papers[i].Title);
-                item.SubItems.Add(Papers[i].Authors);
-                item.SubItems.Add(Papers[i].Year.ToString());
-                item.SubItems.Add(Papers[i].NumberOfCitations.ToString());
-                authorResultsListView.Items.Add(item);
-                //Console.WriteLine(Papers[i].Title + Papers[i].Year + Papers[i].NumberOfCitations);
+                citationsShown.Text = Papers.Count.ToString();
+                for (int i = lastCount; i < Papers.Count; i++)
+                {
+
+                    /*populating */
+                    item = new ListViewItem(Papers[i].Title);
+                    item.SubItems.Add(Papers[i].Authors);
+                    item.SubItems.Add(Papers[i].Year.ToString());
+                    item.SubItems.Add(Papers[i].NumberOfCitations.ToString());
+                    authorResultsListView.Items.Add(item);
+                    //Console.WriteLine(Papers[i].Title + Papers[i].Year + Papers[i].NumberOfCitations);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Sorry. No citations data available!");
             }
         }
 
         private void viewAll_Click(object sender, EventArgs e)
         {
-
-            stop.Visible = true;
-
-            progressPanel.Visible = true;
-            progressBar.Style = ProgressBarStyle.Marquee;
-            progressBar.MarqueeAnimationSpeed = 25;
-            nextData = true;
-            while (nextData == true && !STOP)
+            if (MainPapers != null)
             {
-                lastCount = MainPapers.Count;
-                Console.WriteLine("Paper Next");
-                BackgroundWorker backgroundWorker1 = new BackgroundWorker();
-                backgroundWorker1.DoWork += new DoWorkEventHandler(backgroundWorker_citationNextDataWork);
-                backgroundWorker1.RunWorkerAsync();
-                while (backgroundWorker1.IsBusy)
+                stop.Visible = true;
+
+                progressPanel.Visible = true;
+                progressBar.Style = ProgressBarStyle.Marquee;
+                progressBar.MarqueeAnimationSpeed = 25;
+                nextData = true;
+                while (nextData == true && !STOP)
                 {
-                    Application.DoEvents();
-                    // disable those options which will trigger another thread 
+                    lastCount = MainPapers.Count;
+                    Console.WriteLine("Paper Next");
+                    BackgroundWorker backgroundWorker1 = new BackgroundWorker();
+                    backgroundWorker1.DoWork += new DoWorkEventHandler(backgroundWorker_citationNextDataWork);
+                    backgroundWorker1.RunWorkerAsync();
+                    while (backgroundWorker1.IsBusy)
+                    {
+                        Application.DoEvents();
+                        // disable those options which will trigger another thread 
+                    }
+                    Papers = MainPapers;
+                    showCitations();
                 }
-                Papers = MainPapers;
-                showCitations();
+                lastCount = 0;
+                STOP = false;
+                stop.Visible = false;
+                progressPanel.Visible = false;
+                progressBar.MarqueeAnimationSpeed = 0;
+                progressBar.Style = ProgressBarStyle.Blocks;
+                progressBar.Value = progressBar.Minimum;
             }
-            lastCount = 0;
-            STOP = false;
-            stop.Visible = false;
-            progressPanel.Visible = false;
-            progressBar.MarqueeAnimationSpeed = 0;
-            progressBar.Style = ProgressBarStyle.Blocks;
-            progressBar.Value = progressBar.Minimum;
         }
 
         private void stop_Click(object sender, EventArgs e)
@@ -205,7 +214,12 @@ namespace PubCite
             if (type == 0)
                 MainPapers = CSParser.getCitations(paper.CitedByURL);
             else if (type == 1)
+            {
                 MainPapers = GSScraper.getCitations(paper.CitedByURL, ref gs_url);
+                if (MainPapers == null)
+                    MessageBox.Show("Oops! You have reached administrative limit for Google Scholar." +
+                        "\nIf you are behind a proxy server, please try changing your settings.");
+            }
             else if (type == 2)
                 MainPapers = MSParser.getCitations(paper.CitedByURL);
         }
