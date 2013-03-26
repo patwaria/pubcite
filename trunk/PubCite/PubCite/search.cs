@@ -1200,6 +1200,9 @@ namespace PubCite
             Nsettings.MASMaxResults=(int)microsoftNumericUpDown.Value;
            
             (NsettingsRecord).SaveSettings(Nsettings);
+            CSParser = new CSXParser();
+            GSScraper = new GSScraper();
+            MSParser = new MicrosoftScholarParser();
         }
 
         private void clearHistoryToolStripMenuItem_Click(object sender, EventArgs e)
