@@ -77,11 +77,11 @@ namespace SG
         {
             get
             {
-                return IsFavorite;
+                return isFavorite;
             }
             set
             {
-                IsFavorite = value;
+                isFavorite = value;
             }
         }
         public void setHIndex(int h)
