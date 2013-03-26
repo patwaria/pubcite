@@ -785,7 +785,7 @@ namespace PubCite
 
                     tempPubliObj.url = "http://citeseer.ist.psu.edu" + rows[i].SelectSingleNode("h3/a").GetAttributeValue("href", "");
 
-                    if (tempPubliObj.numCit > 0)
+                    //if (tempPubliObj.numCit > 0)
                         citeList.Add(tempPubliObj);
                 }
                 
@@ -908,7 +908,7 @@ namespace PubCite
                 tempPubliObj.journal = list[1];
                 tempPubliObj.year = Convert.ToInt32(list[2]);
                 tempPubliObj.url = "http://citeseer.ist.psu.edu" + rows[i].SelectSingleNode("td[2]/a").GetAttributeValue("href", "");
-                if(tempPubliObj.numCit>0)
+               // if(tempPubliObj.numCit>0)
                     publiList.Add(tempPubliObj);
             }
 
