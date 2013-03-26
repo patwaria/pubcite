@@ -1032,11 +1032,11 @@ namespace PubCite
 
 
         // GET CITATIONS NEXT PAGE
-        public List<SG.Paper> getCitationsNextPage(string url, ref string next_url)
+        public  bool getCitationsNextPage(string url, ref string next_url, ref List<SG.Paper> papers)
         {
 
             // CONNECTIONS
-            if (url == null) return null;
+            if (url == null) return false;
             HtmlWeb web = new HtmlWeb();
 
             try
@@ -1052,7 +1052,7 @@ namespace PubCite
             string title, titleLink, authors, publication, publisher, cited_by_url, summary;
             int year, rank = 1, no_of_citations;
             HtmlNodeCollection searchResults = doc.DocumentNode.SelectNodes(xpath);
-            if (searchResults == null) return null;
+            if (searchResults == null) return false;
             else
             {
 
@@ -1171,7 +1171,9 @@ namespace PubCite
                 else next_url = null;
             }
 
-            return results;
+            foreach (SG.Paper p in results)
+                papers.Add(p);
+            return true;
         }
 
 

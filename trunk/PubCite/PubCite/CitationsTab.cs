@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace PubCite
 {
@@ -13,20 +14,23 @@ namespace PubCite
     {
         ListViewItem item;
         List<SG.Paper> MainPapers;
-        List<SG.Paper> Citations;
-        
+
         GSScraper GSScraper;
         CSXParser CSParser;
         MicrosoftScholarParser MSParser;
-        
+
         Boolean[] prevSortedColum = { false, false, false, false };
-        BackgroundWorker backgroundWorker;
 
         int type;
         int citationIndex;
         string gs_url;
+        int lastCount;
+        bool nextData;
+        bool STOP;
 
-        public CitationsTab()
+        SG.Paper paper; 
+
+        public CitationsTab(SG.Paper paper, int type)
         {
             InitializeComponent();
             authorResultsListView.ColumnClick += new ColumnClickEventHandler(authorResultsListView_ColumnClick);
@@ -36,6 +40,19 @@ namespace PubCite
             authorResultsListView.DrawItem += ListView_DrawItem;
             authorResultsListView.DrawColumnHeader += ListView_DrawColumnHeader;
             abstractBox.GotFocus += abstractBox_GotFocus;
+
+            CSParser = new CSXParser();
+            GSScraper = new GSScraper();
+            MSParser = new MicrosoftScholarParser();
+
+            this.paper = paper;
+            this.type = type;
+            lastCount = 0;
+            STOP = false;
+
+            showStatistics();
+
+            getCitations();
         }
 
         void abstractBox_GotFocus(object sender, EventArgs e)
@@ -54,58 +71,103 @@ namespace PubCite
             e.DrawText();
         }
 
+        private void getCitations()
+        {
+            lastCount = 0;
+            resultsGroupBox.Enabled = false;
+            progressPanel.Visible = true;
+            progressBar.Style = ProgressBarStyle.Marquee;
+            progressBar.MarqueeAnimationSpeed = 25;
 
-        public void populateCitations(SG.Paper paper, List<SG.Paper> Papers, int t) {
+            BackgroundWorker backgroundWorker = new BackgroundWorker();
+            backgroundWorker.DoWork += new DoWorkEventHandler(backgroundWorker_citationSearchWork);
+            //backgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(backgroundWorker_RunWorkerCompleted);
 
-            
-            if (Papers != null)
+            backgroundWorker.RunWorkerAsync();
+
+            while (backgroundWorker.IsBusy)
             {
-                
-                MainPapers = Papers;
-                type = t;
+                Application.DoEvents();
+                // disable those options which will trigger another thread 
+            }
 
-                /* Add statistics */
-                publicationsDetailsGroupBox.Text = paper.Title;
-                authorsName.Text = paper.Authors;
-                yearLabel.Text = paper.Year.ToString();
-                venue.Text = paper.Publication;
-                numCitations.Text = paper.NumberOfCitations.ToString();
-                publisher.Text = paper.Publisher;
-                abstractBox.Text = paper.Summary;
+            resultsGroupBox.Enabled = true;
 
-                authorResultsListView.Items.Clear();
-                for (int i = 0; i < Papers.Count; i++)
-                {
-
-                    /*populating */
-                    item = new ListViewItem(Papers[i].Title);
-                    item.SubItems.Add(Papers[i].Authors);
-                    item.SubItems.Add(Papers[i].Year.ToString());
-                    item.SubItems.Add(Papers[i].NumberOfCitations.ToString());
-                    authorResultsListView.Items.Add(item);
-                    //Console.WriteLine(Papers[i].Title + Papers[i].Year + Papers[i].NumberOfCitations);
-                }
-            }                                      
+            showCitations();
+            progressPanel.Visible = false;
+            progressBar.MarqueeAnimationSpeed = 0;
+            progressBar.Style = ProgressBarStyle.Blocks;
+            progressBar.Value = progressBar.Minimum;
         }
 
-        public void RepopulateCitations(List<SG.Paper> Papers) {
+        public void showStatistics()
+        {
 
-            MainPapers = Papers;
-            authorResultsListView.Items.Clear();
-            for (int i = 0; i < Papers.Count; i++)
+            publicationsDetailsGroupBox.Text = paper.Title;
+            authorsName.Text = paper.Authors;
+            yearLabel.Text = paper.Year.ToString();
+            venue.Text = paper.Publication;
+            numCitations.Text = paper.NumberOfCitations.ToString();
+            publisher.Text = paper.Publisher;
+            abstractBox.Text = paper.Summary;
+            
+        }
+        public void showCitations()
+        {
+            if(lastCount == 0)
+                authorResultsListView.Items.Clear();
+
+            citationsShown.Text = MainPapers.Count.ToString();
+            for (int i = lastCount; i < MainPapers.Count; i++)
             {
 
                 /*populating */
-                item = new ListViewItem(Papers[i].Title);
-                item.SubItems.Add(Papers[i].Authors);
-                item.SubItems.Add(Papers[i].Year.ToString());
-                item.SubItems.Add(Papers[i].NumberOfCitations.ToString());
+                item = new ListViewItem(MainPapers[i].Title);
+                item.SubItems.Add(MainPapers[i].Authors);
+                item.SubItems.Add(MainPapers[i].Year.ToString());
+                item.SubItems.Add(MainPapers[i].NumberOfCitations.ToString());
                 authorResultsListView.Items.Add(item);
                 //Console.WriteLine(Papers[i].Title + Papers[i].Year + Papers[i].NumberOfCitations);
             }
-            
-        
-        
+        }
+
+        private void viewAll_Click(object sender, EventArgs e)
+        {
+
+            stop.Visible = true;
+
+            progressPanel.Visible = true;
+            progressBar.Style = ProgressBarStyle.Marquee;
+            progressBar.MarqueeAnimationSpeed = 25;
+            nextData = true;
+            while (nextData == true && !STOP)
+            {
+                lastCount = MainPapers.Count;
+                Console.WriteLine("Paper Next");
+                BackgroundWorker backgroundWorker1 = new BackgroundWorker();
+                backgroundWorker1.DoWork += new DoWorkEventHandler(backgroundWorker_citationNextDataWork);
+                backgroundWorker1.RunWorkerAsync();
+                while (backgroundWorker1.IsBusy)
+                {
+                    Application.DoEvents();
+                    // disable those options which will trigger another thread 
+                }
+
+                showCitations();
+            }
+
+            STOP = false;
+            stop.Visible = false;
+            progressPanel.Visible = false;
+            progressBar.MarqueeAnimationSpeed = 0;
+            progressBar.Style = ProgressBarStyle.Blocks;
+            progressBar.Value = progressBar.Minimum;
+        }
+
+        private void stop_Click(object sender, EventArgs e)
+        {
+            STOP = true;
+            stop.Visible = false;
         }
 
         private void authorResultsListView_MouseClick(object sender, MouseEventArgs e)
@@ -119,12 +181,6 @@ namespace PubCite
             }
         }
 
-        private void CloseButton_Click(object sender, EventArgs e)
-        {
-            Form1.dub_tab.TabPages.Remove(Form1.dub_tab.SelectedTab);
-            Form1.dub_tab.SelectedIndex = Form1.dub_tab.TabCount - 2;
-        }
-
         private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             progressBar.MarqueeAnimationSpeed = 0;
@@ -132,14 +188,24 @@ namespace PubCite
             progressBar.Value = progressBar.Minimum;
         }
 
+        private void backgroundWorker_citationNextDataWork(object sender, DoWorkEventArgs e)
+        {
+            if (type == 0)
+                nextData = CSParser.getCitationsNext(paper.CitedByURL, ref MainPapers);
+            else if (type == 1)
+                nextData = GSScraper.getCitationsNextPage(gs_url, ref gs_url, ref MainPapers);
+            else if (type == 2)
+                nextData = MSParser.getCitationsNext(paper.CitedByURL, ref MainPapers);
+        }
+
         private void backgroundWorker_citationSearchWork(object sender, DoWorkEventArgs e)
         {
             if (type == 0)
-                Citations = CSParser.getCitations(MainPapers[citationIndex].CitedByURL);
+                MainPapers = CSParser.getCitations(paper.CitedByURL);
             else if (type == 1)
-                Citations = GSScraper.getCitations(MainPapers[citationIndex].CitedByURL, ref gs_url);
+                MainPapers = GSScraper.getCitations(paper.CitedByURL, ref gs_url);
             else if (type == 2)
-                Citations = MSParser.getCitations(MainPapers[citationIndex].CitedByURL);
+                MainPapers = MSParser.getCitations(paper.CitedByURL);
         }
 
         private void authorResultsListView_MouseDoubleClick(object sender, EventArgs e)
@@ -154,32 +220,11 @@ namespace PubCite
 
             if (MainPapers[citationIndex].NumberOfCitations != 0)
             {
-                if (type == 0)
-                    CSParser = new CSXParser();
-                else if (type == 1)
-                    GSScraper = new GSScraper();
-                else if (type == 2)
-                    MSParser = new MicrosoftScholarParser();
-                resultsGroupBox.Enabled = false;
-                progressPanel.Visible = true;
-                progressBar.Style = ProgressBarStyle.Marquee;
-                progressBar.MarqueeAnimationSpeed = 25;
+                paper = MainPapers[citationIndex];
+                
+                showStatistics();
 
-                backgroundWorker = new BackgroundWorker();
-                backgroundWorker.DoWork += new DoWorkEventHandler(backgroundWorker_citationSearchWork);
-                backgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(backgroundWorker_RunWorkerCompleted);
-
-                backgroundWorker.RunWorkerAsync();
-
-                while (backgroundWorker.IsBusy)
-                {
-                    Application.DoEvents();
-                    // disable those options which will trigger another thread 
-                }
-
-                resultsGroupBox.Enabled = true;
-                progressPanel.Visible = false;
-                populateCitations(MainPapers[citationIndex], Citations, type);
+                getCitations();
             }
         }
 
@@ -200,10 +245,9 @@ namespace PubCite
         private void authorResultsListView_ColumnClick(object sender, ColumnClickEventArgs e)
         {
 
-
             if (e.Column == 0)
             {
-               
+
                 if (prevSortedColum[0] == false)
                 {
                     sortPapersByTitle(true);
@@ -257,28 +301,27 @@ namespace PubCite
                     prevSortedColum[3] = false;
                 }
             }
-            RepopulateCitations( MainPapers);
-
-            
+            showCitations();
         }
 
 
-        public void sortPapersByAuthor(bool order) {
-            if(order)
-                 MainPapers.Sort((x, y) => x.Authors.CompareTo(y.Authors));
+        public void sortPapersByAuthor(bool order)
+        {
+            if (order)
+                MainPapers.Sort((x, y) => x.Authors.CompareTo(y.Authors));
             else
-                MainPapers.Sort((y,x) => x.Authors.CompareTo(y.Authors));
+                MainPapers.Sort((y, x) => x.Authors.CompareTo(y.Authors));
 
-        
+
         }
 
         public void sortPapersByCitations(bool order)
         {
-            
+
             if (order)
             {
                 MainPapers.Sort((x, y) => x.NumberOfCitations.CompareTo(y.NumberOfCitations));
-                
+
             }
             else
             {
@@ -311,10 +354,10 @@ namespace PubCite
         {
             if (order)
             {
-                
+
                 MainPapers.Sort((x, y) => x.Title.CompareTo(y.Title));
-                
-                
+
+
             }
             else
             {
@@ -343,6 +386,6 @@ namespace PubCite
                 MainPapers.Sort((y, x) => x.Publisher.CompareTo(x.Publisher));
             }
         }
-        
+
     }
 }
