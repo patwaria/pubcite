@@ -72,6 +72,8 @@ namespace PubCite
             {
                 doc = web.Load(url);
                 HtmlNode citUrl = doc.DocumentNode.SelectSingleNode("//*[@id=\"docCites\"]/td[2]/a");
+                if (citUrl == null)
+                    return false;
                 url = "http://citeseer.ist.psu.edu" + citUrl.GetAttributeValue("href", "");
             }
 
