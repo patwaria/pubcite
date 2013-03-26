@@ -1198,7 +1198,7 @@ namespace PubCite
             Nsettings.CiteSeerMaxResults=(int)citeseerNumericUpDown.Value;
             Nsettings.GSMaxResults = (int)googleNumericUpDown.Value;
             Nsettings.MASMaxResults=(int)microsoftNumericUpDown.Value;
-           
+          
             (NsettingsRecord).SaveSettings(Nsettings);
             CSParser = new CSXParser();
             GSScraper = new GSScraper();
