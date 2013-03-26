@@ -12,6 +12,7 @@ namespace PubCite
         static List<string> LastJournal = new List<string>();
         static string LastAuthorkey = "abcd";
         static string LastJournalkey = "abcd";
+        static SettingsRecord srecord = new SettingsRecord();
 
         // get value of key. 
         public static Object Get(string key, bool isAuthor)
@@ -32,13 +33,12 @@ namespace PubCite
         // add a key-value pair
         public static void Add(string key, Object objectToCache, bool isAuthor)
         {
-            if (objectToCache == null) { Console.WriteLine("object is null"); return; }
+            if (objectToCache == null) return; 
             key = key.ToLower();
             key=key.Trim();
             key = isAuthor ? key : key + " ";
-            cache.Add(key, objectToCache, DateTime.Now.AddHours(2));
-            Console.WriteLine("Object added to cache");
-            Console.WriteLine(objectToCache.ToString());
+            Settings set = srecord.ReadSettings();
+            cache.Add(key, objectToCache, DateTime.Now.AddDays(set.DaysCache));
         }
 
         //remove key-value pair
