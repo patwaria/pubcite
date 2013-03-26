@@ -151,7 +151,7 @@ namespace PubCite
 
                 tempPaperObj = new Paper(title, pUrl, authNames, abs, year, "", "", numCit, pUrl, 0);
 
-                if (tempPaperObj.NumberOfCitations > 0)
+                //if (tempPaperObj.NumberOfCitations > 0)
                     p.Add(tempPaperObj);
             }                
 
