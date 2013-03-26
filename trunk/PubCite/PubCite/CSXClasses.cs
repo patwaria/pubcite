@@ -574,9 +574,12 @@ namespace PubCite
                 HtmlNode nxUrlN = doc.DocumentNode.SelectSingleNode("//*[@id=\"pager\"]/a");
                 if (nxUrlN == null)
                     return;
-                String nxUrl = "http://citeseer.ist.psu.edu" + nxUrlN.GetAttributeValue("href", "");
+                String nxUrl = "http://citeseer.ist.psu.edu" + nxUrlN.GetAttributeValue("href", "").Replace("&amp;","&");
+                Console.WriteLine(nxUrl);
 
                 doc = web.Load(nxUrl);
+
+                rows = doc.DocumentNode.SelectNodes("//*[@id=\"result_list\"]/div");//*[@id="result_list"]/div[1]
 
                 for (int i = 0; i < rows.Count; i++)
                 {
