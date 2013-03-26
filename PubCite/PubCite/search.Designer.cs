@@ -463,7 +463,7 @@
             this.settingsPanel.Controls.Add(this.settingsOk);
             this.settingsPanel.Controls.Add(this.groupBox1);
             this.settingsPanel.Controls.Add(this.CacheOptions);
-            this.settingsPanel.Location = new System.Drawing.Point(100, 30);
+            this.settingsPanel.Location = new System.Drawing.Point(100, -800);
             this.settingsPanel.Name = "settingsPanel";
             this.settingsPanel.Size = new System.Drawing.Size(499, 319);
             this.settingsPanel.TabIndex = 41;
@@ -506,9 +506,14 @@
             // 
             // microsoftNumericUpDown
             // 
+            this.microsoftNumericUpDown.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
             this.microsoftNumericUpDown.Location = new System.Drawing.Point(271, 109);
             this.microsoftNumericUpDown.Maximum = new decimal(new int[] {
-            500,
+            2000,
             0,
             0,
             0});
@@ -516,7 +521,7 @@
             this.microsoftNumericUpDown.Size = new System.Drawing.Size(44, 22);
             this.microsoftNumericUpDown.TabIndex = 5;
             this.microsoftNumericUpDown.Value = new decimal(new int[] {
-            100,
+            500,
             0,
             0,
             0});
@@ -533,9 +538,14 @@
             // 
             // googleNumericUpDown
             // 
+            this.googleNumericUpDown.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
             this.googleNumericUpDown.Location = new System.Drawing.Point(271, 68);
             this.googleNumericUpDown.Maximum = new decimal(new int[] {
-            500,
+            2000,
             0,
             0,
             0});
@@ -543,7 +553,7 @@
             this.googleNumericUpDown.Size = new System.Drawing.Size(44, 22);
             this.googleNumericUpDown.TabIndex = 3;
             this.googleNumericUpDown.Value = new decimal(new int[] {
-            100,
+            500,
             0,
             0,
             0});
@@ -560,9 +570,14 @@
             // 
             // citeseerNumericUpDown
             // 
+            this.citeseerNumericUpDown.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
             this.citeseerNumericUpDown.Location = new System.Drawing.Point(271, 28);
             this.citeseerNumericUpDown.Maximum = new decimal(new int[] {
-            500,
+            2000,
             0,
             0,
             0});
@@ -570,7 +585,7 @@
             this.citeseerNumericUpDown.Size = new System.Drawing.Size(44, 22);
             this.citeseerNumericUpDown.TabIndex = 1;
             this.citeseerNumericUpDown.Value = new decimal(new int[] {
-            100,
+            500,
             0,
             0,
             0});
