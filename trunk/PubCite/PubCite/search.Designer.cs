@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Authors");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Journals");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Favourites", new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2});
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Authors");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Journals");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Favourites", new System.Windows.Forms.TreeNode[] {
+            treeNode4,
+            treeNode5});
             this.SearchPanel = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -57,6 +57,20 @@
             this.panel11 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.resultsGroupBox = new System.Windows.Forms.GroupBox();
+            this.arbitPanel = new System.Windows.Forms.Panel();
+            this.settingsPanel = new System.Windows.Forms.Panel();
+            this.settingsCloseIcon = new System.Windows.Forms.PictureBox();
+            this.settingsOk = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.microsoftNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.label11 = new System.Windows.Forms.Label();
+            this.googleNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.label12 = new System.Windows.Forms.Label();
+            this.citeseerNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.label13 = new System.Windows.Forms.Label();
+            this.CacheOptions = new System.Windows.Forms.GroupBox();
+            this.cacheNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.CacheOptionslabel = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel19 = new System.Windows.Forms.Panel();
             this.panel9 = new System.Windows.Forms.Panel();
@@ -123,20 +137,9 @@
             this.viewStatisticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeFromFavouritesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.settingsPanel = new System.Windows.Forms.Panel();
-            this.settingsOk = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.microsoftNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.label11 = new System.Windows.Forms.Label();
-            this.googleNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.label12 = new System.Windows.Forms.Label();
-            this.citeseerNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.label13 = new System.Windows.Forms.Label();
-            this.CacheOptions = new System.Windows.Forms.GroupBox();
-            this.cacheNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.CacheOptionslabel = new System.Windows.Forms.Label();
-            this.settingsCloseIcon = new System.Windows.Forms.PictureBox();
-            this.arbitPanel = new System.Windows.Forms.Panel();
+            this.numPapers = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
             this.EndYear = new PubCite.NumericTextBox();
             this.StartYear = new PubCite.NumericTextBox();
             this.SearchPanel.SuspendLayout();
@@ -145,6 +148,14 @@
             this.resultsPanel.SuspendLayout();
             this.panel4.SuspendLayout();
             this.resultsGroupBox.SuspendLayout();
+            this.settingsPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.settingsCloseIcon)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.microsoftNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.googleNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.citeseerNumericUpDown)).BeginInit();
+            this.CacheOptions.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cacheNumericUpDown)).BeginInit();
             this.statisticsGroupBox.SuspendLayout();
             this.progressPanel.SuspendLayout();
             this.favouritesPanel.SuspendLayout();
@@ -156,14 +167,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.stopButton)).BeginInit();
             this.optionsMenuStrip.SuspendLayout();
             this.favouriteMenuStrip.SuspendLayout();
-            this.settingsPanel.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.microsoftNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.googleNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.citeseerNumericUpDown)).BeginInit();
-            this.CacheOptions.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cacheNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.settingsCloseIcon)).BeginInit();
             this.SuspendLayout();
             // 
             // SearchPanel
@@ -224,7 +227,7 @@
             this.cachedListView.ForeColor = System.Drawing.SystemColors.Menu;
             this.cachedListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.cachedListView.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.cachedListView.Location = new System.Drawing.Point(128, 31);
+            this.cachedListView.Location = new System.Drawing.Point(15, 3);
             this.cachedListView.Name = "cachedListView";
             this.cachedListView.Size = new System.Drawing.Size(760, 97);
             this.cachedListView.TabIndex = 29;
@@ -440,6 +443,180 @@
             this.resultsGroupBox.TabStop = false;
             this.resultsGroupBox.Text = "Results ";
             // 
+            // arbitPanel
+            // 
+            this.arbitPanel.Location = new System.Drawing.Point(100, -3);
+            this.arbitPanel.Name = "arbitPanel";
+            this.arbitPanel.Size = new System.Drawing.Size(499, 10);
+            this.arbitPanel.TabIndex = 42;
+            // 
+            // settingsPanel
+            // 
+            this.settingsPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(84)))), ((int)(((byte)(84)))));
+            this.settingsPanel.Controls.Add(this.settingsCloseIcon);
+            this.settingsPanel.Controls.Add(this.settingsOk);
+            this.settingsPanel.Controls.Add(this.groupBox1);
+            this.settingsPanel.Controls.Add(this.CacheOptions);
+            this.settingsPanel.Location = new System.Drawing.Point(100, -800);
+            this.settingsPanel.Name = "settingsPanel";
+            this.settingsPanel.Size = new System.Drawing.Size(499, 319);
+            this.settingsPanel.TabIndex = 41;
+            // 
+            // settingsCloseIcon
+            // 
+            this.settingsCloseIcon.Image = global::PubCite.Properties.Resources.close;
+            this.settingsCloseIcon.Location = new System.Drawing.Point(472, 4);
+            this.settingsCloseIcon.Name = "settingsCloseIcon";
+            this.settingsCloseIcon.Size = new System.Drawing.Size(16, 15);
+            this.settingsCloseIcon.TabIndex = 3;
+            this.settingsCloseIcon.TabStop = false;
+            this.settingsCloseIcon.Click += new System.EventHandler(this.settingsCloseIcon_Click);
+            // 
+            // settingsOk
+            // 
+            this.settingsOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.settingsOk.Location = new System.Drawing.Point(202, 281);
+            this.settingsOk.Name = "settingsOk";
+            this.settingsOk.Size = new System.Drawing.Size(75, 23);
+            this.settingsOk.TabIndex = 2;
+            this.settingsOk.Text = "OK";
+            this.settingsOk.UseVisualStyleBackColor = true;
+            this.settingsOk.Click += new System.EventHandler(this.settingsOk_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.microsoftNumericUpDown);
+            this.groupBox1.Controls.Add(this.label11);
+            this.groupBox1.Controls.Add(this.googleNumericUpDown);
+            this.groupBox1.Controls.Add(this.label12);
+            this.groupBox1.Controls.Add(this.citeseerNumericUpDown);
+            this.groupBox1.Controls.Add(this.label13);
+            this.groupBox1.Location = new System.Drawing.Point(11, 97);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(476, 167);
+            this.groupBox1.TabIndex = 1;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Query Options";
+            // 
+            // microsoftNumericUpDown
+            // 
+            this.microsoftNumericUpDown.Location = new System.Drawing.Point(271, 109);
+            this.microsoftNumericUpDown.Maximum = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
+            this.microsoftNumericUpDown.Name = "microsoftNumericUpDown";
+            this.microsoftNumericUpDown.Size = new System.Drawing.Size(44, 22);
+            this.microsoftNumericUpDown.TabIndex = 5;
+            this.microsoftNumericUpDown.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(18, 113);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(228, 13);
+            this.label11.TabIndex = 4;
+            this.label11.Text = "Limit Microsoft Academic Search Results to:";
+            // 
+            // googleNumericUpDown
+            // 
+            this.googleNumericUpDown.Location = new System.Drawing.Point(271, 68);
+            this.googleNumericUpDown.Maximum = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
+            this.googleNumericUpDown.Name = "googleNumericUpDown";
+            this.googleNumericUpDown.Size = new System.Drawing.Size(44, 22);
+            this.googleNumericUpDown.TabIndex = 3;
+            this.googleNumericUpDown.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(75, 72);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(169, 13);
+            this.label12.TabIndex = 2;
+            this.label12.Text = "Limit Google Scholar Results to:";
+            // 
+            // citeseerNumericUpDown
+            // 
+            this.citeseerNumericUpDown.Location = new System.Drawing.Point(271, 28);
+            this.citeseerNumericUpDown.Maximum = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
+            this.citeseerNumericUpDown.Name = "citeseerNumericUpDown";
+            this.citeseerNumericUpDown.Size = new System.Drawing.Size(44, 22);
+            this.citeseerNumericUpDown.TabIndex = 1;
+            this.citeseerNumericUpDown.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(110, 30);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(132, 13);
+            this.label13.TabIndex = 0;
+            this.label13.Text = "Limit Citeseer Results to:";
+            // 
+            // CacheOptions
+            // 
+            this.CacheOptions.Controls.Add(this.cacheNumericUpDown);
+            this.CacheOptions.Controls.Add(this.CacheOptionslabel);
+            this.CacheOptions.Location = new System.Drawing.Point(11, 28);
+            this.CacheOptions.Name = "CacheOptions";
+            this.CacheOptions.Size = new System.Drawing.Size(476, 63);
+            this.CacheOptions.TabIndex = 0;
+            this.CacheOptions.TabStop = false;
+            this.CacheOptions.Text = "Results Caching";
+            // 
+            // cacheNumericUpDown
+            // 
+            this.cacheNumericUpDown.Location = new System.Drawing.Point(271, 26);
+            this.cacheNumericUpDown.Maximum = new decimal(new int[] {
+            15,
+            0,
+            0,
+            0});
+            this.cacheNumericUpDown.Name = "cacheNumericUpDown";
+            this.cacheNumericUpDown.Size = new System.Drawing.Size(35, 22);
+            this.cacheNumericUpDown.TabIndex = 1;
+            this.cacheNumericUpDown.Value = new decimal(new int[] {
+            9,
+            0,
+            0,
+            0});
+            // 
+            // CacheOptionslabel
+            // 
+            this.CacheOptionslabel.AutoSize = true;
+            this.CacheOptionslabel.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CacheOptionslabel.Location = new System.Drawing.Point(92, 28);
+            this.CacheOptionslabel.Name = "CacheOptionslabel";
+            this.CacheOptionslabel.Size = new System.Drawing.Size(160, 13);
+            this.CacheOptionslabel.TabIndex = 0;
+            this.CacheOptionslabel.Text = "Keep Cache These Many Days:";
+            // 
             // panel5
             // 
             this.panel5.BackgroundImage = global::PubCite.Properties.Resources.border;
@@ -548,6 +725,9 @@
             // statisticsGroupBox
             // 
             this.statisticsGroupBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.statisticsGroupBox.Controls.Add(this.label16);
+            this.statisticsGroupBox.Controls.Add(this.numPapers);
+            this.statisticsGroupBox.Controls.Add(this.label15);
             this.statisticsGroupBox.Controls.Add(this.panel12);
             this.statisticsGroupBox.Controls.Add(this.panel10);
             this.statisticsGroupBox.Controls.Add(this.label5);
@@ -666,7 +846,7 @@
             // progressPanel
             // 
             this.progressPanel.Controls.Add(this.label3);
-            this.progressPanel.Location = new System.Drawing.Point(480, 44);
+            this.progressPanel.Location = new System.Drawing.Point(501, 44);
             this.progressPanel.Name = "progressPanel";
             this.progressPanel.Size = new System.Drawing.Size(248, 29);
             this.progressPanel.TabIndex = 22;
@@ -696,27 +876,27 @@
             this.citesperPaper.AutoSize = true;
             this.citesperPaper.Location = new System.Drawing.Point(321, 18);
             this.citesperPaper.Name = "citesperPaper";
-            this.citesperPaper.Size = new System.Drawing.Size(26, 13);
+            this.citesperPaper.Size = new System.Drawing.Size(14, 13);
             this.citesperPaper.TabIndex = 18;
-            this.citesperPaper.Text = "cpp";
+            this.citesperPaper.Text = "#";
             // 
             // citesperYear
             // 
             this.citesperYear.AutoSize = true;
             this.citesperYear.Location = new System.Drawing.Point(321, 39);
             this.citesperYear.Name = "citesperYear";
-            this.citesperYear.Size = new System.Drawing.Size(25, 13);
+            this.citesperYear.Size = new System.Drawing.Size(14, 13);
             this.citesperYear.TabIndex = 17;
-            this.citesperYear.Text = "cpy";
+            this.citesperYear.Text = "#";
             // 
             // citationsNumberLabel
             // 
             this.citationsNumberLabel.AutoSize = true;
             this.citationsNumberLabel.Location = new System.Drawing.Point(64, 38);
             this.citationsNumberLabel.Name = "citationsNumberLabel";
-            this.citationsNumberLabel.Size = new System.Drawing.Size(61, 13);
+            this.citationsNumberLabel.Size = new System.Drawing.Size(14, 13);
             this.citationsNumberLabel.TabIndex = 16;
-            this.citationsNumberLabel.Text = "# citations";
+            this.citationsNumberLabel.Text = "#";
             // 
             // authorNameLabel
             // 
@@ -893,14 +1073,14 @@
             this.favouritesTreeView.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.favouritesTreeView.Location = new System.Drawing.Point(11, 43);
             this.favouritesTreeView.Name = "favouritesTreeView";
-            treeNode1.Name = "authorsRootNode";
-            treeNode1.Text = "Authors";
-            treeNode2.Name = "journalsRootNode";
-            treeNode2.Text = "Journals";
-            treeNode3.Name = "Favourites";
-            treeNode3.Text = "Favourites";
+            treeNode4.Name = "authorsRootNode";
+            treeNode4.Text = "Authors";
+            treeNode5.Name = "journalsRootNode";
+            treeNode5.Text = "Journals";
+            treeNode6.Name = "Favourites";
+            treeNode6.Text = "Favourites";
             this.favouritesTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode3});
+            treeNode6});
             this.favouritesTreeView.Size = new System.Drawing.Size(192, 209);
             this.favouritesTreeView.TabIndex = 9;
             // 
@@ -1090,179 +1270,34 @@
             this.removeFromFavouritesToolStripMenuItem.Text = "Remove from Favourites";
             this.removeFromFavouritesToolStripMenuItem.Click += new System.EventHandler(this.removeFromFavouritesToolStripMenuItem_Click);
             // 
-            // settingsPanel
+            // numPapers
             // 
-            this.settingsPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(84)))), ((int)(((byte)(84)))));
-            this.settingsPanel.Controls.Add(this.settingsCloseIcon);
-            this.settingsPanel.Controls.Add(this.settingsOk);
-            this.settingsPanel.Controls.Add(this.groupBox1);
-            this.settingsPanel.Controls.Add(this.CacheOptions);
-            this.settingsPanel.Location = new System.Drawing.Point(100, -800);
-            this.settingsPanel.Name = "settingsPanel";
-            this.settingsPanel.Size = new System.Drawing.Size(499, 319);
-            this.settingsPanel.TabIndex = 41;
+            this.numPapers.AutoSize = true;
+            this.numPapers.Location = new System.Drawing.Point(551, 18);
+            this.numPapers.Name = "numPapers";
+            this.numPapers.Size = new System.Drawing.Size(14, 13);
+            this.numPapers.TabIndex = 35;
+            this.numPapers.Text = "#";
             // 
-            // settingsOk
+            // label15
             // 
-            this.settingsOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.settingsOk.Location = new System.Drawing.Point(202, 281);
-            this.settingsOk.Name = "settingsOk";
-            this.settingsOk.Size = new System.Drawing.Size(75, 23);
-            this.settingsOk.TabIndex = 2;
-            this.settingsOk.Text = "OK";
-            this.settingsOk.UseVisualStyleBackColor = true;
-            this.settingsOk.Click += new System.EventHandler(this.settingsOk_Click);
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(433, 18);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(102, 13);
+            this.label15.TabIndex = 34;
+            this.label15.Text = "Number of Papers";
             // 
-            // groupBox1
+            // label16
             // 
-            this.groupBox1.Controls.Add(this.microsoftNumericUpDown);
-            this.groupBox1.Controls.Add(this.label11);
-            this.groupBox1.Controls.Add(this.googleNumericUpDown);
-            this.groupBox1.Controls.Add(this.label12);
-            this.groupBox1.Controls.Add(this.citeseerNumericUpDown);
-            this.groupBox1.Controls.Add(this.label13);
-            this.groupBox1.Location = new System.Drawing.Point(11, 97);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(476, 167);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Query Options";
-            // 
-            // microsoftNumericUpDown
-            // 
-            this.microsoftNumericUpDown.Location = new System.Drawing.Point(271, 109);
-            this.microsoftNumericUpDown.Maximum = new decimal(new int[] {
-            500,
-            0,
-            0,
-            0});
-            this.microsoftNumericUpDown.Name = "microsoftNumericUpDown";
-            this.microsoftNumericUpDown.Size = new System.Drawing.Size(44, 22);
-            this.microsoftNumericUpDown.TabIndex = 5;
-            this.microsoftNumericUpDown.Value = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(18, 113);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(228, 13);
-            this.label11.TabIndex = 4;
-            this.label11.Text = "Limit Microsoft Academic Search Results to:";
-            // 
-            // googleNumericUpDown
-            // 
-            this.googleNumericUpDown.Location = new System.Drawing.Point(271, 68);
-            this.googleNumericUpDown.Maximum = new decimal(new int[] {
-            500,
-            0,
-            0,
-            0});
-            this.googleNumericUpDown.Name = "googleNumericUpDown";
-            this.googleNumericUpDown.Size = new System.Drawing.Size(44, 22);
-            this.googleNumericUpDown.TabIndex = 3;
-            this.googleNumericUpDown.Value = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(75, 72);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(169, 13);
-            this.label12.TabIndex = 2;
-            this.label12.Text = "Limit Google Scholar Results to:";
-            // 
-            // citeseerNumericUpDown
-            // 
-            this.citeseerNumericUpDown.Location = new System.Drawing.Point(271, 28);
-            this.citeseerNumericUpDown.Maximum = new decimal(new int[] {
-            500,
-            0,
-            0,
-            0});
-            this.citeseerNumericUpDown.Name = "citeseerNumericUpDown";
-            this.citeseerNumericUpDown.Size = new System.Drawing.Size(44, 22);
-            this.citeseerNumericUpDown.TabIndex = 1;
-            this.citeseerNumericUpDown.Value = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(110, 30);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(132, 13);
-            this.label13.TabIndex = 0;
-            this.label13.Text = "Limit Citeseer Results to:";
-            // 
-            // CacheOptions
-            // 
-            this.CacheOptions.Controls.Add(this.cacheNumericUpDown);
-            this.CacheOptions.Controls.Add(this.CacheOptionslabel);
-            this.CacheOptions.Location = new System.Drawing.Point(11, 28);
-            this.CacheOptions.Name = "CacheOptions";
-            this.CacheOptions.Size = new System.Drawing.Size(476, 63);
-            this.CacheOptions.TabIndex = 0;
-            this.CacheOptions.TabStop = false;
-            this.CacheOptions.Text = "Results Caching";
-            // 
-            // cacheNumericUpDown
-            // 
-            this.cacheNumericUpDown.Location = new System.Drawing.Point(271, 26);
-            this.cacheNumericUpDown.Maximum = new decimal(new int[] {
-            15,
-            0,
-            0,
-            0});
-            this.cacheNumericUpDown.Name = "cacheNumericUpDown";
-            this.cacheNumericUpDown.Size = new System.Drawing.Size(35, 22);
-            this.cacheNumericUpDown.TabIndex = 1;
-            this.cacheNumericUpDown.Value = new decimal(new int[] {
-            9,
-            0,
-            0,
-            0});
-            // 
-            // CacheOptionslabel
-            // 
-            this.CacheOptionslabel.AutoSize = true;
-            this.CacheOptionslabel.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CacheOptionslabel.Location = new System.Drawing.Point(92, 28);
-            this.CacheOptionslabel.Name = "CacheOptionslabel";
-            this.CacheOptionslabel.Size = new System.Drawing.Size(160, 13);
-            this.CacheOptionslabel.TabIndex = 0;
-            this.CacheOptionslabel.Text = "Keep Cache These Many Days:";
-            // 
-            // settingsCloseIcon
-            // 
-            this.settingsCloseIcon.Image = global::PubCite.Properties.Resources.close;
-            this.settingsCloseIcon.Location = new System.Drawing.Point(472, 4);
-            this.settingsCloseIcon.Name = "settingsCloseIcon";
-            this.settingsCloseIcon.Size = new System.Drawing.Size(16, 15);
-            this.settingsCloseIcon.TabIndex = 3;
-            this.settingsCloseIcon.TabStop = false;
-            this.settingsCloseIcon.Click += new System.EventHandler(this.settingsCloseIcon_Click);
-            // 
-            // arbitPanel
-            // 
-            this.arbitPanel.Location = new System.Drawing.Point(100, -3);
-            this.arbitPanel.Name = "arbitPanel";
-            this.arbitPanel.Size = new System.Drawing.Size(499, 10);
-            this.arbitPanel.TabIndex = 42;
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(535, 18);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(10, 13);
+            this.label16.TabIndex = 36;
+            this.label16.Text = ":";
             // 
             // EndYear
             // 
@@ -1306,6 +1341,16 @@
             this.resultsPanel.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.resultsGroupBox.ResumeLayout(false);
+            this.settingsPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.settingsCloseIcon)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.microsoftNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.googleNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.citeseerNumericUpDown)).EndInit();
+            this.CacheOptions.ResumeLayout(false);
+            this.CacheOptions.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cacheNumericUpDown)).EndInit();
             this.statisticsGroupBox.ResumeLayout(false);
             this.statisticsGroupBox.PerformLayout();
             this.progressPanel.ResumeLayout(false);
@@ -1319,16 +1364,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.stopButton)).EndInit();
             this.optionsMenuStrip.ResumeLayout(false);
             this.favouriteMenuStrip.ResumeLayout(false);
-            this.settingsPanel.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.microsoftNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.googleNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.citeseerNumericUpDown)).EndInit();
-            this.CacheOptions.ResumeLayout(false);
-            this.CacheOptions.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cacheNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.settingsCloseIcon)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1440,5 +1475,8 @@
         private System.Windows.Forms.Label CacheOptionslabel;
         private System.Windows.Forms.PictureBox settingsCloseIcon;
         private System.Windows.Forms.Panel arbitPanel;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label numPapers;
+        private System.Windows.Forms.Label label15;
     }
 }
