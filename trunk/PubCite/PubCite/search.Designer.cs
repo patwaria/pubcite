@@ -142,11 +142,11 @@
             this.favouriteMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.viewStatisticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeFromFavouritesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearFavouritesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.recentMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.clearFavouritesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SearchPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.settingsIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.addToFavourite)).BeginInit();
@@ -907,7 +907,7 @@
             this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(18, 11);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(215, 13);
+            this.label3.Size = new System.Drawing.Size(218, 13);
             this.label3.TabIndex = 1;
             this.label3.Text = "Please wait while we process your query...";
             // 
@@ -1231,7 +1231,7 @@
             this.label2.ForeColor = System.Drawing.SystemColors.Menu;
             this.label2.Location = new System.Drawing.Point(314, 41);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(22, 13);
+            this.label2.Size = new System.Drawing.Size(23, 13);
             this.label2.TabIndex = 10;
             this.label2.Text = "To:";
             // 
@@ -1341,6 +1341,13 @@
             this.removeFromFavouritesToolStripMenuItem.Text = "Remove from Favourites";
             this.removeFromFavouritesToolStripMenuItem.Click += new System.EventHandler(this.removeFromFavouritesToolStripMenuItem_Click);
             // 
+            // clearFavouritesToolStripMenuItem
+            // 
+            this.clearFavouritesToolStripMenuItem.Name = "clearFavouritesToolStripMenuItem";
+            this.clearFavouritesToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.clearFavouritesToolStripMenuItem.Text = "Clear Favourites";
+            this.clearFavouritesToolStripMenuItem.Click += new System.EventHandler(this.clearFavouritesToolStripMenuItem_Click);
+            // 
             // recentMenuStrip
             // 
             this.recentMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1362,13 +1369,6 @@
             this.clearHistoryToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.clearHistoryToolStripMenuItem.Text = "Clear History";
             this.clearHistoryToolStripMenuItem.Click += new System.EventHandler(this.clearHistoryToolStripMenuItem_Click);
-            // 
-            // clearFavouritesToolStripMenuItem
-            // 
-            this.clearFavouritesToolStripMenuItem.Name = "clearFavouritesToolStripMenuItem";
-            this.clearFavouritesToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
-            this.clearFavouritesToolStripMenuItem.Text = "Clear Favourites";
-            this.clearFavouritesToolStripMenuItem.Click += new System.EventHandler(this.clearFavouritesToolStripMenuItem_Click);
             // 
             // search
             // 

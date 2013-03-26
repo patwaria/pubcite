@@ -40,6 +40,7 @@ namespace PubCite
         Boolean suggestions;
         Boolean nextData;
         Boolean STOP;
+        Boolean currentSearchEntity;
 
         String gs_nextUrl;
 
@@ -410,7 +411,8 @@ namespace PubCite
 
             FavAuthorList = Form1.favorites.AuthorList;
             FavJournalList = Form1.favorites.JournalList;
-
+            favouritesTreeView.Nodes[0].Nodes[0].Nodes.Clear();
+            favouritesTreeView.Nodes[0].Nodes[1].Nodes.Clear();
             for (int i = 0; i < FavAuthorList.Count; i++)
             {
 
@@ -421,30 +423,6 @@ namespace PubCite
             {
                 favouritesTreeView.Nodes[0].Nodes[1].Nodes.Add(new TreeNode(FavJournalList[i].Name));
                 favouritesTreeView.Nodes[0].Nodes[1].Nodes[i].ContextMenuStrip = favouriteMenuStrip;
-            }
-        }
-
-        public void UpdateTree()
-        {
-
-            if (authorCheckBox.Checked == true)
-            {
-                favouritesTreeView.Nodes[0].Nodes[0].Nodes.Clear();
-                for (int i = 0; i < FavAuthorList.Count; i++)
-                {
-
-                    favouritesTreeView.Nodes[0].Nodes[0].Nodes.Add(new TreeNode(FavAuthorList[i].Name));
-                    favouritesTreeView.Nodes[0].Nodes[0].Nodes[i].ContextMenuStrip = favouriteMenuStrip;
-                }
-            }
-            else if (journalCheckBox.Checked == true)
-            {
-                favouritesTreeView.Nodes[0].Nodes[1].Nodes.Clear();
-                for (int i = 0; i < Form1.favorites.JournalList.Count; i++)
-                {
-                    favouritesTreeView.Nodes[0].Nodes[1].Nodes.Add(new TreeNode(FavJournalList[i].Name));
-                    favouritesTreeView.Nodes[0].Nodes[1].Nodes[i].ContextMenuStrip = favouriteMenuStrip;
-                }
             }
         }
 
@@ -1050,18 +1028,18 @@ namespace PubCite
 
         private void addToFavourite_Click(object sender, EventArgs e)
         {
-            if (authorCheckBox.Checked == true && authStats != null)
+            if (authorResultsListView.Visible == true && authStats != null)
             {
 
                 Form1.favorites.AddAuthor(authStats);
 
             }
-            else if (journalCheckBox.Checked == true && journalStats != null)
+            else if (journalResultsListView.Visible == true && journalStats != null)
             {
 
                 Form1.favorites.AddJournal(journalStats);
             }
-            UpdateTree();
+            ArrangeTree();
         }
 
         private void favouritesTreeView_MouseDoubleClick(object sender, EventArgs e)
@@ -1110,7 +1088,7 @@ namespace PubCite
             Console.WriteLine(StartYear.Text);
             if (StartYear.Text.Length == 4 || StartYear.getintval() == 0)
             {
-                if (authorCheckBox.Checked == true && authStats != null)
+                if (authorResultsListView.Visible == true && authStats != null)
                     populateAuthor();
                 else if (journalStats != null)
                     populateJournal();
@@ -1122,7 +1100,7 @@ namespace PubCite
 
             if (EndYear.Text.Length == 4 || EndYear.getintval() == 0)
             {
-                if (authorCheckBox.Checked == true && authStats != null)
+                if (authorResultsListView.Visible == true && authStats != null)
                     populateAuthor();
                 else if (journalStats != null)
                     populateJournal();
@@ -1229,11 +1207,8 @@ namespace PubCite
         private void clearFavouritesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form1.favorites.clear();
-            UpdateTree();
-        }
-
-       
-        
+            ArrangeTree();
+        }        
     }
 }
 
