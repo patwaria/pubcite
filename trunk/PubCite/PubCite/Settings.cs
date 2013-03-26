@@ -28,7 +28,7 @@ namespace PubCite
         {
         }
         public Settings()
-            : this(7, 100, 100, 100)
+            : this(7)
         {
 
         }
