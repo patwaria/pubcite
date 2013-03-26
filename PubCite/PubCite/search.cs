@@ -1030,16 +1030,19 @@ namespace PubCite
 
         private void addToFavourite_Click(object sender, EventArgs e)
         {
-            if (authorResultsListView.Visible == true && authStats != null)
+            
+            if (authStats!=null && !authStats.IsFavorite)
             {
 
                 Form1.favorites.AddAuthor(authStats);
+                authStats.IsFavorite = true;
 
             }
-            else if (journalResultsListView.Visible == true && journalStats != null)
+            else if (journalStats!=null && !journalStats.IsFavorite)
             {
 
                 Form1.favorites.AddJournal(journalStats);
+                journalStats.IsFavorite = true;
             }
             ArrangeTree();
         }
