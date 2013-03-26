@@ -98,10 +98,10 @@ namespace PubCite
         void KeywordsTextBox_KeyUp(object sender, KeyEventArgs e)
         {
           
-            if (authorCheckBox.Checked == true && authStats != null)
-                    populateAuthor();
-            else if (journalStats != null)
-                    populateJournal();
+            if (authorResultsListView.Visible)
+                populateAuthor();
+            else
+                populateJournal();
         }
 
         void ListView_DrawItem(object sender, DrawListViewItemEventArgs e)
@@ -548,7 +548,7 @@ namespace PubCite
 
         private void startProgressUI()
         {
-            disablePanels();
+
             progressPanel.Visible = true;
             progressBar.BringToFront();
             progressBar.Visible = true;
@@ -614,35 +614,6 @@ namespace PubCite
                 {
                     authors = authSug.getSuggestions();
                     auth_url = authSug.getSuggestionsURL();
-
-                    /*if (authors.Count == 1)
-                    {
-                        suggestedIndex = 0;
-                        if (prevSelectedIndex != suggestedIndex)
-                        {
-                            if (a[0] == true)
-                            {
-                                authStats = CSParser.getAuthStatistics(auth_url[suggestedIndex]);
-                                authStats.Type = 0;
-                            }
-                            else if (a[1] == true)
-                            {
-                                authStats = GSScraper.getAuthStatistics(auth_url[suggestedIndex]);
-                                authStats.Type = 1;
-                            }
-                            else if (a[2] == true)
-                            {
-                                authStats = MSParser.getAuthStatistics(auth_url[suggestedIndex]);
-                                authStats.Type = 2;
-                            }
-                            prevSelectedIndex = suggestedIndex;
-                        }
-                        suggestions = false;
-                    }
-                    else
-                    {
-                        suggestions = true;
-                    }*/
 
                     suggestions = true;
                 }
@@ -782,7 +753,6 @@ namespace PubCite
             while (nextData == true && STOP == false)
             {
                 lastCount = journalStats.getNumberOfPapers();
-                Console.WriteLine("Journal");
                 BackgroundWorker backgroundWorker1 = new BackgroundWorker();
                 backgroundWorker1.DoWork += new DoWorkEventHandler(backgroundWorker_journalsNextDataWork);
                 backgroundWorker1.RunWorkerAsync();
@@ -822,9 +792,6 @@ namespace PubCite
             RecentSearchKeys.Add(authStats.Name);
             updateHistory(authStats.Name);
             populateAuthor();
-            /* enable panels */
-            enablePanels();
-
 
             getNextAuthStats(true);
             showSearch();
@@ -843,6 +810,7 @@ namespace PubCite
 
             cachedListView.Visible = false;
             cachedListView.SendToBack();
+
 
             startProgressUI();
 
@@ -879,7 +847,7 @@ namespace PubCite
                 // disable those options which will trigger another thread 
             }
 
-            enablePanels();
+            endProgressUI();
             if (authorCheckBox.Checked == true)
             {
                 Console.WriteLine("Done" + suggestions);
@@ -907,16 +875,18 @@ namespace PubCite
             else
             {
                 if(journalStats != null) {
-                /* add journal to cache */
-                cacheObject.Add(journalStats.Name, journalStats, false);
 
-                /* add journal to recent */
-                RecentSearchKeys.Add(journalStats.Name);
-                updateHistory(journalStats.Name);
-                populateJournal();
+                    /* add journal to cache */
+                    cacheObject.Add(journalStats.Name, journalStats, false);
 
-                getNextJournal();
-                    }
+                    /* add journal to recent */
+                    RecentSearchKeys.Add(journalStats.Name);
+                    updateHistory(journalStats.Name);
+                    populateJournal();
+
+                    startProgressUI();
+                    getNextJournal();
+                }
             }
 
             showSearch();
@@ -948,19 +918,17 @@ namespace PubCite
             {
                 citationIndex = authorResultsListView.FocusedItem.Index;
                 citationType = authStats.Type;
-                Papers = authStats.getPapers();
 
             }
             else
             {
                 citationIndex = journalResultsListView.FocusedItem.Index;
                 citationType = journalStats.Type;
-                Papers = journalStats.getPapers();
             }
 
             if (Papers[citationIndex].NumberOfCitations != 0)
             {
-                disablePanels();
+                /*disablePanels();
                 progressPanel.Visible = true;
                 progressBar.Style = ProgressBarStyle.Marquee;
                 progressBar.MarqueeAnimationSpeed = 15;
@@ -982,16 +950,13 @@ namespace PubCite
                 enablePanels();
                 progressPanel.Visible = false;
                 progressBar.SendToBack();
-                progressBar.Visible = false;
+                progressBar.Visible = false;*/
 
                 TabPage citationsPage = new TabPage("Citations");
                 citationsPage.ImageIndex = 1;
                 Form1.dub_tab.TabPages.Insert(Form1.dub_tab.TabPages.Count - 1, citationsPage);
-                CitationsTab NcitTab = new CitationsTab();
+                CitationsTab NcitTab = new CitationsTab(Papers[citationIndex], citationType);
                 citationsPage.Controls.Add(NcitTab);
-
-
-                NcitTab.populateCitations(Papers[citationIndex], Citations, citationType);
 
                 Form1.dub_tab.SelectedTab = citationsPage;
             }

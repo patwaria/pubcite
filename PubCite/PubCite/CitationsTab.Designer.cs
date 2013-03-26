@@ -66,12 +66,18 @@
             this.optionMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.viewCitationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewUrlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewAll = new System.Windows.Forms.Button();
+            this.stop = new System.Windows.Forms.PictureBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.citationsShown = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.progressPanel.SuspendLayout();
             this.publicationsDetailsGroupBox.SuspendLayout();
             this.resultsGroupBox.SuspendLayout();
             this.optionMenuStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.stop)).BeginInit();
             this.SuspendLayout();
             // 
             // panel3
@@ -80,28 +86,30 @@
             this.panel3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panel3.Location = new System.Drawing.Point(3, 3);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1009, 637);
+            this.panel3.Size = new System.Drawing.Size(996, 637);
             this.panel3.TabIndex = 2;
             // 
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.panel4.Controls.Add(this.stop);
+            this.panel4.Controls.Add(this.viewAll);
             this.panel4.Controls.Add(this.progressPanel);
             this.panel4.Controls.Add(this.publicationsDetailsGroupBox);
             this.panel4.Controls.Add(this.resultsGroupBox);
             this.panel4.ForeColor = System.Drawing.SystemColors.Menu;
             this.panel4.Location = new System.Drawing.Point(3, 3);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1003, 631);
+            this.panel4.Size = new System.Drawing.Size(992, 631);
             this.panel4.TabIndex = 3;
             // 
             // progressPanel
             // 
             this.progressPanel.Controls.Add(this.label7);
             this.progressPanel.Controls.Add(this.progressBar);
-            this.progressPanel.Location = new System.Drawing.Point(6, 176);
+            this.progressPanel.Location = new System.Drawing.Point(3, 181);
             this.progressPanel.Name = "progressPanel";
-            this.progressPanel.Size = new System.Drawing.Size(546, 29);
+            this.progressPanel.Size = new System.Drawing.Size(546, 32);
             this.progressPanel.TabIndex = 23;
             this.progressPanel.Visible = false;
             // 
@@ -124,6 +132,9 @@
             // publicationsDetailsGroupBox
             // 
             this.publicationsDetailsGroupBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.publicationsDetailsGroupBox.Controls.Add(this.label13);
+            this.publicationsDetailsGroupBox.Controls.Add(this.citationsShown);
+            this.publicationsDetailsGroupBox.Controls.Add(this.label15);
             this.publicationsDetailsGroupBox.Controls.Add(this.label8);
             this.publicationsDetailsGroupBox.Controls.Add(this.label9);
             this.publicationsDetailsGroupBox.Controls.Add(this.label10);
@@ -144,7 +155,7 @@
             this.publicationsDetailsGroupBox.ForeColor = System.Drawing.SystemColors.Control;
             this.publicationsDetailsGroupBox.Location = new System.Drawing.Point(3, 6);
             this.publicationsDetailsGroupBox.Name = "publicationsDetailsGroupBox";
-            this.publicationsDetailsGroupBox.Size = new System.Drawing.Size(969, 174);
+            this.publicationsDetailsGroupBox.Size = new System.Drawing.Size(988, 174);
             this.publicationsDetailsGroupBox.TabIndex = 8;
             this.publicationsDetailsGroupBox.TabStop = false;
             this.publicationsDetailsGroupBox.Text = "Publication Details";
@@ -262,7 +273,7 @@
             this.abstractBox.Location = new System.Drawing.Point(9, 94);
             this.abstractBox.Name = "abstractBox";
             this.abstractBox.ReadOnly = true;
-            this.abstractBox.Size = new System.Drawing.Size(954, 70);
+            this.abstractBox.Size = new System.Drawing.Size(976, 70);
             this.abstractBox.TabIndex = 11;
             this.abstractBox.Text = "";
             // 
@@ -321,9 +332,9 @@
             this.resultsGroupBox.Controls.Add(this.authorResultsListView);
             this.resultsGroupBox.Controls.Add(this.journalsResultsListView);
             this.resultsGroupBox.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.resultsGroupBox.Location = new System.Drawing.Point(0, 208);
+            this.resultsGroupBox.Location = new System.Drawing.Point(0, 214);
             this.resultsGroupBox.Name = "resultsGroupBox";
-            this.resultsGroupBox.Size = new System.Drawing.Size(1000, 423);
+            this.resultsGroupBox.Size = new System.Drawing.Size(991, 417);
             this.resultsGroupBox.TabIndex = 0;
             this.resultsGroupBox.TabStop = false;
             this.resultsGroupBox.Text = "Results ";
@@ -343,7 +354,7 @@
             this.authorResultsListView.MultiSelect = false;
             this.authorResultsListView.Name = "authorResultsListView";
             this.authorResultsListView.OwnerDraw = true;
-            this.authorResultsListView.Size = new System.Drawing.Size(994, 402);
+            this.authorResultsListView.Size = new System.Drawing.Size(985, 396);
             this.authorResultsListView.TabIndex = 1;
             this.authorResultsListView.UseCompatibleStateImageBehavior = false;
             this.authorResultsListView.View = System.Windows.Forms.View.Details;
@@ -351,7 +362,7 @@
             // columnHeader6
             // 
             this.columnHeader6.Text = "Paper";
-            this.columnHeader6.Width = 660;
+            this.columnHeader6.Width = 654;
             // 
             // authorColumn
             // 
@@ -380,7 +391,7 @@
             this.journalsResultsListView.Location = new System.Drawing.Point(3, 18);
             this.journalsResultsListView.MultiSelect = false;
             this.journalsResultsListView.Name = "journalsResultsListView";
-            this.journalsResultsListView.Size = new System.Drawing.Size(994, 402);
+            this.journalsResultsListView.Size = new System.Drawing.Size(985, 396);
             this.journalsResultsListView.TabIndex = 0;
             this.journalsResultsListView.UseCompatibleStateImageBehavior = false;
             this.journalsResultsListView.View = System.Windows.Forms.View.Details;
@@ -428,6 +439,57 @@
             this.viewUrlToolStripMenuItem.Text = "View Url";
             this.viewUrlToolStripMenuItem.Click += new System.EventHandler(this.viewUrlToolStripMenuItem_Click);
             // 
+            // viewAll
+            // 
+            this.viewAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.viewAll.Location = new System.Drawing.Point(890, 189);
+            this.viewAll.Name = "viewAll";
+            this.viewAll.Size = new System.Drawing.Size(98, 23);
+            this.viewAll.TabIndex = 24;
+            this.viewAll.Text = " View Full List";
+            this.viewAll.UseVisualStyleBackColor = true;
+            this.viewAll.Click += new System.EventHandler(this.viewAll_Click);
+            // 
+            // stop
+            // 
+            this.stop.Image = global::PubCite.Properties.Resources.stop_button;
+            this.stop.Location = new System.Drawing.Point(869, 194);
+            this.stop.Name = "stop";
+            this.stop.Size = new System.Drawing.Size(15, 15);
+            this.stop.TabIndex = 25;
+            this.stop.TabStop = false;
+            this.stop.Visible = false;
+            this.stop.Click += new System.EventHandler(this.stop_Click);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(783, 38);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(10, 13);
+            this.label13.TabIndex = 25;
+            this.label13.Text = ":";
+            // 
+            // citationsShown
+            // 
+            this.citationsShown.AutoSize = true;
+            this.citationsShown.Location = new System.Drawing.Point(804, 38);
+            this.citationsShown.Name = "citationsShown";
+            this.citationsShown.Size = new System.Drawing.Size(14, 13);
+            this.citationsShown.TabIndex = 24;
+            this.citationsShown.Text = "#";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(685, 38);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(92, 13);
+            this.label15.TabIndex = 23;
+            this.label15.Text = "Citations Shown";
+            // 
             // CitationsTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -444,6 +506,7 @@
             this.publicationsDetailsGroupBox.PerformLayout();
             this.resultsGroupBox.ResumeLayout(false);
             this.optionMenuStrip.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.stop)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -487,6 +550,11 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Button viewAll;
+        private System.Windows.Forms.PictureBox stop;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label citationsShown;
+        private System.Windows.Forms.Label label15;
 
 
     }
