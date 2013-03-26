@@ -15,6 +15,7 @@ namespace SG
         private int h_ind;               //h index of the search entity
         private int i10_ind;             // i10 index of the search entity
         private int type;
+        private bool isFavorite;
 
         //constructors
         public  SearchEntity(string name, int h, int i)
@@ -24,6 +25,7 @@ namespace SG
             i10_ind = i;
             papers = new List<Paper>();
             type = 0;
+            isFavorite = false;
         }
         public SearchEntity(string name, int h, int i, int type)
         {
@@ -32,6 +34,7 @@ namespace SG
             i10_ind = i;
             papers = new List<Paper>();
             this.type = type;
+            isFavorite = false;
         }
         public  SearchEntity(SerializationInfo info, StreamingContext ctxt){
             name = (string)info.GetValue("Name", typeof(string));
@@ -39,6 +42,7 @@ namespace SG
             h_ind = (int)info.GetValue("HInd", typeof(int));
             i10_ind = (int)info.GetValue("IInd", typeof(int));
             type = (int)info.GetValue("Type", typeof(int));
+            isFavorite = (bool)info.GetValue("isFav", typeof(bool));
         }
         public virtual void GetObjectData(SerializationInfo info, StreamingContext ctxt)
         {
@@ -47,6 +51,7 @@ namespace SG
             info.AddValue("HInd", h_ind);
             info.AddValue("IInd", i10_ind);
             info.AddValue("Type",type);
+            info.AddValue("isFav", isFavorite);
         }
 
         //property - "Name" of the search entity
@@ -66,6 +71,17 @@ namespace SG
             set
             {
                 type = value;
+            }
+        }
+        public bool IsFavorite
+        {
+            get
+            {
+                return IsFavorite;
+            }
+            set
+            {
+                IsFavorite = value;
             }
         }
         public void setHIndex(int h)
