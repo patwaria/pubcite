@@ -901,7 +901,7 @@
             this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(18, 11);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(215, 13);
+            this.label3.Size = new System.Drawing.Size(218, 13);
             this.label3.TabIndex = 1;
             this.label3.Text = "Please wait while we process your query...";
             // 
@@ -1218,7 +1218,7 @@
             this.label2.ForeColor = System.Drawing.SystemColors.Menu;
             this.label2.Location = new System.Drawing.Point(314, 41);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(22, 13);
+            this.label2.Size = new System.Drawing.Size(23, 13);
             this.label2.TabIndex = 10;
             this.label2.Text = "To:";
             // 
