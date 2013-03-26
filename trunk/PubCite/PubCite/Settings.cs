@@ -24,7 +24,7 @@ namespace PubCite
             masMaxResults = MASMaxResults;
         }
         public Settings(int DaysCache)
-            : this(DaysCache, 100, 100, 100)
+            : this(DaysCache, 500, 500, 500)
         {
         }
         public Settings()
