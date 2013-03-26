@@ -12,7 +12,7 @@ namespace PubCite
         private Settings set;
         public SettingsRecord()
         {
-            set = new Settings();
+            set = new Settings();   
         }
         public Settings ReadSettings()
         {
