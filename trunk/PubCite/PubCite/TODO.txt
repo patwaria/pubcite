@@ -5,7 +5,6 @@
 6. Copy citations/export in different formats: ?
 7. co-author graph ?
 8. citations problem after sort/keywords
-9. settings
-10. Not found loop
+9. Not found loop
 
 @parsers : Urlformatexception, numberformatexception, No error handling for arbit searches
