@@ -14,6 +14,13 @@ namespace PubCite
 
         private HtmlDocument doc;
 
+        bool checkForCaptcha() {
+            bool tmp = false;
+            if (doc.DocumentNode.InnerHtml.Contains("We're sorry...") && doc.DocumentNode.InnerHtml.Contains("... but your computer or network may be sending automated queries. To protect our users, we can't process your request right now.")) tmp = true;
+            if (doc.DocumentNode.InnerHtml.Contains("action=\"Captcha\"") && doc.DocumentNode.InnerHtml.Contains("Our systems have detected unusual traffic from your computer network.")) tmp = true;
+            return tmp;
+        }
+
 
         // SUGGESTIONS FROM SEARCH PAGE
         public SG.AuthSuggestion getAuthSuggestions(string authName)//,ref string next_URL)
@@ -88,8 +95,11 @@ namespace PubCite
                 }
                 else next_URL = null;
 
+                //TAKING RESULTS FROM NEXT PAGE
+                SG.AuthSuggestion suggestions = new SG.AuthSuggestion(names,links,true);
+                getAuthSuggestionsNextPage(next_URL, ref suggestions, ref next_URL);
 
-                return new SG.AuthSuggestion(names, links, true);
+                return suggestions;
             }
             else return new SG.AuthSuggestion(null, null, false);
         }
@@ -189,11 +199,13 @@ namespace PubCite
             SG.Author author = new SG.Author(authScraper.getName(), authScraper.getAffiliation(), authScraper.getHomePage(), authScraper.getHIndex(), authScraper.getIIndex());
             //Console.WriteLine(author.Name + "," + author.getHIndex() + "," + author.getI10Index());
             List<SG.Paper> papers = authScraper.getPapersOfCurrentPage();
-            if (papers != null) foreach (SG.Paper paper in papers) author.addPaper(paper);
+            if (papers == null) return null;
+            if (papers.Count == 0) return author;
+            foreach (SG.Paper paper in papers) author.addPaper(paper);
             return author;
         }
 
-        public bool getAuthStatisticsNextPage(string authUrl, ref SG.Author author)
+        public bool? getAuthStatisticsNextPage(string authUrl, ref SG.Author author)
         {
             int num = author.getNumberOfPapers();
             if (num < 0) return false;
@@ -201,7 +213,8 @@ namespace PubCite
             authUrl += ("&pagesize=100&cstart=" + num);
             GSAuthScraper authScraper = new GSAuthScraper(authUrl, num);
             List<SG.Paper> papers = authScraper.getPapersOfCurrentPage();
-            if (papers == null) return false;
+            if (papers == null) return null;
+            if (papers.Count == 0) return false;
             foreach (SG.Paper paper in papers)
             {
                 author.addPaper(paper);
@@ -267,7 +280,16 @@ namespace PubCite
             string title, titleLink, authors, publication, publisher, cited_by_url, summary;
             int year, rank = 1, no_of_citations;
             HtmlNodeCollection searchResults = doc.DocumentNode.SelectNodes(xpath);
-            if (searchResults == null) return null;
+            if (searchResults == null)
+            {
+                if (checkForCaptcha())
+                {
+                    Console.WriteLine("Captcha problem ...");
+                    return null;
+                }
+                Console.WriteLine("No results ...");
+                return result;
+            }
             else
             {
                 Console.WriteLine(url);
@@ -395,7 +417,7 @@ namespace PubCite
 
 
         // SEARCH PAGE RESULTS NEXT PAGE
-        public bool getAuthorsNextPage(string this_url, ref SG.Author author, ref string next_url)
+        public bool? getAuthorsNextPage(string this_url, ref SG.Author author, ref string next_url)
         {
 
             // CONNECTIONS
@@ -416,7 +438,16 @@ namespace PubCite
             string title, titleLink, authors, publication, publisher, cited_by_url, summary;
             int year, rank = author.getNumberOfPapers() + 1, no_of_citations;
             HtmlNodeCollection searchResults = doc.DocumentNode.SelectNodes(xpath);
-            if (searchResults == null) return false;
+            if (searchResults == null)
+            {
+                if (checkForCaptcha())
+                {
+                    Console.WriteLine("Captcha problem ...");
+                    return null;
+                }
+                Console.WriteLine("No results ...");
+                return false;
+            }
             else
             {
                 //Console.WriteLine(url);
@@ -600,7 +631,16 @@ namespace PubCite
             string title, titleLink, authors, publication, publisher, cited_by_url, summary;
             int year, rank = 1, no_of_citations;
             HtmlNodeCollection searchResults = doc.DocumentNode.SelectNodes(xpath);
-            if (searchResults == null) return null;
+            if (searchResults == null)
+            {
+                if (checkForCaptcha())
+                {
+                    Console.WriteLine("Captcha problem ...");
+                    return null;
+                }
+                Console.WriteLine("No results ...");
+                return result;
+            }
             else
             {
                 foreach (HtmlNode n in searchResults)
@@ -730,7 +770,7 @@ namespace PubCite
 
 
         //  JOURNAL SEARCH RESULTS NEXT PAGE
-        public bool getJournalsNextPage(string this_url, ref SG.Journal journal, ref string next_url)
+        public bool? getJournalsNextPage(string this_url, ref SG.Journal journal, ref string next_url)
         {
 
 
@@ -756,7 +796,16 @@ namespace PubCite
             string title, titleLink, authors, publication, publisher, cited_by_url, summary;
             int year, rank = 1 + journal.getNumberOfPapers(), no_of_citations;
             HtmlNodeCollection searchResults = doc.DocumentNode.SelectNodes(xpath);
-            if (searchResults == null) return false;
+            if (searchResults == null)
+            {
+                if (checkForCaptcha())
+                {
+                    Console.WriteLine("Captcha problem ...");
+                    return null;
+                }
+                Console.WriteLine("No results ...");
+                return false;
+            }
             else
             {
                 foreach (HtmlNode n in searchResults)
@@ -905,7 +954,16 @@ namespace PubCite
             string title, titleLink, authors, publication, publisher, cited_by_url, summary;
             int year, rank = 1, no_of_citations;
             HtmlNodeCollection searchResults = doc.DocumentNode.SelectNodes(xpath);
-            if (searchResults == null) return null;
+            if (searchResults == null)
+            {
+                if (checkForCaptcha())
+                {
+                    Console.WriteLine("Captcha problem ...");
+                    return null;
+                }
+                Console.WriteLine("No results ...");
+                return results;
+            }
             else
             {
 
@@ -1032,7 +1090,7 @@ namespace PubCite
 
 
         // GET CITATIONS NEXT PAGE
-        public  bool getCitationsNextPage(string url, ref string next_url, ref List<SG.Paper> papers)
+        public  bool? getCitationsNextPage(string url, ref string next_url, ref List<SG.Paper> papers)
         {
 
             // CONNECTIONS
@@ -1052,7 +1110,16 @@ namespace PubCite
             string title, titleLink, authors, publication, publisher, cited_by_url, summary;
             int year, rank = 1, no_of_citations;
             HtmlNodeCollection searchResults = doc.DocumentNode.SelectNodes(xpath);
-            if (searchResults == null) return false;
+            if (searchResults == null)
+            {
+                if (checkForCaptcha())
+                {
+                    Console.WriteLine("Captcha problem ...");
+                    return null;
+                }
+                Console.WriteLine("No results ...");
+                return false;
+            }
             else
             {
 
