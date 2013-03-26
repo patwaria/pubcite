@@ -97,6 +97,32 @@ namespace SG
             return newList;
         }
 
+        public List<Paper> getPaperByKeywords(List<Paper> papers, string keywords)
+        {
+            if (keywords.Length == 0)
+                return papers;
+            char[] delims = { ' ', ',', ':', ';', '\"' };
+            string[] keywordsList = keywords.Split(delims);
+
+            List<Paper> newList = new List<Paper>();
+            foreach (Paper p in papers)
+            {
+                bool add = true;
+                string content = (p.Title + p.Publication + p.Summary).ToLower();
+                for (int i = 0; i < keywordsList.Length; i++)
+                {
+                    if (keywordsList[i].Length > 0 && !content.Contains(keywordsList[i].ToLower()))
+                    {
+                        add = false;
+                        break;
+                    }
+                }
+                if (add == true)
+                    newList.Add(p);
+            }
+            return newList;
+        }
+
         public List<Paper> getPaperByYearRange(int begin)
         {
             return getPaperByYearRange(begin, -1);

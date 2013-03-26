@@ -77,6 +77,8 @@ namespace PubCite
             searchField.GotFocus += new EventHandler(searchField_GotFocus);
             searchField.LostFocus += new EventHandler(searchField_LostFocus);
             searchField.KeyUp += new KeyEventHandler(searchField_KeyUp);
+            KeywordsTextBox.KeyUp += new KeyEventHandler(KeywordsTextBox_KeyUp);
+
             progressBar.SendToBack();
             progressBar.Visible = false;
 
@@ -91,6 +93,15 @@ namespace PubCite
             showSearch();
             STOP = false;
             lastCount = 0;
+        }
+
+        void KeywordsTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+          
+            if (authorCheckBox.Checked == true && authStats != null)
+                    populateAuthor();
+            else if (journalStats != null)
+                    populateJournal();
         }
 
         void ListView_DrawItem(object sender, DrawListViewItemEventArgs e)
@@ -211,14 +222,19 @@ namespace PubCite
                 authorsSuggestions.Items.Add(item);
             }
         }
+
         private void populateJournal()
         {
 
             if (journalStats != null && journalStats.getNumberOfPapers() != 0)
             {
-                journalResultsListView.Items.Clear();
-                authorResultsListView.Visible = false;
-                journalResultsListView.Visible = true;
+                if (lastCount == 0)
+                {
+                    journalResultsListView.Items.Clear();
+                    authorResultsListView.Visible = false;
+                    journalResultsListView.Visible = true;
+                }
+
                 if (StartYear.getintval() == 0 && EndYear.getintval() == 0)
                     Papers = journalStats.getPapers();
                 else if (StartYear.getintval() != 0 && EndYear.getintval() == 0)
@@ -229,13 +245,17 @@ namespace PubCite
                     Papers = journalStats.getPaperByYearRange(StartYear.getintval(), EndYear.getintval());
                 Console.WriteLine(Papers.Count);
 
+                Papers = journalStats.getPaperByKeywords(Papers, KeywordsTextBox.Text);
+
+                /*Statistics */
                 authorNameLabel.Text = journalStats.Name;
                 citesperPaper.Text = journalStats.getCitesPerPaper().ToString();
                 citesperYear.Text = journalStats.getCitesPerYear().ToString();
                 hindex.Text = journalStats.getHIndex().ToString();
                 i10index.Text = journalStats.getI10Index().ToString();
                 citationsNumberLabel.Text = journalStats.getTotalNumberofCitations().ToString();
-                for (int i = 0; i < Papers.Count; i++)
+                numPapers.Text = Papers.Count.ToString();
+                for (int i = lastCount; i < Papers.Count; i++)
                 {
                     item = new ListViewItem(Papers[i].Title);
                     item.SubItems.Add(Papers[i].Authors);
@@ -259,11 +279,15 @@ namespace PubCite
 
             if (authStats != null && authStats.getNumberOfPapers() != 0)
             {
+                if (lastCount == 0)
+                {
+                    authorResultsListView.Items.Clear();
+                    authorResultsListView.Visible = true;
+                    journalResultsListView.Visible = false;
 
-                authorResultsListView.Items.Clear();
-                authorResultsListView.Visible = true;
-                journalResultsListView.Visible = false;
+                }
 
+                /* Filter by year range */
                 if (StartYear.getintval() == 0 && EndYear.getintval() == 0)
                     Papers = authStats.getPapers();
                 else if (StartYear.getintval() != 0 && EndYear.getintval() == 0)
@@ -272,6 +296,10 @@ namespace PubCite
                     Papers = authStats.getPaperUptoYear(EndYear.getintval());
                 else if (StartYear.getintval() != 0 && EndYear.getintval() != 0)
                     Papers = authStats.getPaperByYearRange(StartYear.getintval(), EndYear.getintval());
+
+                /* Filter by keywords */
+                Papers = authStats.getPaperByKeywords(Papers, KeywordsTextBox.Text);
+
                 Console.WriteLine(Papers.Count);
 
                 /* Statistics */
@@ -281,9 +309,10 @@ namespace PubCite
                 hindex.Text = authStats.getHIndex().ToString();
                 i10index.Text = authStats.getI10Index().ToString();
                 citationsNumberLabel.Text = authStats.getTotalNumberofCitations().ToString();
+                numPapers.Text = Papers.Count.ToString();
 
                 /* Papers */
-                for (int i = 0; i < Papers.Count; i++)
+                for (int i = lastCount; i < Papers.Count; i++)
                 {
                     /*populating */
 
@@ -586,7 +615,7 @@ namespace PubCite
                     authors = authSug.getSuggestions();
                     auth_url = authSug.getSuggestionsURL();
 
-                    if (authors.Count == 1)
+                    /*if (authors.Count == 1)
                     {
                         suggestedIndex = 0;
                         if (prevSelectedIndex != suggestedIndex)
@@ -613,7 +642,9 @@ namespace PubCite
                     else
                     {
                         suggestions = true;
-                    }
+                    }*/
+
+                    suggestions = true;
                 }
             }
             else // journal
@@ -723,6 +754,7 @@ namespace PubCite
             nextData = true;
             while (nextData == true && STOP == false)
             {
+                lastCount = authStats.getNumberOfPapers();
                 BackgroundWorker backgroundWorker1 = new BackgroundWorker();
                 if (hasProfile && authStats.Type == 0)
                     break;
@@ -739,18 +771,17 @@ namespace PubCite
 
                 populateAuthor();
             }
+            lastCount = 0;
             STOP = false;
         }
 
         private void getNextJournal()
         {
-            /* Get next journal data in the background 
-             * Note : only for MSParser now
-             * 
-             */
+            /* Get next journal data in the background */
             nextData = true;
             while (nextData == true && STOP == false)
             {
+                lastCount = journalStats.getNumberOfPapers();
                 Console.WriteLine("Journal");
                 BackgroundWorker backgroundWorker1 = new BackgroundWorker();
                 backgroundWorker1.DoWork += new DoWorkEventHandler(backgroundWorker_journalsNextDataWork);
@@ -763,14 +794,16 @@ namespace PubCite
 
                 populateJournal();
             }
+            lastCount = 0;
             STOP = false;
 
         }
 
         private void authorsSuggestions_MouseClick(object sender, EventArgs e)
         {
+            if(authorsSuggestions.Focused)
+                suggestedIndex = authorsSuggestions.FocusedItem.Index;
             showStop();
-            suggestedIndex = authorsSuggestions.FocusedItem.Index;
             startProgressUI();
             BackgroundWorker backgroundWorker = new BackgroundWorker();
             backgroundWorker.DoWork += new DoWorkEventHandler(backgroundWorker_authSearchWork);
@@ -804,6 +837,7 @@ namespace PubCite
             for (int i = 0; i < 4; i++) prevSortedColum[i] = false;
 
             authorsSuggestions.Items.Clear();
+            suggestedIndex = 0;
             authorResultsListView.Items.Clear();
             journalResultsListView.Items.Clear();
 
@@ -850,24 +884,29 @@ namespace PubCite
             {
                 Console.WriteLine("Done" + suggestions);
                 if (suggestions)
+                {
                     populateSuggestions();
+                    authorsSuggestions_MouseClick(sender, e);
+                }
                 else
                 {
-                    /* Add to cache */
-                    cacheObject.Add(authStats.Name, authStats, true);
-                    /* Add to recent History */
-                    RecentSearchKeys.Add(authStats.Name);
-                    updateHistory(authStats.Name);
-                    populateAuthor();
+                    if (authStats != null)
+                    {
+                        /* Add to cache */
+                        cacheObject.Add(authStats.Name, authStats, true);
+                        /* Add to recent History */
+                        RecentSearchKeys.Add(authStats.Name);
+                        updateHistory(authStats.Name);
+                        populateAuthor();
 
-                    /* Add threading */
-                    /* Only for MSParser now */
-
-                    getNextAuthStats(false);
+                        /* Threaded requests */
+                        getNextAuthStats(false);
+                    }
                 }
             }
             else
             {
+                if(journalStats != null) {
                 /* add journal to cache */
                 cacheObject.Add(journalStats.Name, journalStats, false);
 
@@ -877,6 +916,7 @@ namespace PubCite
                 populateJournal();
 
                 getNextJournal();
+                    }
             }
 
             showSearch();
