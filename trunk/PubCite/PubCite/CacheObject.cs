@@ -50,6 +50,13 @@ namespace PubCite
             cache.Remove(key);
         }
 
+        //clear the cache table
+        public static void Clearcache(bool isAuthor)
+        {
+            List<string> keys = GetAll();
+            foreach (string s in keys) Clear(s,isAuthor);
+        }
+
         // exists
         public static bool Exists(string key, bool isAuthor)
         {
