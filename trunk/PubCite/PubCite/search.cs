@@ -72,12 +72,15 @@ namespace PubCite
 
             recentListView.DrawItem += ListView_DrawItem;
             recentListView.DrawColumnHeader += ListView_DrawColumnHeader;
+            recentListView.MouseDoubleClick+=new MouseEventHandler(recentListView_MouseDoubleClick);
+            recentListView.MouseClick += new MouseEventHandler(recentListView_MouseClick);
 
             favouritesTreeView.MouseDoubleClick += new MouseEventHandler(favouritesTreeView_MouseDoubleClick);
             searchField.GotFocus += new EventHandler(searchField_GotFocus);
             searchField.LostFocus += new EventHandler(searchField_LostFocus);
             searchField.KeyUp += new KeyEventHandler(searchField_KeyUp);
             KeywordsTextBox.KeyUp += new KeyEventHandler(KeywordsTextBox_KeyUp);
+
 
             progressBar.SendToBack();
             progressBar.Visible = false;
@@ -93,6 +96,21 @@ namespace PubCite
             showSearch();
             STOP = false;
             lastCount = 0;
+        }
+
+        void recentListView_MouseClick(object sender, MouseEventArgs e)
+        {
+            //throw new NotImplementedException();
+
+            //Console.WriteLine("heereeerererjerfejfk..");
+            if (e.Button == MouseButtons.Right)
+            {
+                //Console.WriteLine("heereeerererjerfejfk..");
+                if (recentListView.FocusedItem.Bounds.Contains(e.Location) == true)
+                    recentMenuStrip.Show(Cursor.Position);
+            }
+
+
         }
 
         
@@ -150,6 +168,26 @@ namespace PubCite
                 journalStats = (SG.Journal)cacheObject.Get(searchField.Text, authorCheckBox.Checked);
                 populateJournal();
             }
+        }
+
+        private void recentListView_MouseDoubleClick(object sender, EventArgs e) {
+
+            if (recentListView.FocusedItem.SubItems[1].Text.Equals("Author")) {
+
+
+                authStats = (SG.Author)cacheObject.Get(recentListView.FocusedItem.SubItems[0].Text, true);
+                populateAuthor();
+
+            }
+            else if (recentListView.FocusedItem.SubItems[1].Text.Equals("Journal")) {
+
+                journalStats = (SG.Journal)cacheObject.Get(recentListView.FocusedItem.SubItems[0].Text, false);
+                populateJournal();
+            
+            }
+        
+        
+        
         }
 
         private void authorCheckBox_Click(object sender, EventArgs e)
@@ -334,11 +372,38 @@ namespace PubCite
             }
         }
 
-        private void updateHistory(string name)
+        private void updateHistory(string name,int t)
         {
             item = new ListViewItem(name);
+            if (t == 0) item.SubItems.Add("Author");
+            else if (t == 1) item.SubItems.Add("Journal");
             recentListView.Items.Add(item);
         }
+
+        private void removeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            if (recentListView.FocusedItem.SubItems[1].Text.Equals("Author"))
+            {
+
+
+                cacheObject.Clear(recentListView.FocusedItem.SubItems[0].Text, true);
+                populateAuthor();
+
+            }
+            else if (recentListView.FocusedItem.SubItems[1].Text.Equals("Journal"))
+            {
+
+                cacheObject.Clear(recentListView.FocusedItem.SubItems[0].Text, false);
+                populateJournal();
+
+            }
+
+            recentListView.FocusedItem.Remove();
+
+
+        }
+
 
         public void ArrangeTree()
         {
@@ -811,7 +876,7 @@ namespace PubCite
             cacheObject.Add(authStats.Name, authStats, true);
             /* Add to recent History */
             RecentSearchKeys.Add(authStats.Name);
-            updateHistory(authStats.Name);
+            updateHistory(authStats.Name,0);
             populateAuthor();
 
             getNextAuthStats(true);
@@ -885,7 +950,7 @@ namespace PubCite
                         cacheObject.Add(authStats.Name, authStats, true);
                         /* Add to recent History */
                         RecentSearchKeys.Add(authStats.Name);
-                        updateHistory(authStats.Name);
+                        updateHistory(authStats.Name,0);
                         populateAuthor();
 
                         /* Threaded requests */
@@ -902,7 +967,7 @@ namespace PubCite
 
                     /* add journal to recent */
                     RecentSearchKeys.Add(journalStats.Name);
-                    updateHistory(journalStats.Name);
+                    updateHistory(journalStats.Name,1);
                     populateJournal();
 
                     startProgressUI();
@@ -1101,7 +1166,7 @@ namespace PubCite
         private void favouriteButton_Click(object sender, EventArgs e)
         {
             Transition t = new Transition(new TransitionType_EaseInEaseOut(500));
-            t.add(favouritesTreeView, "Left", 7);
+            t.add(favouritesTreeView, "Left", 11);
             t.add(recentSearchPanel, "Left", -250);
             t.run();
         }
@@ -1110,7 +1175,7 @@ namespace PubCite
         {
             Transition t = new Transition(new TransitionType_EaseInEaseOut(500));
             t.add(favouritesTreeView, "Left", -250);
-            t.add(recentSearchPanel, "Left", 7);
+            t.add(recentSearchPanel, "Left", 11);
             t.run();
         }
 
@@ -1153,6 +1218,22 @@ namespace PubCite
                 (int)googleNumericUpDown.Value, (int)microsoftNumericUpDown.Value);
             (new SettingsRecord()).SaveSettings(Nsettings);
         }
+
+        private void clearHistoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            cacheObject.Clearcache(true);
+            cacheObject.Clearcache(false);
+            recentListView.Items.Clear();
+        }
+
+        private void clearFavouritesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form1.favorites.clear();
+            UpdateTree();
+        }
+
+       
+        
     }
 }
 

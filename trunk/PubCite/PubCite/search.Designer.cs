@@ -113,14 +113,15 @@
             this.authorLabel = new System.Windows.Forms.Label();
             this.StartYear = new PubCite.NumericTextBox();
             this.favouritesPanel = new System.Windows.Forms.Panel();
+            this.recentSearchPanel = new System.Windows.Forms.Panel();
+            this.recentListView = new System.Windows.Forms.ListView();
+            this.recentHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.typeHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel16 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
             this.recentButton = new System.Windows.Forms.Button();
             this.favouriteButton = new System.Windows.Forms.Button();
-            this.recentSearchPanel = new System.Windows.Forms.Panel();
-            this.recentListView = new System.Windows.Forms.ListView();
-            this.recentHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.favouritesTreeView = new System.Windows.Forms.TreeView();
             this.Suggestions = new System.Windows.Forms.GroupBox();
             this.panel15 = new System.Windows.Forms.Panel();
@@ -142,6 +143,10 @@
             this.viewStatisticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeFromFavouritesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.recentMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearFavouritesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SearchPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.settingsIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.addToFavourite)).BeginInit();
@@ -159,14 +164,15 @@
             this.statisticsGroupBox.SuspendLayout();
             this.progressPanel.SuspendLayout();
             this.favouritesPanel.SuspendLayout();
-            this.panel7.SuspendLayout();
             this.recentSearchPanel.SuspendLayout();
+            this.panel7.SuspendLayout();
             this.Suggestions.SuspendLayout();
             this.panel13.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.searchIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.stopButton)).BeginInit();
             this.optionsMenuStrip.SuspendLayout();
             this.favouriteMenuStrip.SuspendLayout();
+            this.recentMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // SearchPanel
@@ -901,7 +907,7 @@
             this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(18, 11);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(218, 13);
+            this.label3.Size = new System.Drawing.Size(215, 13);
             this.label3.TabIndex = 1;
             this.label3.Text = "Please wait while we process your query...";
             // 
@@ -1030,11 +1036,11 @@
             // favouritesPanel
             // 
             this.favouritesPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.favouritesPanel.Controls.Add(this.recentSearchPanel);
             this.favouritesPanel.Controls.Add(this.panel16);
             this.favouritesPanel.Controls.Add(this.panel7);
             this.favouritesPanel.Controls.Add(this.recentButton);
             this.favouritesPanel.Controls.Add(this.favouriteButton);
-            this.favouritesPanel.Controls.Add(this.recentSearchPanel);
             this.favouritesPanel.Controls.Add(this.favouritesTreeView);
             this.favouritesPanel.Controls.Add(this.Suggestions);
             this.favouritesPanel.ForeColor = System.Drawing.SystemColors.ControlText;
@@ -1042,6 +1048,41 @@
             this.favouritesPanel.Name = "favouritesPanel";
             this.favouritesPanel.Size = new System.Drawing.Size(222, 540);
             this.favouritesPanel.TabIndex = 0;
+            // 
+            // recentSearchPanel
+            // 
+            this.recentSearchPanel.Controls.Add(this.recentListView);
+            this.recentSearchPanel.Location = new System.Drawing.Point(-250, 43);
+            this.recentSearchPanel.Name = "recentSearchPanel";
+            this.recentSearchPanel.Size = new System.Drawing.Size(192, 209);
+            this.recentSearchPanel.TabIndex = 1;
+            // 
+            // recentListView
+            // 
+            this.recentListView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.recentListView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.recentListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.recentHeader,
+            this.typeHeader});
+            this.recentListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.recentListView.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.recentListView.Location = new System.Drawing.Point(0, 0);
+            this.recentListView.Name = "recentListView";
+            this.recentListView.OwnerDraw = true;
+            this.recentListView.Size = new System.Drawing.Size(192, 209);
+            this.recentListView.TabIndex = 0;
+            this.recentListView.UseCompatibleStateImageBehavior = false;
+            this.recentListView.View = System.Windows.Forms.View.Details;
+            // 
+            // recentHeader
+            // 
+            this.recentHeader.Text = "History";
+            this.recentHeader.Width = 134;
+            // 
+            // typeHeader
+            // 
+            this.typeHeader.Text = "Type";
+            this.typeHeader.Width = 56;
             // 
             // panel16
             // 
@@ -1094,34 +1135,6 @@
             this.favouriteButton.Text = "Favourite";
             this.favouriteButton.UseVisualStyleBackColor = true;
             this.favouriteButton.Click += new System.EventHandler(this.favouriteButton_Click);
-            // 
-            // recentSearchPanel
-            // 
-            this.recentSearchPanel.Controls.Add(this.recentListView);
-            this.recentSearchPanel.Location = new System.Drawing.Point(-250, 43);
-            this.recentSearchPanel.Name = "recentSearchPanel";
-            this.recentSearchPanel.Size = new System.Drawing.Size(209, 209);
-            this.recentSearchPanel.TabIndex = 1;
-            // 
-            // recentListView
-            // 
-            this.recentListView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.recentListView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.recentListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.recentHeader});
-            this.recentListView.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.recentListView.Location = new System.Drawing.Point(0, 0);
-            this.recentListView.Name = "recentListView";
-            this.recentListView.OwnerDraw = true;
-            this.recentListView.Size = new System.Drawing.Size(187, 246);
-            this.recentListView.TabIndex = 0;
-            this.recentListView.UseCompatibleStateImageBehavior = false;
-            this.recentListView.View = System.Windows.Forms.View.Details;
-            // 
-            // recentHeader
-            // 
-            this.recentHeader.Text = "Recent History";
-            this.recentHeader.Width = 183;
             // 
             // favouritesTreeView
             // 
@@ -1218,7 +1231,7 @@
             this.label2.ForeColor = System.Drawing.SystemColors.Menu;
             this.label2.Location = new System.Drawing.Point(314, 41);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(23, 13);
+            this.label2.Size = new System.Drawing.Size(22, 13);
             this.label2.TabIndex = 10;
             this.label2.Text = "To:";
             // 
@@ -1308,10 +1321,11 @@
             // 
             this.favouriteMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.viewStatisticsToolStripMenuItem,
-            this.removeFromFavouritesToolStripMenuItem});
+            this.removeFromFavouritesToolStripMenuItem,
+            this.clearFavouritesToolStripMenuItem});
             this.favouriteMenuStrip.Name = "favouriteMenuStrip";
             this.favouriteMenuStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.favouriteMenuStrip.Size = new System.Drawing.Size(204, 48);
+            this.favouriteMenuStrip.Size = new System.Drawing.Size(204, 92);
             // 
             // viewStatisticsToolStripMenuItem
             // 
@@ -1326,6 +1340,35 @@
             this.removeFromFavouritesToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.removeFromFavouritesToolStripMenuItem.Text = "Remove from Favourites";
             this.removeFromFavouritesToolStripMenuItem.Click += new System.EventHandler(this.removeFromFavouritesToolStripMenuItem_Click);
+            // 
+            // recentMenuStrip
+            // 
+            this.recentMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.removeToolStripMenuItem,
+            this.clearHistoryToolStripMenuItem});
+            this.recentMenuStrip.Name = "recentMenuStrip";
+            this.recentMenuStrip.Size = new System.Drawing.Size(143, 48);
+            // 
+            // removeToolStripMenuItem
+            // 
+            this.removeToolStripMenuItem.Name = "removeToolStripMenuItem";
+            this.removeToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.removeToolStripMenuItem.Text = "Remove";
+            this.removeToolStripMenuItem.Click += new System.EventHandler(this.removeToolStripMenuItem_Click);
+            // 
+            // clearHistoryToolStripMenuItem
+            // 
+            this.clearHistoryToolStripMenuItem.Name = "clearHistoryToolStripMenuItem";
+            this.clearHistoryToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.clearHistoryToolStripMenuItem.Text = "Clear History";
+            this.clearHistoryToolStripMenuItem.Click += new System.EventHandler(this.clearHistoryToolStripMenuItem_Click);
+            // 
+            // clearFavouritesToolStripMenuItem
+            // 
+            this.clearFavouritesToolStripMenuItem.Name = "clearFavouritesToolStripMenuItem";
+            this.clearFavouritesToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.clearFavouritesToolStripMenuItem.Text = "Clear Favourites";
+            this.clearFavouritesToolStripMenuItem.Click += new System.EventHandler(this.clearFavouritesToolStripMenuItem_Click);
             // 
             // search
             // 
@@ -1356,14 +1399,15 @@
             this.progressPanel.ResumeLayout(false);
             this.progressPanel.PerformLayout();
             this.favouritesPanel.ResumeLayout(false);
-            this.panel7.ResumeLayout(false);
             this.recentSearchPanel.ResumeLayout(false);
+            this.panel7.ResumeLayout(false);
             this.Suggestions.ResumeLayout(false);
             this.panel13.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.searchIcon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.stopButton)).EndInit();
             this.optionsMenuStrip.ResumeLayout(false);
             this.favouriteMenuStrip.ResumeLayout(false);
+            this.recentMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1478,5 +1522,10 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label numPapers;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.ColumnHeader typeHeader;
+        private System.Windows.Forms.ContextMenuStrip recentMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem removeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem clearHistoryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem clearFavouritesToolStripMenuItem;
     }
 }
