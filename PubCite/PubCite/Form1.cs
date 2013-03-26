@@ -33,6 +33,11 @@ namespace PubCite
             //maintabControl.ContextMenuStrip = tabMenuStrip;
             newTabPage = new TabPage();
             newTabPage.ImageIndex = 0;
+            newTabPage.Text = "New";
+
+            //maintabControl.SizeMode = TabSizeMode.Fixed;
+            //maintabControl.ItemSize = new Size(100, 200);
+
             maintabControl.Controls.Add(newTabPage);
            
             maintabControl.MouseClick+=new MouseEventHandler(maintabControl_MouseClick);
