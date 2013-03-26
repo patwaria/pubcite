@@ -12,7 +12,12 @@ namespace PubCite
     class GSScraper
     {
 
+
+        private SettingsRecord setRecords = new SettingsRecord();
+        private Settings setts;
         private HtmlDocument doc;
+
+     
 
         bool checkForCaptcha() {
             bool tmp = false;
@@ -46,8 +51,9 @@ namespace PubCite
             }
             */
 
+            
             // AUTHOR SUGGESTIONS
-            authName.Trim();
+            authName = authName.Trim();
             authName = Regex.Replace(authName, @"\s+", "+");
             string url = "http://scholar.google.co.in/citations?view_op=search_authors&mauthors=" + authName + "&hl=en&oi=ao";
             HtmlWeb web = new HtmlWeb();
@@ -207,9 +213,12 @@ namespace PubCite
 
         public bool? getAuthStatisticsNextPage(string authUrl, ref SG.Author author)
         {
+            setts = setRecords.ReadSettings();
+            int maxResults = setts.GSMaxResults;
             int num = author.getNumberOfPapers();
             if (num < 0) return false;
             if (num % 100 != 0) return false;
+            if (num >= maxResults) return false;
             authUrl += ("&pagesize=100&cstart=" + num);
             GSAuthScraper authScraper = new GSAuthScraper(authUrl, num);
             List<SG.Paper> papers = authScraper.getPapersOfCurrentPage();
@@ -217,7 +226,9 @@ namespace PubCite
             if (papers.Count == 0) return false;
             foreach (SG.Paper paper in papers)
             {
+                if (num == maxResults) return false;
                 author.addPaper(paper);
+                num++;
             }
             return true;
         }
@@ -420,6 +431,11 @@ namespace PubCite
         public bool? getAuthorsNextPage(string this_url, ref SG.Author author, ref string next_url)
         {
 
+            setts = setRecords.ReadSettings();
+            int maxResults = setts.GSMaxResults;
+            int num = author.getNumberOfPapers();
+            if (num >= maxResults) return false;
+            
             // CONNECTIONS
             if (this_url == null) return false;
             HtmlWeb web = new HtmlWeb();
@@ -548,8 +564,10 @@ namespace PubCite
 
                     publisher.Trim();
                     publication.Trim();
+                    if (num == maxResults) return false;
                     SG.Paper paper = new SG.Paper(title, titleLink, authors, summary, year, publication, publisher, no_of_citations, cited_by_url, rank);
                     author.addPaper(paper);
+                    num++;
                     rank++;
                 }
 
@@ -774,6 +792,12 @@ namespace PubCite
         {
 
 
+
+            setts = setRecords.ReadSettings();
+            int maxResults = setts.GSMaxResults;
+            int num = journal.getNumberOfPapers();
+            if (num >= maxResults) return false;
+
             // CONNECTIONS
             if (this_url == null) return false;
             HtmlWeb web = new HtmlWeb();
@@ -905,9 +929,10 @@ namespace PubCite
 
                     }
 
-
+                    if (num == maxResults) return false;
                     SG.Paper paper = new SG.Paper(title, titleLink, authors, summary, year, publication, publisher, no_of_citations, cited_by_url, rank);
                     journal.addPaper(paper);
+                    num++;
                     rank++;
                 }
 
@@ -1093,6 +1118,13 @@ namespace PubCite
         public  bool? getCitationsNextPage(string url, ref string next_url, ref List<SG.Paper> papers)
         {
 
+
+            setts = setRecords.ReadSettings();
+            int maxResults = setts.GSMaxResults;
+            int num = papers.Count;
+            if (num >= maxResults) return false;
+
+
             // CONNECTIONS
             if (url == null) return false;
             HtmlWeb web = new HtmlWeb();
@@ -1216,9 +1248,10 @@ namespace PubCite
                         catch (Exception e) { }
                     }
 
-
+                    if (num == maxResults) return false;
                     SG.Paper paper = new SG.Paper(title, titleLink, authors, summary, year, publication, publisher, no_of_citations, cited_by_url, rank);
                     results.Add(paper);
+                    num++;
                     rank++;
                 }
 
