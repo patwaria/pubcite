@@ -234,6 +234,15 @@ namespace PubCite
             return 1;
         }
 
+        public List<string> getCoAuthors() { 
+            HtmlNode authorNode = doc.DocumentNode.SelectSingleNode("//*[@id=\"gs_top\"]/div/div[1]/div[1]/div[2]/div[2]/div[4]");
+            HtmlNodeCollection nodes = authorNode.SelectNodes("./a");
+            if (nodes == null) return null;
+            List<string> list = new List<string>();
+            foreach (HtmlNode n in nodes) list.Add(n.Attributes["title"].ToString());
+            return list;
+        }
+
 
         public int getHIndex() { return h_index; }
         public int getIIndex() { return i_index; }
