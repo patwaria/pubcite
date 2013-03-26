@@ -588,7 +588,9 @@ namespace PubCite
                 if (a[0])
                     authSug = CSParser.getAuthSuggestions(searchField.Text);
                 else if (a[1])
+                {
                     authSug = GSScraper.getAuthSuggestions(searchField.Text);
+                }
                 else
                     authSug = MSParser.getAuthSuggestions(searchField.Text);
 
@@ -603,7 +605,11 @@ namespace PubCite
                     else if (a[1] == true)
                     {
                         authStats = GSScraper.getAuthors(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text, ref gs_nextUrl);
-                        authStats.Type = 1;
+                        if (authStats == null)
+                            MessageBox.Show("Oops! You have reached administrative limit for Google Scholar." +
+                                "\nIf you are behind a proxy server, please try changing your settings.");
+                        else
+                            authStats.Type = 1;
                     }
                     else
                     {
@@ -630,7 +636,11 @@ namespace PubCite
                 else if (a[1])
                 {
                     journalStats = GSScraper.getJournals(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text, ref gs_nextUrl);
-                    journalStats.Type = 1;
+                    if(journalStats == null)
+                       MessageBox.Show("Oops! You have reached administrative limit for Google Scholar." +
+                                "\nIf you are behind a proxy server, please try changing your settings.");
+                    else
+                        journalStats.Type = 1;
                 }
                 else
                 {
@@ -653,7 +663,11 @@ namespace PubCite
                 else if (a[1] == true)
                 {
                     authStats = GSScraper.getAuthStatistics(auth_url[suggestedIndex]);
-                    authStats.Type = 1;
+                    if (authStats == null)
+                        MessageBox.Show("Oops! You have reached administrative limit for Google Scholar." +
+                            "\nIf you are behind a proxy server, please try changing your settings.");
+                    else
+                        authStats.Type = 1;
                 }
                 else if (a[2] == true)
                 {
@@ -676,6 +690,11 @@ namespace PubCite
             {
                 Console.WriteLine("url:" + Papers[citationIndex].CitedByURL);
                 Citations = GSScraper.getCitations(Papers[citationIndex].CitedByURL, ref gs_nextUrl);
+                if (Citations == null)
+                    MessageBox.Show("Oops! You have reached administrative limit for Google Scholar." +
+                        "\nIf you are behind a proxy server, please try changing your settings.");
+                else
+                    authStats.Type = 1;
 
             }
             else if (citationType == 2)
