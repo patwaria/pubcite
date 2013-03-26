@@ -31,7 +31,7 @@ namespace PubCite
             tables = doc.DocumentNode.SelectNodes("//table");
             h_index = i_index = -1;
             name = doc.DocumentNode.SelectSingleNode(".//*[@id=\"cit-name-display\"]").InnerText;
-            getCitationStats();
+            //getCitationStats();
             index = i+1;
             papers = new List<SG.Paper>();
 
@@ -130,12 +130,30 @@ namespace PubCite
             return pageStatus;
         }
 
+
+        bool checkForCaptcha()
+        {
+            bool tmp = false;
+            if (doc.DocumentNode.InnerHtml.Contains("We're sorry...") && doc.DocumentNode.InnerHtml.Contains("... but your computer or network may be sending automated queries. To protect our users, we can't process your request right now.")) tmp = true;
+            if (doc.DocumentNode.InnerHtml.Contains("action=\"Captcha\"") && doc.DocumentNode.InnerHtml.Contains("Our systems have detected unusual traffic from your computer network.")) tmp = true;
+            return tmp;
+        }
+
+
         private int getCitationData(/*Probably pass the array of objects and the index it has to write to*/) //Return the index of next free index
         {
             HtmlNodeCollection rows = doc.DocumentNode.SelectNodes(".//tr[@class=\"cit-table item\"]");
             string title,titleLink, authors, publication, publisher, cited_by_url;
             int year, no_of_citations;
-            if (rows == null) return -1;
+            if (rows == null)
+            {
+                if (checkForCaptcha()) {
+                    Console.WriteLine("Captcha Problem...");
+                    return 0;
+                }
+                Console.WriteLine("No results...");
+                return -1;
+            }
             papers.Clear();
 
             foreach (HtmlNode row in rows)
@@ -224,7 +242,9 @@ namespace PubCite
         public string getAffiliation() { return affiliation;     }
         public List<SG.Paper> getPapersOfCurrentPage()
         {
-            if(getCitationData()==-1) return null;
+            int id = getCitationData();
+            if(id==0) return null;
+            if (id == -1) return new List<SG.Paper>();
             //foreach (SG.Paper pap in papers) { Console.WriteLine(pap.Title); }
             return papers;
         }
