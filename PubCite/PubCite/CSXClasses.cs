@@ -569,6 +569,22 @@ namespace PubCite
                 urlList.Add("http://citeseer.ist.psu.edu" + rows[i].SelectSingleNode("h3/a").GetAttributeValue("href", "") + "&list=full");//Author Page Link
             }
 
+            try
+            {
+                HtmlNode nxUrlN = doc.DocumentNode.SelectSingleNode("//*[@id=\"pager\"]/a");
+                if (nxUrlN == null)
+                    return;
+                String nxUrl = "http://citeseer.ist.psu.edu" + nxUrlN.GetAttributeValue("href", "");
+
+                doc = web.Load(nxUrl);
+
+                for (int i = 0; i < rows.Count; i++)
+                {
+                    sugList.Add(rows[i].SelectSingleNode("h3").InnerText);//Author Name
+                    urlList.Add("http://citeseer.ist.psu.edu" + rows[i].SelectSingleNode("h3/a").GetAttributeValue("href", "") + "&list=full");//Author Page Link
+                }
+            }
+            catch (Exception e) { Console.WriteLine("Exception caught: Author next result page not processed"); }
         }
     }
 
