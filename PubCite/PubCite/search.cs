@@ -97,11 +97,17 @@ namespace PubCite
             cachedListView.HeaderStyle = ColumnHeaderStyle.None;
             cachedListView.SendToBack();
 
-           
+           graphComboBox.DropDownClosed+=new EventHandler(graphComboBox_DropDownClosed);
 
             showSearch();
             STOP = false;
             lastCount = 0;
+        }
+
+        private void graphComboBox_DropDownClosed(object sender, EventArgs e) {
+
+            graphsButton_Click(sender, e);
+        
         }
 
         void recentListView_MouseClick(object sender, MouseEventArgs e)
