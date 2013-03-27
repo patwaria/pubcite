@@ -114,8 +114,8 @@ namespace PubCite
 
             noResult = Convert.ToInt32(noResults);
 
-            if (noResult > 100)
-                noResult = 100;
+            if (noResult > 500)
+                noResult = 500;
 
 
             // Console.WriteLine(noResult + "   " + noResult);
