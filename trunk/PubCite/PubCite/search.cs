@@ -41,7 +41,6 @@ namespace PubCite
         Boolean suggestions;
         Boolean? nextData;
         Boolean STOP;
-        Boolean currentSearchEntity;
         Settings Nsettings;
         SettingsRecord NsettingsRecord = new SettingsRecord();
 
@@ -121,7 +120,12 @@ namespace PubCite
 
         void KeywordsTextBox_KeyUp(object sender, KeyEventArgs e)
         {
-          
+
+            if (KeywordsTextBox.Text.Length == 0)
+            {
+                KeywordsTextBox.Text = "Enter delimitor separated keywords to filter your search results..";
+            }
+
             if (authorResultsListView.Visible)
                 populateAuthor();
             else
@@ -646,12 +650,12 @@ namespace PubCite
                     /* Case : No suggestions */
                     if (a[0] == true)
                     {
-                        authStats = CSParser.getAuthors(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text);
+                        authStats = CSParser.getAuthors(searchField.Text, "", KeywordsTextBox.Text);
                         authStats.Type = 0;
                     }
                     else if (a[1] == true)
                     {
-                        authStats = GSScraper.getAuthors(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text, ref gs_nextUrl);
+                        authStats = GSScraper.getAuthors(searchField.Text, "", KeywordsTextBox.Text, ref gs_nextUrl);
                         if (authStats == null)
                             MessageBox.Show("Oops! You have reached administrative limit for Google Scholar." +
                                 "\nIf you are behind a proxy server, please try changing your settings.");
@@ -660,7 +664,7 @@ namespace PubCite
                     }
                     else
                     {
-                        authStats = MSParser.getAuthors(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text);
+                        authStats = MSParser.getAuthors(searchField.Text, "", KeywordsTextBox.Text);
                         authStats.Type = 2;
                     }
                     suggestions = false;
@@ -677,12 +681,12 @@ namespace PubCite
             {
                 if (a[0])
                 {
-                    journalStats = CSParser.getJournals(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text);
+                    journalStats = CSParser.getJournals(searchField.Text, "", KeywordsTextBox.Text);
                     journalStats.Type = 0;
                 }
                 else if (a[1])
                 {
-                    journalStats = GSScraper.getJournals(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text, ref gs_nextUrl);
+                    journalStats = GSScraper.getJournals(searchField.Text, "", KeywordsTextBox.Text, ref gs_nextUrl);
                     if(journalStats == null)
                        MessageBox.Show("Oops! You have reached administrative limit for Google Scholar." +
                                 "\nIf you are behind a proxy server, please try changing your settings.");
@@ -691,7 +695,7 @@ namespace PubCite
                 }
                 else
                 {
-                    journalStats = MSParser.getJournals(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text);
+                    journalStats = MSParser.getJournals(searchField.Text, "", KeywordsTextBox.Text);
                     journalStats.Type = 2;
                 }
             }
@@ -741,9 +745,9 @@ namespace PubCite
             if (authStats.Type == 1)
                 nextData = GSScraper.getAuthorsNextPage(gs_nextUrl, ref authStats, ref gs_nextUrl);
             else if (authStats.Type == 2)
-                nextData = MSParser.getAuthorsNext(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text, ref authStats);
+                nextData = MSParser.getAuthorsNext(searchField.Text, "", KeywordsTextBox.Text, ref authStats);
             else
-                nextData = CSParser.getAuthorsNext(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text, ref authStats);
+                nextData = CSParser.getAuthorsNext(searchField.Text, "", KeywordsTextBox.Text, ref authStats);
 
         }
 
@@ -752,9 +756,9 @@ namespace PubCite
             if (journalStats.Type == 1)
                 nextData = GSScraper.getJournalsNextPage(gs_nextUrl, ref journalStats, ref gs_nextUrl);
             else if (journalStats.Type == 2)
-                nextData = MSParser.getJournalsNext(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text, ref journalStats);
+                nextData = MSParser.getJournalsNext(searchField.Text, "", KeywordsTextBox.Text, ref journalStats);
             else
-                nextData = CSParser.getJournalsNext(searchField.Text, affilationTextBox.Text, KeywordsTextBox.Text, ref journalStats);
+                nextData = CSParser.getJournalsNext(searchField.Text, "", KeywordsTextBox.Text, ref journalStats);
         }
 
         private void getNextAuthStats(bool hasProfile)
