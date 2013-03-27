@@ -71,7 +71,7 @@ namespace PubCite
         public SG.Author getAuthStatistics(string authid, int noResults=20)
         {
             SG.Author auth;
-            string name;
+            string name, affiliation, homePageURl;
             int Hindex;
 
             Request requestAuth = new Request();
@@ -88,7 +88,10 @@ namespace PubCite
 
             name = generateName(response1.Author.Result[0].FirstName, response1.Author.Result[0].MiddleName, response1.Author.Result[0].LastName);
             Hindex = Convert.ToInt32(response1.Author.Result[0].HIndex);
-            auth = new SG.Author(name,Hindex,-1);
+            affiliation = response1.Author.Result[0].Affiliation.Name;
+            homePageURl = response1.Author.Result[0].HomepageURL;
+
+            auth = new SG.Author(name,affiliation,homePageURl,-1,-1);
 
 
             Request requestPaper = new Request();
