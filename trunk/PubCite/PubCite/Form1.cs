@@ -41,6 +41,9 @@ namespace PubCite
             maintabControl.Controls.Add(newTabPage);
            
             maintabControl.MouseClick+=new MouseEventHandler(maintabControl_MouseClick);
+         
+            if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
+                MessageBox.Show("Warning: Please check your Internet connection. You may not get desired results!");
                 
         }
 

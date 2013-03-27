@@ -142,36 +142,41 @@ namespace PubCite
 
         private void viewAll_Click(object sender, EventArgs e)
         {
-            if (MainPapers != null)
+            if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
+                MessageBox.Show("Warning: Please check your Internet connection!");
+            else
             {
-                stop.Visible = true;
-
-                progressPanel.Visible = true;
-                progressBar.Style = ProgressBarStyle.Marquee;
-                progressBar.MarqueeAnimationSpeed = 25;
-                nextData = true;
-                while (nextData == true && !STOP)
+                if (MainPapers != null)
                 {
-                    lastCount = MainPapers.Count;
-                    Console.WriteLine("Paper Next");
-                    BackgroundWorker backgroundWorker1 = new BackgroundWorker();
-                    backgroundWorker1.DoWork += new DoWorkEventHandler(backgroundWorker_citationNextDataWork);
-                    backgroundWorker1.RunWorkerAsync();
-                    while (backgroundWorker1.IsBusy)
+                    stop.Visible = true;
+
+                    progressPanel.Visible = true;
+                    progressBar.Style = ProgressBarStyle.Marquee;
+                    progressBar.MarqueeAnimationSpeed = 25;
+                    nextData = true;
+                    while (nextData == true && !STOP)
                     {
-                        Application.DoEvents();
-                        // disable those options which will trigger another thread 
+                        lastCount = MainPapers.Count;
+                        Console.WriteLine("Paper Next");
+                        BackgroundWorker backgroundWorker1 = new BackgroundWorker();
+                        backgroundWorker1.DoWork += new DoWorkEventHandler(backgroundWorker_citationNextDataWork);
+                        backgroundWorker1.RunWorkerAsync();
+                        while (backgroundWorker1.IsBusy)
+                        {
+                            Application.DoEvents();
+                            // disable those options which will trigger another thread 
+                        }
+                        Papers = MainPapers;
+                        showCitations();
                     }
-                    Papers = MainPapers;
-                    showCitations();
+                    lastCount = 0;
+                    STOP = false;
+                    stop.Visible = false;
+                    progressPanel.Visible = false;
+                    progressBar.MarqueeAnimationSpeed = 0;
+                    progressBar.Style = ProgressBarStyle.Blocks;
+                    progressBar.Value = progressBar.Minimum;
                 }
-                lastCount = 0;
-                STOP = false;
-                stop.Visible = false;
-                progressPanel.Visible = false;
-                progressBar.MarqueeAnimationSpeed = 0;
-                progressBar.Style = ProgressBarStyle.Blocks;
-                progressBar.Value = progressBar.Minimum;
             }
         }
 
@@ -235,40 +240,50 @@ namespace PubCite
 
         private void viewCitationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < 4; i++) prevSortedColum[i] = false;
-            citationIndex = authorResultsListView.FocusedItem.Index;
-
-            if (Papers[citationIndex].NumberOfCitations != 0)
+            if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
+                MessageBox.Show("Warning: Please check your Internet connection!");
+            else
             {
-                paper = Papers[citationIndex];
-                
-                showStatistics();
+                for (int i = 0; i < 4; i++) prevSortedColum[i] = false;
+                citationIndex = authorResultsListView.FocusedItem.Index;
 
-                getCitations();
+                if (Papers[citationIndex].NumberOfCitations != 0)
+                {
+                    paper = Papers[citationIndex];
+
+                    showStatistics();
+
+                    getCitations();
+                }
             }
         }
 
         private void viewUrlToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string url;
-            if (authorResultsListView.Visible == true)
-                url = Papers[authorResultsListView.FocusedItem.Index].TitleURL;
+            if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
+                MessageBox.Show("Warning: Please check your Internet connection!");
             else
-                url = Papers[journalsResultsListView.FocusedItem.Index].TitleURL;
+            {
+                string url;
+                if (authorResultsListView.Visible == true)
+                    url = Papers[authorResultsListView.FocusedItem.Index].TitleURL;
+                else
+                    url = Papers[journalsResultsListView.FocusedItem.Index].TitleURL;
 
-            if (url != null && !(url.ToLower().Equals("not found")) && url.Length > 0)
-            {
-                TabPage bpage = new TabPage("Browser");
-                Browser browser;
-                browser = new Browser(url);
-                bpage.Controls.Add(browser);
-                bpage.ImageIndex = 1;
-                Form1.dub_tab.TabPages.Insert(Form1.dub_tab.TabPages.Count - 1, bpage);
-                Form1.dub_tab.SelectedTab = bpage;
-            }
-            else
-            {
-                MessageBox.Show("Sorry!Url unavailable");
+                if (url != null && !(url.ToLower().Equals("not found")) && url.Length > 0)
+                {
+                    TabPage bpage = new TabPage("Browser");
+                    Browser browser;
+                    browser = new Browser(url);
+                    bpage.Controls.Add(browser);
+                    bpage.ImageIndex = 1;
+                    Form1.dub_tab.TabPages.Insert(Form1.dub_tab.TabPages.Count - 1, bpage);
+                    Form1.dub_tab.SelectedTab = bpage;
+                }
+                else
+                {
+                    MessageBox.Show("Sorry!Url unavailable");
+                }
             }
         }
 
