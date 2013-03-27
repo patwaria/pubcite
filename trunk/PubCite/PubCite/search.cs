@@ -28,6 +28,7 @@ namespace PubCite
         SG.AuthSuggestion authSug = null;
         SG.Author authStats = null;
         SG.Journal journalStats;
+        List<SG.Paper> graphPapers;
 
 
         int prevSelectedIndex;
@@ -95,6 +96,8 @@ namespace PubCite
             cachedListView.Click += new EventHandler(cachedListView_Click);
             cachedListView.HeaderStyle = ColumnHeaderStyle.None;
             cachedListView.SendToBack();
+
+           
 
             showSearch();
             STOP = false;
@@ -1220,6 +1223,134 @@ namespace PubCite
             Form1.favorites.clear();
             ArrangeTree();
         }
+
+        public void sortPapersByYearGraph(bool order)
+        {
+            if (order)
+            {
+                graphPapers.Sort((x, y) => x.Year.CompareTo(y.Year));
+            }
+            else
+            {
+                graphPapers.Sort((y, x) => x.Year.CompareTo(y.Year));
+            }
+        }
+
+        private void graphsButton_Click(object sender, EventArgs e)
+        {
+            if ((authorResultsListView.Visible == true && authStats != null) || (journalResultsListView.Visible == true && journalStats != null))
+            {
+
+                graphsChart.Titles.Clear();
+                Transition t = new Transition(new TransitionType_EaseInEaseOut(500));
+                t.add(graphsPanel, "Top", 83);
+                t.run();
+                graphsChart.Series["Series1"].Points.Clear();
+
+                if (graphComboBox.Text.Equals("Citations Per Year"))
+                {
+                    graphsChart.Titles.Add("Citations Per Year");
+                    graphsChart.Titles.Add("Citations").Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Left;
+                    graphsChart.Titles.Add("Year").Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
+
+                    int currYear;
+                    int j;
+                    int currCitations = 0;
+                    graphPapers = Papers;
+                    sortPapersByYearGraph(true);
+                    for (j = 0; j < graphPapers.Count; j++)
+                    {
+                        if (graphPapers[j].Year > 2) break;
+
+                    }
+                    currYear = graphPapers[j].Year;
+
+
+                    for (int i = j; i < graphPapers.Count; i++)
+                    {
+                        if (currYear == graphPapers[i].Year)
+                        {
+
+                            currCitations += graphPapers[i].NumberOfCitations;
+
+                        }
+                        else
+                        {
+
+                            graphsChart.Series["Series1"].Points.AddXY(currYear, currCitations);
+                            currYear = graphPapers[i].Year;
+                            currCitations = graphPapers[i].NumberOfCitations;
+
+
+
+                        }
+                    }
+
+                }
+                else if (graphComboBox.Text.Equals("Publications Per Year"))
+                {
+
+
+                    graphsChart.Titles.Add("Publications Per Year");
+                    graphsChart.Titles.Add("Publications").Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Left;
+                    graphsChart.Titles.Add("Year").Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
+
+                    int currYear;
+                    int j;
+                    int currpublic = 0;
+                    graphPapers = Papers;
+                    sortPapersByYearGraph(true);
+                    for (j = 0; j < graphPapers.Count; j++)
+                    {
+                        if (graphPapers[j].Year > 2) break;
+
+                    }
+                    currYear = graphPapers[j].Year;
+
+
+                    for (int i = j; i < graphPapers.Count; i++)
+                    {
+                        if (currYear == graphPapers[i].Year)
+                        {
+
+                            currpublic++;
+
+                        }
+                        else
+                        {
+
+                            graphsChart.Series["Series1"].Points.AddXY(currYear, currpublic);
+                            currYear = graphPapers[i].Year;
+                            currpublic = 1;
+
+
+
+                        }
+
+
+
+                    }
+
+
+
+
+                }
+
+            }
+            else
+                MessageBox.Show("Please select an author or journal before viewing graphs");
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            Transition t = new Transition(new TransitionType_EaseInEaseOut(500));
+            t.add(graphsPanel, "Top", -900);
+            t.run();
+
+        }
+
+      
         
     }
 }

@@ -90,5 +90,12 @@ namespace PubCite
 
 
         }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            this.ResumeLayout(false);
+
+        }
     }
 }
