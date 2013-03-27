@@ -34,12 +34,14 @@
             System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Favourites", new System.Windows.Forms.TreeNode[] {
             treeNode1,
             treeNode2});
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.SearchPanel = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.cachedListView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.settingsIcon = new System.Windows.Forms.PictureBox();
             this.label4 = new System.Windows.Forms.Label();
             this.affiliation = new System.Windows.Forms.Label();
             this.KeywordsTextBox = new System.Windows.Forms.TextBox();
@@ -48,18 +50,11 @@
             this.searchField = new System.Windows.Forms.TextBox();
             this.authorCheckBox = new System.Windows.Forms.CheckBox();
             this.progressBar = new System.Windows.Forms.ProgressBar();
-            this.addToFavourite = new System.Windows.Forms.PictureBox();
             this.resultsPanel = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.panel20 = new System.Windows.Forms.Panel();
-            this.panel18 = new System.Windows.Forms.Panel();
-            this.panel17 = new System.Windows.Forms.Panel();
-            this.panel11 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
             this.resultsGroupBox = new System.Windows.Forms.GroupBox();
             this.arbitPanel = new System.Windows.Forms.Panel();
             this.settingsPanel = new System.Windows.Forms.Panel();
-            this.settingsCloseIcon = new System.Windows.Forms.PictureBox();
             this.settingsOk = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.microsoftNumericUpDown = new System.Windows.Forms.NumericUpDown();
@@ -71,9 +66,6 @@
             this.CacheOptions = new System.Windows.Forms.GroupBox();
             this.cacheNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.CacheOptionslabel = new System.Windows.Forms.Label();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.panel19 = new System.Windows.Forms.Panel();
-            this.panel9 = new System.Windows.Forms.Panel();
             this.authorResultsListView = new System.Windows.Forms.ListView();
             this.PaperHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.venueHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -85,11 +77,10 @@
             this.Cites = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Year = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.statisticsGroupBox = new System.Windows.Forms.GroupBox();
+            this.graphComboBox = new System.Windows.Forms.ComboBox();
             this.label16 = new System.Windows.Forms.Label();
             this.numPapers = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
-            this.panel12 = new System.Windows.Forms.Panel();
-            this.panel10 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -115,25 +106,16 @@
             this.recentListView = new System.Windows.Forms.ListView();
             this.recentHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.typeHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.panel16 = new System.Windows.Forms.Panel();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.panel8 = new System.Windows.Forms.Panel();
             this.recentButton = new System.Windows.Forms.Button();
             this.favouriteButton = new System.Windows.Forms.Button();
             this.favouritesTreeView = new System.Windows.Forms.TreeView();
             this.Suggestions = new System.Windows.Forms.GroupBox();
-            this.panel15 = new System.Windows.Forms.Panel();
-            this.panel13 = new System.Windows.Forms.Panel();
-            this.panel14 = new System.Windows.Forms.Panel();
-            this.panel6 = new System.Windows.Forms.Panel();
             this.authorsSuggestions = new System.Windows.Forms.ListView();
             this.Authors = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.siteComboBox = new System.Windows.Forms.ComboBox();
             this.searchSiteLabel = new System.Windows.Forms.Label();
-            this.searchIcon = new System.Windows.Forms.PictureBox();
-            this.stopButton = new System.Windows.Forms.PictureBox();
             this.optionsMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.viewCitationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewURLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -145,16 +127,40 @@
             this.recentMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.directorySearcher1 = new System.DirectoryServices.DirectorySearcher();
+            this.graphsButton = new System.Windows.Forms.Button();
+            this.graphsPanel = new System.Windows.Forms.Panel();
+            this.graphsChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.settingsIcon = new System.Windows.Forms.PictureBox();
+            this.addToFavourite = new System.Windows.Forms.PictureBox();
+            this.panel20 = new System.Windows.Forms.Panel();
+            this.panel18 = new System.Windows.Forms.Panel();
+            this.panel17 = new System.Windows.Forms.Panel();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.graphsCloseIcon = new System.Windows.Forms.PictureBox();
+            this.settingsCloseIcon = new System.Windows.Forms.PictureBox();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.panel19 = new System.Windows.Forms.Panel();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.panel16 = new System.Windows.Forms.Panel();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.panel15 = new System.Windows.Forms.Panel();
+            this.panel13 = new System.Windows.Forms.Panel();
+            this.panel14 = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.searchIcon = new System.Windows.Forms.PictureBox();
+            this.stopButton = new System.Windows.Forms.PictureBox();
             this.EndYear = new PubCite.NumericTextBox();
             this.StartYear = new PubCite.NumericTextBox();
             this.SearchPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.settingsIcon)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.addToFavourite)).BeginInit();
             this.resultsPanel.SuspendLayout();
             this.panel4.SuspendLayout();
             this.resultsGroupBox.SuspendLayout();
             this.settingsPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.settingsCloseIcon)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.microsoftNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.googleNumericUpDown)).BeginInit();
@@ -165,14 +171,20 @@
             this.progressPanel.SuspendLayout();
             this.favouritesPanel.SuspendLayout();
             this.recentSearchPanel.SuspendLayout();
-            this.panel7.SuspendLayout();
             this.Suggestions.SuspendLayout();
-            this.panel13.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.searchIcon)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.stopButton)).BeginInit();
             this.optionsMenuStrip.SuspendLayout();
             this.favouriteMenuStrip.SuspendLayout();
             this.recentMenuStrip.SuspendLayout();
+            this.graphsPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.graphsChart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.settingsIcon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.addToFavourite)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.graphsCloseIcon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.settingsCloseIcon)).BeginInit();
+            this.panel7.SuspendLayout();
+            this.panel13.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.searchIcon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.stopButton)).BeginInit();
             this.SuspendLayout();
             // 
             // SearchPanel
@@ -180,8 +192,8 @@
             this.SearchPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.SearchPanel.Controls.Add(this.panel2);
             this.SearchPanel.Controls.Add(this.panel1);
-            this.SearchPanel.Controls.Add(this.cachedListView);
             this.SearchPanel.Controls.Add(this.settingsIcon);
+            this.SearchPanel.Controls.Add(this.cachedListView);
             this.SearchPanel.Controls.Add(this.label4);
             this.SearchPanel.Controls.Add(this.affiliation);
             this.SearchPanel.Controls.Add(this.KeywordsTextBox);
@@ -244,16 +256,6 @@
             // columnHeader1
             // 
             this.columnHeader1.Width = 461;
-            // 
-            // settingsIcon
-            // 
-            this.settingsIcon.Image = global::PubCite.Properties.Resources.settings;
-            this.settingsIcon.Location = new System.Drawing.Point(969, 9);
-            this.settingsIcon.Name = "settingsIcon";
-            this.settingsIcon.Size = new System.Drawing.Size(25, 25);
-            this.settingsIcon.TabIndex = 30;
-            this.settingsIcon.TabStop = false;
-            this.settingsIcon.Click += new System.EventHandler(this.settingsIcon_Click);
             // 
             // label4
             // 
@@ -355,17 +357,6 @@
             this.progressBar.Size = new System.Drawing.Size(760, 22);
             this.progressBar.TabIndex = 0;
             // 
-            // addToFavourite
-            // 
-            this.addToFavourite.Image = global::PubCite.Properties.Resources.star;
-            this.addToFavourite.Location = new System.Drawing.Point(931, 7);
-            this.addToFavourite.Name = "addToFavourite";
-            this.addToFavourite.Size = new System.Drawing.Size(25, 28);
-            this.addToFavourite.TabIndex = 21;
-            this.addToFavourite.TabStop = false;
-            this.toolTip.SetToolTip(this.addToFavourite, "Add to Favourite");
-            this.addToFavourite.Click += new System.EventHandler(this.addToFavourite_Click);
-            // 
             // resultsPanel
             // 
             this.resultsPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
@@ -379,6 +370,7 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.panel4.Controls.Add(this.graphsPanel);
             this.panel4.Controls.Add(this.panel20);
             this.panel4.Controls.Add(this.panel18);
             this.panel4.Controls.Add(this.panel17);
@@ -390,46 +382,6 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(769, 534);
             this.panel4.TabIndex = 3;
-            // 
-            // panel20
-            // 
-            this.panel20.BackgroundImage = global::PubCite.Properties.Resources.borderv;
-            this.panel20.Location = new System.Drawing.Point(2, 95);
-            this.panel20.Name = "panel20";
-            this.panel20.Size = new System.Drawing.Size(2, 433);
-            this.panel20.TabIndex = 40;
-            // 
-            // panel18
-            // 
-            this.panel18.BackgroundImage = global::PubCite.Properties.Resources.borderv;
-            this.panel18.Location = new System.Drawing.Point(752, 10);
-            this.panel18.Name = "panel18";
-            this.panel18.Size = new System.Drawing.Size(2, 71);
-            this.panel18.TabIndex = 38;
-            // 
-            // panel17
-            // 
-            this.panel17.BackgroundImage = global::PubCite.Properties.Resources.borderv;
-            this.panel17.Location = new System.Drawing.Point(2, 11);
-            this.panel17.Name = "panel17";
-            this.panel17.Size = new System.Drawing.Size(2, 71);
-            this.panel17.TabIndex = 37;
-            // 
-            // panel11
-            // 
-            this.panel11.BackgroundImage = global::PubCite.Properties.Resources.border;
-            this.panel11.Location = new System.Drawing.Point(58, 10);
-            this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(694, 2);
-            this.panel11.TabIndex = 32;
-            // 
-            // panel3
-            // 
-            this.panel3.BackgroundImage = global::PubCite.Properties.Resources.border;
-            this.panel3.Location = new System.Drawing.Point(52, 94);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(702, 2);
-            this.panel3.TabIndex = 30;
             // 
             // resultsGroupBox
             // 
@@ -467,16 +419,6 @@
             this.settingsPanel.Name = "settingsPanel";
             this.settingsPanel.Size = new System.Drawing.Size(499, 319);
             this.settingsPanel.TabIndex = 41;
-            // 
-            // settingsCloseIcon
-            // 
-            this.settingsCloseIcon.Image = global::PubCite.Properties.Resources.close;
-            this.settingsCloseIcon.Location = new System.Drawing.Point(472, 4);
-            this.settingsCloseIcon.Name = "settingsCloseIcon";
-            this.settingsCloseIcon.Size = new System.Drawing.Size(16, 15);
-            this.settingsCloseIcon.TabIndex = 3;
-            this.settingsCloseIcon.TabStop = false;
-            this.settingsCloseIcon.Click += new System.EventHandler(this.settingsCloseIcon_Click);
             // 
             // settingsOk
             // 
@@ -638,30 +580,6 @@
             this.CacheOptionslabel.TabIndex = 0;
             this.CacheOptionslabel.Text = "Keep Cache These Many Days:";
             // 
-            // panel5
-            // 
-            this.panel5.BackgroundImage = global::PubCite.Properties.Resources.border;
-            this.panel5.Location = new System.Drawing.Point(2, 439);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(751, 2);
-            this.panel5.TabIndex = 31;
-            // 
-            // panel19
-            // 
-            this.panel19.BackgroundImage = global::PubCite.Properties.Resources.borderv;
-            this.panel19.Location = new System.Drawing.Point(750, 7);
-            this.panel19.Name = "panel19";
-            this.panel19.Size = new System.Drawing.Size(2, 432);
-            this.panel19.TabIndex = 39;
-            // 
-            // panel9
-            // 
-            this.panel9.BackgroundImage = global::PubCite.Properties.Resources.border;
-            this.panel9.Location = new System.Drawing.Point(-1, 7);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(10, 2);
-            this.panel9.TabIndex = 32;
-            // 
             // authorResultsListView
             // 
             this.authorResultsListView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
@@ -746,6 +664,8 @@
             // statisticsGroupBox
             // 
             this.statisticsGroupBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.statisticsGroupBox.Controls.Add(this.graphsButton);
+            this.statisticsGroupBox.Controls.Add(this.graphComboBox);
             this.statisticsGroupBox.Controls.Add(this.label16);
             this.statisticsGroupBox.Controls.Add(this.numPapers);
             this.statisticsGroupBox.Controls.Add(this.label15);
@@ -779,11 +699,26 @@
             this.statisticsGroupBox.TabStop = false;
             this.statisticsGroupBox.Text = "Statistics";
             // 
+            // graphComboBox
+            // 
+            this.graphComboBox.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.graphComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.graphComboBox.ForeColor = System.Drawing.SystemColors.Info;
+            this.graphComboBox.FormattingEnabled = true;
+            this.graphComboBox.Items.AddRange(new object[] {
+            "Citations Per Year",
+            "Publications Per Year"});
+            this.graphComboBox.Location = new System.Drawing.Point(504, 13);
+            this.graphComboBox.Name = "graphComboBox";
+            this.graphComboBox.Size = new System.Drawing.Size(120, 21);
+            this.graphComboBox.TabIndex = 37;
+            this.graphComboBox.Text = "Citations Per Year";
+            // 
             // label16
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(535, 18);
+            this.label16.Location = new System.Drawing.Point(467, 58);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(10, 13);
             this.label16.TabIndex = 36;
@@ -792,7 +727,7 @@
             // numPapers
             // 
             this.numPapers.AutoSize = true;
-            this.numPapers.Location = new System.Drawing.Point(551, 18);
+            this.numPapers.Location = new System.Drawing.Point(483, 58);
             this.numPapers.Name = "numPapers";
             this.numPapers.Size = new System.Drawing.Size(14, 13);
             this.numPapers.TabIndex = 35;
@@ -802,27 +737,11 @@
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(433, 18);
+            this.label15.Location = new System.Drawing.Point(365, 58);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(102, 13);
             this.label15.TabIndex = 34;
             this.label15.Text = "Number of Papers";
-            // 
-            // panel12
-            // 
-            this.panel12.BackgroundImage = global::PubCite.Properties.Resources.border;
-            this.panel12.Location = new System.Drawing.Point(0, 7);
-            this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(10, 2);
-            this.panel12.TabIndex = 33;
-            // 
-            // panel10
-            // 
-            this.panel10.BackgroundImage = global::PubCite.Properties.Resources.border;
-            this.panel10.Location = new System.Drawing.Point(1, 77);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(751, 2);
-            this.panel10.TabIndex = 31;
             // 
             // label5
             // 
@@ -896,9 +815,9 @@
             // progressPanel
             // 
             this.progressPanel.Controls.Add(this.label3);
-            this.progressPanel.Location = new System.Drawing.Point(501, 44);
+            this.progressPanel.Location = new System.Drawing.Point(518, 43);
             this.progressPanel.Name = "progressPanel";
-            this.progressPanel.Size = new System.Drawing.Size(248, 29);
+            this.progressPanel.Size = new System.Drawing.Size(229, 33);
             this.progressPanel.TabIndex = 22;
             this.progressPanel.Visible = false;
             // 
@@ -906,7 +825,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(18, 11);
+            this.label3.Location = new System.Drawing.Point(18, 12);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(215, 13);
             this.label3.TabIndex = 1;
@@ -1071,31 +990,6 @@
             this.typeHeader.Text = "Type";
             this.typeHeader.Width = 56;
             // 
-            // panel16
-            // 
-            this.panel16.BackgroundImage = global::PubCite.Properties.Resources.borderv;
-            this.panel16.Location = new System.Drawing.Point(201, 264);
-            this.panel16.Name = "panel16";
-            this.panel16.Size = new System.Drawing.Size(2, 266);
-            this.panel16.TabIndex = 36;
-            // 
-            // panel7
-            // 
-            this.panel7.BackgroundImage = global::PubCite.Properties.Resources.border;
-            this.panel7.Controls.Add(this.panel8);
-            this.panel7.Location = new System.Drawing.Point(86, 265);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(117, 2);
-            this.panel7.TabIndex = 33;
-            // 
-            // panel8
-            // 
-            this.panel8.BackgroundImage = global::PubCite.Properties.Resources.border;
-            this.panel8.Location = new System.Drawing.Point(-77, -5);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(10, 10);
-            this.panel8.TabIndex = 34;
-            // 
             // recentButton
             // 
             this.recentButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1155,39 +1049,6 @@
             this.Suggestions.TabIndex = 8;
             this.Suggestions.TabStop = false;
             this.Suggestions.Text = "Suggestions";
-            // 
-            // panel15
-            // 
-            this.panel15.BackgroundImage = global::PubCite.Properties.Resources.borderv;
-            this.panel15.Location = new System.Drawing.Point(0, 9);
-            this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(2, 263);
-            this.panel15.TabIndex = 35;
-            // 
-            // panel13
-            // 
-            this.panel13.BackgroundImage = global::PubCite.Properties.Resources.border;
-            this.panel13.Controls.Add(this.panel14);
-            this.panel13.Location = new System.Drawing.Point(0, 7);
-            this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(8, 2);
-            this.panel13.TabIndex = 35;
-            // 
-            // panel14
-            // 
-            this.panel14.BackgroundImage = global::PubCite.Properties.Resources.border;
-            this.panel14.Location = new System.Drawing.Point(-77, -5);
-            this.panel14.Name = "panel14";
-            this.panel14.Size = new System.Drawing.Size(10, 10);
-            this.panel14.TabIndex = 34;
-            // 
-            // panel6
-            // 
-            this.panel6.BackgroundImage = global::PubCite.Properties.Resources.border;
-            this.panel6.Location = new System.Drawing.Point(2, 271);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(190, 2);
-            this.panel6.TabIndex = 32;
             // 
             // authorsSuggestions
             // 
@@ -1258,28 +1119,6 @@
             this.searchSiteLabel.Size = new System.Drawing.Size(69, 21);
             this.searchSiteLabel.TabIndex = 3;
             this.searchSiteLabel.Text = "Search Site :";
-            // 
-            // searchIcon
-            // 
-            this.searchIcon.Image = global::PubCite.Properties.Resources.search_button2;
-            this.searchIcon.Location = new System.Drawing.Point(900, 8);
-            this.searchIcon.Name = "searchIcon";
-            this.searchIcon.Size = new System.Drawing.Size(24, 29);
-            this.searchIcon.TabIndex = 11;
-            this.searchIcon.TabStop = false;
-            this.toolTip.SetToolTip(this.searchIcon, "Search..");
-            this.searchIcon.Click += new System.EventHandler(this.searchIcon_Click);
-            // 
-            // stopButton
-            // 
-            this.stopButton.Image = global::PubCite.Properties.Resources.stop;
-            this.stopButton.Location = new System.Drawing.Point(900, 8);
-            this.stopButton.Name = "stopButton";
-            this.stopButton.Size = new System.Drawing.Size(21, 19);
-            this.stopButton.TabIndex = 31;
-            this.stopButton.TabStop = false;
-            this.stopButton.Visible = false;
-            this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
             // 
             // optionsMenuStrip
             // 
@@ -1357,6 +1196,249 @@
             this.clearHistoryToolStripMenuItem.Text = "Clear History";
             this.clearHistoryToolStripMenuItem.Click += new System.EventHandler(this.clearHistoryToolStripMenuItem_Click);
             // 
+            // directorySearcher1
+            // 
+            this.directorySearcher1.ClientTimeout = System.TimeSpan.Parse("-00:00:01");
+            this.directorySearcher1.ServerPageTimeLimit = System.TimeSpan.Parse("-00:00:01");
+            this.directorySearcher1.ServerTimeLimit = System.TimeSpan.Parse("-00:00:01");
+            // 
+            // graphsButton
+            // 
+            this.graphsButton.Location = new System.Drawing.Point(631, 11);
+            this.graphsButton.Name = "graphsButton";
+            this.graphsButton.Size = new System.Drawing.Size(46, 23);
+            this.graphsButton.TabIndex = 38;
+            this.graphsButton.Text = "gra";
+            this.graphsButton.UseVisualStyleBackColor = true;
+            this.graphsButton.Click += new System.EventHandler(this.graphsButton_Click);
+            // 
+            // graphsPanel
+            // 
+            this.graphsPanel.Controls.Add(this.graphsCloseIcon);
+            this.graphsPanel.Controls.Add(this.graphsChart);
+            this.graphsPanel.Location = new System.Drawing.Point(-1, -900);
+            this.graphsPanel.Name = "graphsPanel";
+            this.graphsPanel.Size = new System.Drawing.Size(755, 293);
+            this.graphsPanel.TabIndex = 43;
+            // 
+            // graphsChart
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.graphsChart.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.graphsChart.Legends.Add(legend1);
+            this.graphsChart.Location = new System.Drawing.Point(3, 3);
+            this.graphsChart.Name = "graphsChart";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.graphsChart.Series.Add(series1);
+            this.graphsChart.Size = new System.Drawing.Size(744, 287);
+            this.graphsChart.TabIndex = 0;
+            this.graphsChart.Text = "chart1";
+            // 
+            // settingsIcon
+            // 
+            this.settingsIcon.Image = global::PubCite.Properties.Resources.settings;
+            this.settingsIcon.Location = new System.Drawing.Point(969, 9);
+            this.settingsIcon.Name = "settingsIcon";
+            this.settingsIcon.Size = new System.Drawing.Size(25, 25);
+            this.settingsIcon.TabIndex = 30;
+            this.settingsIcon.TabStop = false;
+            this.settingsIcon.Click += new System.EventHandler(this.settingsIcon_Click);
+            // 
+            // addToFavourite
+            // 
+            this.addToFavourite.Image = global::PubCite.Properties.Resources.star;
+            this.addToFavourite.Location = new System.Drawing.Point(931, 7);
+            this.addToFavourite.Name = "addToFavourite";
+            this.addToFavourite.Size = new System.Drawing.Size(25, 28);
+            this.addToFavourite.TabIndex = 21;
+            this.addToFavourite.TabStop = false;
+            this.toolTip.SetToolTip(this.addToFavourite, "Add to Favourite");
+            this.addToFavourite.Click += new System.EventHandler(this.addToFavourite_Click);
+            // 
+            // panel20
+            // 
+            this.panel20.BackgroundImage = global::PubCite.Properties.Resources.borderv;
+            this.panel20.Location = new System.Drawing.Point(2, 95);
+            this.panel20.Name = "panel20";
+            this.panel20.Size = new System.Drawing.Size(2, 433);
+            this.panel20.TabIndex = 40;
+            // 
+            // panel18
+            // 
+            this.panel18.BackgroundImage = global::PubCite.Properties.Resources.borderv;
+            this.panel18.Location = new System.Drawing.Point(752, 10);
+            this.panel18.Name = "panel18";
+            this.panel18.Size = new System.Drawing.Size(2, 71);
+            this.panel18.TabIndex = 38;
+            // 
+            // panel17
+            // 
+            this.panel17.BackgroundImage = global::PubCite.Properties.Resources.borderv;
+            this.panel17.Location = new System.Drawing.Point(2, 11);
+            this.panel17.Name = "panel17";
+            this.panel17.Size = new System.Drawing.Size(2, 71);
+            this.panel17.TabIndex = 37;
+            // 
+            // panel11
+            // 
+            this.panel11.BackgroundImage = global::PubCite.Properties.Resources.border;
+            this.panel11.Location = new System.Drawing.Point(58, 10);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(694, 2);
+            this.panel11.TabIndex = 32;
+            // 
+            // panel3
+            // 
+            this.panel3.BackgroundImage = global::PubCite.Properties.Resources.border;
+            this.panel3.Location = new System.Drawing.Point(52, 94);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(702, 2);
+            this.panel3.TabIndex = 30;
+            // 
+            // graphsCloseIcon
+            // 
+            this.graphsCloseIcon.BackColor = System.Drawing.Color.White;
+            this.graphsCloseIcon.Image = global::PubCite.Properties.Resources.close;
+            this.graphsCloseIcon.Location = new System.Drawing.Point(730, 4);
+            this.graphsCloseIcon.Name = "graphsCloseIcon";
+            this.graphsCloseIcon.Size = new System.Drawing.Size(17, 22);
+            this.graphsCloseIcon.TabIndex = 1;
+            this.graphsCloseIcon.TabStop = false;
+            this.graphsCloseIcon.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // settingsCloseIcon
+            // 
+            this.settingsCloseIcon.Image = global::PubCite.Properties.Resources.close;
+            this.settingsCloseIcon.Location = new System.Drawing.Point(472, 4);
+            this.settingsCloseIcon.Name = "settingsCloseIcon";
+            this.settingsCloseIcon.Size = new System.Drawing.Size(16, 15);
+            this.settingsCloseIcon.TabIndex = 3;
+            this.settingsCloseIcon.TabStop = false;
+            this.settingsCloseIcon.Click += new System.EventHandler(this.settingsCloseIcon_Click);
+            // 
+            // panel5
+            // 
+            this.panel5.BackgroundImage = global::PubCite.Properties.Resources.border;
+            this.panel5.Location = new System.Drawing.Point(2, 439);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(751, 2);
+            this.panel5.TabIndex = 31;
+            // 
+            // panel19
+            // 
+            this.panel19.BackgroundImage = global::PubCite.Properties.Resources.borderv;
+            this.panel19.Location = new System.Drawing.Point(750, 7);
+            this.panel19.Name = "panel19";
+            this.panel19.Size = new System.Drawing.Size(2, 432);
+            this.panel19.TabIndex = 39;
+            // 
+            // panel9
+            // 
+            this.panel9.BackgroundImage = global::PubCite.Properties.Resources.border;
+            this.panel9.Location = new System.Drawing.Point(-1, 7);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(10, 2);
+            this.panel9.TabIndex = 32;
+            // 
+            // panel12
+            // 
+            this.panel12.BackgroundImage = global::PubCite.Properties.Resources.border;
+            this.panel12.Location = new System.Drawing.Point(0, 7);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(10, 2);
+            this.panel12.TabIndex = 33;
+            // 
+            // panel10
+            // 
+            this.panel10.BackgroundImage = global::PubCite.Properties.Resources.border;
+            this.panel10.Location = new System.Drawing.Point(1, 77);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(751, 2);
+            this.panel10.TabIndex = 31;
+            // 
+            // panel16
+            // 
+            this.panel16.BackgroundImage = global::PubCite.Properties.Resources.borderv;
+            this.panel16.Location = new System.Drawing.Point(201, 264);
+            this.panel16.Name = "panel16";
+            this.panel16.Size = new System.Drawing.Size(2, 266);
+            this.panel16.TabIndex = 36;
+            // 
+            // panel7
+            // 
+            this.panel7.BackgroundImage = global::PubCite.Properties.Resources.border;
+            this.panel7.Controls.Add(this.panel8);
+            this.panel7.Location = new System.Drawing.Point(86, 265);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(117, 2);
+            this.panel7.TabIndex = 33;
+            // 
+            // panel8
+            // 
+            this.panel8.BackgroundImage = global::PubCite.Properties.Resources.border;
+            this.panel8.Location = new System.Drawing.Point(-77, -5);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(10, 10);
+            this.panel8.TabIndex = 34;
+            // 
+            // panel15
+            // 
+            this.panel15.BackgroundImage = global::PubCite.Properties.Resources.borderv;
+            this.panel15.Location = new System.Drawing.Point(0, 9);
+            this.panel15.Name = "panel15";
+            this.panel15.Size = new System.Drawing.Size(2, 263);
+            this.panel15.TabIndex = 35;
+            // 
+            // panel13
+            // 
+            this.panel13.BackgroundImage = global::PubCite.Properties.Resources.border;
+            this.panel13.Controls.Add(this.panel14);
+            this.panel13.Location = new System.Drawing.Point(0, 7);
+            this.panel13.Name = "panel13";
+            this.panel13.Size = new System.Drawing.Size(8, 2);
+            this.panel13.TabIndex = 35;
+            // 
+            // panel14
+            // 
+            this.panel14.BackgroundImage = global::PubCite.Properties.Resources.border;
+            this.panel14.Location = new System.Drawing.Point(-77, -5);
+            this.panel14.Name = "panel14";
+            this.panel14.Size = new System.Drawing.Size(10, 10);
+            this.panel14.TabIndex = 34;
+            // 
+            // panel6
+            // 
+            this.panel6.BackgroundImage = global::PubCite.Properties.Resources.border;
+            this.panel6.Location = new System.Drawing.Point(2, 271);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(190, 2);
+            this.panel6.TabIndex = 32;
+            // 
+            // searchIcon
+            // 
+            this.searchIcon.Image = global::PubCite.Properties.Resources.search_button2;
+            this.searchIcon.Location = new System.Drawing.Point(900, 8);
+            this.searchIcon.Name = "searchIcon";
+            this.searchIcon.Size = new System.Drawing.Size(24, 29);
+            this.searchIcon.TabIndex = 11;
+            this.searchIcon.TabStop = false;
+            this.toolTip.SetToolTip(this.searchIcon, "Search..");
+            this.searchIcon.Click += new System.EventHandler(this.searchIcon_Click);
+            // 
+            // stopButton
+            // 
+            this.stopButton.Image = global::PubCite.Properties.Resources.stop;
+            this.stopButton.Location = new System.Drawing.Point(900, 8);
+            this.stopButton.Name = "stopButton";
+            this.stopButton.Size = new System.Drawing.Size(21, 19);
+            this.stopButton.TabIndex = 31;
+            this.stopButton.TabStop = false;
+            this.stopButton.Visible = false;
+            this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
+            // 
             // EndYear
             // 
             this.EndYear.AllowSpace = false;
@@ -1394,13 +1476,10 @@
             this.Size = new System.Drawing.Size(1015, 631);
             this.SearchPanel.ResumeLayout(false);
             this.SearchPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.settingsIcon)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.addToFavourite)).EndInit();
             this.resultsPanel.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.resultsGroupBox.ResumeLayout(false);
             this.settingsPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.settingsCloseIcon)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.microsoftNumericUpDown)).EndInit();
@@ -1415,14 +1494,20 @@
             this.progressPanel.PerformLayout();
             this.favouritesPanel.ResumeLayout(false);
             this.recentSearchPanel.ResumeLayout(false);
-            this.panel7.ResumeLayout(false);
             this.Suggestions.ResumeLayout(false);
-            this.panel13.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.searchIcon)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.stopButton)).EndInit();
             this.optionsMenuStrip.ResumeLayout(false);
             this.favouriteMenuStrip.ResumeLayout(false);
             this.recentMenuStrip.ResumeLayout(false);
+            this.graphsPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.graphsChart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.settingsIcon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.addToFavourite)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.graphsCloseIcon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.settingsCloseIcon)).EndInit();
+            this.panel7.ResumeLayout(false);
+            this.panel13.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.searchIcon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.stopButton)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1542,5 +1627,11 @@
         private System.Windows.Forms.ToolStripMenuItem removeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clearHistoryToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clearFavouritesToolStripMenuItem;
+        private System.Windows.Forms.ComboBox graphComboBox;
+        private System.DirectoryServices.DirectorySearcher directorySearcher1;
+        private System.Windows.Forms.Panel graphsPanel;
+        private System.Windows.Forms.Button graphsButton;
+        private System.Windows.Forms.DataVisualization.Charting.Chart graphsChart;
+        private System.Windows.Forms.PictureBox graphsCloseIcon;
     }
 }
