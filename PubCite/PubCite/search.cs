@@ -895,6 +895,7 @@ namespace PubCite
 
         private void searchIcon_Click(object sender, EventArgs e)
         {
+            stopButton.Focus();
             showStop();
             for (int i = 0; i < 4; i++) prevSortedColum[i] = false;
 
