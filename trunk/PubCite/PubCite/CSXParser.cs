@@ -77,7 +77,9 @@ namespace PubCite
                 url = "http://citeseer.ist.psu.edu" + citUrl.GetAttributeValue("href", "");
             }
 
-            if (p.Count % 10 != 0)
+            SettingsRecord sr = new SettingsRecord();
+            Settings s = sr.ReadSettings();
+            if (p.Count % 10 != 0 || p.Count >= s.CiteSeerMaxResults)
                 return false;
 
             int pagen = p.Count;
