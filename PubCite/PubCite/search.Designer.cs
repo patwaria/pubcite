@@ -661,7 +661,7 @@
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(132, 13);
             this.label13.TabIndex = 0;
-            this.label13.Text = "Limit Citeseer Results to:";
+            this.label13.Text = "Limit CiteSeerX Results to:";
             // 
             // CacheOptions
             // 
