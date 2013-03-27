@@ -50,6 +50,7 @@
             this.authorCheckBox = new System.Windows.Forms.CheckBox();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.addToFavourite = new System.Windows.Forms.PictureBox();
+            this.EndYear = new PubCite.NumericTextBox();
             this.resultsPanel = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.graphsPanel = new System.Windows.Forms.Panel();
@@ -116,6 +117,7 @@
             this.citesperYearLabel = new System.Windows.Forms.Label();
             this.citationsLabel = new System.Windows.Forms.Label();
             this.authorLabel = new System.Windows.Forms.Label();
+            this.StartYear = new PubCite.NumericTextBox();
             this.favouritesPanel = new System.Windows.Forms.Panel();
             this.recentSearchPanel = new System.Windows.Forms.Panel();
             this.recentListView = new System.Windows.Forms.ListView();
@@ -152,8 +154,6 @@
             this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.directorySearcher1 = new System.DirectoryServices.DirectorySearcher();
-            this.EndYear = new PubCite.NumericTextBox();
-            this.StartYear = new PubCite.NumericTextBox();
             this.SearchPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.settingsIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.addToFavourite)).BeginInit();
@@ -251,7 +251,7 @@
             this.cachedListView.ForeColor = System.Drawing.SystemColors.Menu;
             this.cachedListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.cachedListView.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.cachedListView.Location = new System.Drawing.Point(-423, 10);
+            this.cachedListView.Location = new System.Drawing.Point(128, 31);
             this.cachedListView.Name = "cachedListView";
             this.cachedListView.Size = new System.Drawing.Size(760, 97);
             this.cachedListView.TabIndex = 29;
@@ -350,6 +350,20 @@
             this.addToFavourite.TabStop = false;
             this.toolTip.SetToolTip(this.addToFavourite, "Add to Favourite");
             this.addToFavourite.Click += new System.EventHandler(this.addToFavourite_Click);
+            // 
+            // EndYear
+            // 
+            this.EndYear.AllowSpace = false;
+            this.EndYear.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.EndYear.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.EndYear.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EndYear.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.EndYear.Location = new System.Drawing.Point(342, 38);
+            this.EndYear.Name = "EndYear";
+            this.EndYear.Size = new System.Drawing.Size(44, 22);
+            this.EndYear.TabIndex = 0;
+            this.toolTip.SetToolTip(this.EndYear, "End Year");
+            this.EndYear.TextChanged += new System.EventHandler(this.EndYear_TextChanged);
             // 
             // resultsPanel
             // 
@@ -618,7 +632,7 @@
             this.label13.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.Location = new System.Drawing.Point(110, 30);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(132, 13);
+            this.label13.Size = new System.Drawing.Size(140, 13);
             this.label13.TabIndex = 0;
             this.label13.Text = "Limit CiteSeerX Results to:";
             // 
@@ -1069,6 +1083,20 @@
             this.authorLabel.TabIndex = 8;
             this.authorLabel.Text = "Name";
             // 
+            // StartYear
+            // 
+            this.StartYear.AllowSpace = false;
+            this.StartYear.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.StartYear.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.StartYear.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StartYear.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.StartYear.Location = new System.Drawing.Point(259, 38);
+            this.StartYear.Name = "StartYear";
+            this.StartYear.Size = new System.Drawing.Size(44, 22);
+            this.StartYear.TabIndex = 0;
+            this.toolTip.SetToolTip(this.StartYear, "Start Year");
+            this.StartYear.TextChanged += new System.EventHandler(this.StartYear_TextChanged);
+            // 
             // favouritesPanel
             // 
             this.favouritesPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
@@ -1411,34 +1439,6 @@
             this.directorySearcher1.ClientTimeout = System.TimeSpan.Parse("-00:00:01");
             this.directorySearcher1.ServerPageTimeLimit = System.TimeSpan.Parse("-00:00:01");
             this.directorySearcher1.ServerTimeLimit = System.TimeSpan.Parse("-00:00:01");
-            // 
-            // EndYear
-            // 
-            this.EndYear.AllowSpace = false;
-            this.EndYear.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.EndYear.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.EndYear.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EndYear.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.EndYear.Location = new System.Drawing.Point(342, 38);
-            this.EndYear.Name = "EndYear";
-            this.EndYear.Size = new System.Drawing.Size(44, 22);
-            this.EndYear.TabIndex = 0;
-            this.toolTip.SetToolTip(this.EndYear, "End Year");
-            this.EndYear.TextChanged += new System.EventHandler(this.EndYear_TextChanged);
-            // 
-            // StartYear
-            // 
-            this.StartYear.AllowSpace = false;
-            this.StartYear.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.StartYear.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.StartYear.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.StartYear.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.StartYear.Location = new System.Drawing.Point(259, 38);
-            this.StartYear.Name = "StartYear";
-            this.StartYear.Size = new System.Drawing.Size(44, 22);
-            this.StartYear.TabIndex = 0;
-            this.toolTip.SetToolTip(this.StartYear, "Start Year");
-            this.StartYear.TextChanged += new System.EventHandler(this.StartYear_TextChanged);
             // 
             // search
             // 
