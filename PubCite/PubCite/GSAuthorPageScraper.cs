@@ -182,8 +182,8 @@ namespace PubCite
                 //titleLink = nameNode.Attributes["href"].Value;
                 //set the paper link to url_link.Inner_Text. First check if link begins with "http://...". If not add "http://scholar.google.co.in/"
                 //titleLink=url_link;
-                titleLink = nameNode.GetAttributeValue("href", "Not Found");
-                if (!titleLink.Equals("Not Found"))
+                titleLink = nameNode.GetAttributeValue("href", "");
+                if (!titleLink.Equals(""))
                 {
                                 titleLink = "http://scholar.google.com" + titleLink;
                                 titleLink = titleLink.Replace("amp;", "");
@@ -196,9 +196,9 @@ namespace PubCite
                 //Console.WriteLine("AUTHOR NAME : " + nameNode.InnerText);
 
                 // PUBLICATION
-                authors = "Not Found";
-                publication = "Not Found";
-                publisher = "Not Found";
+                authors = "";
+                publication = "";
+                publisher = "";
                 if (nodes != null)
                 {
                     authors = nodes[0].InnerText;
@@ -212,13 +212,13 @@ namespace PubCite
                 //set the number of citations to nameNode.InnerText
                 //Console.WriteLine("NO OF CITATIONS : " + nameNode.InnerText);
                 no_of_citations = 0;
-                cited_by_url = "Not Found";
+                cited_by_url = "";
                 if (nameNode != null && nameNode.FirstChild != null)
                 {
                     try { no_of_citations = Convert.ToInt32(nameNode.FirstChild.InnerText.Trim()); }
                     catch (Exception e) { }
-                    cited_by_url = nameNode.FirstChild.GetAttributeValue("href", "Not Found");
-                    if (!cited_by_url.Equals("Not Found"))
+                    cited_by_url = nameNode.FirstChild.GetAttributeValue("href", "");
+                    if (!cited_by_url.Equals(""))
                     {
                         // cited_by_url = "http://scholar.google.com" + cited_by_url;
                         cited_by_url = cited_by_url.Replace("amp;", "");

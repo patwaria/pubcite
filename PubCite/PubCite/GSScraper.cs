@@ -77,9 +77,9 @@ namespace PubCite
                     //HtmlNode urlNode = node.SelectSingleNode(".//a");
                     if (urlNode != null)
                     {
-                        profiles_url = urlNode.GetAttributeValue("href", "Not Found");
+                        profiles_url = urlNode.GetAttributeValue("href", "");
                         names.Add(urlNode.InnerText);
-                        if (!profiles_url.Equals("Not Found"))
+                        if (!profiles_url.Equals(""))
                         {
                             profiles_url = "http://scholar.google.com" + profiles_url;
                             profiles_url = profiles_url.Replace("amp;", "");
@@ -163,9 +163,9 @@ namespace PubCite
                     //HtmlNode urlNode = node.SelectSingleNode(".//a");
                     if (urlNode != null)
                     {
-                        profiles_url = urlNode.GetAttributeValue("href", "Not Found");
+                        profiles_url = urlNode.GetAttributeValue("href", "");
                         names.Add(urlNode.InnerText);
-                        if (!profiles_url.Equals("Not Found"))
+                        if (!profiles_url.Equals(""))
                         {
                             profiles_url = "http://scholar.google.com" + profiles_url;
                             profiles_url = profiles_url.Replace("amp;", "");
@@ -310,12 +310,12 @@ namespace PubCite
                     // TITLE AND TITLE LINK
                     HtmlNode child = n.SelectSingleNode(".//*[@class=\"gs_rt\"]");
                     title = child.InnerText;
-                    titleLink = "Not Found";
+                    titleLink = "";
                     HtmlNode url_node = child.SelectSingleNode(".//a");
                     if (url_node != null)
                     {
-                        titleLink = url_node.GetAttributeValue("href", "Not Found");
-                        if (!titleLink.Equals("Not Found"))
+                        titleLink = url_node.GetAttributeValue("href", "");
+                        if (!titleLink.Equals(""))
                         {
                             //titleLink = "http://scholar.google.com" + titleLink;
                             titleLink = titleLink.Replace("amp;", "");
@@ -323,9 +323,9 @@ namespace PubCite
                     }
                     // AUTHORS AND PUBLICATION
                     child = n.SelectSingleNode(".//*[@class=\"gs_a\"]");
-                    authors = "Not Found";
-                    publication = "Not Found";
-                    publisher = "Not Found";
+                    authors = "";
+                    publication = "";
+                    publisher = "";
                     year = 1970;
                     if (child != null)
                     {
@@ -366,7 +366,7 @@ namespace PubCite
 
                     // SUMMARY
                     child = n.SelectSingleNode(".//*[@class=\"gs_rs\"]");
-                    summary = "Not Found";
+                    summary = "";
                     if (child != null)
                     {
                         summary = child.InnerText;
@@ -375,7 +375,7 @@ namespace PubCite
 
                     // CITATION STUFF
                     no_of_citations = 0;
-                    cited_by_url = "Not Found";
+                    cited_by_url = "";
                     child = n.SelectSingleNode(".//*[@class=\"gs_fl\"]");
                     if (child != null) child = child.FirstChild;
                     if (child != null)
@@ -390,8 +390,8 @@ namespace PubCite
                         }
                         catch (Exception e) { }
 
-                        cited_by_url = no_of_citations != 0 ? child.GetAttributeValue("href", "Not Found") : "Not Found";
-                        if (!cited_by_url.Equals("Not Found"))
+                        cited_by_url = no_of_citations != 0 ? child.GetAttributeValue("href", "") : "";
+                        if (!cited_by_url.Equals(""))
                         {
                             cited_by_url = "http://scholar.google.com" + cited_by_url;
                             cited_by_url = cited_by_url.Replace("amp;", "");
@@ -473,12 +473,12 @@ namespace PubCite
                     // TITLE AND TITLE LINK
                     HtmlNode child = n.SelectSingleNode(".//*[@class=\"gs_rt\"]");
                     title = child.InnerText;
-                    titleLink = "Not Found";
+                    titleLink = "";
                     HtmlNode url_node = child.SelectSingleNode(".//a");
                     if (url_node != null)
                     {
-                        titleLink = url_node.GetAttributeValue("href", "Not Found");
-                        if (!titleLink.Equals("Not Found"))
+                        titleLink = url_node.GetAttributeValue("href", "");
+                        if (!titleLink.Equals(""))
                         {
                             //titleLink = "http://scholar.google.com" + titleLink;
                             titleLink = titleLink.Replace("amp;", "");
@@ -486,9 +486,9 @@ namespace PubCite
                     }
                     // AUTHORS AND PUBLICATION
                     child = n.SelectSingleNode(".//*[@class=\"gs_a\"]");
-                    authors = "Not Found";
-                    publication = "Not Found";
-                    publisher = "Not Found";
+                    authors = "";
+                    publication = "";
+                    publisher = "";
                     year = 1970;
                     if (child != null)
                     {
@@ -529,7 +529,7 @@ namespace PubCite
 
                     // SUMMARY
                     child = n.SelectSingleNode(".//*[@class=\"gs_rs\"]");
-                    summary = "Not Found";
+                    summary = "";
                     if (child != null)
                     {
                         summary = child.InnerText;
@@ -538,7 +538,7 @@ namespace PubCite
 
                     // CITATION STUFF
                     no_of_citations = 0;
-                    cited_by_url = "Not Found";
+                    cited_by_url = "";
                     child = n.SelectSingleNode(".//*[@class=\"gs_fl\"]");
                     if (child != null) child = child.FirstChild;
                     if (child != null)
@@ -553,8 +553,8 @@ namespace PubCite
                         }
                         catch (Exception e) { }
 
-                        cited_by_url = no_of_citations != 0 ? child.GetAttributeValue("href", "Not Found") : "Not Found";
-                        if (!cited_by_url.Equals("Not Found"))
+                        cited_by_url = no_of_citations != 0 ? child.GetAttributeValue("href", "") : "";
+                        if (!cited_by_url.Equals(""))
                         {
                             cited_by_url = "http://scholar.google.com" + cited_by_url;
                             cited_by_url = cited_by_url.Replace("amp;", "");
@@ -667,12 +667,12 @@ namespace PubCite
                     // TITLE AND TITLE LINK
                     HtmlNode child = n.SelectSingleNode(".//*[@class=\"gs_rt\"]");
                     title = child.InnerText;
-                    titleLink = "Not Found";
+                    titleLink = "";
                     HtmlNode url_node = child.SelectSingleNode(".//a");
                     if (url_node != null)
                     {
-                        titleLink = url_node.GetAttributeValue("href", "Not Found");
-                        if (!titleLink.Equals("Not Found"))
+                        titleLink = url_node.GetAttributeValue("href", "");
+                        if (!titleLink.Equals(""))
                         {
                             //titleLink = "http://scholar.google.com" + titleLink;
                             titleLink = titleLink.Replace("amp;", "");
@@ -681,9 +681,9 @@ namespace PubCite
 
                     // AUTHORS AND PUBLICATION
                     child = n.SelectSingleNode(".//*[@class=\"gs_a\"]");
-                    authors = "Not Found";
-                    publication = "Not Found";
-                    publisher = "Not Found";
+                    authors = "";
+                    publication = "";
+                    publisher = "";
                     year = -1;
                     if (child != null)
                     {
@@ -724,7 +724,7 @@ namespace PubCite
 
                     // SUMMARY
                     child = n.SelectSingleNode(".//*[@class=\"gs_rs\"]");
-                    summary = "Not Found";
+                    summary = "";
                     if (child != null)
                     {
                         summary = child.InnerText;
@@ -733,7 +733,7 @@ namespace PubCite
 
                     // CITATION STUFF
                     no_of_citations = 0;
-                    cited_by_url = "Not Found";
+                    cited_by_url = "";
                     child = n.SelectSingleNode(".//*[@class=\"gs_fl\"]");
                     if (child != null) child = child.FirstChild;
                     if (child != null)
@@ -749,8 +749,8 @@ namespace PubCite
                         }
                         catch (Exception e) { }
 
-                        cited_by_url = no_of_citations != 0 ? child.GetAttributeValue("href", "Not Found") : "Not Found";
-                        if (!cited_by_url.Equals("Not Found"))
+                        cited_by_url = no_of_citations != 0 ? child.GetAttributeValue("href", "") : "";
+                        if (!cited_by_url.Equals(""))
                         {
                             cited_by_url = "http://scholar.google.com" + cited_by_url;
                             cited_by_url = cited_by_url.Replace("amp;", "");
@@ -838,12 +838,12 @@ namespace PubCite
                     // TITLE AND TITLE LINK
                     HtmlNode child = n.SelectSingleNode(".//*[@class=\"gs_rt\"]");
                     title = child.InnerText;
-                    titleLink = "Not Found";
+                    titleLink = "";
                     HtmlNode url_node = child.SelectSingleNode(".//a");
                     if (url_node != null)
                     {
-                        titleLink = url_node.GetAttributeValue("href", "Not Found");
-                        if (!titleLink.Equals("Not Found"))
+                        titleLink = url_node.GetAttributeValue("href", "");
+                        if (!titleLink.Equals(""))
                         {
                             //titleLink = "http://scholar.google.com" + titleLink;
                             titleLink = titleLink.Replace("amp;", "");
@@ -852,9 +852,9 @@ namespace PubCite
 
                     // AUTHORS AND PUBLICATION
                     child = n.SelectSingleNode(".//*[@class=\"gs_a\"]");
-                    authors = "Not Found";
-                    publication = "Not Found";
-                    publisher = "Not Found";
+                    authors = "";
+                    publication = "";
+                    publisher = "";
                     year = -1;
                     if (child != null)
                     {
@@ -895,7 +895,7 @@ namespace PubCite
 
                     // SUMMARY
                     child = n.SelectSingleNode(".//*[@class=\"gs_rs\"]");
-                    summary = "Not Found";
+                    summary = "";
                     if (child != null)
                     {
                         summary = child.InnerText;
@@ -904,7 +904,7 @@ namespace PubCite
 
                     // CITATION STUFF
                     no_of_citations = 0;
-                    cited_by_url = "Not Found";
+                    cited_by_url = "";
                     child = n.SelectSingleNode(".//*[@class=\"gs_fl\"]");
                     if (child != null) child = child.FirstChild;
                     if (child != null)
@@ -920,8 +920,8 @@ namespace PubCite
                         }
                         catch (Exception e) { }
 
-                        cited_by_url = no_of_citations != 0 ? child.GetAttributeValue("href", "Not Found") : "Not Found";
-                        if (!cited_by_url.Equals("Not Found"))
+                        cited_by_url = no_of_citations != 0 ? child.GetAttributeValue("href", "") : "";
+                        if (!cited_by_url.Equals(""))
                         {
                             cited_by_url = "http://scholar.google.com" + cited_by_url;
                             cited_by_url = cited_by_url.Replace("amp;", "");
@@ -998,12 +998,12 @@ namespace PubCite
                     // TITLE AND TITLE LINK
                     HtmlNode child = n.SelectSingleNode(".//*[@class=\"gs_rt\"]");
                     title = child.InnerText;
-                    titleLink = "Not Found";
+                    titleLink = "";
                     HtmlNode url_node = child.SelectSingleNode(".//a");
                     if (url_node != null)
                     {
-                        titleLink = url_node.GetAttributeValue("href", "Not Found");
-                        if (!titleLink.Equals("Not Found"))
+                        titleLink = url_node.GetAttributeValue("href", "");
+                        if (!titleLink.Equals(""))
                         {
                             //titleLink = "http://scholar.google.com" + titleLink;
                             titleLink = titleLink.Replace("amp;", "");
@@ -1012,9 +1012,9 @@ namespace PubCite
 
                     // AUTHORS AND PUBLICATION
                     child = n.SelectSingleNode(".//*[@class=\"gs_a\"]");
-                    authors = "Not Found";
-                    publication = "Not Found";
-                    publisher = "Not Found";
+                    authors = "";
+                    publication = "";
+                    publisher = "";
                     year = 1970;
                     if (child != null)
                     {
@@ -1055,7 +1055,7 @@ namespace PubCite
 
                     // SUMMARY
                     child = n.SelectSingleNode(".//*[@class=\"gs_rs\"]");
-                    summary = "Not Found";
+                    summary = "";
                     if (child != null)
                     {
                         summary = child.InnerText;
@@ -1064,14 +1064,14 @@ namespace PubCite
 
                     // CITATION STUFF
                     no_of_citations = 0;
-                    cited_by_url = "Not Found";
+                    cited_by_url = "";
                     child = n.SelectSingleNode(".//*[@class=\"gs_fl\"]");
                     if (child != null) child = child.FirstChild;
                     if (child != null)
                     {
                         string text = child.InnerText;
-                        cited_by_url = child.GetAttributeValue("href", "Not Found");
-                        if (!cited_by_url.Equals("Not Found"))
+                        cited_by_url = child.GetAttributeValue("href", "");
+                        if (!cited_by_url.Equals(""))
                         {
                             cited_by_url = "http://scholar.google.com" + cited_by_url;
                             cited_by_url = cited_by_url.Replace("amp;", "");
@@ -1161,12 +1161,12 @@ namespace PubCite
                     // TITLE AND TITLE LINK
                     HtmlNode child = n.SelectSingleNode(".//*[@class=\"gs_rt\"]");
                     title = child.InnerText;
-                    titleLink = "Not Found";
+                    titleLink = "";
                     HtmlNode url_node = child.SelectSingleNode(".//a");
                     if (url_node != null)
                     {
-                        titleLink = url_node.GetAttributeValue("href", "Not Found");
-                        if (!titleLink.Equals("Not Found"))
+                        titleLink = url_node.GetAttributeValue("href", "");
+                        if (!titleLink.Equals(""))
                         {
                             //titleLink = "http://scholar.google.com" + titleLink;
                             titleLink = titleLink.Replace("amp;", "");
@@ -1175,9 +1175,9 @@ namespace PubCite
 
                     // AUTHORS AND PUBLICATION
                     child = n.SelectSingleNode(".//*[@class=\"gs_a\"]");
-                    authors = "Not Found";
-                    publication = "Not Found";
-                    publisher = "Not Found";
+                    authors = "";
+                    publication = "";
+                    publisher = "";
                     year = 1970;
                     if (child != null)
                     {
@@ -1218,7 +1218,7 @@ namespace PubCite
 
                     // SUMMARY
                     child = n.SelectSingleNode(".//*[@class=\"gs_rs\"]");
-                    summary = "Not Found";
+                    summary = "";
                     if (child != null)
                     {
                         summary = child.InnerText;
@@ -1227,14 +1227,14 @@ namespace PubCite
 
                     // CITATION STUFF
                     no_of_citations = 0;
-                    cited_by_url = "Not Found";
+                    cited_by_url = "";
                     child = n.SelectSingleNode(".//*[@class=\"gs_fl\"]");
                     if (child != null) child = child.FirstChild;
                     if (child != null)
                     {
                         string text = child.InnerText;
-                        cited_by_url = child.GetAttributeValue("href", "Not Found");
-                        if (!cited_by_url.Equals("Not Found"))
+                        cited_by_url = child.GetAttributeValue("href", "");
+                        if (!cited_by_url.Equals(""))
                         {
                             cited_by_url = "http://scholar.google.com" + cited_by_url;
                             cited_by_url = cited_by_url.Replace("amp;", "");
