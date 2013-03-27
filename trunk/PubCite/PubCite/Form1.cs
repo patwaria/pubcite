@@ -76,31 +76,6 @@ namespace PubCite
             }
         }
 
-        /*private void tabChangeHandler(object sender, EventArgs e)
-        {
-            Console.WriteLine("calledchange");
-            if (maintabControl.SelectedTab == newTabPage)
-            {
-                search nSearch = new search();
-                createdTabPage = new TabPage("Search");
-                
-                createdTabPage.ImageIndex = 1;
-               
-                createdTabPage.Controls.Add(nSearch);
-                maintabControl.TabPages.Insert(maintabControl.TabPages.Count - 1, createdTabPage);
-                maintabControl.SelectedTab = createdTabPage;
-            }
-        }*/
-        private void searchToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            string s = "Search";
-            TabPage MyTab = new TabPage(s);
-            maintabControl.TabPages.Add(MyTab);
-            search Nsearch = new search();
-            MyTab.Controls.Add(Nsearch);
-            Nsearch.get_sugg().Visible = false;
-        }
-
         public static TabControl get_maintab() {
 
             return dub_tab;
