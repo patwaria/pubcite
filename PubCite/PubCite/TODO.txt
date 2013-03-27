@@ -16,7 +16,7 @@
 15. add to favourites change location
 16. GUI changes - revamp to white.
 17. Proper citeseer name
-
+18. limit number of tabs
 Report:
 1. Test plan
 2. Architecture
