@@ -62,6 +62,9 @@
   <PropertyGroup>
     <SignManifests>true</SignManifests>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>pubcite.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="HtmlAgilityPack">
       <HintPath>references\HtmlAgilityPack.dll</HintPath>
@@ -153,6 +156,9 @@
     <None Include="Resources\settings1.png" />
     <None Include="Resources\stop_button.jpg" />
     <None Include="Resources\border1.PNG" />
+    <Content Include="favicon.ico" />
+    <Content Include="pubcite.ico" />
+    <None Include="Resources\bar-chart-2.png" />
     <Content Include="Resources\borderv.png" />
     <None Include="Resources\borderv1.png" />
     <None Include="Resources\chartIcon.gif" />

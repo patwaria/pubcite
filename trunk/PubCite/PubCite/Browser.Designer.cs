@@ -38,7 +38,7 @@
             // 
             // UrlBox
             // 
-            this.UrlBox.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.UrlBox.BackColor = System.Drawing.SystemColors.ControlLight;
             this.UrlBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.UrlBox.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UrlBox.Location = new System.Drawing.Point(64, 3);
@@ -49,9 +49,9 @@
             // UrlLabel
             // 
             this.UrlLabel.AutoSize = true;
-            this.UrlLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.UrlLabel.BackColor = System.Drawing.Color.WhiteSmoke;
             this.UrlLabel.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UrlLabel.ForeColor = System.Drawing.SystemColors.Menu;
+            this.UrlLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
             this.UrlLabel.Location = new System.Drawing.Point(23, 5);
             this.UrlLabel.Margin = new System.Windows.Forms.Padding(3);
             this.UrlLabel.Name = "UrlLabel";
@@ -72,23 +72,24 @@
             // 
             // webBrowser
             // 
-            this.webBrowser.Location = new System.Drawing.Point(26, 32);
+            this.webBrowser.Location = new System.Drawing.Point(0, 32);
             this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser.Name = "webBrowser";
-            this.webBrowser.Size = new System.Drawing.Size(960, 596);
+            this.webBrowser.ScriptErrorsSuppressed = true;
+            this.webBrowser.Size = new System.Drawing.Size(1008, 612);
             this.webBrowser.TabIndex = 3;
             // 
             // Browser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.BackColor = System.Drawing.Color.LightGray;
             this.Controls.Add(this.webBrowser);
             this.Controls.Add(this.searchButton);
             this.Controls.Add(this.UrlLabel);
             this.Controls.Add(this.UrlBox);
             this.Name = "Browser";
-            this.Size = new System.Drawing.Size(996, 644);
+            this.Size = new System.Drawing.Size(1016, 644);
             ((System.ComponentModel.ISupportInitialize)(this.searchButton)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

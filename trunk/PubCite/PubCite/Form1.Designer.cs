@@ -47,25 +47,24 @@
             // 
             // searchTab1
             // 
-            this.searchTab1.BackColor = System.Drawing.SystemColors.Window;
+            this.searchTab1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.searchTab1.ImageIndex = 1;
             this.searchTab1.Location = new System.Drawing.Point(4, 22);
+            this.searchTab1.Margin = new System.Windows.Forms.Padding(0);
             this.searchTab1.Name = "searchTab1";
-            this.searchTab1.Padding = new System.Windows.Forms.Padding(3);
-            this.searchTab1.Size = new System.Drawing.Size(1000, 639);
+            this.searchTab1.Size = new System.Drawing.Size(1008, 630);
             this.searchTab1.TabIndex = 0;
             this.searchTab1.Text = "Search";
-            this.searchTab1.UseVisualStyleBackColor = true;
             // 
             // maintabControl
             // 
             this.maintabControl.Controls.Add(this.searchTab1);
-            this.maintabControl.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.maintabControl.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.maintabControl.ItemSize = new System.Drawing.Size(48, 18);
-            this.maintabControl.Location = new System.Drawing.Point(-1, -1);
+            this.maintabControl.Location = new System.Drawing.Point(-4, 0);
             this.maintabControl.Name = "maintabControl";
             this.maintabControl.SelectedIndex = 0;
-            this.maintabControl.Size = new System.Drawing.Size(1008, 665);
+            this.maintabControl.Size = new System.Drawing.Size(1016, 656);
             this.maintabControl.TabIndex = 4;
             // 
             // imageList1
@@ -93,10 +92,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(1006, 663);
+            this.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.ClientSize = new System.Drawing.Size(1006, 652);
             this.Controls.Add(this.maintabControl);
+            this.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "PubCite";

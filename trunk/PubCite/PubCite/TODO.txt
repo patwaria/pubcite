@@ -4,20 +4,15 @@
 Name: ScholExplorer?
 
 Errors/Changes:
-1. Limit no. of tabs
-2. When year is returned as 0, show '-' in the table
+1. Citeseer journal not working
+2. google scholar citation view full list not working
+3. 405 error - ms
 **
 
  citations problem after sort/keywords
     
  update cache on delete from favs
 
-
- add to favourites change location
- GUI changes - revamp to white.
- limit number of tabs
- add data to tab header
- select first auth suggestion by default
  tooltip everywhere
 
 Report:
