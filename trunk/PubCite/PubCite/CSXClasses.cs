@@ -31,9 +31,14 @@ namespace PubCite
         private string affiliation;
         private string keyword;
         private string ISSN;
+        private int maxResults;
 
         public CiteSeerJournal_FinalAuthorSearch(string searchEle, int searchTy, string affISSN, string key)  //searchType 0 for authorSearch, 1 for journalSearch
         {
+
+            SettingsRecord sett = new SettingsRecord();
+            Settings set = sett.ReadSettings();
+            maxResults = set.CiteSeerMaxResults;
 
             searchElement = searchEle;
             searchType = searchTy;
@@ -114,8 +119,8 @@ namespace PubCite
 
             noResult = Convert.ToInt32(noResults);
 
-            if (noResult > 500)
-                noResult = 500;
+            if (noResult > maxResults-10)
+                noResult = maxResults-10;
 
 
             // Console.WriteLine(noResult + "   " + noResult);
