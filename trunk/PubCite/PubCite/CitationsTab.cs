@@ -116,7 +116,7 @@ namespace PubCite
         }
         public void showCitations()
         {
-            if (MainPapers != null)
+            if (MainPapers != null && MainPapers.Count > 0)
             {
                 if (lastCount == 0)
                     authorResultsListView.Items.Clear();
@@ -179,6 +179,10 @@ namespace PubCite
         {
             STOP = true;
             stop.Visible = false;
+            progressPanel.Visible = false;
+            progressBar.MarqueeAnimationSpeed = 0;
+            progressBar.Style = ProgressBarStyle.Blocks;
+            progressBar.Value = progressBar.Minimum;
         }
 
         private void authorResultsListView_MouseClick(object sender, MouseEventArgs e)
@@ -246,16 +250,26 @@ namespace PubCite
 
         private void viewUrlToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            TabPage bpage = new TabPage("Browser");
-            Browser browser;
+            string url;
             if (authorResultsListView.Visible == true)
-                browser = new Browser(Papers[authorResultsListView.FocusedItem.Index].TitleURL);
+                url = Papers[authorResultsListView.FocusedItem.Index].TitleURL;
             else
-                browser = new Browser(Papers[journalsResultsListView.FocusedItem.Index].TitleURL);
-            bpage.Controls.Add(browser);
-            bpage.ImageIndex = 1;
-            Form1.dub_tab.TabPages.Insert(Form1.dub_tab.TabPages.Count - 1, bpage);
-            Form1.dub_tab.SelectedTab = bpage;
+                url = Papers[journalsResultsListView.FocusedItem.Index].TitleURL;
+
+            if (url != null && !(url.ToLower().Equals("not found")) && url.Length > 0)
+            {
+                TabPage bpage = new TabPage("Browser");
+                Browser browser;
+                browser = new Browser(url);
+                bpage.Controls.Add(browser);
+                bpage.ImageIndex = 1;
+                Form1.dub_tab.TabPages.Insert(Form1.dub_tab.TabPages.Count - 1, bpage);
+                Form1.dub_tab.SelectedTab = bpage;
+            }
+            else
+            {
+                MessageBox.Show("Sorry!Url unavailable");
+            }
         }
 
         private void authorResultsListView_ColumnClick(object sender, ColumnClickEventArgs e)
@@ -412,7 +426,7 @@ namespace PubCite
             foreach (Paper p in papers)
             {
                 bool add = true;
-                string content = (p.Title + p.Publication + p.Summary).ToLower();
+                string content = (p.Title + p.Publication + p.Summary + p.Authors).ToLower();
                 for (int i = 0; i < keywordsList.Length; i++)
                 {
                     if (keywordsList[i].Length > 0 && !content.Contains(keywordsList[i].ToLower()))

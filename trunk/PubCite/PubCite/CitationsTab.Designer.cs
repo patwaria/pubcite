@@ -130,10 +130,10 @@
             // 
             // stop
             // 
-            this.stop.Image = global::PubCite.Properties.Resources.stop_button;
-            this.stop.Location = new System.Drawing.Point(869, 194);
+            this.stop.Image = global::PubCite.Properties.Resources.stop;
+            this.stop.Location = new System.Drawing.Point(864, 193);
             this.stop.Name = "stop";
-            this.stop.Size = new System.Drawing.Size(15, 15);
+            this.stop.Size = new System.Drawing.Size(20, 20);
             this.stop.TabIndex = 25;
             this.stop.TabStop = false;
             this.stop.Visible = false;
