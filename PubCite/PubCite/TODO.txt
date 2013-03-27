@@ -1,10 +1,10 @@
 ﻿Tasks:
 1. Report & test plan : Sachin/Deepayan
 2. Error Handling/Show appropriate messages in message box : Parser team + GUI
-5. Back/ Fwd in citation tab : Cachers/GUI ?
-6. Copy citations/export in different formats: ?
-7. co-author graph ?
-8. citations problem after sort/keywords
-9. Not found loop
+3. Copy citations/export in different formats: ?
+4. citations problem after sort/keywords
+5. Not found loop
+6.remove affiliation
+7.seperate keywords
 
 @parsers : Urlformatexception, numberformatexception, No error handling for arbit searches
