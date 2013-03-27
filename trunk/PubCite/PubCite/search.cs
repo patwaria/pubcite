@@ -305,7 +305,7 @@ namespace PubCite
                     item = new ListViewItem(Papers[i].Title);
                     item.SubItems.Add(Papers[i].Authors);
                     item.SubItems.Add(Papers[i].NumberOfCitations.ToString());
-                    if (Papers[i].Year == -1 || Papers[i].Year == -1)
+                    if (Papers[i].Year == -1 || Papers[i].Year == 0)
                         item.SubItems.Add("--");
                     else
                         item.SubItems.Add(Papers[i].Year.ToString());
