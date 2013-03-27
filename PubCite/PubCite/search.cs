@@ -99,9 +99,9 @@ namespace PubCite
             KeywordsTextBox.LostFocus += new EventHandler(KeywordsTextBox_LostFocus);
             KeywordsTextBox.GotFocus += new EventHandler(KeywordsTextBox_GotFocus);
 
-            searchField.Text = "Enter Author or Journal name";
-            KeywordsTextBox.Text = "Enter any Keywords";
-
+            searchField.Text = "enter author or journal name";
+            KeywordsTextBox.Text = "e.g: <author>,<co-author>,<journal>,<keywords>";
+           
             showSearch();
             STOP = false;
             lastCount = 0;
@@ -412,7 +412,7 @@ namespace PubCite
 
                     item = new ListViewItem(Papers[i].Title);
                     item.SubItems.Add(Papers[i].Publication);
-                    if (Papers[i].Year == -1 || Papers[i].Year == -1)
+                    if (Papers[i].Year == -1 || Papers[i].Year == 0)
                         item.SubItems.Add("--");
                     else
                         item.SubItems.Add(Papers[i].Year.ToString());
@@ -863,6 +863,13 @@ namespace PubCite
         {
             if(authorsSuggestions.Focused)
                 suggestedIndex = authorsSuggestions.FocusedItem.Index;
+            authorNameLabel.Text = "";
+            citesperPaper.Text = "";
+            citesperYear.Text = "";
+            hindex.Text = "";
+            i10index.Text = "";
+            citationsNumberLabel.Text = "";
+            numPapers.Text = "";
             showStop();
             startProgressUI();
             BackgroundWorker backgroundWorker = new BackgroundWorker();
@@ -897,6 +904,47 @@ namespace PubCite
         {
             stopButton.Focus();
             showStop();
+            authorNameLabel.Text = "";
+            citesperPaper.Text = "";
+            citesperYear.Text = "";
+            hindex.Text = "";
+            i10index.Text = "";
+            citationsNumberLabel.Text = "";
+            numPapers.Text = "";
+
+            if (siteComboBox.SelectedItem != null)
+            {
+                if (siteComboBox.SelectedItem.ToString().Equals("CiteSeerX"))
+                {
+                    a[0] = true;
+                    a[1] = false;
+                    a[2] = false;
+
+                }
+                else if (siteComboBox.SelectedItem.ToString().Equals("Google Scholar"))
+                {
+                    a[0] = false;
+                    a[1] = true;
+                    a[2] = false;
+
+                }
+                else if (siteComboBox.SelectedItem.ToString().Equals("Microsoft Academic Search"))
+                {
+                    a[0] = false;
+                    a[1] = false;
+                    a[2] = true;
+                }
+            }
+            else
+            {
+                siteComboBox.SelectedItem = "Google Scholar";
+                /* GS default */
+                a[0] = false;
+                a[1] = true;
+                a[2] = false;
+            }
+
+
             for (int i = 0; i < 4; i++) prevSortedColum[i] = false;
 
             authorsSuggestions.Items.Clear();
@@ -1359,6 +1407,105 @@ namespace PubCite
             t.add(graphsPanel, "Top", -900);
             t.run();
 
+        }
+
+        private void pictureBox1_Click_1(object sender, EventArgs e)
+        {
+            if ((authorResultsListView.Visible == true && authStats != null && authStats.getNumberOfPapers() > 0) || (journalResultsListView.Visible == true && journalStats != null && journalStats.getNumberOfPapers() > 0))
+            {
+               
+
+                graphsChart.Titles.Clear();
+                Transition t = new Transition(new TransitionType_EaseInEaseOut(500));
+                t.add(graphsPanel, "Top", 83);
+                t.run();
+                graphsChart.Series["Series1"].Points.Clear();
+
+                if (graphComboBox.SelectedItem == null) graphComboBox.SelectedItem = "Citations Per Year";
+                else{
+                if (graphComboBox.Text.Equals("Citations Per Year"))
+                {
+                    graphsChart.Titles.Add("Citations Per Year");
+                    graphsChart.Titles.Add("Citations").Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Left;
+                    graphsChart.Titles.Add("Year").Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
+
+                    int currYear;
+                    int j;
+                    int currCitations = 0;
+                    graphPapers = Papers;
+                    sortPapersByYearGraph(true);
+                    for (j = 0; j < graphPapers.Count; j++)
+                    {
+                        if (graphPapers[j].Year > 2) break;
+
+                    }
+                    currYear = graphPapers[j].Year;
+
+
+                    for (int i = j; i < graphPapers.Count; i++)
+                    {
+                        if (currYear == graphPapers[i].Year)
+                        {
+
+                            currCitations += graphPapers[i].NumberOfCitations;
+
+                        }
+                        else
+                        {
+
+                            graphsChart.Series["Series1"].Points.AddXY(currYear, currCitations);
+                            currYear = graphPapers[i].Year;
+                            currCitations = graphPapers[i].NumberOfCitations;
+
+
+
+                        }
+                    }
+
+                }
+                else if (graphComboBox.Text.Equals("Publications Per Year"))
+                {
+
+
+                    graphsChart.Titles.Add("Publications Per Year");
+                    graphsChart.Titles.Add("Publications").Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Left;
+                    graphsChart.Titles.Add("Year").Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
+
+                    int currYear;
+                    int j;
+                    int currpublic = 0;
+                    graphPapers = Papers;
+                    sortPapersByYearGraph(true);
+                    for (j = 0; j < graphPapers.Count; j++)
+                    {
+                        if (graphPapers[j].Year > 2) break;
+
+                    }
+                    currYear = graphPapers[j].Year;
+
+
+                    for (int i = j; i < graphPapers.Count; i++)
+                    {
+                        if (currYear == graphPapers[i].Year)
+                        {
+
+                            currpublic++;
+
+                        }
+                        else
+                        {
+
+                            graphsChart.Series["Series1"].Points.AddXY(currYear, currpublic);
+                            currYear = graphPapers[i].Year;
+                            currpublic = 1;
+                        }
+                    }
+                }
+
+            }
+            }
+            else
+                MessageBox.Show("Please select an author or journal before viewing graphs");
         }
     }
 }
