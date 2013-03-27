@@ -109,7 +109,7 @@ namespace PubCite
 
         void KeywordsTextBox_GotFocus(object sender, EventArgs e)
         {
-            if (searchHint == true)
+            if (AdvanFilterHint == true)
             {
 
                 KeywordsTextBox.Text = "";
@@ -144,11 +144,13 @@ namespace PubCite
 
         void KeywordsTextBox_KeyUp(object sender, KeyEventArgs e)
         {
-
-            if (authorResultsListView.Visible)
-                populateAuthor();
-            else
-                populateJournal();
+            if (AdvanFilterHint == false)
+            {
+                if (authorResultsListView.Visible)
+                    populateAuthor();
+                else
+                    populateJournal();
+            }
         }
 
         void ListView_DrawItem(object sender, DrawListViewItemEventArgs e)
@@ -388,7 +390,9 @@ namespace PubCite
                     Papers = authStats.getPaperByYearRange(StartYear.getintval(), EndYear.getintval());
 
                 /* Filter by keywords */
+                if(AdvanFilterHint==false)
                 Papers = authStats.getPaperByKeywords(Papers, KeywordsTextBox.Text);
+                else Papers = authStats.getPaperByKeywords(Papers, "");
 
                 Console.WriteLine(Papers.Count);
 
