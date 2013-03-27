@@ -1010,6 +1010,7 @@ namespace PubCite
                     {
                         populateSuggestions();
                         authorsSuggestions_MouseClick(sender, e);
+                        
                     }
                     else
                     {

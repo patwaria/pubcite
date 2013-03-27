@@ -1,29 +1,24 @@
 ﻿Tasks:
 
 **28-03-2012
-Name: ScholExpolrer?
+Name: ScholExplorer?
 
 Errors/Changes:
 1. Limit no. of tabs
 2. When year is returned as 0, show '-' in the table
-3. Handle exception for no net connection
 **
 
-2. Error Handling/Show appropriate messages in message box
-3. Copy citations/export in different formats: ?
-4. citations problem after sort/keywords
+ citations problem after sort/keywords
     
+ update cache on delete from favs
 
-9. add placeholders to text boxes
-10. update cache on delete from favs
-11. update favs/ cache across tabs
-13. MSparser/CSparser/Cache settings update
-15. add to favourites change location
-16. GUI changes - revamp to white.
-18. limit number of tabs
+
+ add to favourites change location
+ GUI changes - revamp to white.
+ limit number of tabs
  add data to tab header
  select first auth suggestion by default
- view graph null exception on null search
+ tooltip everywhere
 
 Report:
 1. Test plan

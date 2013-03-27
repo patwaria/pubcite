@@ -55,6 +55,7 @@
             this.searchTab1.Size = new System.Drawing.Size(1000, 639);
             this.searchTab1.TabIndex = 0;
             this.searchTab1.Text = "Search";
+            this.searchTab1.UseVisualStyleBackColor = true;
             // 
             // maintabControl
             // 
