@@ -12,6 +12,9 @@
 15. add to favourites change location
 16. GUI changes - revamp to white.
 18. limit number of tabs
+ add data to tab header
+ select first auth suggestion by default
+ view graph null exception on null search
 
 Report:
 1. Test plan

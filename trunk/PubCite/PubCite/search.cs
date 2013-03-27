@@ -1210,7 +1210,7 @@ namespace PubCite
 
         private void graphsButton_Click(object sender, EventArgs e)
         {
-            if ((authorResultsListView.Visible == true && authStats != null) || (journalResultsListView.Visible == true && journalStats != null))
+            if ((authorResultsListView.Visible == true && authStats != null && authStats.getNumberOfPapers() > 0) || (journalResultsListView.Visible == true && journalStats != null && journalStats.getNumberOfPapers() > 0))
             {
 
                 graphsChart.Titles.Clear();
