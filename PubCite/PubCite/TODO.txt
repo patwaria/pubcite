@@ -1,10 +1,25 @@
 ﻿Tasks:
-1. Report & test plan : Sachin/Deepayan
-2. Error Handling/Show appropriate messages in message box : Parser team + GUI
+
+2. Error Handling/Show appropriate messages in message box
 3. Copy citations/export in different formats: ?
 4. citations problem after sort/keywords
 5. Not found loop
 6.remove affiliation
 7.seperate keywords
+8. dont open browser for erraneous or empty url
+9. add placeholders to text boxes
+10. update cache on delete from favs
+11. update favs/ cache across tabs
+12. google scholar captcha message
+13. MSparser/CSparser/Cache settings update
+14. stop button properly
+15. add to favourites change location
+16. GUI changes - revamp to white.
+17. Proper citeseer name
 
-@parsers : Urlformatexception, numberformatexception, No error handling for arbit searches
+Report:
+1. Test plan
+2. Architecture
+3. User manual me pics and recent features
+4. Installation guide
+5. SRS add text to some places
