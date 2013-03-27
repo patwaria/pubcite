@@ -10,11 +10,16 @@ namespace PubCite
     class MicrosoftScholarParser
     {
         private APIService client;
-
+        private SettingsRecord sett;
+        private Settings set;
+        private int masMaxResults;
 
         public MicrosoftScholarParser()
         {
             client = new APIService();
+            sett = new SettingsRecord();
+            set = sett.ReadSettings();
+            masMaxResults = set.MASMaxResults;
         }
 
         private string generateName(string fname, string midname, string endname)
@@ -42,14 +47,14 @@ namespace PubCite
             request.ResultObjects = ObjectType.Author;
             request.AuthorQuery = authName;
             request.StartIdx = 1;
-            request.EndIdx = 10;
+            request.EndIdx = 20;
             response = client.Search(request);
             if (response.Author == null)
             {
                 authSuggest=new AuthSuggestion(authNM,authID,false);
                 return authSuggest;
             }
-            uint range = response.Author.TotalItem < 10 ? response.Author.TotalItem : 10;
+            uint range = response.Author.TotalItem < 20 ? response.Author.TotalItem : 20;
             for (int i = 0; i < range; i++)
             {
                 name = generateName(response.Author.Result[i].FirstName, response.Author.Result[i].MiddleName, response.Author.Result[i].LastName);
@@ -213,7 +218,7 @@ namespace PubCite
             requestPaper.StartIdx = Convert.ToUInt32(stIndex);
             requestPaper.EndIdx = Convert.ToUInt32(EndIndex);
 
-            List<SG.Paper> papers = generatePaper(requestPaper, 100);
+            List<SG.Paper> papers = generatePaper(requestPaper, 100, auth.getNumberOfPapers());
 
             for (int i = 0; i < papers.Count; i++)
             {
@@ -367,7 +372,7 @@ namespace PubCite
             requestJournal.StartIdx = Convert.ToUInt32(stIndex);
             requestJournal.EndIdx = Convert.ToUInt32(EndIndex);
 
-            List<SG.Paper> papers = generatePaper(requestJournal, 100);
+            List<SG.Paper> papers = generatePaper(requestJournal, 100, journ.getNumberOfPapers());
 
             for (int i = 0; i < papers.Count; i++)
             {
@@ -512,7 +517,7 @@ namespace PubCite
             requestPaper.StartIdx = Convert.ToUInt32(stIndex);
             requestPaper.EndIdx = Convert.ToUInt32(EndIndex);
 
-            List<SG.Paper> papers = generatePaper(requestPaper, 100);
+            List<SG.Paper> papers = generatePaper(requestPaper, 100, auth.getNumberOfPapers());
 
             for (int i = 0; i < papers.Count; i++)
             {
@@ -605,6 +610,9 @@ namespace PubCite
 
         public bool getCitationsNext(String id, ref List<Paper> cited)
         {
+            int no = cited.Count;
+            int flag = 0;
+
             UInt32 paperID;
             try
             {
@@ -636,6 +644,13 @@ namespace PubCite
 
             for (int i = 0; i < response.Publication.Result.Length; i++)
             {
+                no++;
+                if (no > masMaxResults)
+                {
+                    flag = 1;
+                    break;
+                }
+
                 Paper paper;
                 String title, authors, publication, pap_abstract;
                 int numOfCitations, year;
@@ -670,7 +685,7 @@ namespace PubCite
                 cited.Add(paper);
             }
 
-            if (response.Publication.Result.Length < 100)
+            if (response.Publication.Result.Length < 100 || flag==1)
                 return false;
             else
                 return true;
@@ -679,7 +694,7 @@ namespace PubCite
 
         
     //--------------------------------------------------------------------------------------------------------//
-        public List<Paper> generatePaper(Request request, int numberofResult)
+        public List<Paper> generatePaper(Request request, int numberofResult, int initialNO=0)
         {
             List<Paper> papers = new List<Paper>();
             Response response;
@@ -697,6 +712,10 @@ namespace PubCite
 
             for (int i = 0; i <response.Publication.Result.Length; i++)
             {
+                initialNO++;
+                if (initialNO > masMaxResults)
+                    break;
+
                 Paper paper;
                 String title, authors, publication, pap_abstract, url, id_;
                 int numOfCitations, year;
