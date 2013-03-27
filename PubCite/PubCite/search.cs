@@ -725,33 +725,7 @@ namespace PubCite
             }
         }
 
-        private void backgroundWorker_citationSearchWork(object sender, DoWorkEventArgs e)
-        {
-            if (citationType == 0)
-            {
-                Console.WriteLine("url:" + Papers[citationIndex].CitedByURL);
-                Citations = CSParser.getCitations(Papers[citationIndex].CitedByURL);
-
-            }
-            else if (citationType == 1)
-            {
-                Console.WriteLine("url:" + Papers[citationIndex].CitedByURL);
-                Citations = GSScraper.getCitations(Papers[citationIndex].CitedByURL, ref gs_nextUrl);
-                if (Citations == null)
-                    MessageBox.Show("Oops! You have reached administrative limit for Google Scholar." +
-                        "\nIf you are behind a proxy server, please try changing your settings.");
-                else
-                    authStats.Type = 1;
-
-            }
-            else if (citationType == 2)
-            {
-                Console.WriteLine("url:" + Papers[citationIndex].CitedByURL);
-                Citations = MSParser.getCitations(Papers[citationIndex].CitedByURL);
-
-            }
-        }
-
+        
         private void backgroundWorker_authstatsNextDataWork(object sender, DoWorkEventArgs e)
         {
             if (authStats.Type == 1)
@@ -786,10 +760,8 @@ namespace PubCite
         private void getNextAuthStats(bool hasProfile)
         {
             /* Get author data in the background 
-             * Note : only for MSParser now
-             * 
              */
-            Console.WriteLine("author");
+            Console.WriteLine("authorNext");
             nextData = true;
             while (nextData == true && STOP == false)
             {
@@ -817,6 +789,7 @@ namespace PubCite
         private void getNextJournal()
         {
             /* Get next journal data in the background */
+            Console.WriteLine("authorNext");
             nextData = true;
             while (nextData == true && STOP == false)
             {
@@ -854,16 +827,21 @@ namespace PubCite
                 // disable those options which will trigger another thread 
             }
 
-            /* Add to cache */
-            cacheObject.Add(authStats.Name, authStats, true);
-            /* Add to recent History */
-            RecentSearchKeys.Add(authStats.Name);
-            updateHistory(authStats.Name,0);
-            populateAuthor();
+            if (authStats != null && authStats.getNumberOfPapers() != 0)
+            {
+                /* Add to cache */
+                cacheObject.Add(authStats.Name, authStats, true);
+                /* Add to recent History */
+                RecentSearchKeys.Add(authStats.Name);
+                updateHistory(authStats.Name, 0);
+                populateAuthor();
 
-            getNextAuthStats(true);
-            showSearch();
-            endProgressUI();
+                getNextAuthStats(true);
+                showSearch();
+                endProgressUI();
+            }
+            else
+                MessageBox.Show("No results available!");
         }
 
         private void searchIcon_Click(object sender, EventArgs e)
@@ -884,9 +862,9 @@ namespace PubCite
 
             BackgroundWorker backgroundWorker = new BackgroundWorker();
             backgroundWorker.DoWork += new DoWorkEventHandler(backgroundWorker_genSearchWork);
-            backgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(backgroundWorker_RunWorkerCompleted);
+            //backgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(backgroundWorker_RunWorkerCompleted);
 
-            if (siteComboBox.SelectedItem.ToString().Equals("Citeseer"))
+            if (siteComboBox.SelectedItem.ToString().Equals("CiteSeerX"))
             {
                 a[0] = true;
                 a[1] = false;
@@ -915,7 +893,6 @@ namespace PubCite
                 // disable those options which will trigger another thread 
             }
 
-            endProgressUI();
             if (authorCheckBox.Checked == true)
             {
                 Console.WriteLine("Done" + suggestions);
@@ -926,23 +903,30 @@ namespace PubCite
                 }
                 else
                 {
-                    if (authStats != null)
+                    if (authStats != null && authStats.getNumberOfPapers() != 0)
                     {
                         /* Add to cache */
                         cacheObject.Add(authStats.Name, authStats, true);
                         /* Add to recent History */
                         RecentSearchKeys.Add(authStats.Name);
-                        updateHistory(authStats.Name,0);
+                        updateHistory(authStats.Name, 0);
                         populateAuthor();
 
                         /* Threaded requests */
                         getNextAuthStats(false);
+                        if (nextData == null)
+                        {
+                            MessageBox.Show("Oops! You have reached administrative limit for Google Scholar." +
+                                "\nIf you are behind a proxy server, please try changing your settings.");
+                        }
                     }
+                    else
+                        MessageBox.Show("No results available!");
                 }
             }
             else
             {
-                if(journalStats != null) {
+                if(journalStats != null && journalStats.getNumberOfPapers() != 0) {
 
                     /* add journal to cache */
                     cacheObject.Add(journalStats.Name, journalStats, false);
@@ -951,10 +935,15 @@ namespace PubCite
                     RecentSearchKeys.Add(journalStats.Name);
                     updateHistory(journalStats.Name,1);
                     populateJournal();
-
-                    startProgressUI();
                     getNextJournal();
+                    if (nextData == null)
+                    {
+                        MessageBox.Show("Oops! You have reached administrative limit for Google Scholar." +
+                            "\nIf you are behind a proxy server, please try changing your settings.");
+                    }
                 }
+                else
+                    MessageBox.Show("No results available!");
             }
 
             showSearch();
@@ -996,30 +985,6 @@ namespace PubCite
 
             if (Papers[citationIndex].NumberOfCitations != 0)
             {
-                /*disablePanels();
-                progressPanel.Visible = true;
-                progressBar.Style = ProgressBarStyle.Marquee;
-                progressBar.MarqueeAnimationSpeed = 15;
-                progressBar.BringToFront();
-                progressBar.Visible = true;
-
-                BackgroundWorker backgroundWorker = new BackgroundWorker();
-                backgroundWorker.DoWork += new DoWorkEventHandler(backgroundWorker_citationSearchWork);
-                backgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(backgroundWorker_RunWorkerCompleted);
-
-                backgroundWorker.RunWorkerAsync();
-
-                while (backgroundWorker.IsBusy)
-                {
-                    Application.DoEvents();
-                    // disable those options which will trigger another thread 
-                }
-
-                enablePanels();
-                progressPanel.Visible = false;
-                progressBar.SendToBack();
-                progressBar.Visible = false;*/
-
                 TabPage citationsPage = new TabPage("Citations");
                 citationsPage.ImageIndex = 1;
                 Form1.dub_tab.TabPages.Insert(Form1.dub_tab.TabPages.Count - 1, citationsPage);
@@ -1116,13 +1081,20 @@ namespace PubCite
 
         private void openBrowserForUrl(string url)
         {
-            TabPage bpage = new TabPage("Browser");
-            Browser browser;
-            browser = new Browser(url);
-            bpage.Controls.Add(browser);
-            bpage.ImageIndex = 1;
-            Form1.dub_tab.TabPages.Insert(Form1.dub_tab.TabPages.Count - 1, bpage);
-            Form1.dub_tab.SelectedTab = bpage;
+            if (url != null && !(url.ToLower().Equals("not found")) && url.Length > 0)
+            {
+                TabPage bpage = new TabPage("Browser");
+                Browser browser;
+                browser = new Browser(url);
+                bpage.Controls.Add(browser);
+                bpage.ImageIndex = 1;
+                Form1.dub_tab.TabPages.Insert(Form1.dub_tab.TabPages.Count - 1, bpage);
+                Form1.dub_tab.SelectedTab = bpage;
+            }
+            else
+            {
+                MessageBox.Show("Sorry!Url unavailable");
+            }
         }
 
         private void authorNameLabel_Click(object sender, EventArgs e)
@@ -1168,6 +1140,7 @@ namespace PubCite
         {
             Console.WriteLine("say cheese");
             STOP = true;
+            endProgressUI();
         }
 
         private void showSearch()
@@ -1321,20 +1294,9 @@ namespace PubCite
                             graphsChart.Series["Series1"].Points.AddXY(currYear, currpublic);
                             currYear = graphPapers[i].Year;
                             currpublic = 1;
-
-
-
                         }
-
-
-
                     }
-
-
-
-
                 }
-
             }
             else
                 MessageBox.Show("Please select an author or journal before viewing graphs");
@@ -1348,9 +1310,6 @@ namespace PubCite
             t.run();
 
         }
-
-      
-        
     }
 }
 
