@@ -3,9 +3,8 @@
 2. Error Handling/Show appropriate messages in message box
 3. Copy citations/export in different formats: ?
 4. citations problem after sort/keywords
-5. Not found loop - done ? check again
-6.remove affiliation
-7.seperate keywords
+    
+
 9. add placeholders to text boxes
 10. update cache on delete from favs
 11. update favs/ cache across tabs
@@ -13,6 +12,7 @@
 15. add to favourites change location
 16. GUI changes - revamp to white.
 18. limit number of tabs
+
 Report:
 1. Test plan
 2. Architecture

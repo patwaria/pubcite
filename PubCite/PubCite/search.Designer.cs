@@ -44,15 +44,12 @@
             this.cachedListView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label4 = new System.Windows.Forms.Label();
-            this.affiliation = new System.Windows.Forms.Label();
             this.KeywordsTextBox = new System.Windows.Forms.TextBox();
-            this.affilationTextBox = new System.Windows.Forms.TextBox();
             this.journalCheckBox = new System.Windows.Forms.CheckBox();
             this.searchField = new System.Windows.Forms.TextBox();
             this.authorCheckBox = new System.Windows.Forms.CheckBox();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.addToFavourite = new System.Windows.Forms.PictureBox();
-            this.EndYear = new PubCite.NumericTextBox();
             this.resultsPanel = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.graphsPanel = new System.Windows.Forms.Panel();
@@ -119,7 +116,6 @@
             this.citesperYearLabel = new System.Windows.Forms.Label();
             this.citationsLabel = new System.Windows.Forms.Label();
             this.authorLabel = new System.Windows.Forms.Label();
-            this.StartYear = new PubCite.NumericTextBox();
             this.favouritesPanel = new System.Windows.Forms.Panel();
             this.recentSearchPanel = new System.Windows.Forms.Panel();
             this.recentListView = new System.Windows.Forms.ListView();
@@ -156,6 +152,8 @@
             this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.directorySearcher1 = new System.DirectoryServices.DirectorySearcher();
+            this.EndYear = new PubCite.NumericTextBox();
+            this.StartYear = new PubCite.NumericTextBox();
             this.SearchPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.settingsIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.addToFavourite)).BeginInit();
@@ -195,9 +193,7 @@
             this.SearchPanel.Controls.Add(this.settingsIcon);
             this.SearchPanel.Controls.Add(this.cachedListView);
             this.SearchPanel.Controls.Add(this.label4);
-            this.SearchPanel.Controls.Add(this.affiliation);
             this.SearchPanel.Controls.Add(this.KeywordsTextBox);
-            this.SearchPanel.Controls.Add(this.affilationTextBox);
             this.SearchPanel.Controls.Add(this.journalCheckBox);
             this.SearchPanel.Controls.Add(this.searchField);
             this.SearchPanel.Controls.Add(this.authorCheckBox);
@@ -255,7 +251,7 @@
             this.cachedListView.ForeColor = System.Drawing.SystemColors.Menu;
             this.cachedListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.cachedListView.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.cachedListView.Location = new System.Drawing.Point(128, 31);
+            this.cachedListView.Location = new System.Drawing.Point(-423, 10);
             this.cachedListView.Name = "cachedListView";
             this.cachedListView.Size = new System.Drawing.Size(760, 97);
             this.cachedListView.TabIndex = 29;
@@ -272,22 +268,11 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.Menu;
-            this.label4.Location = new System.Drawing.Point(648, 44);
+            this.label4.Location = new System.Drawing.Point(438, 44);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(61, 13);
+            this.label4.Size = new System.Drawing.Size(131, 13);
             this.label4.TabIndex = 28;
-            this.label4.Text = "Keywords:";
-            // 
-            // affiliation
-            // 
-            this.affiliation.AutoSize = true;
-            this.affiliation.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.affiliation.ForeColor = System.Drawing.SystemColors.Menu;
-            this.affiliation.Location = new System.Drawing.Point(397, 42);
-            this.affiliation.Name = "affiliation";
-            this.affiliation.Size = new System.Drawing.Size(62, 13);
-            this.affiliation.TabIndex = 27;
-            this.affiliation.Text = "Affiliation:";
+            this.label4.Text = "Advanced Search Filter :";
             // 
             // KeywordsTextBox
             // 
@@ -295,23 +280,11 @@
             this.KeywordsTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.KeywordsTextBox.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.KeywordsTextBox.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.KeywordsTextBox.Location = new System.Drawing.Point(728, 38);
+            this.KeywordsTextBox.Location = new System.Drawing.Point(577, 38);
             this.KeywordsTextBox.Name = "KeywordsTextBox";
-            this.KeywordsTextBox.Size = new System.Drawing.Size(160, 22);
+            this.KeywordsTextBox.Size = new System.Drawing.Size(311, 22);
             this.KeywordsTextBox.TabIndex = 26;
             this.toolTip.SetToolTip(this.KeywordsTextBox, "Add space separated keywords to add to your search");
-            // 
-            // affilationTextBox
-            // 
-            this.affilationTextBox.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.affilationTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.affilationTextBox.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.affilationTextBox.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.affilationTextBox.Location = new System.Drawing.Point(476, 38);
-            this.affilationTextBox.Name = "affilationTextBox";
-            this.affilationTextBox.Size = new System.Drawing.Size(148, 22);
-            this.affilationTextBox.TabIndex = 25;
-            this.toolTip.SetToolTip(this.affilationTextBox, "Affiliation/ISSN Number");
             // 
             // journalCheckBox
             // 
@@ -377,20 +350,6 @@
             this.addToFavourite.TabStop = false;
             this.toolTip.SetToolTip(this.addToFavourite, "Add to Favourite");
             this.addToFavourite.Click += new System.EventHandler(this.addToFavourite_Click);
-            // 
-            // EndYear
-            // 
-            this.EndYear.AllowSpace = false;
-            this.EndYear.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.EndYear.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.EndYear.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EndYear.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.EndYear.Location = new System.Drawing.Point(342, 38);
-            this.EndYear.Name = "EndYear";
-            this.EndYear.Size = new System.Drawing.Size(44, 22);
-            this.EndYear.TabIndex = 0;
-            this.toolTip.SetToolTip(this.EndYear, "End Year");
-            this.EndYear.TextChanged += new System.EventHandler(this.EndYear_TextChanged);
             // 
             // resultsPanel
             // 
@@ -1110,20 +1069,6 @@
             this.authorLabel.TabIndex = 8;
             this.authorLabel.Text = "Name";
             // 
-            // StartYear
-            // 
-            this.StartYear.AllowSpace = false;
-            this.StartYear.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.StartYear.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.StartYear.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.StartYear.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.StartYear.Location = new System.Drawing.Point(259, 38);
-            this.StartYear.Name = "StartYear";
-            this.StartYear.Size = new System.Drawing.Size(44, 22);
-            this.StartYear.TabIndex = 0;
-            this.toolTip.SetToolTip(this.StartYear, "Start Year");
-            this.StartYear.TextChanged += new System.EventHandler(this.StartYear_TextChanged);
-            // 
             // favouritesPanel
             // 
             this.favouritesPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
@@ -1467,6 +1412,34 @@
             this.directorySearcher1.ServerPageTimeLimit = System.TimeSpan.Parse("-00:00:01");
             this.directorySearcher1.ServerTimeLimit = System.TimeSpan.Parse("-00:00:01");
             // 
+            // EndYear
+            // 
+            this.EndYear.AllowSpace = false;
+            this.EndYear.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.EndYear.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.EndYear.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EndYear.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.EndYear.Location = new System.Drawing.Point(342, 38);
+            this.EndYear.Name = "EndYear";
+            this.EndYear.Size = new System.Drawing.Size(44, 22);
+            this.EndYear.TabIndex = 0;
+            this.toolTip.SetToolTip(this.EndYear, "End Year");
+            this.EndYear.TextChanged += new System.EventHandler(this.EndYear_TextChanged);
+            // 
+            // StartYear
+            // 
+            this.StartYear.AllowSpace = false;
+            this.StartYear.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.StartYear.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.StartYear.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StartYear.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.StartYear.Location = new System.Drawing.Point(259, 38);
+            this.StartYear.Name = "StartYear";
+            this.StartYear.Size = new System.Drawing.Size(44, 22);
+            this.StartYear.TabIndex = 0;
+            this.toolTip.SetToolTip(this.StartYear, "Start Year");
+            this.StartYear.TextChanged += new System.EventHandler(this.StartYear_TextChanged);
+            // 
             // search
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1567,9 +1540,7 @@
         private System.Windows.Forms.CheckBox authorCheckBox;
         private System.Windows.Forms.CheckBox journalCheckBox;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label affiliation;
         private System.Windows.Forms.TextBox KeywordsTextBox;
-        private System.Windows.Forms.TextBox affilationTextBox;
         private System.Windows.Forms.ListView cachedListView;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.Label label5;
