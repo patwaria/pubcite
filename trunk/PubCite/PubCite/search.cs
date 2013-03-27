@@ -28,7 +28,7 @@ namespace PubCite
         SG.Author authStats = null;
         SG.Journal journalStats;
         List<SG.Paper> graphPapers;
-
+        List<String> cachedList;
 
         int prevSelectedIndex;
         int suggestedIndex;
@@ -42,7 +42,7 @@ namespace PubCite
         Boolean STOP;
         Settings Nsettings;
         SettingsRecord NsettingsRecord = new SettingsRecord();
-
+        Boolean searchHint = true, StartYearHint = true, EndYearHint = true, AdvanFilterHint = true;
         String gs_nextUrl;
 
         public search()
@@ -81,6 +81,7 @@ namespace PubCite
             searchField.GotFocus += new EventHandler(searchField_GotFocus);
             searchField.LostFocus += new EventHandler(searchField_LostFocus);
             searchField.KeyUp += new KeyEventHandler(searchField_KeyUp);
+        
             KeywordsTextBox.KeyUp += new KeyEventHandler(KeywordsTextBox_KeyUp);
 
 
@@ -95,11 +96,35 @@ namespace PubCite
             cachedListView.HeaderStyle = ColumnHeaderStyle.None;
             cachedListView.SendToBack();
 
-           
+            KeywordsTextBox.LostFocus += new EventHandler(KeywordsTextBox_LostFocus);
+            KeywordsTextBox.GotFocus += new EventHandler(KeywordsTextBox_GotFocus);
+
+            searchField.Text = "Enter Author or Journal name";
+            KeywordsTextBox.Text = "Enter any Keywords";
 
             showSearch();
             STOP = false;
             lastCount = 0;
+        }
+
+        void KeywordsTextBox_GotFocus(object sender, EventArgs e)
+        {
+            if (searchHint == true)
+            {
+
+                KeywordsTextBox.Text = "";
+                AdvanFilterHint = false;
+            }
+        }
+
+        void KeywordsTextBox_LostFocus(object sender, EventArgs e)
+        {
+            if (KeywordsTextBox.Text.Length == 0 && AdvanFilterHint == false)
+            {
+
+                KeywordsTextBox.Text = "Enter any keywords";
+                AdvanFilterHint = true;
+            }
         }
 
        
@@ -139,16 +164,36 @@ namespace PubCite
 
         private void searchField_GotFocus(object sender, EventArgs e)
         {
-            if (searchField.Text.Length > 0)
+            if (searchField.Text.Length > 0 && searchHint==false )
             {
-                cachedListView.BringToFront();
-                cachedListView.Visible = true;
+                if (cachedList.Count > 0)
+                {
+                    cachedListView.BringToFront();
+                    cachedListView.Visible = true;
+
+                }
             }
+
+            if (searchHint == true)
+            {
+
+                searchField.Text = "";
+                searchHint = false;
+            }
+
+
         }
         private void searchField_LostFocus(object sender, EventArgs e)
         {
             cachedListView.Visible = false;
             cachedListView.SendToBack();
+
+            if (searchField.Text.Length == 0 && searchHint == false) {
+
+                searchField.Text = "Enter Author or Journal name";
+                searchHint = true;
+            }
+                
         }
 
 
@@ -230,7 +275,7 @@ namespace PubCite
             cachedListView.Items.Clear();
             if (searchField.Text.Length > 0)
             {
-                List<String> cachedList = cacheObject.GetMatchingkeys(searchField.Text, authorCheckBox.Checked);
+                cachedList = cacheObject.GetMatchingkeys(searchField.Text, authorCheckBox.Checked);
                 if (cachedList.Count > 0)
                 {
                     cachedListView.Visible = true;
