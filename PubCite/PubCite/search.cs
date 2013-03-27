@@ -97,7 +97,7 @@ namespace PubCite
             cachedListView.HeaderStyle = ColumnHeaderStyle.None;
             cachedListView.SendToBack();
 
-           //graphComboBox.DropDownClosed+=new EventHandler(graphComboBox_DropDownClosed);
+           
 
             showSearch();
             STOP = false;
@@ -108,17 +108,13 @@ namespace PubCite
 
         void recentListView_MouseClick(object sender, MouseEventArgs e)
         {
-            //throw new NotImplementedException();
-
-            //Console.WriteLine("heereeerererjerfejfk..");
+                        
             if (e.Button == MouseButtons.Right)
             {
-                //Console.WriteLine("heereeerererjerfejfk..");
+                
                 if (recentListView.FocusedItem.Bounds.Contains(e.Location) == true)
                     recentMenuStrip.Show(Cursor.Position);
             }
-
-
         }
 
         
@@ -175,6 +171,7 @@ namespace PubCite
             {
                 journalStats = (SG.Journal)cacheObject.Get(searchField.Text, authorCheckBox.Checked);
                 populateJournal();
+                
             }
         }
 
