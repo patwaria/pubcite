@@ -338,8 +338,9 @@ namespace PubCite
                 else if (StartYear.getintval() != 0 && EndYear.getintval() != 0)
                     Papers = journalStats.getPaperByYearRange(StartYear.getintval(), EndYear.getintval());
                 Console.WriteLine(Papers.Count);
-
-                Papers = journalStats.getPaperByKeywords(Papers, KeywordsTextBox.Text);
+                if (AdvanFilterHint == false)
+                    Papers = journalStats.getPaperByKeywords(Papers, KeywordsTextBox.Text);
+                else Papers = journalStats.getPaperByKeywords(Papers, "");
 
                 /*Statistics */
                 authorNameLabel.Text = journalStats.Name;
@@ -1535,6 +1536,24 @@ namespace PubCite
         private void graphComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void addToFav_Click(object sender, EventArgs e)
+        {
+            if (authStats != null && !authStats.IsFavorite)
+            {
+
+                Form1.favorites.AddAuthor(authStats);
+                authStats.IsFavorite = true;
+
+            }
+            else if (journalStats != null && !journalStats.IsFavorite)
+            {
+
+                Form1.favorites.AddJournal(journalStats);
+                journalStats.IsFavorite = true;
+            }
+            ArrangeTree();
         }
     }
 }

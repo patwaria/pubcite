@@ -197,7 +197,7 @@ namespace PubCite
 
                 if (authorResultsListView.FocusedItem.Bounds.Contains(e.Location) == true)
                     optionMenuStrip.Show(Cursor.Position);
-
+            
             }
         }
 

@@ -38,32 +38,25 @@
             treeNode1,
             treeNode2});
             this.SearchPanel = new System.Windows.Forms.Panel();
+            this.progressPanel = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.settingsIcon = new System.Windows.Forms.PictureBox();
-            this.cachedListView = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label4 = new System.Windows.Forms.Label();
             this.KeywordsTextBox = new System.Windows.Forms.TextBox();
             this.journalCheckBox = new System.Windows.Forms.CheckBox();
             this.searchField = new System.Windows.Forms.TextBox();
             this.authorCheckBox = new System.Windows.Forms.CheckBox();
             this.progressBar = new System.Windows.Forms.ProgressBar();
-            this.addToFavourite = new System.Windows.Forms.PictureBox();
             this.resultsPanel = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.graphsPanel = new System.Windows.Forms.Panel();
-            this.graphsCloseIcon = new System.Windows.Forms.PictureBox();
             this.graphsChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.panel20 = new System.Windows.Forms.Panel();
-            this.panel18 = new System.Windows.Forms.Panel();
-            this.panel17 = new System.Windows.Forms.Panel();
-            this.panel11 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
             this.resultsGroupBox = new System.Windows.Forms.GroupBox();
             this.arbitPanel = new System.Windows.Forms.Panel();
             this.settingsPanel = new System.Windows.Forms.Panel();
-            this.settingsCloseIcon = new System.Windows.Forms.PictureBox();
             this.settingsOk = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.microsoftNumericUpDown = new System.Windows.Forms.NumericUpDown();
@@ -75,9 +68,6 @@
             this.CacheOptions = new System.Windows.Forms.GroupBox();
             this.cacheNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.CacheOptionslabel = new System.Windows.Forms.Label();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.panel19 = new System.Windows.Forms.Panel();
-            this.panel9 = new System.Windows.Forms.Panel();
             this.authorResultsListView = new System.Windows.Forms.ListView();
             this.PaperHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.venueHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -89,13 +79,10 @@
             this.Cites = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Year = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.statisticsGroupBox = new System.Windows.Forms.GroupBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.graphComboBox = new System.Windows.Forms.ComboBox();
             this.label16 = new System.Windows.Forms.Label();
             this.numPapers = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
-            this.panel12 = new System.Windows.Forms.Panel();
-            this.panel10 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -103,8 +90,6 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.i10index = new System.Windows.Forms.Label();
-            this.progressPanel = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
             this.hindex = new System.Windows.Forms.Label();
             this.citesperPaper = new System.Windows.Forms.Label();
             this.citesperYear = new System.Windows.Forms.Label();
@@ -121,25 +106,19 @@
             this.recentListView = new System.Windows.Forms.ListView();
             this.recentHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.typeHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.panel16 = new System.Windows.Forms.Panel();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.panel8 = new System.Windows.Forms.Panel();
             this.recentButton = new System.Windows.Forms.Button();
             this.favouriteButton = new System.Windows.Forms.Button();
             this.favouritesTreeView = new System.Windows.Forms.TreeView();
             this.Suggestions = new System.Windows.Forms.GroupBox();
-            this.panel15 = new System.Windows.Forms.Panel();
-            this.panel13 = new System.Windows.Forms.Panel();
-            this.panel14 = new System.Windows.Forms.Panel();
-            this.panel6 = new System.Windows.Forms.Panel();
             this.authorsSuggestions = new System.Windows.Forms.ListView();
             this.Authors = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.siteComboBox = new System.Windows.Forms.ComboBox();
             this.searchSiteLabel = new System.Windows.Forms.Label();
-            this.searchIcon = new System.Windows.Forms.PictureBox();
-            this.stopButton = new System.Windows.Forms.PictureBox();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.cachedListView = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.optionsMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.viewCitationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewURLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -152,19 +131,25 @@
             this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.directorySearcher1 = new System.DirectoryServices.DirectorySearcher();
+            this.settingsIcon = new System.Windows.Forms.PictureBox();
+            this.graphsCloseIcon = new System.Windows.Forms.PictureBox();
+            this.settingsCloseIcon = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.searchIcon = new System.Windows.Forms.PictureBox();
+            this.stopButton = new System.Windows.Forms.PictureBox();
+            this.addToFav = new System.Windows.Forms.Button();
             this.EndYear = new PubCite.NumericTextBox();
             this.StartYear = new PubCite.NumericTextBox();
             this.SearchPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.settingsIcon)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.addToFavourite)).BeginInit();
+            this.progressPanel.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.resultsPanel.SuspendLayout();
             this.panel4.SuspendLayout();
             this.graphsPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.graphsCloseIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.graphsChart)).BeginInit();
             this.resultsGroupBox.SuspendLayout();
             this.settingsPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.settingsCloseIcon)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.microsoftNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.googleNumericUpDown)).BeginInit();
@@ -172,34 +157,34 @@
             this.CacheOptions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cacheNumericUpDown)).BeginInit();
             this.statisticsGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.progressPanel.SuspendLayout();
             this.favouritesPanel.SuspendLayout();
             this.recentSearchPanel.SuspendLayout();
-            this.panel7.SuspendLayout();
             this.Suggestions.SuspendLayout();
-            this.panel13.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.searchIcon)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.stopButton)).BeginInit();
+            this.panel6.SuspendLayout();
             this.optionsMenuStrip.SuspendLayout();
             this.favouriteMenuStrip.SuspendLayout();
             this.recentMenuStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.settingsIcon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.graphsCloseIcon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.settingsCloseIcon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchIcon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.stopButton)).BeginInit();
             this.SuspendLayout();
             // 
             // SearchPanel
             // 
-            this.SearchPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.SearchPanel.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.SearchPanel.Controls.Add(this.progressPanel);
             this.SearchPanel.Controls.Add(this.panel2);
             this.SearchPanel.Controls.Add(this.panel1);
             this.SearchPanel.Controls.Add(this.settingsIcon);
-            this.SearchPanel.Controls.Add(this.cachedListView);
             this.SearchPanel.Controls.Add(this.label4);
             this.SearchPanel.Controls.Add(this.KeywordsTextBox);
             this.SearchPanel.Controls.Add(this.journalCheckBox);
             this.SearchPanel.Controls.Add(this.searchField);
             this.SearchPanel.Controls.Add(this.authorCheckBox);
             this.SearchPanel.Controls.Add(this.progressBar);
-            this.SearchPanel.Controls.Add(this.addToFavourite);
             this.SearchPanel.Controls.Add(this.EndYear);
             this.SearchPanel.Controls.Add(this.resultsPanel);
             this.SearchPanel.Controls.Add(this.StartYear);
@@ -210,66 +195,73 @@
             this.SearchPanel.Controls.Add(this.searchSiteLabel);
             this.SearchPanel.Controls.Add(this.searchIcon);
             this.SearchPanel.Controls.Add(this.stopButton);
+            this.SearchPanel.Controls.Add(this.panel6);
             this.SearchPanel.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SearchPanel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.SearchPanel.Location = new System.Drawing.Point(0, 6);
+            this.SearchPanel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
+            this.SearchPanel.Location = new System.Drawing.Point(0, 0);
             this.SearchPanel.Name = "SearchPanel";
             this.SearchPanel.Size = new System.Drawing.Size(1038, 647);
             this.SearchPanel.TabIndex = 2;
             // 
+            // progressPanel
+            // 
+            this.progressPanel.Controls.Add(this.label3);
+            this.progressPanel.Location = new System.Drawing.Point(780, 72);
+            this.progressPanel.Margin = new System.Windows.Forms.Padding(0);
+            this.progressPanel.Name = "progressPanel";
+            this.progressPanel.Size = new System.Drawing.Size(229, 10);
+            this.progressPanel.TabIndex = 44;
+            this.progressPanel.Visible = false;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(0, -3);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(215, 13);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "Please wait while we process your query...";
+            // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.Color.Chocolate;
-            this.panel2.Location = new System.Drawing.Point(-2, 622);
+            this.panel2.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.panel2.Controls.Add(this.panel3);
+            this.panel2.Location = new System.Drawing.Point(-28, 626);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1017, 10);
+            this.panel2.Size = new System.Drawing.Size(1104, 6);
             this.panel2.TabIndex = 3;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.panel5);
+            this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(200, 100);
+            this.panel3.TabIndex = 0;
+            // 
+            // panel5
+            // 
+            this.panel5.Location = new System.Drawing.Point(0, 0);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(200, 100);
+            this.panel5.TabIndex = 0;
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.Chocolate;
-            this.panel1.Location = new System.Drawing.Point(11, 65);
+            this.panel1.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.panel1.Location = new System.Drawing.Point(-3, 64);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(983, 2);
+            this.panel1.Size = new System.Drawing.Size(1019, 5);
             this.panel1.TabIndex = 2;
-            // 
-            // settingsIcon
-            // 
-            this.settingsIcon.Image = global::PubCite.Properties.Resources.settings;
-            this.settingsIcon.Location = new System.Drawing.Point(969, 9);
-            this.settingsIcon.Name = "settingsIcon";
-            this.settingsIcon.Size = new System.Drawing.Size(25, 25);
-            this.settingsIcon.TabIndex = 30;
-            this.settingsIcon.TabStop = false;
-            this.settingsIcon.Click += new System.EventHandler(this.settingsIcon_Click);
-            // 
-            // cachedListView
-            // 
-            this.cachedListView.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.cachedListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1});
-            this.cachedListView.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.cachedListView.ForeColor = System.Drawing.SystemColors.Menu;
-            this.cachedListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.cachedListView.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.cachedListView.Location = new System.Drawing.Point(128, 12);
-            this.cachedListView.Name = "cachedListView";
-            this.cachedListView.Size = new System.Drawing.Size(760, 97);
-            this.cachedListView.TabIndex = 29;
-            this.cachedListView.UseCompatibleStateImageBehavior = false;
-            this.cachedListView.View = System.Windows.Forms.View.Details;
-            this.cachedListView.Visible = false;
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Width = 461;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.LightGray;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.SystemColors.Menu;
-            this.label4.Location = new System.Drawing.Point(438, 44);
+            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
+            this.label4.Location = new System.Drawing.Point(403, 42);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(131, 13);
             this.label4.TabIndex = 28;
@@ -277,13 +269,13 @@
             // 
             // KeywordsTextBox
             // 
-            this.KeywordsTextBox.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.KeywordsTextBox.BackColor = System.Drawing.SystemColors.Window;
             this.KeywordsTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.KeywordsTextBox.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.KeywordsTextBox.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.KeywordsTextBox.Location = new System.Drawing.Point(577, 38);
+            this.KeywordsTextBox.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.KeywordsTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
+            this.KeywordsTextBox.Location = new System.Drawing.Point(542, 38);
             this.KeywordsTextBox.Name = "KeywordsTextBox";
-            this.KeywordsTextBox.Size = new System.Drawing.Size(311, 22);
+            this.KeywordsTextBox.Size = new System.Drawing.Size(346, 22);
             this.KeywordsTextBox.TabIndex = 26;
             this.toolTip.SetToolTip(this.KeywordsTextBox, "Add space separated keywords to add to your search");
             // 
@@ -292,24 +284,25 @@
             this.journalCheckBox.Appearance = System.Windows.Forms.Appearance.Button;
             this.journalCheckBox.AutoSize = true;
             this.journalCheckBox.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.journalCheckBox.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.journalCheckBox.FlatAppearance.BorderColor = System.Drawing.Color.DarkGray;
             this.journalCheckBox.FlatAppearance.CheckedBackColor = System.Drawing.Color.Chocolate;
-            this.journalCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.journalCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.journalCheckBox.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.journalCheckBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.journalCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
             this.journalCheckBox.Location = new System.Drawing.Point(67, 8);
             this.journalCheckBox.Name = "journalCheckBox";
             this.journalCheckBox.Size = new System.Drawing.Size(53, 23);
             this.journalCheckBox.TabIndex = 24;
             this.journalCheckBox.Text = "Journal";
+            this.journalCheckBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.journalCheckBox.UseVisualStyleBackColor = false;
             // 
             // searchField
             // 
-            this.searchField.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.searchField.BackColor = System.Drawing.SystemColors.Window;
             this.searchField.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.searchField.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchField.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.searchField.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchField.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
             this.searchField.Location = new System.Drawing.Point(128, 9);
             this.searchField.Name = "searchField";
             this.searchField.Size = new System.Drawing.Size(760, 22);
@@ -319,19 +312,21 @@
             // 
             this.authorCheckBox.Appearance = System.Windows.Forms.Appearance.Button;
             this.authorCheckBox.AutoSize = true;
-            this.authorCheckBox.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.authorCheckBox.BackColor = System.Drawing.Color.LightGray;
             this.authorCheckBox.Checked = true;
             this.authorCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.authorCheckBox.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.authorCheckBox.FlatAppearance.CheckedBackColor = System.Drawing.Color.Chocolate;
-            this.authorCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.authorCheckBox.FlatAppearance.BorderSize = 0;
+            this.authorCheckBox.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGray;
+            this.authorCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.authorCheckBox.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.authorCheckBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.authorCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
             this.authorCheckBox.Location = new System.Drawing.Point(11, 8);
             this.authorCheckBox.Name = "authorCheckBox";
             this.authorCheckBox.Size = new System.Drawing.Size(51, 23);
             this.authorCheckBox.TabIndex = 23;
             this.authorCheckBox.Text = "Author";
+            this.authorCheckBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.authorCheckBox.UseVisualStyleBackColor = false;
             // 
             // progressBar
@@ -341,22 +336,11 @@
             this.progressBar.Size = new System.Drawing.Size(760, 22);
             this.progressBar.TabIndex = 0;
             // 
-            // addToFavourite
-            // 
-            this.addToFavourite.Image = global::PubCite.Properties.Resources.star;
-            this.addToFavourite.Location = new System.Drawing.Point(931, 7);
-            this.addToFavourite.Name = "addToFavourite";
-            this.addToFavourite.Size = new System.Drawing.Size(25, 28);
-            this.addToFavourite.TabIndex = 21;
-            this.addToFavourite.TabStop = false;
-            this.toolTip.SetToolTip(this.addToFavourite, "Add to Favourite");
-            this.addToFavourite.Click += new System.EventHandler(this.addToFavourite_Click);
-            // 
             // resultsPanel
             // 
-            this.resultsPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.resultsPanel.BackColor = System.Drawing.Color.WhiteSmoke;
             this.resultsPanel.Controls.Add(this.panel4);
-            this.resultsPanel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.resultsPanel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
             this.resultsPanel.Location = new System.Drawing.Point(236, 88);
             this.resultsPanel.Name = "resultsPanel";
             this.resultsPanel.Size = new System.Drawing.Size(776, 531);
@@ -364,13 +348,8 @@
             // 
             // panel4
             // 
-            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.panel4.BackColor = System.Drawing.Color.WhiteSmoke;
             this.panel4.Controls.Add(this.graphsPanel);
-            this.panel4.Controls.Add(this.panel20);
-            this.panel4.Controls.Add(this.panel18);
-            this.panel4.Controls.Add(this.panel17);
-            this.panel4.Controls.Add(this.panel11);
-            this.panel4.Controls.Add(this.panel3);
             this.panel4.Controls.Add(this.resultsGroupBox);
             this.panel4.Controls.Add(this.statisticsGroupBox);
             this.panel4.Location = new System.Drawing.Point(4, 3);
@@ -386,17 +365,6 @@
             this.graphsPanel.Name = "graphsPanel";
             this.graphsPanel.Size = new System.Drawing.Size(755, 293);
             this.graphsPanel.TabIndex = 43;
-            // 
-            // graphsCloseIcon
-            // 
-            this.graphsCloseIcon.BackColor = System.Drawing.Color.White;
-            this.graphsCloseIcon.Image = global::PubCite.Properties.Resources.close;
-            this.graphsCloseIcon.Location = new System.Drawing.Point(730, 4);
-            this.graphsCloseIcon.Name = "graphsCloseIcon";
-            this.graphsCloseIcon.Size = new System.Drawing.Size(17, 22);
-            this.graphsCloseIcon.TabIndex = 1;
-            this.graphsCloseIcon.TabStop = false;
-            this.graphsCloseIcon.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // graphsChart
             // 
@@ -414,63 +382,21 @@
             this.graphsChart.TabIndex = 0;
             this.graphsChart.Text = "chart1";
             // 
-            // panel20
-            // 
-            this.panel20.BackgroundImage = global::PubCite.Properties.Resources.borderv;
-            this.panel20.Location = new System.Drawing.Point(2, 95);
-            this.panel20.Name = "panel20";
-            this.panel20.Size = new System.Drawing.Size(2, 433);
-            this.panel20.TabIndex = 40;
-            // 
-            // panel18
-            // 
-            this.panel18.BackgroundImage = global::PubCite.Properties.Resources.borderv;
-            this.panel18.Location = new System.Drawing.Point(752, 10);
-            this.panel18.Name = "panel18";
-            this.panel18.Size = new System.Drawing.Size(2, 71);
-            this.panel18.TabIndex = 38;
-            // 
-            // panel17
-            // 
-            this.panel17.BackgroundImage = global::PubCite.Properties.Resources.borderv;
-            this.panel17.Location = new System.Drawing.Point(2, 11);
-            this.panel17.Name = "panel17";
-            this.panel17.Size = new System.Drawing.Size(2, 71);
-            this.panel17.TabIndex = 37;
-            // 
-            // panel11
-            // 
-            this.panel11.BackgroundImage = global::PubCite.Properties.Resources.border;
-            this.panel11.Location = new System.Drawing.Point(58, 10);
-            this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(694, 2);
-            this.panel11.TabIndex = 32;
-            // 
-            // panel3
-            // 
-            this.panel3.BackgroundImage = global::PubCite.Properties.Resources.border;
-            this.panel3.Location = new System.Drawing.Point(52, 94);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(702, 2);
-            this.panel3.TabIndex = 30;
-            // 
             // resultsGroupBox
             // 
-            this.resultsGroupBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.resultsGroupBox.BackColor = System.Drawing.Color.WhiteSmoke;
             this.resultsGroupBox.Controls.Add(this.arbitPanel);
             this.resultsGroupBox.Controls.Add(this.settingsPanel);
-            this.resultsGroupBox.Controls.Add(this.panel5);
-            this.resultsGroupBox.Controls.Add(this.panel19);
-            this.resultsGroupBox.Controls.Add(this.panel9);
             this.resultsGroupBox.Controls.Add(this.authorResultsListView);
             this.resultsGroupBox.Controls.Add(this.journalResultsListView);
-            this.resultsGroupBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.resultsGroupBox.Location = new System.Drawing.Point(2, 87);
+            this.resultsGroupBox.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.resultsGroupBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
+            this.resultsGroupBox.Location = new System.Drawing.Point(2, 102);
             this.resultsGroupBox.Name = "resultsGroupBox";
-            this.resultsGroupBox.Size = new System.Drawing.Size(752, 445);
+            this.resultsGroupBox.Size = new System.Drawing.Size(752, 426);
             this.resultsGroupBox.TabIndex = 0;
             this.resultsGroupBox.TabStop = false;
-            this.resultsGroupBox.Text = "Results ";
+            this.resultsGroupBox.Text = "PUBLICATIONS";
             // 
             // arbitPanel
             // 
@@ -481,7 +407,7 @@
             // 
             // settingsPanel
             // 
-            this.settingsPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(84)))), ((int)(((byte)(84)))));
+            this.settingsPanel.BackColor = System.Drawing.Color.LightGray;
             this.settingsPanel.Controls.Add(this.settingsCloseIcon);
             this.settingsPanel.Controls.Add(this.settingsOk);
             this.settingsPanel.Controls.Add(this.groupBox1);
@@ -490,16 +416,6 @@
             this.settingsPanel.Name = "settingsPanel";
             this.settingsPanel.Size = new System.Drawing.Size(499, 319);
             this.settingsPanel.TabIndex = 41;
-            // 
-            // settingsCloseIcon
-            // 
-            this.settingsCloseIcon.Image = global::PubCite.Properties.Resources.close;
-            this.settingsCloseIcon.Location = new System.Drawing.Point(472, 4);
-            this.settingsCloseIcon.Name = "settingsCloseIcon";
-            this.settingsCloseIcon.Size = new System.Drawing.Size(16, 15);
-            this.settingsCloseIcon.TabIndex = 3;
-            this.settingsCloseIcon.TabStop = false;
-            this.settingsCloseIcon.Click += new System.EventHandler(this.settingsCloseIcon_Click);
             // 
             // settingsOk
             // 
@@ -661,47 +577,22 @@
             this.CacheOptionslabel.TabIndex = 0;
             this.CacheOptionslabel.Text = "Keep Cache These Many Days:";
             // 
-            // panel5
-            // 
-            this.panel5.BackgroundImage = global::PubCite.Properties.Resources.border;
-            this.panel5.Location = new System.Drawing.Point(2, 439);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(751, 2);
-            this.panel5.TabIndex = 31;
-            // 
-            // panel19
-            // 
-            this.panel19.BackgroundImage = global::PubCite.Properties.Resources.borderv;
-            this.panel19.Location = new System.Drawing.Point(750, 7);
-            this.panel19.Name = "panel19";
-            this.panel19.Size = new System.Drawing.Size(2, 432);
-            this.panel19.TabIndex = 39;
-            // 
-            // panel9
-            // 
-            this.panel9.BackgroundImage = global::PubCite.Properties.Resources.border;
-            this.panel9.Location = new System.Drawing.Point(-1, 7);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(10, 2);
-            this.panel9.TabIndex = 32;
-            // 
             // authorResultsListView
             // 
-            this.authorResultsListView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.authorResultsListView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.authorResultsListView.BackColor = System.Drawing.SystemColors.Window;
             this.authorResultsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.PaperHeader,
             this.venueHeader,
             this.YearHeader,
             this.NumOfCitesHeader});
             this.authorResultsListView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.authorResultsListView.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.authorResultsListView.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.authorResultsListView.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.authorResultsListView.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
+            this.authorResultsListView.GridLines = true;
             this.authorResultsListView.Location = new System.Drawing.Point(3, 18);
             this.authorResultsListView.MultiSelect = false;
             this.authorResultsListView.Name = "authorResultsListView";
-            this.authorResultsListView.OwnerDraw = true;
-            this.authorResultsListView.Size = new System.Drawing.Size(746, 424);
+            this.authorResultsListView.Size = new System.Drawing.Size(746, 405);
             this.authorResultsListView.TabIndex = 1;
             this.authorResultsListView.UseCompatibleStateImageBehavior = false;
             this.authorResultsListView.View = System.Windows.Forms.View.Details;
@@ -714,33 +605,33 @@
             // venueHeader
             // 
             this.venueHeader.Text = "Venue";
-            this.venueHeader.Width = 174;
+            this.venueHeader.Width = 243;
             // 
             // YearHeader
             // 
             this.YearHeader.Text = "Year";
-            this.YearHeader.Width = 71;
+            this.YearHeader.Width = 51;
             // 
             // NumOfCitesHeader
             // 
             this.NumOfCitesHeader.Text = "No.Of Cites";
-            this.NumOfCitesHeader.Width = 143;
+            this.NumOfCitesHeader.Width = 77;
             // 
             // journalResultsListView
             // 
-            this.journalResultsListView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.journalResultsListView.BackColor = System.Drawing.SystemColors.Window;
             this.journalResultsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Paper,
             this.Author,
             this.Cites,
             this.Year});
             this.journalResultsListView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.journalResultsListView.ForeColor = System.Drawing.SystemColors.Menu;
+            this.journalResultsListView.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
+            this.journalResultsListView.GridLines = true;
             this.journalResultsListView.Location = new System.Drawing.Point(3, 18);
             this.journalResultsListView.MultiSelect = false;
             this.journalResultsListView.Name = "journalResultsListView";
-            this.journalResultsListView.OwnerDraw = true;
-            this.journalResultsListView.Size = new System.Drawing.Size(746, 424);
+            this.journalResultsListView.Size = new System.Drawing.Size(746, 405);
             this.journalResultsListView.TabIndex = 0;
             this.journalResultsListView.UseCompatibleStateImageBehavior = false;
             this.journalResultsListView.View = System.Windows.Forms.View.Details;
@@ -768,14 +659,13 @@
             // 
             // statisticsGroupBox
             // 
-            this.statisticsGroupBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.statisticsGroupBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.statisticsGroupBox.Controls.Add(this.addToFav);
             this.statisticsGroupBox.Controls.Add(this.pictureBox1);
             this.statisticsGroupBox.Controls.Add(this.graphComboBox);
             this.statisticsGroupBox.Controls.Add(this.label16);
             this.statisticsGroupBox.Controls.Add(this.numPapers);
             this.statisticsGroupBox.Controls.Add(this.label15);
-            this.statisticsGroupBox.Controls.Add(this.panel12);
-            this.statisticsGroupBox.Controls.Add(this.panel10);
             this.statisticsGroupBox.Controls.Add(this.label5);
             this.statisticsGroupBox.Controls.Add(this.label6);
             this.statisticsGroupBox.Controls.Add(this.label7);
@@ -783,7 +673,6 @@
             this.statisticsGroupBox.Controls.Add(this.label9);
             this.statisticsGroupBox.Controls.Add(this.label10);
             this.statisticsGroupBox.Controls.Add(this.i10index);
-            this.statisticsGroupBox.Controls.Add(this.progressPanel);
             this.statisticsGroupBox.Controls.Add(this.hindex);
             this.statisticsGroupBox.Controls.Add(this.citesperPaper);
             this.statisticsGroupBox.Controls.Add(this.citesperYear);
@@ -796,37 +685,26 @@
             this.statisticsGroupBox.Controls.Add(this.citationsLabel);
             this.statisticsGroupBox.Controls.Add(this.authorLabel);
             this.statisticsGroupBox.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.statisticsGroupBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.statisticsGroupBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
             this.statisticsGroupBox.Location = new System.Drawing.Point(2, 3);
             this.statisticsGroupBox.Name = "statisticsGroupBox";
-            this.statisticsGroupBox.Size = new System.Drawing.Size(752, 79);
+            this.statisticsGroupBox.Size = new System.Drawing.Size(752, 93);
             this.statisticsGroupBox.TabIndex = 2;
             this.statisticsGroupBox.TabStop = false;
-            this.statisticsGroupBox.Text = "Statistics";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::PubCite.Properties.Resources.chartIcon;
-            this.pictureBox1.Location = new System.Drawing.Point(630, 11);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(33, 26);
-            this.pictureBox1.TabIndex = 38;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click_1);
+            this.statisticsGroupBox.Text = "STATISTICS";
             // 
             // graphComboBox
             // 
-            this.graphComboBox.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.graphComboBox.BackColor = System.Drawing.SystemColors.Window;
             this.graphComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.graphComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.graphComboBox.ForeColor = System.Drawing.SystemColors.Info;
+            this.graphComboBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
             this.graphComboBox.FormattingEnabled = true;
             this.graphComboBox.Items.AddRange(new object[] {
             "Citations of Publications Per Year",
             "Publications Per Year"});
-            this.graphComboBox.Location = new System.Drawing.Point(504, 13);
+            this.graphComboBox.Location = new System.Drawing.Point(13, 69);
             this.graphComboBox.Name = "graphComboBox";
-            this.graphComboBox.Size = new System.Drawing.Size(120, 21);
+            this.graphComboBox.Size = new System.Drawing.Size(200, 21);
             this.graphComboBox.TabIndex = 37;
             this.graphComboBox.SelectedIndexChanged += new System.EventHandler(this.graphComboBox_SelectedIndexChanged);
             // 
@@ -834,7 +712,7 @@
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(467, 58);
+            this.label16.Location = new System.Drawing.Point(547, 18);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(10, 13);
             this.label16.TabIndex = 36;
@@ -843,7 +721,7 @@
             // numPapers
             // 
             this.numPapers.AutoSize = true;
-            this.numPapers.Location = new System.Drawing.Point(483, 58);
+            this.numPapers.Location = new System.Drawing.Point(563, 18);
             this.numPapers.Name = "numPapers";
             this.numPapers.Size = new System.Drawing.Size(0, 13);
             this.numPapers.TabIndex = 35;
@@ -852,33 +730,17 @@
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(365, 58);
+            this.label15.Location = new System.Drawing.Point(445, 18);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(102, 13);
             this.label15.TabIndex = 34;
             this.label15.Text = "Number of Papers";
             // 
-            // panel12
-            // 
-            this.panel12.BackgroundImage = global::PubCite.Properties.Resources.border;
-            this.panel12.Location = new System.Drawing.Point(0, 7);
-            this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(10, 2);
-            this.panel12.TabIndex = 33;
-            // 
-            // panel10
-            // 
-            this.panel10.BackgroundImage = global::PubCite.Properties.Resources.border;
-            this.panel10.Location = new System.Drawing.Point(1, 77);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(751, 2);
-            this.panel10.TabIndex = 31;
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(53, 60);
+            this.label5.Location = new System.Drawing.Point(682, 37);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(10, 13);
             this.label5.TabIndex = 26;
@@ -888,7 +750,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(309, 58);
+            this.label6.Location = new System.Drawing.Point(547, 37);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(10, 13);
             this.label6.TabIndex = 25;
@@ -898,7 +760,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(309, 16);
+            this.label7.Location = new System.Drawing.Point(316, 16);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(10, 13);
             this.label7.TabIndex = 24;
@@ -908,7 +770,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(309, 37);
+            this.label8.Location = new System.Drawing.Point(316, 37);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(10, 13);
             this.label8.TabIndex = 23;
@@ -918,7 +780,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(53, 38);
+            this.label9.Location = new System.Drawing.Point(60, 38);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(10, 13);
             this.label9.TabIndex = 22;
@@ -928,7 +790,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(53, 16);
+            this.label10.Location = new System.Drawing.Point(60, 16);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(10, 13);
             this.label10.TabIndex = 21;
@@ -937,34 +799,15 @@
             // i10index
             // 
             this.i10index.AutoSize = true;
-            this.i10index.Location = new System.Drawing.Point(64, 60);
+            this.i10index.Location = new System.Drawing.Point(693, 37);
             this.i10index.Name = "i10index";
             this.i10index.Size = new System.Drawing.Size(0, 13);
             this.i10index.TabIndex = 20;
             // 
-            // progressPanel
-            // 
-            this.progressPanel.Controls.Add(this.label3);
-            this.progressPanel.Location = new System.Drawing.Point(518, 43);
-            this.progressPanel.Name = "progressPanel";
-            this.progressPanel.Size = new System.Drawing.Size(229, 33);
-            this.progressPanel.TabIndex = 22;
-            this.progressPanel.Visible = false;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(18, 12);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(218, 13);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Please wait while we process your query...";
-            // 
             // hindex
             // 
             this.hindex.AutoSize = true;
-            this.hindex.Location = new System.Drawing.Point(321, 60);
+            this.hindex.Location = new System.Drawing.Point(559, 39);
             this.hindex.Name = "hindex";
             this.hindex.Size = new System.Drawing.Size(0, 13);
             this.hindex.TabIndex = 19;
@@ -972,7 +815,7 @@
             // citesperPaper
             // 
             this.citesperPaper.AutoSize = true;
-            this.citesperPaper.Location = new System.Drawing.Point(321, 18);
+            this.citesperPaper.Location = new System.Drawing.Point(328, 18);
             this.citesperPaper.Name = "citesperPaper";
             this.citesperPaper.Size = new System.Drawing.Size(0, 13);
             this.citesperPaper.TabIndex = 18;
@@ -980,7 +823,7 @@
             // citesperYear
             // 
             this.citesperYear.AutoSize = true;
-            this.citesperYear.Location = new System.Drawing.Point(321, 39);
+            this.citesperYear.Location = new System.Drawing.Point(328, 39);
             this.citesperYear.Name = "citesperYear";
             this.citesperYear.Size = new System.Drawing.Size(0, 13);
             this.citesperYear.TabIndex = 17;
@@ -988,7 +831,7 @@
             // citationsNumberLabel
             // 
             this.citationsNumberLabel.AutoSize = true;
-            this.citationsNumberLabel.Location = new System.Drawing.Point(64, 38);
+            this.citationsNumberLabel.Location = new System.Drawing.Point(71, 38);
             this.citationsNumberLabel.Name = "citationsNumberLabel";
             this.citationsNumberLabel.Size = new System.Drawing.Size(0, 13);
             this.citationsNumberLabel.TabIndex = 16;
@@ -996,8 +839,9 @@
             // authorNameLabel
             // 
             this.authorNameLabel.AutoSize = true;
-            this.authorNameLabel.ForeColor = System.Drawing.Color.DarkOrange;
-            this.authorNameLabel.Location = new System.Drawing.Point(64, 16);
+            this.authorNameLabel.Font = new System.Drawing.Font("Segoe UI", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.authorNameLabel.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.authorNameLabel.Location = new System.Drawing.Point(71, 16);
             this.authorNameLabel.Name = "authorNameLabel";
             this.authorNameLabel.Size = new System.Drawing.Size(0, 13);
             this.authorNameLabel.TabIndex = 15;
@@ -1008,7 +852,7 @@
             // 
             this.i10indexLabel.AutoSize = true;
             this.i10indexLabel.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.i10indexLabel.Location = new System.Drawing.Point(3, 60);
+            this.i10indexLabel.Location = new System.Drawing.Point(626, 37);
             this.i10indexLabel.Name = "i10indexLabel";
             this.i10indexLabel.Size = new System.Drawing.Size(55, 13);
             this.i10indexLabel.TabIndex = 13;
@@ -1018,7 +862,7 @@
             // 
             this.hindexLabel.AutoSize = true;
             this.hindexLabel.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.hindexLabel.Location = new System.Drawing.Point(227, 58);
+            this.hindexLabel.Location = new System.Drawing.Point(445, 37);
             this.hindexLabel.Name = "hindexLabel";
             this.hindexLabel.Size = new System.Drawing.Size(47, 13);
             this.hindexLabel.TabIndex = 12;
@@ -1028,7 +872,7 @@
             // 
             this.citerperPaperLabel.AutoSize = true;
             this.citerperPaperLabel.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.citerperPaperLabel.Location = new System.Drawing.Point(227, 16);
+            this.citerperPaperLabel.Location = new System.Drawing.Point(234, 16);
             this.citerperPaperLabel.Name = "citerperPaperLabel";
             this.citerperPaperLabel.Size = new System.Drawing.Size(85, 13);
             this.citerperPaperLabel.TabIndex = 11;
@@ -1038,7 +882,7 @@
             // 
             this.citesperYearLabel.AutoSize = true;
             this.citesperYearLabel.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.citesperYearLabel.Location = new System.Drawing.Point(227, 37);
+            this.citesperYearLabel.Location = new System.Drawing.Point(234, 37);
             this.citesperYearLabel.Name = "citesperYearLabel";
             this.citesperYearLabel.Size = new System.Drawing.Size(77, 13);
             this.citesperYearLabel.TabIndex = 10;
@@ -1048,7 +892,7 @@
             // 
             this.citationsLabel.AutoSize = true;
             this.citationsLabel.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.citationsLabel.Location = new System.Drawing.Point(3, 38);
+            this.citationsLabel.Location = new System.Drawing.Point(10, 38);
             this.citationsLabel.Name = "citationsLabel";
             this.citationsLabel.Size = new System.Drawing.Size(53, 13);
             this.citationsLabel.TabIndex = 9;
@@ -1058,7 +902,7 @@
             // 
             this.authorLabel.AutoSize = true;
             this.authorLabel.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.authorLabel.Location = new System.Drawing.Point(3, 16);
+            this.authorLabel.Location = new System.Drawing.Point(10, 16);
             this.authorLabel.Name = "authorLabel";
             this.authorLabel.Size = new System.Drawing.Size(38, 13);
             this.authorLabel.TabIndex = 8;
@@ -1066,10 +910,8 @@
             // 
             // favouritesPanel
             // 
-            this.favouritesPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.favouritesPanel.BackColor = System.Drawing.Color.WhiteSmoke;
             this.favouritesPanel.Controls.Add(this.recentSearchPanel);
-            this.favouritesPanel.Controls.Add(this.panel16);
-            this.favouritesPanel.Controls.Add(this.panel7);
             this.favouritesPanel.Controls.Add(this.recentButton);
             this.favouritesPanel.Controls.Add(this.favouriteButton);
             this.favouritesPanel.Controls.Add(this.favouritesTreeView);
@@ -1083,6 +925,8 @@
             // recentSearchPanel
             // 
             this.recentSearchPanel.Controls.Add(this.recentListView);
+            this.recentSearchPanel.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.recentSearchPanel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
             this.recentSearchPanel.Location = new System.Drawing.Point(-250, 43);
             this.recentSearchPanel.Name = "recentSearchPanel";
             this.recentSearchPanel.Size = new System.Drawing.Size(192, 209);
@@ -1090,16 +934,15 @@
             // 
             // recentListView
             // 
-            this.recentListView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.recentListView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.recentListView.BackColor = System.Drawing.SystemColors.Window;
             this.recentListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.recentHeader,
             this.typeHeader});
             this.recentListView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.recentListView.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.recentListView.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
+            this.recentListView.GridLines = true;
             this.recentListView.Location = new System.Drawing.Point(0, 0);
             this.recentListView.Name = "recentListView";
-            this.recentListView.OwnerDraw = true;
             this.recentListView.Size = new System.Drawing.Size(192, 209);
             this.recentListView.TabIndex = 0;
             this.recentListView.UseCompatibleStateImageBehavior = false;
@@ -1115,36 +958,11 @@
             this.typeHeader.Text = "Type";
             this.typeHeader.Width = 56;
             // 
-            // panel16
-            // 
-            this.panel16.BackgroundImage = global::PubCite.Properties.Resources.borderv;
-            this.panel16.Location = new System.Drawing.Point(201, 264);
-            this.panel16.Name = "panel16";
-            this.panel16.Size = new System.Drawing.Size(2, 266);
-            this.panel16.TabIndex = 36;
-            // 
-            // panel7
-            // 
-            this.panel7.BackgroundImage = global::PubCite.Properties.Resources.border;
-            this.panel7.Controls.Add(this.panel8);
-            this.panel7.Location = new System.Drawing.Point(86, 265);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(117, 2);
-            this.panel7.TabIndex = 33;
-            // 
-            // panel8
-            // 
-            this.panel8.BackgroundImage = global::PubCite.Properties.Resources.border;
-            this.panel8.Location = new System.Drawing.Point(-77, -5);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(10, 10);
-            this.panel8.TabIndex = 34;
-            // 
             // recentButton
             // 
             this.recentButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.recentButton.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.recentButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.recentButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
             this.recentButton.Location = new System.Drawing.Point(77, 6);
             this.recentButton.Name = "recentButton";
             this.recentButton.Size = new System.Drawing.Size(83, 29);
@@ -1158,7 +976,7 @@
             this.favouriteButton.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
             this.favouriteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.favouriteButton.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.favouriteButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.favouriteButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
             this.favouriteButton.Location = new System.Drawing.Point(7, 6);
             this.favouriteButton.Name = "favouriteButton";
             this.favouriteButton.Size = new System.Drawing.Size(70, 29);
@@ -1169,9 +987,9 @@
             // 
             // favouritesTreeView
             // 
-            this.favouritesTreeView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.favouritesTreeView.BackColor = System.Drawing.Color.WhiteSmoke;
             this.favouritesTreeView.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.favouritesTreeView.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.favouritesTreeView.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
             this.favouritesTreeView.Location = new System.Drawing.Point(11, 43);
             this.favouritesTreeView.Name = "favouritesTreeView";
             treeNode1.Name = "authorsRootNode";
@@ -1187,12 +1005,9 @@
             // 
             // Suggestions
             // 
-            this.Suggestions.Controls.Add(this.panel15);
-            this.Suggestions.Controls.Add(this.panel13);
-            this.Suggestions.Controls.Add(this.panel6);
             this.Suggestions.Controls.Add(this.authorsSuggestions);
             this.Suggestions.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Suggestions.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.Suggestions.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
             this.Suggestions.Location = new System.Drawing.Point(11, 258);
             this.Suggestions.Name = "Suggestions";
             this.Suggestions.Size = new System.Drawing.Size(192, 273);
@@ -1200,51 +1015,17 @@
             this.Suggestions.TabStop = false;
             this.Suggestions.Text = "Suggestions";
             // 
-            // panel15
-            // 
-            this.panel15.BackgroundImage = global::PubCite.Properties.Resources.borderv;
-            this.panel15.Location = new System.Drawing.Point(0, 9);
-            this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(2, 263);
-            this.panel15.TabIndex = 35;
-            // 
-            // panel13
-            // 
-            this.panel13.BackgroundImage = global::PubCite.Properties.Resources.border;
-            this.panel13.Controls.Add(this.panel14);
-            this.panel13.Location = new System.Drawing.Point(0, 7);
-            this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(8, 2);
-            this.panel13.TabIndex = 35;
-            // 
-            // panel14
-            // 
-            this.panel14.BackgroundImage = global::PubCite.Properties.Resources.border;
-            this.panel14.Location = new System.Drawing.Point(-77, -5);
-            this.panel14.Name = "panel14";
-            this.panel14.Size = new System.Drawing.Size(10, 10);
-            this.panel14.TabIndex = 34;
-            // 
-            // panel6
-            // 
-            this.panel6.BackgroundImage = global::PubCite.Properties.Resources.border;
-            this.panel6.Location = new System.Drawing.Point(2, 271);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(190, 2);
-            this.panel6.TabIndex = 32;
-            // 
             // authorsSuggestions
             // 
-            this.authorsSuggestions.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.authorsSuggestions.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.authorsSuggestions.BackColor = System.Drawing.SystemColors.Window;
             this.authorsSuggestions.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Authors});
             this.authorsSuggestions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.authorsSuggestions.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.authorsSuggestions.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.authorsSuggestions.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
+            this.authorsSuggestions.GridLines = true;
             this.authorsSuggestions.Location = new System.Drawing.Point(3, 18);
             this.authorsSuggestions.Name = "authorsSuggestions";
-            this.authorsSuggestions.OwnerDraw = true;
             this.authorsSuggestions.Size = new System.Drawing.Size(186, 252);
             this.authorsSuggestions.TabIndex = 0;
             this.authorsSuggestions.UseCompatibleStateImageBehavior = false;
@@ -1258,19 +1039,21 @@
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.LightGray;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.SystemColors.Menu;
-            this.label2.Location = new System.Drawing.Point(314, 41);
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
+            this.label2.Location = new System.Drawing.Point(314, 42);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(23, 13);
+            this.label2.Size = new System.Drawing.Size(22, 13);
             this.label2.TabIndex = 10;
             this.label2.Text = "To:";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.LightGray;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.Menu;
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
             this.label1.Location = new System.Drawing.Point(217, 42);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(37, 13);
@@ -1279,10 +1062,9 @@
             // 
             // siteComboBox
             // 
-            this.siteComboBox.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.siteComboBox.BackColor = System.Drawing.SystemColors.Window;
             this.siteComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.siteComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.siteComboBox.ForeColor = System.Drawing.SystemColors.Info;
+            this.siteComboBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
             this.siteComboBox.FormattingEnabled = true;
             this.siteComboBox.Items.AddRange(new object[] {
             "Google Scholar",
@@ -1295,35 +1077,45 @@
             // 
             // searchSiteLabel
             // 
+            this.searchSiteLabel.BackColor = System.Drawing.Color.LightGray;
             this.searchSiteLabel.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchSiteLabel.ForeColor = System.Drawing.SystemColors.Menu;
-            this.searchSiteLabel.Location = new System.Drawing.Point(16, 41);
+            this.searchSiteLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
+            this.searchSiteLabel.Location = new System.Drawing.Point(12, 41);
             this.searchSiteLabel.Name = "searchSiteLabel";
             this.searchSiteLabel.Size = new System.Drawing.Size(69, 21);
             this.searchSiteLabel.TabIndex = 3;
             this.searchSiteLabel.Text = "Search Site :";
             // 
-            // searchIcon
+            // panel6
             // 
-            this.searchIcon.Image = global::PubCite.Properties.Resources.search_button2;
-            this.searchIcon.Location = new System.Drawing.Point(900, 8);
-            this.searchIcon.Name = "searchIcon";
-            this.searchIcon.Size = new System.Drawing.Size(24, 29);
-            this.searchIcon.TabIndex = 11;
-            this.searchIcon.TabStop = false;
-            this.toolTip.SetToolTip(this.searchIcon, "Search..");
-            this.searchIcon.Click += new System.EventHandler(this.searchIcon_Click);
+            this.panel6.BackColor = System.Drawing.Color.LightGray;
+            this.panel6.Controls.Add(this.cachedListView);
+            this.panel6.Location = new System.Drawing.Point(0, 0);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(1015, 64);
+            this.panel6.TabIndex = 43;
             // 
-            // stopButton
+            // cachedListView
             // 
-            this.stopButton.Image = global::PubCite.Properties.Resources.stop;
-            this.stopButton.Location = new System.Drawing.Point(900, 8);
-            this.stopButton.Name = "stopButton";
-            this.stopButton.Size = new System.Drawing.Size(21, 19);
-            this.stopButton.TabIndex = 31;
-            this.stopButton.TabStop = false;
-            this.stopButton.Visible = false;
-            this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
+            this.cachedListView.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.cachedListView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.cachedListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1});
+            this.cachedListView.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cachedListView.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
+            this.cachedListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.cachedListView.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.cachedListView.Location = new System.Drawing.Point(70, -58);
+            this.cachedListView.Name = "cachedListView";
+            this.cachedListView.Size = new System.Drawing.Size(760, 97);
+            this.cachedListView.TabIndex = 29;
+            this.cachedListView.UseCompatibleStateImageBehavior = false;
+            this.cachedListView.View = System.Windows.Forms.View.Details;
+            this.cachedListView.Visible = false;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Width = 461;
             // 
             // optionsMenuStrip
             // 
@@ -1407,13 +1199,90 @@
             this.directorySearcher1.ServerPageTimeLimit = System.TimeSpan.Parse("-00:00:01");
             this.directorySearcher1.ServerTimeLimit = System.TimeSpan.Parse("-00:00:01");
             // 
+            // settingsIcon
+            // 
+            this.settingsIcon.BackColor = System.Drawing.Color.LightGray;
+            this.settingsIcon.Image = global::PubCite.Properties.Resources.settings;
+            this.settingsIcon.Location = new System.Drawing.Point(969, 9);
+            this.settingsIcon.Name = "settingsIcon";
+            this.settingsIcon.Size = new System.Drawing.Size(25, 25);
+            this.settingsIcon.TabIndex = 30;
+            this.settingsIcon.TabStop = false;
+            this.settingsIcon.Click += new System.EventHandler(this.settingsIcon_Click);
+            // 
+            // graphsCloseIcon
+            // 
+            this.graphsCloseIcon.BackColor = System.Drawing.Color.White;
+            this.graphsCloseIcon.Image = global::PubCite.Properties.Resources.close;
+            this.graphsCloseIcon.Location = new System.Drawing.Point(730, 4);
+            this.graphsCloseIcon.Name = "graphsCloseIcon";
+            this.graphsCloseIcon.Size = new System.Drawing.Size(17, 22);
+            this.graphsCloseIcon.TabIndex = 1;
+            this.graphsCloseIcon.TabStop = false;
+            this.graphsCloseIcon.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // settingsCloseIcon
+            // 
+            this.settingsCloseIcon.Image = global::PubCite.Properties.Resources.close;
+            this.settingsCloseIcon.Location = new System.Drawing.Point(472, 4);
+            this.settingsCloseIcon.Name = "settingsCloseIcon";
+            this.settingsCloseIcon.Size = new System.Drawing.Size(16, 15);
+            this.settingsCloseIcon.TabIndex = 3;
+            this.settingsCloseIcon.TabStop = false;
+            this.settingsCloseIcon.Click += new System.EventHandler(this.settingsCloseIcon_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::PubCite.Properties.Resources.bar_chart_2;
+            this.pictureBox1.Location = new System.Drawing.Point(219, 59);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(33, 31);
+            this.pictureBox1.TabIndex = 38;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click_1);
+            // 
+            // searchIcon
+            // 
+            this.searchIcon.BackColor = System.Drawing.Color.LightGray;
+            this.searchIcon.Image = global::PubCite.Properties.Resources.search_button2;
+            this.searchIcon.Location = new System.Drawing.Point(900, 8);
+            this.searchIcon.Name = "searchIcon";
+            this.searchIcon.Size = new System.Drawing.Size(24, 29);
+            this.searchIcon.TabIndex = 11;
+            this.searchIcon.TabStop = false;
+            this.toolTip.SetToolTip(this.searchIcon, "Search..");
+            this.searchIcon.Click += new System.EventHandler(this.searchIcon_Click);
+            // 
+            // stopButton
+            // 
+            this.stopButton.BackColor = System.Drawing.Color.LightGray;
+            this.stopButton.Image = global::PubCite.Properties.Resources.icon_pause;
+            this.stopButton.Location = new System.Drawing.Point(900, 8);
+            this.stopButton.Name = "stopButton";
+            this.stopButton.Size = new System.Drawing.Size(25, 25);
+            this.stopButton.TabIndex = 31;
+            this.stopButton.TabStop = false;
+            this.stopButton.Visible = false;
+            this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
+            // 
+            // addToFav
+            // 
+            this.addToFav.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.addToFav.Location = new System.Drawing.Point(629, 64);
+            this.addToFav.Name = "addToFav";
+            this.addToFav.Size = new System.Drawing.Size(105, 23);
+            this.addToFav.TabIndex = 39;
+            this.addToFav.Text = "Add to Favourite";
+            this.addToFav.UseVisualStyleBackColor = true;
+            this.addToFav.Click += new System.EventHandler(this.addToFav_Click);
+            // 
             // EndYear
             // 
             this.EndYear.AllowSpace = false;
-            this.EndYear.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.EndYear.BackColor = System.Drawing.SystemColors.Window;
             this.EndYear.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.EndYear.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EndYear.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.EndYear.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
             this.EndYear.Location = new System.Drawing.Point(342, 38);
             this.EndYear.Name = "EndYear";
             this.EndYear.Size = new System.Drawing.Size(44, 22);
@@ -1424,10 +1293,10 @@
             // StartYear
             // 
             this.StartYear.AllowSpace = false;
-            this.StartYear.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.StartYear.BackColor = System.Drawing.SystemColors.Window;
             this.StartYear.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.StartYear.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.StartYear.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.StartYear.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
             this.StartYear.Location = new System.Drawing.Point(259, 38);
             this.StartYear.Name = "StartYear";
             this.StartYear.Size = new System.Drawing.Size(44, 22);
@@ -1444,16 +1313,16 @@
             this.Size = new System.Drawing.Size(1015, 631);
             this.SearchPanel.ResumeLayout(false);
             this.SearchPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.settingsIcon)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.addToFavourite)).EndInit();
+            this.progressPanel.ResumeLayout(false);
+            this.progressPanel.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
             this.resultsPanel.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.graphsPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.graphsCloseIcon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.graphsChart)).EndInit();
             this.resultsGroupBox.ResumeLayout(false);
             this.settingsPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.settingsCloseIcon)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.microsoftNumericUpDown)).EndInit();
@@ -1464,19 +1333,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.cacheNumericUpDown)).EndInit();
             this.statisticsGroupBox.ResumeLayout(false);
             this.statisticsGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.progressPanel.ResumeLayout(false);
-            this.progressPanel.PerformLayout();
             this.favouritesPanel.ResumeLayout(false);
             this.recentSearchPanel.ResumeLayout(false);
-            this.panel7.ResumeLayout(false);
             this.Suggestions.ResumeLayout(false);
-            this.panel13.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.searchIcon)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.stopButton)).EndInit();
+            this.panel6.ResumeLayout(false);
             this.optionsMenuStrip.ResumeLayout(false);
             this.favouriteMenuStrip.ResumeLayout(false);
             this.recentMenuStrip.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.settingsIcon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.graphsCloseIcon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.settingsCloseIcon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchIcon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.stopButton)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1525,13 +1394,10 @@
         private System.Windows.Forms.ContextMenuStrip optionsMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem viewCitationsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem viewURLToolStripMenuItem;
-        private System.Windows.Forms.PictureBox addToFavourite;
         private System.Windows.Forms.TreeView favouritesTreeView;
         private System.Windows.Forms.ContextMenuStrip favouriteMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem viewStatisticsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem removeFromFavouritesToolStripMenuItem;
-        private System.Windows.Forms.Panel progressPanel;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.CheckBox authorCheckBox;
         private System.Windows.Forms.CheckBox journalCheckBox;
@@ -1555,23 +1421,6 @@
         private System.Windows.Forms.PictureBox stopButton;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.Panel panel8;
-        private System.Windows.Forms.Panel panel11;
-        private System.Windows.Forms.Panel panel9;
-        private System.Windows.Forms.Panel panel12;
-        private System.Windows.Forms.Panel panel10;
-        private System.Windows.Forms.Panel panel13;
-        private System.Windows.Forms.Panel panel14;
-        private System.Windows.Forms.Panel panel20;
-        private System.Windows.Forms.Panel panel18;
-        private System.Windows.Forms.Panel panel17;
-        private System.Windows.Forms.Panel panel19;
-        private System.Windows.Forms.Panel panel16;
-        private System.Windows.Forms.Panel panel15;
         private System.Windows.Forms.Panel settingsPanel;
         private System.Windows.Forms.Button settingsOk;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -1600,5 +1449,11 @@
         private System.Windows.Forms.DataVisualization.Charting.Chart graphsChart;
         private System.Windows.Forms.PictureBox graphsCloseIcon;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Panel progressPanel;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button addToFav;
     }
 }

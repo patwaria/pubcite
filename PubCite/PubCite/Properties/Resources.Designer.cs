@@ -63,6 +63,16 @@ namespace PubCite.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap bar_chart_2 {
+            get {
+                object obj = ResourceManager.GetObject("bar-chart-2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap bookmark {
             get {
                 object obj = ResourceManager.GetObject("bookmark", resourceCulture);
@@ -106,6 +116,16 @@ namespace PubCite.Properties {
         internal static System.Drawing.Bitmap close {
             get {
                 object obj = ResourceManager.GetObject("close", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icon_pause {
+            get {
+                object obj = ResourceManager.GetObject("icon_pause", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
