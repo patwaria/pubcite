@@ -16,7 +16,6 @@ namespace PubCite
         List<SG.Author> FavAuthorList;
         List<SG.Journal> FavJournalList;
         List<SG.Paper> Papers;
-        List<SG.Paper> Citations;
         List<String> RecentSearchKeys = new List<string>();
 
         List<string> auth_url;
@@ -121,11 +120,6 @@ namespace PubCite
         void KeywordsTextBox_KeyUp(object sender, KeyEventArgs e)
         {
 
-            if (KeywordsTextBox.Text.Length == 0)
-            {
-                KeywordsTextBox.Text = "Enter delimitor separated keywords to filter your search results..";
-            }
-
             if (authorResultsListView.Visible)
                 populateAuthor();
             else
@@ -217,6 +211,8 @@ namespace PubCite
             if (e.KeyCode == Keys.Enter)
             {
                 searchIcon_Click(sender, e);
+                System.Windows.Forms.SendKeys.Send("{tab}");
+                
             }
 
             updateCacheSuggestions();
