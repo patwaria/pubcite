@@ -53,6 +53,8 @@ namespace PubCite
             MSParser = new MicrosoftScholarParser();
             ArrangeTree();
 
+            siteComboBox.SelectedItem = "Google Scholar";
+            graphComboBox.SelectedItem = "Publications Per Year";
             authorResultsListView.FullRowSelect = true;
             authorResultsListView.MouseClick += new MouseEventHandler(authorResultsListView_MouseClick);
             authorResultsListView.ColumnClick += new ColumnClickEventHandler(authorResultsListView_ColumnClick);
@@ -861,59 +863,117 @@ namespace PubCite
 
         private void authorsSuggestions_MouseClick(object sender, EventArgs e)
         {
-            if(authorsSuggestions.Focused)
-                suggestedIndex = authorsSuggestions.FocusedItem.Index;
-            authorNameLabel.Text = "";
-            citesperPaper.Text = "";
-            citesperYear.Text = "";
-            hindex.Text = "";
-            i10index.Text = "";
-            citationsNumberLabel.Text = "";
-            numPapers.Text = "";
-            showStop();
-            startProgressUI();
-            BackgroundWorker backgroundWorker = new BackgroundWorker();
-            backgroundWorker.DoWork += new DoWorkEventHandler(backgroundWorker_authSearchWork);
-            //backgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(backgroundWorker_RunWorkerCompleted);
-
-            backgroundWorker.RunWorkerAsync();
-            while (backgroundWorker.IsBusy)
-            {
-                Application.DoEvents();
-                // disable those options which will trigger another thread 
-            }
-
-            if (authStats != null && authStats.getNumberOfPapers() != 0)
-            {
-                /* Add to cache */
-                cacheObject.Add(authStats.Name, authStats, true);
-                /* Add to recent History */
-                RecentSearchKeys.Add(authStats.Name);
-                updateHistory(authStats.Name, 0);
-                populateAuthor();
-
-                getNextAuthStats(true);
-                showSearch();
-                endProgressUI();
-            }
+            if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
+                MessageBox.Show("Warning: Please check your Internet connection!");
             else
-                MessageBox.Show("No results available!");
+            {
+                if (authorsSuggestions.Focused && authorsSuggestions.FocusedItem != null)
+                    suggestedIndex = authorsSuggestions.FocusedItem.Index;
+                authorNameLabel.Text = "";
+                citesperPaper.Text = "";
+                citesperYear.Text = "";
+                hindex.Text = "";
+                i10index.Text = "";
+                citationsNumberLabel.Text = "";
+                numPapers.Text = "";
+                showStop();
+                startProgressUI();
+                BackgroundWorker backgroundWorker = new BackgroundWorker();
+                backgroundWorker.DoWork += new DoWorkEventHandler(backgroundWorker_authSearchWork);
+                //backgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(backgroundWorker_RunWorkerCompleted);
+
+                backgroundWorker.RunWorkerAsync();
+                while (backgroundWorker.IsBusy)
+                {
+                    Application.DoEvents();
+                    // disable those options which will trigger another thread 
+                }
+
+                if (authStats != null && authStats.getNumberOfPapers() != 0)
+                {
+                    /* Add to cache */
+                    cacheObject.Add(authStats.Name, authStats, true);
+                    /* Add to recent History */
+                    RecentSearchKeys.Add(authStats.Name);
+                    updateHistory(authStats.Name, 0);
+                    populateAuthor();
+
+                    getNextAuthStats(true);
+                    showSearch();
+                    endProgressUI();
+                }
+                else
+                    MessageBox.Show("No results available!");
+            }
         }
 
         private void searchIcon_Click(object sender, EventArgs e)
         {
-            stopButton.Focus();
-            showStop();
-            authorNameLabel.Text = "";
-            citesperPaper.Text = "";
-            citesperYear.Text = "";
-            hindex.Text = "";
-            i10index.Text = "";
-            citationsNumberLabel.Text = "";
-            numPapers.Text = "";
 
-            if (siteComboBox.SelectedItem != null)
+            if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
+                MessageBox.Show("Warning: Please check your Internet connection!");
+            else
             {
+                stopButton.Focus();
+                showStop();
+                authorNameLabel.Text = "";
+                citesperPaper.Text = "";
+                citesperYear.Text = "";
+                hindex.Text = "";
+                i10index.Text = "";
+                citationsNumberLabel.Text = "";
+                numPapers.Text = "";
+
+                if (siteComboBox.SelectedItem != null)
+                {
+                    if (siteComboBox.SelectedItem.ToString().Equals("CiteSeerX"))
+                    {
+                        a[0] = true;
+                        a[1] = false;
+                        a[2] = false;
+
+                    }
+                    else if (siteComboBox.SelectedItem.ToString().Equals("Google Scholar"))
+                    {
+                        a[0] = false;
+                        a[1] = true;
+                        a[2] = false;
+
+                    }
+                    else if (siteComboBox.SelectedItem.ToString().Equals("Microsoft Academic Search"))
+                    {
+                        a[0] = false;
+                        a[1] = false;
+                        a[2] = true;
+                    }
+                }
+                else
+                {
+                    siteComboBox.SelectedItem = "Google Scholar";
+                    /* GS default */
+                    a[0] = false;
+                    a[1] = true;
+                    a[2] = false;
+                }
+
+
+                for (int i = 0; i < 4; i++) prevSortedColum[i] = false;
+
+                authorsSuggestions.Items.Clear();
+                suggestedIndex = 0;
+                authorResultsListView.Items.Clear();
+                journalResultsListView.Items.Clear();
+
+                cachedListView.Visible = false;
+                cachedListView.SendToBack();
+
+
+                startProgressUI();
+
+                BackgroundWorker backgroundWorker = new BackgroundWorker();
+                backgroundWorker.DoWork += new DoWorkEventHandler(backgroundWorker_genSearchWork);
+                //backgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(backgroundWorker_RunWorkerCompleted);
+
                 if (siteComboBox.SelectedItem.ToString().Equals("CiteSeerX"))
                 {
                     a[0] = true;
@@ -934,84 +994,59 @@ namespace PubCite
                     a[1] = false;
                     a[2] = true;
                 }
-            }
-            else
-            {
-                siteComboBox.SelectedItem = "Google Scholar";
-                /* GS default */
-                a[0] = false;
-                a[1] = true;
-                a[2] = false;
-            }
 
+                backgroundWorker.RunWorkerAsync();
 
-            for (int i = 0; i < 4; i++) prevSortedColum[i] = false;
-
-            authorsSuggestions.Items.Clear();
-            suggestedIndex = 0;
-            authorResultsListView.Items.Clear();
-            journalResultsListView.Items.Clear();
-
-            cachedListView.Visible = false;
-            cachedListView.SendToBack();
-
-
-            startProgressUI();
-
-            BackgroundWorker backgroundWorker = new BackgroundWorker();
-            backgroundWorker.DoWork += new DoWorkEventHandler(backgroundWorker_genSearchWork);
-            //backgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(backgroundWorker_RunWorkerCompleted);
-
-            if (siteComboBox.SelectedItem.ToString().Equals("CiteSeerX"))
-            {
-                a[0] = true;
-                a[1] = false;
-                a[2] = false;
-
-            }
-            else if (siteComboBox.SelectedItem.ToString().Equals("Google Scholar"))
-            {
-                a[0] = false;
-                a[1] = true;
-                a[2] = false;
-
-            }
-            else if (siteComboBox.SelectedItem.ToString().Equals("Microsoft Academic Search"))
-            {
-                a[0] = false;
-                a[1] = false;
-                a[2] = true;
-            }
-
-            backgroundWorker.RunWorkerAsync();
-
-            while (backgroundWorker.IsBusy)
-            {
-                Application.DoEvents();
-                // disable those options which will trigger another thread 
-            }
-
-            if (authorCheckBox.Checked == true)
-            {
-                Console.WriteLine("Done" + suggestions);
-                if (suggestions)
+                while (backgroundWorker.IsBusy)
                 {
-                    populateSuggestions();
-                    authorsSuggestions_MouseClick(sender, e);
+                    Application.DoEvents();
+                    // disable those options which will trigger another thread 
+                }
+
+                if (authorCheckBox.Checked == true)
+                {
+                    Console.WriteLine("Done" + suggestions);
+                    if (suggestions)
+                    {
+                        populateSuggestions();
+                        authorsSuggestions_MouseClick(sender, e);
+                    }
+                    else
+                    {
+                        if (authStats != null && authStats.getNumberOfPapers() != 0)
+                        {
+                            /* Add to cache */
+                            cacheObject.Add(authStats.Name, authStats, true);
+                            /* Add to recent History */
+                            RecentSearchKeys.Add(authStats.Name);
+                            updateHistory(authStats.Name, 0);
+                            populateAuthor();
+
+                            /* Threaded requests */
+                            getNextAuthStats(false);
+                            if (nextData == null)
+                            {
+                                MessageBox.Show("Oops! You have reached administrative limit for Google Scholar." +
+                                    "\nIf you are behind a proxy server, please try changing your settings.");
+                            }
+                        }
+                        else
+                            MessageBox.Show("No results available!");
+                    }
                 }
                 else
                 {
-                    if (authStats != null && authStats.getNumberOfPapers() != 0)
+                    if (journalStats != null && journalStats.getNumberOfPapers() != 0)
                     {
-                        /* Add to cache */
-                        cacheObject.Add(authStats.Name, authStats, true);
-                        /* Add to recent History */
-                        RecentSearchKeys.Add(authStats.Name);
-                        updateHistory(authStats.Name, 0);
-                        populateAuthor();
 
-                        /* Threaded requests */
-                        getNextAuthStats(false);
+                        /* add journal to cache */
+                        cacheObject.Add(journalStats.Name, journalStats, false);
+
+                        /* add journal to recent */
+                        RecentSearchKeys.Add(journalStats.Name);
+                        updateHistory(journalStats.Name, 1);
+                        populateJournal();
+                        getNextJournal();
                         if (nextData == null)
                         {
                             MessageBox.Show("Oops! You have reached administrative limit for Google Scholar." +
@@ -1021,40 +1056,23 @@ namespace PubCite
                     else
                         MessageBox.Show("No results available!");
                 }
+
+                showSearch();
+                endProgressUI();
             }
-            else
-            {
-                if(journalStats != null && journalStats.getNumberOfPapers() != 0) {
-
-                    /* add journal to cache */
-                    cacheObject.Add(journalStats.Name, journalStats, false);
-
-                    /* add journal to recent */
-                    RecentSearchKeys.Add(journalStats.Name);
-                    updateHistory(journalStats.Name,1);
-                    populateJournal();
-                    getNextJournal();
-                    if (nextData == null)
-                    {
-                        MessageBox.Show("Oops! You have reached administrative limit for Google Scholar." +
-                            "\nIf you are behind a proxy server, please try changing your settings.");
-                    }
-                }
-                else
-                    MessageBox.Show("No results available!");
-            }
-
-            showSearch();
-            endProgressUI();
         }
 
         private void viewURLToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-            if (authorResultsListView.Visible == true)
-                openBrowserForUrl(Papers[authorResultsListView.FocusedItem.Index].TitleURL);
+            if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
+                MessageBox.Show("Warning: Please check your Internet connection!");
             else
-                openBrowserForUrl(Papers[journalResultsListView.FocusedItem.Index].TitleURL);
+            {
+                if (authorResultsListView.Visible == true)
+                    openBrowserForUrl(Papers[authorResultsListView.FocusedItem.Index].TitleURL);
+                else
+                    openBrowserForUrl(Papers[journalResultsListView.FocusedItem.Index].TitleURL);
+            }
         }
 
         private void authorResultsListView_MouseDoubleClick(object sender, EventArgs e)
@@ -1069,27 +1087,32 @@ namespace PubCite
 
         private void viewCitationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (authorResultsListView.Visible == true)
-            {
-                citationIndex = authorResultsListView.FocusedItem.Index;
-                citationType = authStats.Type;
-
-            }
+            if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
+                MessageBox.Show("Warning: Please check your Internet connection!");
             else
             {
-                citationIndex = journalResultsListView.FocusedItem.Index;
-                citationType = journalStats.Type;
-            }
+                if (authorResultsListView.Visible == true)
+                {
+                    citationIndex = authorResultsListView.FocusedItem.Index;
+                    citationType = authStats.Type;
 
-            if (Papers[citationIndex].NumberOfCitations != 0)
-            {
-                TabPage citationsPage = new TabPage("Citations");
-                citationsPage.ImageIndex = 1;
-                Form1.dub_tab.TabPages.Insert(Form1.dub_tab.TabPages.Count - 1, citationsPage);
-                CitationsTab NcitTab = new CitationsTab(Papers[citationIndex], citationType);
-                citationsPage.Controls.Add(NcitTab);
+                }
+                else
+                {
+                    citationIndex = journalResultsListView.FocusedItem.Index;
+                    citationType = journalStats.Type;
+                }
 
-                Form1.dub_tab.SelectedTab = citationsPage;
+                if (Papers[citationIndex].NumberOfCitations != 0)
+                {
+                    TabPage citationsPage = new TabPage("Citations");
+                    citationsPage.ImageIndex = 1;
+                    Form1.dub_tab.TabPages.Insert(Form1.dub_tab.TabPages.Count - 1, citationsPage);
+                    CitationsTab NcitTab = new CitationsTab(Papers[citationIndex], citationType);
+                    citationsPage.Controls.Add(NcitTab);
+
+                    Form1.dub_tab.SelectedTab = citationsPage;
+                }
             }
         }
 
@@ -1317,9 +1340,9 @@ namespace PubCite
                 t.run();
                 graphsChart.Series["Series1"].Points.Clear();
 
-                if (graphComboBox.Text.Equals("Citations Per Year"))
+                if (graphComboBox.Text.Equals("Citations of Publications Per Year"))
                 {
-                    graphsChart.Titles.Add("Citations Per Year");
+                    graphsChart.Titles.Add("Citations of Publications Per Year");
                     graphsChart.Titles.Add("Citations").Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Left;
                     graphsChart.Titles.Add("Year").Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
 
@@ -1421,11 +1444,11 @@ namespace PubCite
                 t.run();
                 graphsChart.Series["Series1"].Points.Clear();
 
-                if (graphComboBox.SelectedItem == null) graphComboBox.SelectedItem = "Citations Per Year";
+                if (graphComboBox.SelectedItem == null) graphComboBox.SelectedItem = "Citations of Publications Per Year";
                 else{
-                if (graphComboBox.Text.Equals("Citations Per Year"))
+                if (graphComboBox.Text.Equals("Citations of Publications Per Year"))
                 {
-                    graphsChart.Titles.Add("Citations Per Year");
+                    graphsChart.Titles.Add("Citations of Publications Per Year");
                     graphsChart.Titles.Add("Citations").Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Left;
                     graphsChart.Titles.Add("Year").Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
 
@@ -1506,6 +1529,11 @@ namespace PubCite
             }
             else
                 MessageBox.Show("Please select an author or journal before viewing graphs");
+        }
+
+        private void graphComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -500,19 +500,19 @@
             this.viewCitationsToolStripMenuItem,
             this.viewUrlToolStripMenuItem});
             this.optionMenuStrip.Name = "optionMenuStrip";
-            this.optionMenuStrip.Size = new System.Drawing.Size(150, 48);
+            this.optionMenuStrip.Size = new System.Drawing.Size(153, 70);
             // 
             // viewCitationsToolStripMenuItem
             // 
             this.viewCitationsToolStripMenuItem.Name = "viewCitationsToolStripMenuItem";
-            this.viewCitationsToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.viewCitationsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.viewCitationsToolStripMenuItem.Text = "View Citations";
             this.viewCitationsToolStripMenuItem.Click += new System.EventHandler(this.viewCitationsToolStripMenuItem_Click);
             // 
             // viewUrlToolStripMenuItem
             // 
             this.viewUrlToolStripMenuItem.Name = "viewUrlToolStripMenuItem";
-            this.viewUrlToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.viewUrlToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.viewUrlToolStripMenuItem.Text = "View Url";
             this.viewUrlToolStripMenuItem.Click += new System.EventHandler(this.viewUrlToolStripMenuItem_Click);
             // 
