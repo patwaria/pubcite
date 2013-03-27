@@ -93,9 +93,17 @@ namespace PubCite
 
             name = generateName(response1.Author.Result[0].FirstName, response1.Author.Result[0].MiddleName, response1.Author.Result[0].LastName);
             Hindex = Convert.ToInt32(response1.Author.Result[0].HIndex);
-            affiliation = response1.Author.Result[0].Affiliation.Name;
-            homePageURl = response1.Author.Result[0].HomepageURL;
 
+            try
+            {
+                affiliation = response1.Author.Result[0].Affiliation.Name;
+                homePageURl = response1.Author.Result[0].HomepageURL;
+            }
+            catch (Exception e)
+            {
+                affiliation = "";
+                homePageURl = "";
+            }
             auth = new SG.Author(name,affiliation,homePageURl,-1,-1);
 
 
