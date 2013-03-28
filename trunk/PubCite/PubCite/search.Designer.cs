@@ -132,11 +132,11 @@
             this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.directorySearcher1 = new System.DirectoryServices.DirectorySearcher();
+            this.settingsIcon = new System.Windows.Forms.PictureBox();
             this.graphsCloseIcon = new System.Windows.Forms.PictureBox();
             this.settingsCloseIcon = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.searchIcon = new System.Windows.Forms.PictureBox();
-            this.settingsIcon = new System.Windows.Forms.PictureBox();
             this.stopButton = new System.Windows.Forms.PictureBox();
             this.EndYear = new PubCite.NumericTextBox();
             this.StartYear = new PubCite.NumericTextBox();
@@ -164,11 +164,11 @@
             this.optionsMenuStrip.SuspendLayout();
             this.favouriteMenuStrip.SuspendLayout();
             this.recentMenuStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.settingsIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.graphsCloseIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.settingsCloseIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchIcon)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.settingsIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.stopButton)).BeginInit();
             this.SuspendLayout();
             // 
@@ -983,7 +983,6 @@
             // 
             // favouriteButton
             // 
-            this.favouriteButton.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
             this.favouriteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.favouriteButton.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.favouriteButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
@@ -1210,6 +1209,17 @@
             this.directorySearcher1.ServerPageTimeLimit = System.TimeSpan.Parse("-00:00:01");
             this.directorySearcher1.ServerTimeLimit = System.TimeSpan.Parse("-00:00:01");
             // 
+            // settingsIcon
+            // 
+            this.settingsIcon.BackColor = System.Drawing.Color.LightGray;
+            this.settingsIcon.Image = global::PubCite.Properties.Resources.settings;
+            this.settingsIcon.Location = new System.Drawing.Point(969, 9);
+            this.settingsIcon.Name = "settingsIcon";
+            this.settingsIcon.Size = new System.Drawing.Size(25, 25);
+            this.settingsIcon.TabIndex = 30;
+            this.settingsIcon.TabStop = false;
+            this.settingsIcon.Click += new System.EventHandler(this.settingsIcon_Click);
+            // 
             // graphsCloseIcon
             // 
             this.graphsCloseIcon.BackColor = System.Drawing.Color.White;
@@ -1252,17 +1262,6 @@
             this.searchIcon.TabStop = false;
             this.toolTip.SetToolTip(this.searchIcon, "Search..");
             this.searchIcon.Click += new System.EventHandler(this.searchIcon_Click);
-            // 
-            // settingsIcon
-            // 
-            this.settingsIcon.BackColor = System.Drawing.Color.LightGray;
-            this.settingsIcon.Image = global::PubCite.Properties.Resources.settings;
-            this.settingsIcon.Location = new System.Drawing.Point(969, 9);
-            this.settingsIcon.Name = "settingsIcon";
-            this.settingsIcon.Size = new System.Drawing.Size(25, 25);
-            this.settingsIcon.TabIndex = 30;
-            this.settingsIcon.TabStop = false;
-            this.settingsIcon.Click += new System.EventHandler(this.settingsIcon_Click);
             // 
             // stopButton
             // 
@@ -1341,11 +1340,11 @@
             this.optionsMenuStrip.ResumeLayout(false);
             this.favouriteMenuStrip.ResumeLayout(false);
             this.recentMenuStrip.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.settingsIcon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.graphsCloseIcon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.settingsCloseIcon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchIcon)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.settingsIcon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.stopButton)).EndInit();
             this.ResumeLayout(false);
 
