@@ -792,7 +792,7 @@ namespace PubCite
             Console.WriteLine("type : " + authStats.Type);
             if (authStats.Type == 1)
                 nextData = GSScraper.getAuthorsNextPage(gs_nextUrl, ref authStats, ref gs_nextUrl);
-            else if (authStats.Type == 2)
+            else if  (authStats.Type == 2)
                 nextData = MSParser.getAuthorsNext(searchField.Text, "", "", ref authStats);
             else
                 nextData = CSParser.getAuthorsNext(searchField.Text, "", "", ref authStats);
@@ -1145,36 +1145,55 @@ namespace PubCite
 
         private void viewStatisticsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (favouritesTreeView.SelectedNode.Level == 2)
+            try
             {
-                if (favouritesTreeView.SelectedNode.Parent.Index == 0)
+                if (favouritesTreeView.SelectedNode != null)
                 {
-                    authStats = FavAuthorList[favouritesTreeView.SelectedNode.Index];
-                    populateAuthor();
-                }
-                else if (favouritesTreeView.SelectedNode.Parent.Index == 1)
-                {// Journal selected
-                    journalStats = FavJournalList[favouritesTreeView.SelectedNode.Index];
-                    populateJournal();
+                    if (favouritesTreeView.SelectedNode.Level == 2)
+                    {
+                        if (favouritesTreeView.SelectedNode.Parent.Index == 0)
+                        {
+                            authStats = FavAuthorList[favouritesTreeView.SelectedNode.Index];
+                            populateAuthor();
+                        }
+                        else if (favouritesTreeView.SelectedNode.Parent.Index == 1)
+                        {// Journal selected
+                            journalStats = FavJournalList[favouritesTreeView.SelectedNode.Index];
+                            populateJournal();
+                        }
+                    }
                 }
             }
-            Console.WriteLine(favouritesTreeView.SelectedNode.Level);
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.GetBaseException());
+            }
         }
 
         private void removeFromFavouritesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (favouritesTreeView.SelectedNode != null)
+            try
             {
-                if (favouritesTreeView.SelectedNode.Parent.Index == 0)
+                if (favouritesTreeView.SelectedNode != null)
                 {
-                    Form1.favorites.removeAuthor(favouritesTreeView.SelectedNode.Index);
-                    favouritesTreeView.SelectedNode.Remove();
+                    if (favouritesTreeView.SelectedNode.Level == 2)
+                    {
+                        if (favouritesTreeView.SelectedNode.Parent.Index == 0)
+                        {
+                            Form1.favorites.removeAuthor(favouritesTreeView.SelectedNode.Index);
+                            favouritesTreeView.SelectedNode.Remove();
+                        }
+                        else if (favouritesTreeView.SelectedNode.Parent.Index == 1)
+                        {
+                            Form1.favorites.removeJournal(favouritesTreeView.SelectedNode.Index);
+                            favouritesTreeView.SelectedNode.Remove();
+                        }
+                    }
                 }
-                else if (favouritesTreeView.SelectedNode.Parent.Index == 1)
-                {
-                    Form1.favorites.removeJournal(favouritesTreeView.SelectedNode.Index);
-                    favouritesTreeView.SelectedNode.Remove();
-                }
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.GetBaseException());
             }
         }
 
