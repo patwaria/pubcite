@@ -16,25 +16,27 @@ namespace PubCite
         private List<SG.Paper> papers;
         int index;
 
-        public GSAuthScraper(String inital_URL,int i)
+        public GSAuthScraper(String inital_URL,int i,ref bool isOK)
         {
             web = new HtmlWeb();
 
+            isOK = true;
             try
             {
                 doc = web.Load(inital_URL);
             }
-            catch (Exception e) { Console.WriteLine("=====Exception occurred(web load) in GSAuthScraperNextPAge()"); }
+            catch (Exception e) { isOK = false; }
 
 
-
-            tables = doc.DocumentNode.SelectNodes("//table");
-            h_index = i_index = -1;
-            name = doc.DocumentNode.SelectSingleNode(".//*[@id=\"cit-name-display\"]").InnerText;
-            //getCitationStats();
-            index = i+1;
-            papers = new List<SG.Paper>();
-
+            if (isOK)
+            {
+                tables = doc.DocumentNode.SelectNodes("//table");
+                h_index = i_index = -1;
+                name = doc.DocumentNode.SelectSingleNode(".//*[@id=\"cit-name-display\"]").InnerText;
+                //getCitationStats();
+                index = i + 1;
+                papers = new List<SG.Paper>();
+            }
 
         }
 
