@@ -1487,27 +1487,35 @@ namespace PubCite
                         if (graphPapers[j].Year > 2) break;
 
                     }
-                    currYear = graphPapers[j].Year;
 
-
-                    for (int i = j; i < graphPapers.Count; i++)
+                    if (j != graphPapers.Count)
                     {
-                        if (currYear == graphPapers[i].Year)
+                        currYear = graphPapers[j].Year;
+
+
+                        for (int i = j; i < graphPapers.Count; i++)
                         {
+                            if (currYear == graphPapers[i].Year)
+                            {
 
-                            currCitations += graphPapers[i].NumberOfCitations;
+                                currCitations += graphPapers[i].NumberOfCitations;
 
+                            }
+                            else
+                            {
+
+                                graphsChart.Series["Series1"].Points.AddXY(currYear, currCitations);
+                                currYear = graphPapers[i].Year;
+                                currCitations = graphPapers[i].NumberOfCitations;
+
+
+
+                            }
                         }
-                        else
-                        {
-
-                            graphsChart.Series["Series1"].Points.AddXY(currYear, currCitations);
-                            currYear = graphPapers[i].Year;
-                            currCitations = graphPapers[i].NumberOfCitations;
-
-
-
-                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Graphing data not available!");
                     }
 
                 }
@@ -1529,24 +1537,32 @@ namespace PubCite
                         if (graphPapers[j].Year > 2) break;
 
                     }
-                    currYear = graphPapers[j].Year;
 
-
-                    for (int i = j; i < graphPapers.Count; i++)
+                    if (j != graphPapers.Count)
                     {
-                        if (currYear == graphPapers[i].Year)
+                        currYear = graphPapers[j].Year;
+
+
+                        for (int i = j; i < graphPapers.Count; i++)
                         {
+                            if (currYear == graphPapers[i].Year)
+                            {
 
-                            currpublic++;
+                                currpublic++;
 
+                            }
+                            else
+                            {
+
+                                graphsChart.Series["Series1"].Points.AddXY(currYear, currpublic);
+                                currYear = graphPapers[i].Year;
+                                currpublic = 1;
+                            }
                         }
-                        else
-                        {
-
-                            graphsChart.Series["Series1"].Points.AddXY(currYear, currpublic);
-                            currYear = graphPapers[i].Year;
-                            currpublic = 1;
-                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Graphing data not available!");
                     }
                 }
 
@@ -1568,6 +1584,7 @@ namespace PubCite
 
                 Form1.favorites.AddAuthor(authStats);
                 authStats.IsFavorite = true;
+                MessageBox.Show("Added " + authStats.Name + " to favourite."); 
 
             }
             else if (journalStats != null && !journalStats.IsFavorite && journalStats.getNumberOfPapers() > 0)
@@ -1575,6 +1592,7 @@ namespace PubCite
 
                 Form1.favorites.AddJournal(journalStats);
                 journalStats.IsFavorite = true;
+                MessageBox.Show("Added " + journalStats.Name + " to favourite.");
             }
             ArrangeTree();
         }
