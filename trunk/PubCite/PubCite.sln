@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PubCite", "PubCite\PubCite.csproj", "{A1B610AF-889B-41CA-8DA1-AEA637FC8FB2}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "PubCite 2013", "PubCite 2013\PubCite 2013.vdproj", "{2FD23B27-4E7D-4A67-8884-F324979DEDFD}"
+EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
@@ -17,6 +19,9 @@ Global
 		{A1B610AF-889B-41CA-8DA1-AEA637FC8FB2}.Debug|x86.Build.0 = Debug|x86
 		{A1B610AF-889B-41CA-8DA1-AEA637FC8FB2}.Release|x86.ActiveCfg = Release|x86
 		{A1B610AF-889B-41CA-8DA1-AEA637FC8FB2}.Release|x86.Build.0 = Release|x86
+		{2FD23B27-4E7D-4A67-8884-F324979DEDFD}.Debug|x86.ActiveCfg = Debug
+		{2FD23B27-4E7D-4A67-8884-F324979DEDFD}.Release|x86.ActiveCfg = Release
+		{2FD23B27-4E7D-4A67-8884-F324979DEDFD}.Release|x86.Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
