@@ -122,7 +122,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
-    <Content Include="Authors.txt" />
     <Compile Include="ClassifyAuthors.cs" />
     <Compile Include="ClassifyJournals.cs" />
     <Compile Include="Favorites.cs" />
@@ -165,7 +164,6 @@
     <None Include="Resources\icon_pause.png" />
     <Content Include="Resources\pubcite.ico" />
     <Content Include="Resources\stop.png" />
-    <Content Include="TODO.txt" />
     <None Include="Resources\bookmark.png" />
     <None Include="Resources\search-button1.png" />
     <None Include="Resources\search-button.png" />
