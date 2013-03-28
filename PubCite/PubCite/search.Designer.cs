@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Authors");
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Journals");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Favourites", new System.Windows.Forms.TreeNode[] {
-            treeNode4,
-            treeNode5});
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Authors");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Journals");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Favourites", new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2});
             this.SearchPanel = new System.Windows.Forms.Panel();
             this.progressPanel = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
@@ -44,7 +44,6 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.settingsIcon = new System.Windows.Forms.PictureBox();
             this.label4 = new System.Windows.Forms.Label();
             this.KeywordsTextBox = new System.Windows.Forms.TextBox();
             this.journalCheckBox = new System.Windows.Forms.CheckBox();
@@ -54,12 +53,10 @@
             this.resultsPanel = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.graphsPanel = new System.Windows.Forms.Panel();
-            this.graphsCloseIcon = new System.Windows.Forms.PictureBox();
             this.graphsChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.resultsGroupBox = new System.Windows.Forms.GroupBox();
             this.arbitPanel = new System.Windows.Forms.Panel();
             this.settingsPanel = new System.Windows.Forms.Panel();
-            this.settingsCloseIcon = new System.Windows.Forms.PictureBox();
             this.settingsOk = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.microsoftNumericUpDown = new System.Windows.Forms.NumericUpDown();
@@ -83,7 +80,6 @@
             this.Year = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.statisticsGroupBox = new System.Windows.Forms.GroupBox();
             this.addToFav = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.graphComboBox = new System.Windows.Forms.ComboBox();
             this.label16 = new System.Windows.Forms.Label();
             this.numPapers = new System.Windows.Forms.Label();
@@ -122,8 +118,6 @@
             this.siteComboBox = new System.Windows.Forms.ComboBox();
             this.searchSiteLabel = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.searchIcon = new System.Windows.Forms.PictureBox();
-            this.stopButton = new System.Windows.Forms.PictureBox();
             this.cachedListView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.optionsMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -138,21 +132,24 @@
             this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.directorySearcher1 = new System.DirectoryServices.DirectorySearcher();
+            this.graphsCloseIcon = new System.Windows.Forms.PictureBox();
+            this.settingsCloseIcon = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.searchIcon = new System.Windows.Forms.PictureBox();
+            this.settingsIcon = new System.Windows.Forms.PictureBox();
+            this.stopButton = new System.Windows.Forms.PictureBox();
             this.EndYear = new PubCite.NumericTextBox();
             this.StartYear = new PubCite.NumericTextBox();
             this.SearchPanel.SuspendLayout();
             this.progressPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.settingsIcon)).BeginInit();
             this.resultsPanel.SuspendLayout();
             this.panel4.SuspendLayout();
             this.graphsPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.graphsCloseIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.graphsChart)).BeginInit();
             this.resultsGroupBox.SuspendLayout();
             this.settingsPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.settingsCloseIcon)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.microsoftNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.googleNumericUpDown)).BeginInit();
@@ -160,16 +157,19 @@
             this.CacheOptions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cacheNumericUpDown)).BeginInit();
             this.statisticsGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.favouritesPanel.SuspendLayout();
             this.recentSearchPanel.SuspendLayout();
             this.Suggestions.SuspendLayout();
             this.panel6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.searchIcon)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.stopButton)).BeginInit();
             this.optionsMenuStrip.SuspendLayout();
             this.favouriteMenuStrip.SuspendLayout();
             this.recentMenuStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.graphsCloseIcon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.settingsCloseIcon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchIcon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.settingsIcon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.stopButton)).BeginInit();
             this.SuspendLayout();
             // 
             // SearchPanel
@@ -252,17 +252,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1019, 5);
             this.panel1.TabIndex = 2;
-            // 
-            // settingsIcon
-            // 
-            this.settingsIcon.BackColor = System.Drawing.Color.LightGray;
-            this.settingsIcon.Image = global::PubCite.Properties.Resources.settings;
-            this.settingsIcon.Location = new System.Drawing.Point(969, 9);
-            this.settingsIcon.Name = "settingsIcon";
-            this.settingsIcon.Size = new System.Drawing.Size(25, 25);
-            this.settingsIcon.TabIndex = 30;
-            this.settingsIcon.TabStop = false;
-            this.settingsIcon.Click += new System.EventHandler(this.settingsIcon_Click);
             // 
             // label4
             // 
@@ -376,29 +365,18 @@
             this.graphsPanel.Size = new System.Drawing.Size(746, 293);
             this.graphsPanel.TabIndex = 43;
             // 
-            // graphsCloseIcon
-            // 
-            this.graphsCloseIcon.BackColor = System.Drawing.Color.White;
-            this.graphsCloseIcon.Image = global::PubCite.Properties.Resources.close;
-            this.graphsCloseIcon.Location = new System.Drawing.Point(721, 5);
-            this.graphsCloseIcon.Name = "graphsCloseIcon";
-            this.graphsCloseIcon.Size = new System.Drawing.Size(17, 22);
-            this.graphsCloseIcon.TabIndex = 1;
-            this.graphsCloseIcon.TabStop = false;
-            this.graphsCloseIcon.Click += new System.EventHandler(this.pictureBox1_Click);
-            // 
             // graphsChart
             // 
-            chartArea2.Name = "ChartArea1";
-            this.graphsChart.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.graphsChart.Legends.Add(legend2);
+            chartArea1.Name = "ChartArea1";
+            this.graphsChart.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.graphsChart.Legends.Add(legend1);
             this.graphsChart.Location = new System.Drawing.Point(3, 3);
             this.graphsChart.Name = "graphsChart";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.graphsChart.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.graphsChart.Series.Add(series1);
             this.graphsChart.Size = new System.Drawing.Size(744, 287);
             this.graphsChart.TabIndex = 0;
             this.graphsChart.Text = "chart1";
@@ -437,16 +415,6 @@
             this.settingsPanel.Name = "settingsPanel";
             this.settingsPanel.Size = new System.Drawing.Size(499, 319);
             this.settingsPanel.TabIndex = 41;
-            // 
-            // settingsCloseIcon
-            // 
-            this.settingsCloseIcon.Image = global::PubCite.Properties.Resources.close;
-            this.settingsCloseIcon.Location = new System.Drawing.Point(472, 4);
-            this.settingsCloseIcon.Name = "settingsCloseIcon";
-            this.settingsCloseIcon.Size = new System.Drawing.Size(16, 15);
-            this.settingsCloseIcon.TabIndex = 3;
-            this.settingsCloseIcon.TabStop = false;
-            this.settingsCloseIcon.Click += new System.EventHandler(this.settingsCloseIcon_Click);
             // 
             // settingsOk
             // 
@@ -734,16 +702,6 @@
             this.addToFav.Text = "Add to Favourite";
             this.addToFav.UseVisualStyleBackColor = true;
             this.addToFav.Click += new System.EventHandler(this.addToFav_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::PubCite.Properties.Resources.bar_chart_2;
-            this.pictureBox1.Location = new System.Drawing.Point(219, 59);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(33, 31);
-            this.pictureBox1.TabIndex = 38;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click_1);
             // 
             // graphComboBox
             // 
@@ -1044,14 +1002,14 @@
             this.favouritesTreeView.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
             this.favouritesTreeView.Location = new System.Drawing.Point(11, 43);
             this.favouritesTreeView.Name = "favouritesTreeView";
-            treeNode4.Name = "authorsRootNode";
-            treeNode4.Text = "Authors";
-            treeNode5.Name = "journalsRootNode";
-            treeNode5.Text = "Journals";
-            treeNode6.Name = "Favourites";
-            treeNode6.Text = "Favourites";
+            treeNode1.Name = "authorsRootNode";
+            treeNode1.Text = "Authors";
+            treeNode2.Name = "journalsRootNode";
+            treeNode2.Text = "Journals";
+            treeNode3.Name = "Favourites";
+            treeNode3.Text = "Favourites";
             this.favouritesTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode6});
+            treeNode3});
             this.favouritesTreeView.Size = new System.Drawing.Size(192, 209);
             this.favouritesTreeView.TabIndex = 9;
             // 
@@ -1147,30 +1105,6 @@
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(1015, 64);
             this.panel6.TabIndex = 43;
-            // 
-            // searchIcon
-            // 
-            this.searchIcon.BackColor = System.Drawing.Color.LightGray;
-            this.searchIcon.Image = global::PubCite.Properties.Resources.search_button2;
-            this.searchIcon.Location = new System.Drawing.Point(937, 9);
-            this.searchIcon.Name = "searchIcon";
-            this.searchIcon.Size = new System.Drawing.Size(24, 29);
-            this.searchIcon.TabIndex = 11;
-            this.searchIcon.TabStop = false;
-            this.toolTip.SetToolTip(this.searchIcon, "Search..");
-            this.searchIcon.Click += new System.EventHandler(this.searchIcon_Click);
-            // 
-            // stopButton
-            // 
-            this.stopButton.BackColor = System.Drawing.Color.LightGray;
-            this.stopButton.Image = global::PubCite.Properties.Resources.icon_pause1;
-            this.stopButton.Location = new System.Drawing.Point(937, 8);
-            this.stopButton.Name = "stopButton";
-            this.stopButton.Size = new System.Drawing.Size(25, 25);
-            this.stopButton.TabIndex = 31;
-            this.stopButton.TabStop = false;
-            this.stopButton.Visible = false;
-            this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
             // 
             // cachedListView
             // 
@@ -1276,6 +1210,72 @@
             this.directorySearcher1.ServerPageTimeLimit = System.TimeSpan.Parse("-00:00:01");
             this.directorySearcher1.ServerTimeLimit = System.TimeSpan.Parse("-00:00:01");
             // 
+            // graphsCloseIcon
+            // 
+            this.graphsCloseIcon.BackColor = System.Drawing.Color.White;
+            this.graphsCloseIcon.Image = global::PubCite.Properties.Resources.close;
+            this.graphsCloseIcon.Location = new System.Drawing.Point(721, 5);
+            this.graphsCloseIcon.Name = "graphsCloseIcon";
+            this.graphsCloseIcon.Size = new System.Drawing.Size(17, 22);
+            this.graphsCloseIcon.TabIndex = 1;
+            this.graphsCloseIcon.TabStop = false;
+            this.graphsCloseIcon.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // settingsCloseIcon
+            // 
+            this.settingsCloseIcon.Image = global::PubCite.Properties.Resources.close;
+            this.settingsCloseIcon.Location = new System.Drawing.Point(472, 4);
+            this.settingsCloseIcon.Name = "settingsCloseIcon";
+            this.settingsCloseIcon.Size = new System.Drawing.Size(16, 15);
+            this.settingsCloseIcon.TabIndex = 3;
+            this.settingsCloseIcon.TabStop = false;
+            this.settingsCloseIcon.Click += new System.EventHandler(this.settingsCloseIcon_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::PubCite.Properties.Resources.bar_chart_2;
+            this.pictureBox1.Location = new System.Drawing.Point(219, 59);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(33, 31);
+            this.pictureBox1.TabIndex = 38;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click_1);
+            // 
+            // searchIcon
+            // 
+            this.searchIcon.BackColor = System.Drawing.Color.LightGray;
+            this.searchIcon.Image = global::PubCite.Properties.Resources.search_button2;
+            this.searchIcon.Location = new System.Drawing.Point(937, 9);
+            this.searchIcon.Name = "searchIcon";
+            this.searchIcon.Size = new System.Drawing.Size(24, 29);
+            this.searchIcon.TabIndex = 11;
+            this.searchIcon.TabStop = false;
+            this.toolTip.SetToolTip(this.searchIcon, "Search..");
+            this.searchIcon.Click += new System.EventHandler(this.searchIcon_Click);
+            // 
+            // settingsIcon
+            // 
+            this.settingsIcon.BackColor = System.Drawing.Color.LightGray;
+            this.settingsIcon.Image = global::PubCite.Properties.Resources.settings;
+            this.settingsIcon.Location = new System.Drawing.Point(969, 9);
+            this.settingsIcon.Name = "settingsIcon";
+            this.settingsIcon.Size = new System.Drawing.Size(25, 25);
+            this.settingsIcon.TabIndex = 30;
+            this.settingsIcon.TabStop = false;
+            this.settingsIcon.Click += new System.EventHandler(this.settingsIcon_Click);
+            // 
+            // stopButton
+            // 
+            this.stopButton.BackColor = System.Drawing.Color.LightGray;
+            this.stopButton.Image = global::PubCite.Properties.Resources.icon_pause1;
+            this.stopButton.Location = new System.Drawing.Point(937, 8);
+            this.stopButton.Name = "stopButton";
+            this.stopButton.Size = new System.Drawing.Size(25, 25);
+            this.stopButton.TabIndex = 31;
+            this.stopButton.TabStop = false;
+            this.stopButton.Visible = false;
+            this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
+            // 
             // EndYear
             // 
             this.EndYear.AllowSpace = false;
@@ -1318,15 +1318,12 @@
             this.progressPanel.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.settingsIcon)).EndInit();
             this.resultsPanel.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.graphsPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.graphsCloseIcon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.graphsChart)).EndInit();
             this.resultsGroupBox.ResumeLayout(false);
             this.settingsPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.settingsCloseIcon)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.microsoftNumericUpDown)).EndInit();
@@ -1337,16 +1334,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.cacheNumericUpDown)).EndInit();
             this.statisticsGroupBox.ResumeLayout(false);
             this.statisticsGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.favouritesPanel.ResumeLayout(false);
             this.recentSearchPanel.ResumeLayout(false);
             this.Suggestions.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.searchIcon)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.stopButton)).EndInit();
             this.optionsMenuStrip.ResumeLayout(false);
             this.favouriteMenuStrip.ResumeLayout(false);
             this.recentMenuStrip.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.graphsCloseIcon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.settingsCloseIcon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchIcon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.settingsIcon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.stopButton)).EndInit();
             this.ResumeLayout(false);
 
         }
