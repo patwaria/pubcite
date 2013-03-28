@@ -83,13 +83,14 @@ namespace PubCite
             }
             CitePage = new HtmlWeb();
 
+            noResult = 10;
             try
             {
                 CiteDoc = CitePage.Load(initialURL);
             }
             catch (Exception e)
             {
-
+                noResult = 0;
             }
             PageNo = 1;
 
@@ -100,6 +101,9 @@ namespace PubCite
 
         private void getNoResult()
         {
+            if (noResult == 0)
+                return;
+
             HtmlNode noResultNode = CiteDoc.DocumentNode.SelectSingleNode("//*[@id=\"result_info\"]/strong[2]");
             if (noResultNode == null)
             {
@@ -166,14 +170,16 @@ namespace PubCite
 
         private void extractDataAllPage()
         {
+            if (noResult == 0)
+                return;
+
+
             HtmlNode mainTable = CiteDoc.DocumentNode.SelectSingleNode("//*[@id=\"result_list\"]");
             HtmlNode entryNoNode, paperNode, authorNode, journalNode, yearNode, citationNode;
             string paperName, authorName, journalName, publishYear, noCitations, citationLink, paperURL;
             int citno;
 
-            if (noResult == 0)
-                return;
-
+            
             mainTable = CiteDoc.DocumentNode.SelectSingleNode("//*[@id=\"result_list\"]");
             for (int i = 1; i <= 10; i++)
             {
