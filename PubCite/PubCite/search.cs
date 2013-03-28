@@ -30,6 +30,7 @@ namespace PubCite
         List<SG.Paper> graphPapers;
         List<String> cachedList;
 
+
         int prevSelectedIndex;
         int suggestedIndex;
         int citationIndex;
@@ -124,7 +125,7 @@ namespace PubCite
             if (KeywordsTextBox.Text.Length == 0 && AdvanFilterHint == false)
             {
 
-                KeywordsTextBox.Text = "Enter any keywords";
+                KeywordsTextBox.Text = "e.g: <author>,<co-author>,<journal>,<keywords>";
                 AdvanFilterHint = true;
             }
         }
@@ -365,7 +366,7 @@ namespace PubCite
             }
             else
             {
-                MessageBox.Show("Journal results not found!");
+                MessageBox.Show("Journal results not found! You may have exceeded your administrative limit.");
             }
         }
 
@@ -425,7 +426,7 @@ namespace PubCite
             }
             else
             {
-                MessageBox.Show("Author results not found!");
+                MessageBox.Show("Results not found! You may have exceeded your administrative limit.");
             }
         }
 
@@ -809,6 +810,7 @@ namespace PubCite
                 nextData = CSParser.getJournalsNext(searchField.Text, "", "", ref journalStats);
         }
 
+
         private void getNextAuthStats(bool hasProfile)
         {
             /* Get author data in the background 
@@ -904,7 +906,7 @@ namespace PubCite
                     endProgressUI();
                 }
                 else
-                    MessageBox.Show("No results available!");
+                    MessageBox.Show("No results available! You may have exceeded your administrative limit.");
             }
         }
 
@@ -1033,7 +1035,7 @@ namespace PubCite
                             }
                         }
                         else
-                            MessageBox.Show("No results available!");
+                            MessageBox.Show("No results available! You may have exceeded your administrative limit.");
                     }
                 }
                 else
@@ -1056,7 +1058,7 @@ namespace PubCite
                         }
                     }
                     else
-                        MessageBox.Show("No results available!");
+                        MessageBox.Show("No results available! You may have exceeded your administrative limit.");
                 }
 
                 showSearch();
@@ -1107,6 +1109,7 @@ namespace PubCite
 
                 if (Papers[citationIndex].NumberOfCitations != 0)
                 {
+
                     TabPage citationsPage = new TabPage("Citations");
                     citationsPage.ImageIndex = 1;
                     Form1.dub_tab.TabPages.Insert(Form1.dub_tab.TabPages.Count - 1, citationsPage);
@@ -1282,6 +1285,7 @@ namespace PubCite
         {
             Console.WriteLine("say cheese");
             STOP = true;
+            showSearch();
             endProgressUI();
         }
 
@@ -1461,7 +1465,7 @@ namespace PubCite
 
                 graphsChart.Titles.Clear();
                 Transition t = new Transition(new TransitionType_EaseInEaseOut(500));
-                t.add(graphsPanel, "Top", 83);
+                t.add(graphsPanel, "Top", 111);
                 t.run();
                 graphsChart.Series["Series1"].Points.Clear();
 
@@ -1559,14 +1563,14 @@ namespace PubCite
 
         private void addToFav_Click(object sender, EventArgs e)
         {
-            if (authStats != null && !authStats.IsFavorite)
+            if (authStats != null && !authStats.IsFavorite && authorResultsListView.Visible == true && authStats.getNumberOfPapers() > 0)
             {
 
                 Form1.favorites.AddAuthor(authStats);
                 authStats.IsFavorite = true;
 
             }
-            else if (journalStats != null && !journalStats.IsFavorite)
+            else if (journalStats != null && !journalStats.IsFavorite && journalStats.getNumberOfPapers() > 0)
             {
 
                 Form1.favorites.AddJournal(journalStats);

@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Authors");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Journals");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Favourites", new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2});
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Authors");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Journals");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Favourites", new System.Windows.Forms.TreeNode[] {
+            treeNode4,
+            treeNode5});
             this.SearchPanel = new System.Windows.Forms.Panel();
             this.progressPanel = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
@@ -51,7 +51,6 @@
             this.searchField = new System.Windows.Forms.TextBox();
             this.authorCheckBox = new System.Windows.Forms.CheckBox();
             this.progressBar = new System.Windows.Forms.ProgressBar();
-            this.EndYear = new PubCite.NumericTextBox();
             this.resultsPanel = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.graphsPanel = new System.Windows.Forms.Panel();
@@ -107,7 +106,6 @@
             this.citesperYearLabel = new System.Windows.Forms.Label();
             this.citationsLabel = new System.Windows.Forms.Label();
             this.authorLabel = new System.Windows.Forms.Label();
-            this.StartYear = new PubCite.NumericTextBox();
             this.favouritesPanel = new System.Windows.Forms.Panel();
             this.recentSearchPanel = new System.Windows.Forms.Panel();
             this.recentListView = new System.Windows.Forms.ListView();
@@ -123,9 +121,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.siteComboBox = new System.Windows.Forms.ComboBox();
             this.searchSiteLabel = new System.Windows.Forms.Label();
+            this.panel6 = new System.Windows.Forms.Panel();
             this.searchIcon = new System.Windows.Forms.PictureBox();
             this.stopButton = new System.Windows.Forms.PictureBox();
-            this.panel6 = new System.Windows.Forms.Panel();
             this.cachedListView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.optionsMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -140,6 +138,8 @@
             this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.directorySearcher1 = new System.DirectoryServices.DirectorySearcher();
+            this.EndYear = new PubCite.NumericTextBox();
+            this.StartYear = new PubCite.NumericTextBox();
             this.SearchPanel.SuspendLayout();
             this.progressPanel.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -164,9 +164,9 @@
             this.favouritesPanel.SuspendLayout();
             this.recentSearchPanel.SuspendLayout();
             this.Suggestions.SuspendLayout();
+            this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.searchIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.stopButton)).BeginInit();
-            this.panel6.SuspendLayout();
             this.optionsMenuStrip.SuspendLayout();
             this.favouriteMenuStrip.SuspendLayout();
             this.recentMenuStrip.SuspendLayout();
@@ -270,7 +270,7 @@
             this.label4.BackColor = System.Drawing.Color.LightGray;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
-            this.label4.Location = new System.Drawing.Point(403, 42);
+            this.label4.Location = new System.Drawing.Point(427, 42);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(131, 13);
             this.label4.TabIndex = 28;
@@ -282,9 +282,9 @@
             this.KeywordsTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.KeywordsTextBox.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.KeywordsTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
-            this.KeywordsTextBox.Location = new System.Drawing.Point(542, 38);
+            this.KeywordsTextBox.Location = new System.Drawing.Point(561, 38);
             this.KeywordsTextBox.Name = "KeywordsTextBox";
-            this.KeywordsTextBox.Size = new System.Drawing.Size(381, 22);
+            this.KeywordsTextBox.Size = new System.Drawing.Size(362, 22);
             this.KeywordsTextBox.TabIndex = 26;
             this.toolTip.SetToolTip(this.KeywordsTextBox, "Add space separated keywords to add to your search");
             // 
@@ -342,22 +342,8 @@
             // 
             this.progressBar.Location = new System.Drawing.Point(128, 9);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(760, 22);
+            this.progressBar.Size = new System.Drawing.Size(795, 22);
             this.progressBar.TabIndex = 0;
-            // 
-            // EndYear
-            // 
-            this.EndYear.AllowSpace = false;
-            this.EndYear.BackColor = System.Drawing.SystemColors.Window;
-            this.EndYear.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.EndYear.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EndYear.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
-            this.EndYear.Location = new System.Drawing.Point(342, 38);
-            this.EndYear.Name = "EndYear";
-            this.EndYear.Size = new System.Drawing.Size(44, 22);
-            this.EndYear.TabIndex = 0;
-            this.toolTip.SetToolTip(this.EndYear, "End Year");
-            this.EndYear.TextChanged += new System.EventHandler(this.EndYear_TextChanged);
             // 
             // resultsPanel
             // 
@@ -382,18 +368,19 @@
             // 
             // graphsPanel
             // 
+            this.graphsPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.graphsPanel.Controls.Add(this.graphsCloseIcon);
             this.graphsPanel.Controls.Add(this.graphsChart);
-            this.graphsPanel.Location = new System.Drawing.Point(-1, -900);
+            this.graphsPanel.Location = new System.Drawing.Point(5, -900);
             this.graphsPanel.Name = "graphsPanel";
-            this.graphsPanel.Size = new System.Drawing.Size(755, 293);
+            this.graphsPanel.Size = new System.Drawing.Size(746, 293);
             this.graphsPanel.TabIndex = 43;
             // 
             // graphsCloseIcon
             // 
             this.graphsCloseIcon.BackColor = System.Drawing.Color.White;
             this.graphsCloseIcon.Image = global::PubCite.Properties.Resources.close;
-            this.graphsCloseIcon.Location = new System.Drawing.Point(730, 4);
+            this.graphsCloseIcon.Location = new System.Drawing.Point(721, 5);
             this.graphsCloseIcon.Name = "graphsCloseIcon";
             this.graphsCloseIcon.Size = new System.Drawing.Size(17, 22);
             this.graphsCloseIcon.TabIndex = 1;
@@ -402,16 +389,16 @@
             // 
             // graphsChart
             // 
-            chartArea1.Name = "ChartArea1";
-            this.graphsChart.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.graphsChart.Legends.Add(legend1);
+            chartArea2.Name = "ChartArea1";
+            this.graphsChart.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.graphsChart.Legends.Add(legend2);
             this.graphsChart.Location = new System.Drawing.Point(3, 3);
             this.graphsChart.Name = "graphsChart";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.graphsChart.Series.Add(series1);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.graphsChart.Series.Add(series2);
             this.graphsChart.Size = new System.Drawing.Size(744, 287);
             this.graphsChart.TabIndex = 0;
             this.graphsChart.Text = "chart1";
@@ -434,9 +421,9 @@
             // 
             // arbitPanel
             // 
-            this.arbitPanel.Location = new System.Drawing.Point(100, -3);
+            this.arbitPanel.Location = new System.Drawing.Point(3, -3);
             this.arbitPanel.Name = "arbitPanel";
-            this.arbitPanel.Size = new System.Drawing.Size(499, 10);
+            this.arbitPanel.Size = new System.Drawing.Size(746, 2);
             this.arbitPanel.TabIndex = 42;
             // 
             // settingsPanel
@@ -973,20 +960,6 @@
             this.authorLabel.TabIndex = 8;
             this.authorLabel.Text = "Name";
             // 
-            // StartYear
-            // 
-            this.StartYear.AllowSpace = false;
-            this.StartYear.BackColor = System.Drawing.SystemColors.Window;
-            this.StartYear.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.StartYear.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.StartYear.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
-            this.StartYear.Location = new System.Drawing.Point(259, 38);
-            this.StartYear.Name = "StartYear";
-            this.StartYear.Size = new System.Drawing.Size(44, 22);
-            this.StartYear.TabIndex = 0;
-            this.toolTip.SetToolTip(this.StartYear, "Start Year");
-            this.StartYear.TextChanged += new System.EventHandler(this.StartYear_TextChanged);
-            // 
             // favouritesPanel
             // 
             this.favouritesPanel.BackColor = System.Drawing.Color.WhiteSmoke;
@@ -1071,14 +1044,14 @@
             this.favouritesTreeView.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
             this.favouritesTreeView.Location = new System.Drawing.Point(11, 43);
             this.favouritesTreeView.Name = "favouritesTreeView";
-            treeNode1.Name = "authorsRootNode";
-            treeNode1.Text = "Authors";
-            treeNode2.Name = "journalsRootNode";
-            treeNode2.Text = "Journals";
-            treeNode3.Name = "Favourites";
-            treeNode3.Text = "Favourites";
+            treeNode4.Name = "authorsRootNode";
+            treeNode4.Text = "Authors";
+            treeNode5.Name = "journalsRootNode";
+            treeNode5.Text = "Journals";
+            treeNode6.Name = "Favourites";
+            treeNode6.Text = "Favourites";
             this.favouritesTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode3});
+            treeNode6});
             this.favouritesTreeView.Size = new System.Drawing.Size(192, 209);
             this.favouritesTreeView.TabIndex = 9;
             // 
@@ -1121,7 +1094,7 @@
             this.label2.BackColor = System.Drawing.Color.LightGray;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
-            this.label2.Location = new System.Drawing.Point(314, 42);
+            this.label2.Location = new System.Drawing.Point(343, 42);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(23, 13);
             this.label2.TabIndex = 10;
@@ -1133,7 +1106,7 @@
             this.label1.BackColor = System.Drawing.Color.LightGray;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
-            this.label1.Location = new System.Drawing.Point(217, 42);
+            this.label1.Location = new System.Drawing.Point(246, 42);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(37, 13);
             this.label1.TabIndex = 7;
@@ -1149,9 +1122,9 @@
             "Google Scholar",
             "CiteSeerX",
             "Microsoft Academic Search"});
-            this.siteComboBox.Location = new System.Drawing.Point(91, 38);
+            this.siteComboBox.Location = new System.Drawing.Point(85, 38);
             this.siteComboBox.Name = "siteComboBox";
-            this.siteComboBox.Size = new System.Drawing.Size(120, 21);
+            this.siteComboBox.Size = new System.Drawing.Size(145, 21);
             this.siteComboBox.TabIndex = 6;
             // 
             // searchSiteLabel
@@ -1164,6 +1137,16 @@
             this.searchSiteLabel.Size = new System.Drawing.Size(69, 21);
             this.searchSiteLabel.TabIndex = 3;
             this.searchSiteLabel.Text = "Search Site :";
+            // 
+            // panel6
+            // 
+            this.panel6.BackColor = System.Drawing.Color.LightGray;
+            this.panel6.Controls.Add(this.searchIcon);
+            this.panel6.Controls.Add(this.stopButton);
+            this.panel6.Location = new System.Drawing.Point(0, 0);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(1015, 64);
+            this.panel6.TabIndex = 43;
             // 
             // searchIcon
             // 
@@ -1189,16 +1172,6 @@
             this.stopButton.Visible = false;
             this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
             // 
-            // panel6
-            // 
-            this.panel6.BackColor = System.Drawing.Color.LightGray;
-            this.panel6.Controls.Add(this.searchIcon);
-            this.panel6.Controls.Add(this.stopButton);
-            this.panel6.Location = new System.Drawing.Point(0, 0);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(1015, 64);
-            this.panel6.TabIndex = 43;
-            // 
             // cachedListView
             // 
             this.cachedListView.BackColor = System.Drawing.Color.WhiteSmoke;
@@ -1209,7 +1182,7 @@
             this.cachedListView.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
             this.cachedListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.cachedListView.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.cachedListView.Location = new System.Drawing.Point(128, 31);
+            this.cachedListView.Location = new System.Drawing.Point(129, 31);
             this.cachedListView.Name = "cachedListView";
             this.cachedListView.Size = new System.Drawing.Size(795, 97);
             this.cachedListView.TabIndex = 29;
@@ -1303,6 +1276,34 @@
             this.directorySearcher1.ServerPageTimeLimit = System.TimeSpan.Parse("-00:00:01");
             this.directorySearcher1.ServerTimeLimit = System.TimeSpan.Parse("-00:00:01");
             // 
+            // EndYear
+            // 
+            this.EndYear.AllowSpace = false;
+            this.EndYear.BackColor = System.Drawing.SystemColors.Window;
+            this.EndYear.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.EndYear.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EndYear.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
+            this.EndYear.Location = new System.Drawing.Point(371, 38);
+            this.EndYear.Name = "EndYear";
+            this.EndYear.Size = new System.Drawing.Size(44, 22);
+            this.EndYear.TabIndex = 0;
+            this.toolTip.SetToolTip(this.EndYear, "End Year");
+            this.EndYear.TextChanged += new System.EventHandler(this.EndYear_TextChanged);
+            // 
+            // StartYear
+            // 
+            this.StartYear.AllowSpace = false;
+            this.StartYear.BackColor = System.Drawing.SystemColors.Window;
+            this.StartYear.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.StartYear.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StartYear.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
+            this.StartYear.Location = new System.Drawing.Point(288, 38);
+            this.StartYear.Name = "StartYear";
+            this.StartYear.Size = new System.Drawing.Size(44, 22);
+            this.StartYear.TabIndex = 0;
+            this.toolTip.SetToolTip(this.StartYear, "Start Year");
+            this.StartYear.TextChanged += new System.EventHandler(this.StartYear_TextChanged);
+            // 
             // search
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1340,9 +1341,9 @@
             this.favouritesPanel.ResumeLayout(false);
             this.recentSearchPanel.ResumeLayout(false);
             this.Suggestions.ResumeLayout(false);
+            this.panel6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.searchIcon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.stopButton)).EndInit();
-            this.panel6.ResumeLayout(false);
             this.optionsMenuStrip.ResumeLayout(false);
             this.favouriteMenuStrip.ResumeLayout(false);
             this.recentMenuStrip.ResumeLayout(false);
