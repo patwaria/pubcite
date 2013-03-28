@@ -48,7 +48,15 @@ namespace PubCite
             request.AuthorQuery = authName;
             request.StartIdx = 1;
             request.EndIdx = 20;
-            response = client.Search(request);
+            try
+            {
+                response = client.Search(request);
+            }
+            catch(Exception e)
+            {
+                authSuggest = new AuthSuggestion(authNM, authID, false);
+                return authSuggest;
+            }
             if (response.Author == null)
             {
                 authSuggest=new AuthSuggestion(authNM,authID,false);
@@ -87,7 +95,16 @@ namespace PubCite
             requestAuth.AuthorID = Convert.ToUInt32(authid);
             requestAuth.StartIdx = 1;
             requestAuth.EndIdx = 1;
-            response1 = client.Search(requestAuth);
+
+            try
+            {
+                response1 = client.Search(requestAuth);
+            }
+            catch (Exception e)
+            {
+                auth = new SG.Author("");
+                return auth;
+            }
 
          
 
@@ -163,7 +180,9 @@ namespace PubCite
 
             requestJournal.ResultObjects = ObjectType.Publication;
             requestJournal.JournalQuery = journalName;
-            requestJournal.FulltextQuery = keywords;
+
+            //requestJournal.FulltextQuery = keywords;
+            
             requestJournal.StartIdx = 1;
             requestJournal.EndIdx = 20;
 
@@ -190,7 +209,9 @@ namespace PubCite
 
             requestJournal.ResultObjects = ObjectType.Publication;
             requestJournal.JournalQuery = journalName;
-            requestJournal.FulltextQuery = keywords;
+
+            //requestJournal.FulltextQuery = keywords;
+            
             requestJournal.StartIdx = Convert.ToUInt32(stIndex);
             requestJournal.EndIdx = Convert.ToUInt32(EndIndex);
 
@@ -291,7 +312,14 @@ namespace PubCite
             requestCitedPaper.StartIdx = 1;
             requestCitedPaper.EndIdx = Convert.ToUInt32(noResults);
 
-            response = client.Search(requestCitedPaper);
+            try
+            {
+                response = client.Search(requestCitedPaper);
+            }
+            catch (Exception e)
+            {
+                return cited;
+            }
 
             uint range = response.Publication.TotalItem;
             range = range > noResults ? Convert.ToUInt32(noResults) : range;
@@ -373,8 +401,14 @@ namespace PubCite
             requestCitedPaper.StartIdx = Convert.ToUInt32(stIndex);
             requestCitedPaper.EndIdx = Convert.ToUInt32(endIndex);
 
-            response = client.Search(requestCitedPaper);
-
+            try
+            {
+                response = client.Search(requestCitedPaper);
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
 
 
             for (int i = 0; i < response.Publication.Result.Length; i++)
@@ -439,7 +473,7 @@ namespace PubCite
             }
             catch (Exception e)
             {
-                throw e;
+                return papers;
             }
 
             if (response.Publication == null)
