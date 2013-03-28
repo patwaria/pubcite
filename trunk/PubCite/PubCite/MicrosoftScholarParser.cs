@@ -240,7 +240,7 @@ namespace PubCite
 
             requestPaper.ResultObjects = ObjectType.Publication;
             requestPaper.AuthorQuery = authName;
-            requestPaper.FulltextQuery = keywords;
+            //requestPaper.FulltextQuery = keywords;
             requestPaper.StartIdx = 1;
             requestPaper.EndIdx = 20;
 
@@ -269,7 +269,7 @@ namespace PubCite
 
             requestPaper.ResultObjects = ObjectType.Publication;
             requestPaper.AuthorQuery = authName;
-            requestPaper.FulltextQuery = keywords;
+            //requestPaper.FulltextQuery = keywords;
             requestPaper.StartIdx = Convert.ToUInt32(stIndex);
             requestPaper.EndIdx = Convert.ToUInt32(EndIndex);
 
