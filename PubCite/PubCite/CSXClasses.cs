@@ -82,7 +82,15 @@ namespace PubCite
                 initialURL = "";
             }
             CitePage = new HtmlWeb();
-            CiteDoc = CitePage.Load(initialURL);
+
+            try
+            {
+                CiteDoc = CitePage.Load(initialURL);
+            }
+            catch (Exception e)
+            {
+
+            }
             PageNo = 1;
 
             //Console.WriteLine("Document opened");
@@ -124,7 +132,15 @@ namespace PubCite
 
                 PageNo++;
 
-                CiteDoc = CitePage.Load(nextURL);
+                try
+                {
+                    CiteDoc = CitePage.Load(nextURL);
+                }
+                catch (Exception e)
+                {
+                    return 0;
+                }
+
                 return 1;
             }
             if (searchType == 1)
@@ -134,9 +150,14 @@ namespace PubCite
                
                 PageNo++;
 
-
-                CiteDoc = CitePage.Load(nextURL);
-
+                try
+                {
+                    CiteDoc = CitePage.Load(nextURL);
+                }
+                catch (Exception e)
+                {
+                    return 0;
+                }
                 //Console.WriteLine(CiteDoc.ToString());
                 return 1;
             }
