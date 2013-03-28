@@ -162,6 +162,7 @@
     <Content Include="Resources\borderv.png" />
     <None Include="Resources\borderv1.png" />
     <None Include="Resources\chartIcon.gif" />
+    <None Include="Resources\icon_pause.png" />
     <Content Include="Resources\pubcite.ico" />
     <Content Include="Resources\stop.png" />
     <Content Include="TODO.txt" />

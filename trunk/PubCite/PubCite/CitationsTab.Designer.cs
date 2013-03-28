@@ -137,7 +137,7 @@
             // 
             // stop
             // 
-            this.stop.Image = global::PubCite.Properties.Resources.icon_pause;
+            this.stop.Image = global::PubCite.Properties.Resources.icon_pause1;
             this.stop.Location = new System.Drawing.Point(321, 9);
             this.stop.Name = "stop";
             this.stop.Size = new System.Drawing.Size(28, 27);

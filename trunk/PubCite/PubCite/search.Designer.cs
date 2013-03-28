@@ -1256,7 +1256,7 @@
             // stopButton
             // 
             this.stopButton.BackColor = System.Drawing.Color.LightGray;
-            this.stopButton.Image = global::PubCite.Properties.Resources.icon_pause;
+            this.stopButton.Image = global::PubCite.Properties.Resources.icon_pause1;
             this.stopButton.Location = new System.Drawing.Point(900, 8);
             this.stopButton.Name = "stopButton";
             this.stopButton.Size = new System.Drawing.Size(25, 25);
