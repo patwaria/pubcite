@@ -62,7 +62,9 @@ namespace PubCite
             {
                 doc = web.Load(url);
             }
-            catch (Exception e) { Console.WriteLine("=====Exception occurred(web load) in GSScraper:getAuthSuggestions()"); }
+            catch (Exception e) {
+                return null;
+            }
 
 
 
@@ -148,7 +150,7 @@ namespace PubCite
             {
                 doc = web.Load(this_url);
             }
-            catch (Exception e) { Console.WriteLine("=====Exception occurred(web load) in GSScraper:getAuthSuggestionsNextPage()"); }
+            catch (Exception e) { return false; }
 
 
 
@@ -198,9 +200,11 @@ namespace PubCite
         // RESULTS FROM AUTHOR PROFILE PAGE
         public SG.Author getAuthStatistics(string authUrl)
         {
+            bool isOK = true;
             if (authUrl == null) return null;
             authUrl += "&pagesize=100";
-            GSAuthScraper authScraper = new GSAuthScraper(authUrl, 0);
+            GSAuthScraper authScraper = new GSAuthScraper(authUrl, 0,ref isOK);
+            if (!isOK) return null;
             authScraper.getCitationStats();
             SG.Author author = new SG.Author(authScraper.getName(), authScraper.getAffiliation(), authScraper.getHomePage(), authScraper.getHIndex(), authScraper.getIIndex());
             //Console.WriteLine(author.Name + "," + author.getHIndex() + "," + author.getI10Index());
@@ -213,6 +217,7 @@ namespace PubCite
 
         public bool? getAuthStatisticsNextPage(string authUrl, ref SG.Author author)
         {
+            bool isOK = true;
             setts = setRecords.ReadSettings();
             int maxResults = setts.GSMaxResults;
             int num = author.getNumberOfPapers();
@@ -220,7 +225,8 @@ namespace PubCite
             if (num % 100 != 0) return false;
             if (num >= maxResults) return false;
             authUrl += ("&pagesize=100&cstart=" + num);
-            GSAuthScraper authScraper = new GSAuthScraper(authUrl, num);
+            GSAuthScraper authScraper = new GSAuthScraper(authUrl, num, ref isOK);
+            if (!isOK) return null;
             List<SG.Paper> papers = authScraper.getPapersOfCurrentPage();
             if (papers == null) return null;
             if (papers.Count == 0) return false;
@@ -281,7 +287,9 @@ namespace PubCite
             {
                 doc = web.Load(url);
             }
-            catch (Exception e) { Console.WriteLine("=====Exception occurred(web load) in GSScraper:getAuthorsNextPage()"); }
+            catch (Exception e) {
+                return null;
+            }
 
 
             //Console.WriteLine(doc.DocumentNode.InnerHtml);
@@ -444,7 +452,9 @@ namespace PubCite
             {
                 doc = web.Load(this_url);
             }
-            catch (Exception e) { Console.WriteLine("=====Exception occurred(web load) in GSScraper:getAuthorsNextPage()"); }
+            catch (Exception e) {
+                return null;
+            }
 
 
             //Console.WriteLine(doc.DocumentNode.InnerHtml);
@@ -637,8 +647,10 @@ namespace PubCite
             {
                 doc = web.Load(url);
             }
-            catch (Exception e) { Console.WriteLine("=====Exception occurred(web load) in GSScraper:getJournals()"); }
-
+            catch (Exception e)
+            {
+                return null;
+            }
 
             //Console.WriteLine(doc.DocumentNode.InnerHtml);
             //string html = client.DownloadString(url);
@@ -807,8 +819,10 @@ namespace PubCite
             {
                 doc = web.Load(this_url);
             }
-            catch (Exception e) { Console.WriteLine("=====Exception occurred(web load) in GSScraper:getJournalsNextPage()"); }
-
+            catch (Exception e)
+            {
+                return null;
+            }
 
 
             //Console.WriteLine(doc.DocumentNode.InnerHtml);
@@ -970,8 +984,10 @@ namespace PubCite
             {
                 doc = web.Load(url);
             }
-            catch (Exception e) { Console.WriteLine("=====Exception occurred(web load) in GSScraper:getCitations()"); }
-
+            catch (Exception e)
+            {
+                return null;
+            }
 
             List<SG.Paper> results = new List<SG.Paper>();
 
@@ -1133,8 +1149,10 @@ namespace PubCite
             {
                 doc = web.Load(url);
             }
-            catch (Exception e) {   Console.WriteLine("=====Exception occurred(web load) in GSScraper:getCitationsNextPage()");     }
-            
+            catch (Exception e)
+            {
+                return null;
+            }
             
             List<SG.Paper> results = new List<SG.Paper>();
 
